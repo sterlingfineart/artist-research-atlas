@@ -1,0 +1,86 @@
+# Artist Research Atlas
+
+A research website for **painters, sculptors, draftsmen and engravers**.
+
+1. **Enter an artist's name.** Exact names, partial names, historical spellings, pseudonyms and inverted forms ("Rijn, Rembrandt van") all work.
+2. **Choose the correct artist.** The site lists real artists whose name or a recorded variant matches. Each candidate shows birth and death dates (including conflicting dates), birthplace, death place, roles, the variant that matched, and authority IDs (Wikidata / Getty ULAN). Only people whose recorded occupation is painter, sculptor, draftsperson, engraver or printmaker (or a subclass of one) are shown.
+3. **Read the report.** It loads section by section:
+
+| # | Section | What it contains | Sources |
+|---|---------|------------------|---------|
+| 1 | Identity & names | Preferred name, life dates and places, nationality, roles, movements, genres, and every recorded name variant | Wikidata, Getty ULAN |
+| 2 | Biography | ULAN biographical note, full encyclopaedic life narrative, documented life facts (education, teachers, pupils, memberships, awards, family, residences), and ULAN relationships | Getty ULAN, Wikipedia (English or best available language), Wikidata |
+| 3 | Exhibition record | Exhibition timeline (artist as participant, plus exhibitions where works were shown), museum exhibitions, object-level exhibition histories, exhibition catalogues from 1751 on, and links to DoME, Paris Salon, Royal Academy, RKD, MoMA and Artfacts | Wikidata, Art Institute of Chicago, Cleveland Museum of Art, Open Library |
+| 4 | Academic & peer reviews | Curated scholarship with the artist as main subject, most-cited peer-reviewed literature with abstracts, reviews, and chronologically arranged quotations from contemporaries, fellow artists and critics | Wikidata, OpenAlex (falls back to Crossref), Wikiquote |
+| 5 | Critical analyses | Style, technique, reception and legacy, plus arguments from leading humanities scholarship. Optional AI synthesis | Wikipedia, OpenAlex/Crossref abstracts |
+| 6 | Auction & art sales | Documented prices (with currency), sales, acquisitions and ownership events, sale and price mentions in the literature, museum provenance chains, the artist's own pages on Artnet, Artsy, MutualArt, Invaluable and Christie's, and pre-filled searches of 13 price databases | Wikidata, AIC, CMA, Wikipedia |
+| 7 | Works & collections | Number of catalogued works, holdings by institution, image gallery, and museum open-access records | Wikidata, The Met, AIC, CMA, Europeana |
+| 8 | References | All sources as Chicago-style citations in six groups: biographical; exhibitions & showings; academic; **sources from the artist's lifetime** (marked LIFETIME); market & provenance; and databases & authority files | Everything above, plus the Internet Archive, Library of Congress *Chronicling America*, Europeana and Open Library, filtered to the artist's lifetime |
+
+The report can be printed or saved as PDF (all collapsed lists expand automatically). You can also copy or download every reference as `.txt` and download all the research data as `.json`.
+
+## Running it
+
+Requires **Node.js 18 or newer**. There are no npm dependencies.
+
+```bash
+cd artist-research-atlas
+npm start            # → http://localhost:3000
+# or: PORT=8080 node server.js
+```
+
+### Optional configuration (environment variables)
+
+| Variable | Purpose |
+|----------|---------|
+| `PORT` | HTTP port (default 3000) |
+| `AI_API_KEY` (or `OPENAI_API_KEY`) | Turns on the **AI research synthesis** section. The model writes a narrative only from the sources gathered for the report and cites them as [S1], [S2]… |
+| `AI_BASE_URL` | Any OpenAI-compatible endpoint (default `https://api.openai.com/v1`; also works with Azure, OpenRouter, a local Ollama or LM Studio, etc.) |
+| `AI_MODEL` | Model name (default `gpt-4o-mini`) |
+| `OPENALEX_API_KEY` | **Recommended in production.** OpenAlex's free tier shares one small daily budget per IP. A free key is available at https://openalex.org/settings/api. Without it, the site falls back to Crossref |
+| `CONTACT_EMAIL` | Sent to OpenAlex and Crossref ("polite pool"; faster and more reliable) |
+| `EUROPEANA_KEY` | Your own Europeana API key (the public demo key is used otherwise) |
+| `USER_AGENT` | Custom User-Agent for outbound requests. Wikimedia asks for a contact address |
+
+### Deploying on Render (free)
+
+1. Put this folder in a GitHub repository. `package.json`, `server.js` and `render.yaml` must be at the top level of the repo.
+2. Go to https://dashboard.render.com and choose **New → Blueprint**. Pick the repository; Render reads `render.yaml`.
+3. Fill in the optional variables (`CONTACT_EMAIL`, `OPENALEX_API_KEY`, `AI_API_KEY`), then click **Apply**.
+4. After a couple of minutes the site is live at `https://artist-research-atlas.onrender.com` (or a similar name). The health check is `/api/health`.
+
+Free Render services go to sleep after 15 minutes without visitors. The first visit after that takes about 30–60 seconds to wake the site up.
+
+A `Dockerfile` (for Fly.io, Railway, Cloud Run or any Docker host) and a `Procfile` (Heroku-style hosts) are included too.
+
+### Other hosts
+
+The app is a single Node process, so it runs on any Node host: Render, Railway, Fly.io, Heroku, a VPS with `pm2`, and so on. Set the start command to `node server.js` and the environment variables above. Responses are cached in memory for 3–6 hours. There's a basic per-IP rate limit (120 API calls/minute).
+
+## Project structure
+
+```
+server.js          HTTP server, API routes, static files
+lib/util.js        cached fetch with retry, SPARQL clients, date formatting, Chicago citations
+lib/search.js      candidate search (Wikidata + Getty ULAN), occupation filter, name-variant matching
+lib/report.js      report modules: profile, exhibitions, academic, market, collections, lifetime
+lib/ai.js          optional grounded AI synthesis
+public/            index.html, app.js (UI), styles.css (screen + print)
+```
+
+### API
+
+```
+GET /api/search?q=NAME
+GET /api/report/profile?wd=Q5598&ulan=500011051
+GET /api/report/{exhibitions|academic|market|collections}?wd=…&name=…&by=1606&dy=1669
+GET /api/report/lifetime?wd=…&name=…&by=…&dy=…&variants=A|B|C
+GET /api/report/synthesis?wd=…          (only when AI is configured)
+```
+
+## Limitations
+
+- **Coverage depends on the open record.** Major artists produce very large reports; obscure artists may have only an authority record and a few period sources.
+- **Auction results:** lot-by-lot hammer prices are kept in subscription databases (Artnet, Artprice, MutualArt), which have no open APIs and do not allow redistribution. The site reports openly documented sales and provenance and links straight to the artist's pages and searches on those services.
+- **Namesakes:** name-based searches (scholarship, newspapers, digitised books) can include other people with the same name, especially for common names. Museum records are filtered by surname plus life dates, but you should still check each item.
+- Citations are generated automatically from catalogue metadata. Check page numbers and editions against the originals before publishing.

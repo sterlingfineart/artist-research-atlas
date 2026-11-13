@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: artist-research-atlas
+    runtime: node
+    plan: free
+    buildCommand: "echo no build step"
+    startCommand: node server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: CONTACT_EMAIL
+        sync: false
+      - key: OPENALEX_API_KEY
+        sync: false
+      - key: AI_API_KEY
+        sync: false
