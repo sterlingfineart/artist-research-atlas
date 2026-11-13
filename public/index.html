@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artist Research Atlas — Painters, Sculptors, Draftsmen & Engravers</title>
+  <meta name="description" content="Identify the exact artist and generate a deeply referenced research report: biography, exhibitions, scholarship, criticism, sales and period sources." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%237a2e2e'/><text x='32' y='44' font-family='Georgia' font-size='36' text-anchor='middle' fill='%23f7f4ee'>A</text></svg>" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#/">
+      <span class="brand-mark">A</span>
+      <span>
+        <span class="brand-title">Artist Research Atlas</span>
+        <span class="brand-sub">Painters · Sculptors · Draftsmen · Engravers</span>
+      </span>
+    </a>
+    <nav class="header-nav">
+      <a href="#/">New search</a>
+      <a href="#/about">Sources & method</a>
+    </nav>
+  </header>
+
+  <main id="app" aria-live="polite"></main>
+
+  <footer class="site-footer">
+    <p>Data from Wikidata, the Getty Union List of Artist Names®, Wikipedia, Wikiquote, OpenAlex, The Metropolitan Museum of Art, the Art Institute of Chicago, the Cleveland Museum of Art, Europeana, Open Library, the Internet Archive and the Library of Congress. Always verify findings against the cited originals.</p>
+  </footer>
+
+  <template id="tpl-home">
+    <section class="hero">
+      <h1>Research a painter, sculptor, draftsman or engraver</h1>
+      <p class="lede">Enter a name or partial name. We match it — and its historical spellings and variants — against authority records of real artists, so you can choose the right person before the research begins.</p>
+      <form class="search-form" id="search-form" role="search">
+        <label class="sr-only" for="q">Artist name</label>
+        <input id="q" name="q" type="search" autocomplete="off" placeholder="e.g. Rembrandt, Käthe Kollwitz, Thomas Bewick, Rosa Bonheur…" required minlength="2" />
+        <button type="submit" class="btn btn-primary">Search artists</button>
+      </form>
+      <div class="examples">Try: <a href="#/search?q=Rembrandt">Rembrandt</a> · <a href="#/search?q=Albrecht%20D%C3%BCrer">Albrecht Dürer</a> · <a href="#/search?q=Camille%20Claudel">Camille Claudel</a> · <a href="#/search?q=John%20Singer%20Sargent">John Singer Sargent</a> · <a href="#/search?q=Hokusai">Hokusai</a> · <a href="#/search?q=John%20Smith">John Smith</a></div>
+    </section>
+    <section class="how">
+      <div class="step"><span>1</span><h3>Enter a name</h3><p>Exact names, partial names, historic spellings, pseudonyms and inverted forms (“Rijn, Rembrandt van”) are all matched.</p></div>
+      <div class="step"><span>2</span><h3>Confirm the artist</h3><p>Compare candidates by life dates, birthplace, roles and recorded name variants, then choose the correct person.</p></div>
+      <div class="step"><span>3</span><h3>Read the report</h3><p>Biography, exhibition record, scholarship and peer commentary, critical analysis, sales and provenance, and extensive references — including sources from the artist’s lifetime.</p></div>
+    </section>
+  </template>
+
+  <script src="/app.js"></script>
+</body>
+</html>
