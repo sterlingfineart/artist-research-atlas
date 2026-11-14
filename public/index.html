@@ -9,6 +9,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css" />
+  <!-- Visitor analytics: Google Analytics + GoatCounter -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKDYBTKD7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EKDYBTKD7F', { send_page_view: false });
+    function trackView(){
+      var path = location.pathname + location.hash;
+      var title = decodeURIComponent((location.hash.match(/[?&]q=([^&]*)/)||[])[1]||'');
+      gtag('event', 'page_view', { page_location: location.href, page_path: path });
+      if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: path, title: title ? 'Search: ' + title : document.title });
+    }
+    window.addEventListener('hashchange', trackView);
+    window.addEventListener('load', function(){ setTimeout(trackView, 300); });
+  </script>
+  <script data-goatcounter="https://sfa-artistresearch.goatcounter.com/count" data-goatcounter-settings='{"no_onload": true}' async src="//gc.zgo.at/count.js"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='10' fill='%237a2e2e'/><text x='32' y='44' font-family='Georgia' font-size='36' text-anchor='middle' fill='%23f7f4ee'>A</text></svg>" />
 </head>
 <body>
