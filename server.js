@@ -67,36 +67,8 @@ function need(p) {
   return p;
 }
 
-// Password protection (HTTP Basic Auth). Enabled when SITE_USER and SITE_PASSWORD are set.
-const crypto = require('crypto');
-const AUTH_USER = process.env.SITE_USER || '';
-const AUTH_PASS = process.env.SITE_PASSWORD || '';
-const failed = new Map();
-function safeEq(a, b) {
-  const x = crypto.createHash('sha256').update(String(a)).digest();
-  const y = crypto.createHash('sha256').update(String(b)).digest();
-  return crypto.timingSafeEqual(x, y);
-}
-function checkAuth(req, res, ip) {
-  if (!AUTH_USER || !AUTH_PASS) return true;
-  const now = Date.now();
-  const f = (failed.get(ip) || []).filter((t) => now - t < 15 * 60000);
-  if (f.length >= 10) { res.writeHead(429, { 'Content-Type': 'text/plain' }); res.end('Too many failed logins. Try again in 15 minutes.'); return false; }
-  const h = req.headers.authorization || '';
-  if (h.startsWith('Basic ')) {
-    const [u, ...p] = Buffer.from(h.slice(6), 'base64').toString('utf8').split(':');
-    if (safeEq(u, AUTH_USER) & safeEq(p.join(':'), AUTH_PASS)) return true;
-    f.push(now); failed.set(ip, f);
-  }
-  res.writeHead(401, { 'WWW-Authenticate': 'Basic realm="Artist Research Atlas", charset="UTF-8"', 'Content-Type': 'text/plain' });
-  res.end('Login required.');
-  return false;
-}
-
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
-  const clientIp = req.headers['x-forwarded-for']?.split(',')[0] || req.socket.remoteAddress;
-  if (url.pathname !== '/api/health' && !checkAuth(req, res, clientIp)) return;
   if (url.pathname.startsWith('/api/')) {
     const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.socket.remoteAddress;
     if (limited(ip)) return send(res, 429, { error: 'Too many requests — please wait a minute.' });
