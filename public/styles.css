@@ -25,6 +25,12 @@ h1, h2, h3, h4 { font-family: var(--serif); line-height: 1.2; margin: 0 0 .5em; 
 .site-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 28px; border-bottom: 1px solid var(--line); background: var(--card); position: sticky; top: 0; z-index: 20; }
 .brand { display: flex; gap: 12px; align-items: center; text-decoration: none; color: var(--ink); }
 .brand-mark { width: 38px; height: 38px; border-radius: 8px; background: var(--accent); color: var(--paper); display: grid; place-items: center; font: 600 24px var(--serif); }
+.brand-mark, .brand-title { text-decoration: none; }
+.brand-title { color: var(--ink); }
+.brand-credit { display: block; font: italic 13px var(--serif); color: var(--accent); text-decoration: none; margin: 1px 0 2px; }
+.brand-credit:hover, .site-footer .contact a:hover { text-decoration: underline; }
+.site-footer .contact { font-size: 14px; color: var(--ink); margin-bottom: 10px; }
+.site-footer .contact a { color: var(--accent); }
 .brand-title { display: block; font: 700 21px var(--serif); letter-spacing: .2px; }
 .brand-sub { display: block; font-size: 11.5px; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
 .header-nav a { margin-left: 20px; color: var(--ink); text-decoration: none; font-weight: 500; font-size: 14px; }
