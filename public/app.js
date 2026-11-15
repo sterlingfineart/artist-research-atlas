@@ -8,6 +8,13 @@
   const link = (url, text) => (url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(text ?? url)}</a>` : esc(text));
   const spinner = (t = 'Researching…') => `<div class="loading"><div class="spinner"></div><span>${esc(t)}</span></div>`;
   const plural = (n, w) => `${n.toLocaleString()} ${w}${n === 1 ? '' : 's'}`;
+  /** Correct ordinal typos in source-supplied headings, e.g. Wikiquote's "21th century" -> "21st century". */
+  const fixOrdinals = (s) =>
+    String(s || '').replace(/\b(\d+)(st|nd|rd|th)\b/g, (m, n) => {
+      const v = +n;
+      const right = v % 10 === 1 && v % 100 !== 11 ? 'st' : v % 10 === 2 && v % 100 !== 12 ? 'nd' : v % 10 === 3 && v % 100 !== 13 ? 'rd' : 'th';
+      return v + right;
+    });
   let config = { ai: false };
 
   function toast(msg) {
@@ -423,7 +430,7 @@
       <p class="source-line">Historical spellings, inverted forms, pseudonyms and names in other languages, as recorded by Wikidata and the Getty ULAN. Use these when searching archives and catalogues.</p>
       ${(() => {
         const principal = [...new Set([...(byLang.en || []), ...(byLang.mul || []), ...ulanNames])];
-        return principal.length ? `<h4>Principal variants (English & Getty ULAN forms — ${principal.length})</h4><div class="variant-cloud">${principal.map((n) => `<span>${esc(n)}</span>`).join('')}</div>` : '';
+        return principal.length ? `<h4>Principal variants (English & Getty ULAN forms — ${principal.length})</h4><ul class="variant-cloud">${principal.map((n) => `<li>${esc(n)}</li>`).join('')}</ul>` : '';
       })()}
       ${Object.keys(byLang).filter((l) => !['en', 'mul'].includes(l)).length ? `<details><summary>Names in other languages and scripts (${Object.entries(byLang).filter(([l]) => !['en', 'mul'].includes(l)).reduce((a, [, n]) => a + n.length, 0)})</summary><table class="table">${Object.entries(byLang).filter(([l]) => !['en', 'mul'].includes(l)).map(([l, n]) => `<tr><th style="width:160px">${esc(langLabel(l))}</th><td>${n.map(esc).join(' · ')}</td></tr>`).join('')}</table></details>` : ''}
       ${errs(pr.errors)}`;
@@ -510,7 +517,7 @@
            const qs = quoteBlock(s.paragraphs);
            const life = /contemporar|lifetime/i.test(s.heading) || ((s.heading.match(/\b(1\d{3})\b/g) || []).some((y) => pr.birthYear && +y >= pr.birthYear && +y <= (pr.deathYear || 9999)));
            const render = (x) => `<li style="border:0;padding:0"><blockquote style="font-size:16.5px">${esc(x.q)}${x.attr.map((a) => `<span class="attr">${esc(a)}</span>`).join('')}</blockquote></li>`;
-           return `<details ${i < 2 ? 'open' : ''}><summary>${esc(s.heading)}${life ? ' <span class="tag-life">LIFETIME</span>' : ''} — ${plural(qs.length, 'quotation')}</summary>${list(qs, render, 4)}</details>`;
+           return `<details ${i < 2 ? 'open' : ''}><summary>${esc(fixOrdinals(s.heading))}${life ? ' <span class="tag-life">LIFETIME</span>' : ''} — ${plural(qs.length, 'quotation')}</summary>${list(qs, render, 4)}</details>`;
          }).join('')}`
       : '';
     const pub = (w) => `<li><span class="yr">${esc(w.year || 'n.d.')}</span> <span class="t">${link(w.doi ? 'https://doi.org/' + w.doi : w.url, w.title)}</span>${citeBtn(w.cite)}
@@ -519,7 +526,7 @@
     $('#body-academic').innerHTML = `
       ${errs(d.errors)}
       ${d.subjectWorks.length ? `<h3>Scholarship with the artist as principal subject (${d.subjectWorks.length})</h3><p class="source-line">Books, articles, catalogues raisonnés and theses catalogued in Wikidata with the artist as main subject — a curated, high-precision list, in chronological order.</p>${list(d.subjectWorks, pub, 15)}` : ''}
-      ${d.scholarly.length ? `<h3>Most-cited scholarly literature (${d.scholarly.length})</h3><p class="source-line">Peer-reviewed articles, books and chapters mentioning “${esc(pr.name)}” in the title or abstract, ranked by citations (${esc(d.scholarlySource || 'OpenAlex')}). Includes art-historical, conservation-science and technical studies.</p>${list(d.scholarly, pub, 15)}` : ''}
+      ${d.scholarly.length ? `<h3>Most-cited scholarly literature (${d.scholarly.length})</h3><p class="source-line">Peer-reviewed articles, books and chapters mentioning “${esc(pr.name)}” in the title or abstract, ranked by citations (${esc(d.scholarlySource || 'OpenAlex')}). Restricted to Arts and Humanities, so namesake studies from other fields (medicine, the natural sciences, patent law) are excluded.</p>${list(d.scholarly, pub, 15)}` : ''}
       ${d.reviews.length ? `<h3>Reviews (${d.reviews.length})</h3>${list(d.reviews, pub, 8)}` : ''}
       ${quoteHtml}
       ${!d.subjectWorks.length && !d.scholarly.length && !wq ? '<div class="notice">No scholarly literature was found in the open indexes. Search the specialist databases below.</div>' : ''}
