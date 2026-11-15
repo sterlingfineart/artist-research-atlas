@@ -169,6 +169,7 @@
     ['critical', 'Critical analyses'],
     ['market', 'Auction & art sales'],
     ['collections', 'Works & collections'],
+    ['catalogue', 'Catalogue raisonné'],
     ['references', 'References'],
   ];
   const REF_CATS = [
@@ -226,6 +227,7 @@
       academic: api('/api/report/academic', common).then((d) => renderAcademic(state, d)),
       market: api('/api/report/market', common).then((d) => renderMarket(state, d)),
       collections: api('/api/report/collections', common).then((d) => renderCollections(state, d)),
+      catalogue: api('/api/report/catalogue', common).then((d) => renderCatalogue(state, d)),
       lifetime: api('/api/report/lifetime', { ...common, variants: variants.slice(0, 8).join('|') }).then((d) => renderLifetime(state, d)),
     };
     for (const [k, pr] of Object.entries(jobs))
@@ -581,7 +583,20 @@
     done('collections');
   }
 
-  /* --------------------------------------------------- 8. Lifetime refs */
+    /* ------------------------------------------- 9. Catalogue raisonné */
+  function renderCatalogue(state, d) {
+    state.data.catalogue = d;
+    $('#sm-catalogue').textContent = d.items.length ? `${d.items.length} ${plural(d.items.length, 'volume')} · earliest ${d.items[0].year || 'undated'}` : 'No catalogue raisonné found';
+    for (const x of d.items) addRef(state, 'acad', x.cite, { year: x.year });
+    $('#body-catalogue').innerHTML = `
+      ${errs(d.errors)}
+      <p class="source-line">The catalogue raisonné is the standard complete, authenticated listing of an artist's works — the reference scholars cite first. Volumes below are drawn from Open Library and Wikidata, in chronological order, including catalogues later superseded by newer ones; the history of cataloguing is part of the record. Where a standard modern catalogue is published under another title (for example, "A Corpus of Rembrandt Paintings"), it is listed from a short curated set.</p>
+      ${d.items.length ? list(d.items, (x) => `<li>${link(x.url, x.title)} <span class="sub">— ${esc([x.authors.join(', '), x.year ? (x.yearEnd ? `${x.year}–${x.yearEnd}` : x.year) : null, x.note, x.publisher].filter(Boolean).join(' · '))}</span>${x.iaUrl ? ` <span class="sub">[${link(x.iaUrl, 'Read on Internet Archive')}]</span>` : ''}</li>`, 15) : '<div class="notice">No published catalogue raisonné was found in Open Library or Wikidata for this artist. Many artists — especially less documented ones — have no complete catalogue raisonné. The links below may still turn one up.</div>'}
+      <h4>Search further</h4><div class="links">${d.links.map((x) => link(x.url, x.label)).join('')}</div>`;
+    done('catalogue');
+  }
+
+/* --------------------------------------------------- 8. Lifetime refs */
   function renderLifetime(state, d) {
     state.data.lifetime = d;
     state.lifeLoaded = true;
@@ -605,6 +620,7 @@
         <li><b>Academic & peer reviews</b> — curated scholarship with the artist as main subject (Wikidata), the most-cited literature in OpenAlex (250M+ scholarly works), reviews, and chronologically arranged quotations from contemporaries, fellow artists and critics (Wikiquote).</li>
         <li><b>Critical analyses</b> — encyclopaedic discussion of style, technique, reception and legacy, and arguments drawn from leading scholarship.</li>
         <li><b>Auction & art sales</b> — documented prices, sales and ownership events, provenance chains published by museums, the artist’s pages on Artnet, Artsy, MutualArt, Invaluable and others, and pre-filled searches of auction archives. Full auction records are in subscription databases and are linked rather than reproduced.</li>
+        <li><b>Catalogue raisonné</b> — the standard catalogue raisonné of the artist’s works, where one exists, drawn from Open Library and Wikidata and shown in chronological order, including catalogues later superseded by newer ones; where a standard catalogue is published under another title it is listed from a short curated set.</li>
         <li><b>References</b> — every source is captured as a Chicago-style citation, grouped as biographical, exhibitions, academic, lifetime, market and database/authority records. <span class="tag-life">LIFETIME</span> marks sources dated within the artist’s life, drawn from historic dictionaries, the Internet Archive, the Library of Congress’s Chronicling America newspapers, Europeana and Open Library.</li>
       </ul>
       <h3>3 · Optional AI synthesis</h3>
