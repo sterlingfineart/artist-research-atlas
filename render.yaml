@@ -2,7 +2,7 @@ services:
   - type: web
     name: artist-research-atlas
     runtime: node
-    plan: free
+    plan: starter
     buildCommand: "echo no build step"
     startCommand: node server.js
     healthCheckPath: /api/health
