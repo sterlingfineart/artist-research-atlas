@@ -165,7 +165,7 @@
     ['identity', 'Identity & names'],
     ['biography', 'Biography'],
     ['exhibitions', 'Exhibition record'],
-    ['academic', 'Academic & peer reviews'],
+    ['academic', 'Bibliography & scholarship'],
     ['critical', 'Critical analyses'],
     ['market', 'Auction & art sales'],
     ['collections', 'Works & collections'],
@@ -187,10 +187,10 @@
     window.__report = state;
     const secs = SECTIONS.filter(([k]) => k !== 'synthesis' || config.ai);
     app.innerHTML = `<div class="report">
-      <aside class="toc"><h4>Report contents</h4>${secs.map(([k, l], i) => `<a href="#sec-${k}" data-toc="${k}"${k === 'catalogue' ? ' class="hl"' : ''}><span>${k === 'catalogue' ? '★ ' : ''}${k === 'synthesis' ? '★' : i + (config.ai ? 0 : 1)}. ${l}</span><span class="st loading-dot" id="st-${k}"></span></a>${k === 'references' ? REF_CATS.map(([rk, rl]) => `<a class="sub" href="#ref-${rk}"><span>${rl}</span><span class="st" id="rc-${rk}"></span></a>`).join('') : ''}`).join('')}</aside>
+      <aside class="toc"><h4>Report contents</h4>${secs.map(([k, l], i) => `<a href="#sec-${k}" data-toc="${k}"${k === 'catalogue' ? ' class="hl"' : ''}><span>${k === 'synthesis' ? '★' : i + (config.ai ? 0 : 1)}. ${l}</span><span class="st loading-dot" id="st-${k}"></span></a>${k === 'references' ? REF_CATS.map(([rk, rl]) => `<a class="sub" href="#ref-${rk}"><span>${rl}</span><span class="st" id="rc-${rk}"></span></a>`).join('') : ''}`).join('')}</aside>
       <div>
         <div class="rep-head" id="rep-head">${cached ? headHtml({ name: cached.name, births: [cached.birth].filter(Boolean), deaths: [cached.death].filter(Boolean), birthPlace: cached.birthPlace, deathPlace: cached.deathPlace, description: cached.description, image: cached.image?.replace('?width=160', '?width=400') }, true) : spinner('Loading artist record…')}</div>
-        ${secs.map(([k, l], i) => `<section class="rs${k === 'catalogue' ? ' hl' : ''}" id="sec-${k}"><h2><span><span class="num">${k === 'synthesis' || k === 'catalogue' ? '★' : i + (config.ai ? 0 : 1)}</span>${l}</span><small id="sm-${k}"></small></h2><div id="body-${k}">${k === 'synthesis' ? '' : spinner()}</div></section>`).join('')}
+        ${secs.map(([k, l], i) => `<section class="rs${k === 'catalogue' ? ' hl' : ''}" id="sec-${k}"><h2><span><span class="num">${k === 'synthesis' ? '★' : i + (config.ai ? 0 : 1)}</span>${l}</span><small id="sm-${k}"></small></h2><div id="body-${k}">${k === 'synthesis' ? '' : spinner()}</div></section>`).join('')}
       </div></div>`;
     // smooth in-page anchors without breaking the hash router
     app.querySelectorAll('.toc a').forEach((a) =>
@@ -502,7 +502,8 @@
     const pr = state.prof;
     for (const w of d.subjectWorks) addRef(state, 'acad', w.cite, { year: w.year });
     for (const w of d.scholarly) addRef(state, 'acad', w.cite, { year: w.year });
-    $('#sm-academic').textContent = `${d.subjectWorks.length + d.scholarly.length} publications`;
+    for (const w of d.books || []) addRef(state, 'acad', w.cite, { year: w.year });     
+    $('#sm-academic').textContent = `${d.subjectWorks.length + d.scholarly.length + (d.books?.length || 0)} publications`;
     const wq = pr.wikiquote;
     const isAttr = (p) => /^(quote[ds]? (of|by|from)|quoted|as cited|original|explanatory|translation|in original|source:|—|~|- )/i.test(p) || /^(Quote|Quoted)\b/.test(p);
     const quoteBlock = (paras) => {
@@ -523,17 +524,63 @@
          }).join('')}`
       : '';
     const pub = (w) => `<li><span class="yr">${esc(w.year || 'n.d.')}</span> <span class="t">${link(w.doi ? 'https://doi.org/' + w.doi : w.url, w.title)}</span>${citeBtn(w.cite)}
-      <div class="sub">${esc([w.authors?.slice(0, 4).join(', '), w.venue, w.type].filter(Boolean).join(' · '))}${w.citedBy != null ? ` · cited by ${w.citedBy}` : ''}${w.field ? ` · ${esc(w.field)}` : ''}${w.openAccess ? ' · ' + link(w.openAccess, 'open-access copy') : ''}</div>
+      <div class="sub">${esc([w.authors?.slice(0, 4).join(', '), w.venue, w.type].filter(Boolean).join(' · '))}${w.citedBy != null ? ` · cited by ${w.citedBy}` : ''}${w.field ? ` · ${esc(w.field)}` : ''}${w.openAccess ? ' · ' + link(w.openAccess, 'open-access copy') : ''}${w.editions ? ` · ${w.editions} edition${w.editions > 1 ? 's' : ''}` : ''}${w.url?.includes('openlibrary.org') ? ' · ' + link('https://search.worldcat.org/search?q=' + encodeURIComponent([w.title, w.authors?.[0]].filter(Boolean).join(' ')), 'find in a library') : ''}</div>
       ${w.abstract ? `<details><summary>Abstract</summary><div class="abs">${esc(w.abstract)}</div></details>` : ''}</li>`;
+    const startHere = [d.books?.[0], d.scholarly?.[0]].filter(Boolean); 
+    const recent = d.scholarly.filter((w) => w.year && w.year >= new Date().getFullYear() - 10).slice(0, 8); 
     $('#body-academic').innerHTML = `
-      ${errs(d.errors)}
+      ${errs(d.errors)} 
+      <p class="source-line">Bibliography drawn from open indexes — Wikidata, OpenAlex/Crossref and Open Library. It is not exhaustive: JSTOR, Art Full Text and the Bibliography of the History of Art hold more, behind paywalls or library logins; use the database links below. <button class="btn btn-sm" data-export="bib">Download BibTeX (.bib)</button> <button class="btn btn-sm" data-export="ris">Download RIS (.ris)</button></p> 
+      ${startHere.length ? `<h3>Start here — the essential reading</h3><p class="source-line">The most widely held book (by number of editions) and the most-cited article. If you read two things about ${esc(pr.name)}, read these.</p>${list(startHere, pub, 5)}` : ''} 
+      ${d.books?.length ? `<h3>Key books & monographs (${d.books.length})</h3><p class="source-line">Books with ${esc(pr.name)} as subject, from Open Library — ranked by number of editions, a rough measure of how widely a book is held and read. Fiction and children's books are excluded.</p>${list(d.books, pub, 10)}` : ''}
       ${d.subjectWorks.length ? `<h3>Scholarship with the artist as principal subject (${d.subjectWorks.length})</h3><p class="source-line">Books, articles, catalogues raisonnés and theses catalogued in Wikidata with the artist as main subject — a curated, high-precision list, in chronological order.</p>${list(d.subjectWorks, pub, 15)}` : ''}
       ${d.scholarly.length ? `<h3>Most-cited scholarly literature (${d.scholarly.length})</h3><p class="source-line">Peer-reviewed articles, books and chapters mentioning “${esc(pr.name)}” in the title or abstract, ranked by citations (${esc(d.scholarlySource || 'OpenAlex')}). Restricted to Arts and Humanities, so namesake studies from other fields (medicine, the natural sciences, patent law) are excluded.</p>${list(d.scholarly, pub, 15)}` : ''}
+      ${recent.length ? `<h3>Recent scholarship — last 10 years (${recent.length})</h3>${list(recent, pub, 8)}` : ''} 
       ${d.reviews.length ? `<h3>Reviews (${d.reviews.length})</h3>${list(d.reviews, pub, 8)}` : ''}
       ${quoteHtml}
-      ${!d.subjectWorks.length && !d.scholarly.length && !wq ? '<div class="notice">No scholarly literature was found in the open indexes. Search the specialist databases below.</div>' : ''}
+      ${!d.subjectWorks.length && !d.scholarly.length && !(d.books?.length) && !wq ? '<div class="notice">No scholarly literature was found in the open indexes. Search the specialist databases below.</div>' : ''}
       <h3>Continue in research databases</h3><div class="links">${d.databases.map((x) => link(x.url, x.label)).join('')}</div>`;
-    done('academic');
+      // Bibliography export (BibTeX / RIS for Zotero): books, subject works and
+  // scholarly literature combined, deduplicated by DOI or title + year.
+  const bibItems = (() => {
+    const seen = new Set();
+    return [...(d.books || []), ...(d.subjectWorks || []), ...(d.scholarly || [])].filter((w) => {
+      const k = w.doi || `${(w.title || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ')}|${w.year || ''}`;
+      if (!w.title || seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    });
+  })();
+    const bibKey = (w) => {
+    const last = (w.authors?.[0] || 'anon').trim().split(/\s+/).pop().toLowerCase().replace(/[^a-z]/g, '') || 'anon';
+    const first = (w.title || 'untitled').toLowerCase().split(/[^a-z0-9]+/).filter(Boolean)[0] || 'work';
+    return `${last}${w.year || 'nd'}${first}`;
+  };
+    const bibAuthor = (w) => (w.authors || []).map((a) => {
+    const parts = String(a).trim().split(/\s+/);
+    return parts.length > 1 ? `${parts.pop()}, ${parts.join(' ')}` : a;
+  }).join(' and ');
+  const isBook = (w) => /book/i.test(w.type || '') || w.url?.includes('openlibrary.org');
+    const toBibtex = () => bibItems.map((w) => {
+    const fields = [`  author = {${bibAuthor(w)}}`, `  title = {${(w.title || '').replace(/[{}]/g, '')}}`, w.year ? `  year = {${w.year}}` : '', !isBook(w) && w.venue ? `  journal = {${w.venue}}` : '', w.doi ? `  doi = {${w.doi}}` : '', w.url ? `  url = {${w.url}}` : ''].filter(Boolean).join(',\n');
+    return `@${isBook(w) ? 'book' : 'article'}{${bibKey(w)},\n${fields}\n}`;
+  }).join('\n\n');
+    const toRis = () => bibItems.map((w) => [`TY  - ${isBook(w) ? 'BOOK' : 'JOUR'}`, ...(w.authors || []).map((a) => `AU  - ${a}`), `TI  - ${w.title || ''}`, w.year ? `PY  - ${w.year}` : '', !isBook(w) && w.venue ? `JO  - ${w.venue}` : '', w.doi ? `DO  - ${w.doi}` : '', w.url ? `UR  - ${w.url}` : '', 'ER  - '].filter(Boolean).join('\n')).join('\n\n');
+    const download = (filename, text) => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }));
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  };
+  const base = pr.name.replace(/[^A-Za-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  $('#body-academic').querySelectorAll('[data-export]').forEach((b) => b.addEventListener('click', () => {
+    download(`${base}-bibliography.${b.dataset.export}`, b.dataset.export === 'bib' ? toBibtex() : toRis());
+    toast(`Bibliography downloaded (${bibItems.length} items)`);
+  }));
+  done('academic');
 
     // scholarly perspectives for Critical analyses
     const arts = d.scholarly.filter((w) => w.abstract && (!w.field || /arts|humanities|history|social/i.test(w.field))).slice(0, 8);
