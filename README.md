@@ -73,7 +73,7 @@ public/            index.html, app.js (UI), styles.css (screen + print)
 ```
 GET /api/search?q=NAME
 GET /api/report/profile?wd=Q5598&ulan=500011051
-GET /api/report/{exhibitions|academic|market|collections}?wd=…&name=…&by=1606&dy=1669
+GET /api/report/{exhibitions|academic|market|collections|catalogue}?wd=…&name=…&by=1606&dy=1669
 GET /api/report/lifetime?wd=…&name=…&by=…&dy=…&variants=A|B|C
 GET /api/report/synthesis?wd=…          (only when AI is configured)
 ```
