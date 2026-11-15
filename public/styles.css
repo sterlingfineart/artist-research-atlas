@@ -45,7 +45,16 @@ main { max-width: 1240px; margin: 0 auto; padding: 28px 24px 60px; min-height: 7
 .search-form { display: flex; gap: 10px; max-width: 760px; margin: 0 auto; }
 .search-form input { flex: 1; font: 17px var(--sans); padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); outline: none; }
 .search-form input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-.examples { margin-top: 14px; color: var(--muted); font-size: 14px; }
+/* homepage showcase: example artists as artwork cards */
+.showcase { margin-top: 36px; }
+.showcase-label { color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 12px; }
+.showcase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; max-width: 1080px; margin: 0 auto; }
+.showcase-card { display: block; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: var(--ink); text-align: left; }
+.showcase-card:hover { border-color: #cdbfa9; box-shadow: 0 4px 16px rgba(60, 40, 20, .10); }
+.showcase-card img { width: 100%; height: 170px; object-fit: cover; display: block; background: #ece6da; }
+.showcase-name { display: block; font: 600 20px var(--serif); padding: 10px 12px 0; }
+.showcase-work { display: block; font-size: 12.5px; color: var(--muted); padding: 0 12px 12px; }
+.showcase-more { margin-top: 16px; color: var(--muted); font-size: 14px; }
 .how { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
 .step { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; }
 .step span { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-bottom: 8px; }
