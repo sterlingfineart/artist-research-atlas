@@ -140,7 +140,7 @@
         : `<span class="badge variant">Partial match${c.matchedName && c.matchedName !== c.name ? ` — “${esc(c.matchedName)}”` : ''}</span>`;
       const alt = [c.altBirth?.length ? `other recorded birth dates: ${c.altBirth.join(', ')}` : '', c.altDeath?.length ? `other recorded death dates: ${c.altDeath.join(', ')}` : ''].filter(Boolean).join(' · ');
       return `<article class="cand">
-        ${c.image ? `<img class="thumb" src="${esc(c.image)}" alt="" loading="lazy">` : `<div class="thumb">${esc((c.name || '?')[0])}</div>`}
+        ${c.image ? `<img class="thumb" src="${esc(c.image)}" alt="">` : `<div class="thumb">${esc((c.name || '?')[0])}</div>`}
         <div>
           <h3>${esc(c.name)}</h3>
           <div class="dates">${esc(lifeStr(c))}${c.floruit && (c.birth || c.death) ? ` <span class="meta">(${esc(c.floruit)})</span>` : ''}</div>
