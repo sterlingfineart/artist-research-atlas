@@ -59,6 +59,7 @@ const routes = {
   '/api/report/academic': async (u) => report.academic(need(params(u))),
   '/api/report/market': async (u) => report.market(need(params(u))),
   '/api/report/collections': async (u) => report.collections(need(params(u))),
+  '/api/report/catalogue': async (u) => report.catalogue(need(params(u))),
   '/api/report/lifetime': async (u) => report.lifetime(need(params(u))),
   '/api/report/synthesis': async (u) => ai.synthesize(params(u)),
 };
