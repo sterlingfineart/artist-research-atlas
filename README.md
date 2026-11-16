@@ -21,6 +21,8 @@ The report can be printed or saved as PDF (all collapsed lists expand automatica
 
 You can also browse artists without a name: the Browse page lists artists by century (12th–20th), country, movement or medium — pick any combination from the dropdowns and press GO. Each list is a live Wikidata query restricted to the same five occupations, capped at 50 artists, and selecting an artist opens the same report. The country list is every country with eligible artists (a live count of citizenships), counting historical states under the modern country (e.g. the Dutch Republic under the Netherlands, the Republic of Florence under Italy); states that map to no modern country appear under their own name. The page also groups the twenty homepage artists by the same four facets.
 
+The **Salon Time Machine** (`#/salon`) walks the Paris Salon year by year, 1673–1881: pick any of the 100 years with a surviving catalogue and browse every work as the livret listed it — catalogue number, title, artist, birthplace, teacher and medium, by section (Painting, Sculpture, Engraving, Architecture), with a search box for the year and 50 works per page. Every artist name links into the Atlas name search, so a Salon exhibitor leads straight to the full research report. The data is a static snapshot (144,081 records) built by `scripts/build-salon-data.py` from the combined Salon database (`salon-all.json`: the printed livrets, Garland reprints via the Internet Archive, parsed from OCR) into one compact JSON file per year under `public/data/salon/`. Catalogue numbers the parser had to infer, or that look suspect in the printed text, are flagged in the data and marked with a ~ on the page; some titles carry OCR noise and a few artist names are fragments — the records are shown as they stand, with their quality flags, not cleaned up. Years with no surviving livret are absent. No images in this first version: most Salon works have no surviving image in the open sources.
+
 ## Running it
 
 Requires **Node.js 18 or newer**. There are no npm dependencies.
@@ -69,6 +71,8 @@ lib/browse.js      browse lists by century, country, movement or role (live Wiki
 lib/report.js      report modules: profile, exhibitions, academic, market, collections, lifetime
 lib/ai.js          optional grounded AI synthesis
 public/            index.html, app.js (UI), styles.css (screen + print)
+public/data/salon/ one compact JSON file per Salon year + index.json (built by scripts/build-salon-data.py)
+scripts/build-salon-data.py  converts salon-all.json (144,081 Paris Salon records, 1673-1881) into public/data/salon/
 ```
 
 ### API
