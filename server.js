@@ -4,6 +4,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { search } = require('./lib/search');
+const { browse } = require('./lib/browse');
 const report = require('./lib/report');
 const ai = require('./lib/ai');
 
@@ -50,6 +51,7 @@ const routes = {
     if (q.length < 2) return { query: q, candidates: [], errors: ['Please enter at least two characters.'] };
     return search(q);
   },
+    '/api/browse': async (u) => browse({ facet: u.searchParams.get('facet') || null, value: u.searchParams.get('value') || null }),
   '/api/report/profile': async (u) => {
     const p = params(u);
     if (!p.wd && !p.ulan) throw Object.assign(new Error('Missing artist identifier'), { status: 400 });
