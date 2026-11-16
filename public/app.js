@@ -66,6 +66,7 @@
     window.scrollTo(0, 0);
     if (path === '/search' && p.q) return viewSearch(p.q);
     if (path === '/browse') return viewBrowse(p);
+    if (path === '/salon' || path.startsWith('/salon/')) return viewSalon(p, path);
     if (path === '/artist' && (p.wd || p.ulan)) return viewReport(p);
     if (path === '/about') return viewAbout();
     return viewHome();
@@ -294,6 +295,180 @@
         location.hash = `#/artist?wd=${cand.wikidata}${cand.ulan ? '&ulan=' + cand.ulan : ''}`;
       })
     );
+  }
+
+  /* ========================================================== salon view */
+  const SALON_SECTION_LABELS = { PEINTURE: 'Painting', SCULPTURE: 'Sculpture', GRAVURE: 'Engraving', ARCHITECTURE: 'Architecture', 'MONUMENTS PUBLICS': 'Public monuments' };
+  const SALON_SECTION_ORDER = ['PEINTURE', 'SCULPTURE', 'GRAVURE', 'ARCHITECTURE', 'MONUMENTS PUBLICS'];
+  const SALON_FAMOUS = [
+    { year: 1863, label: '1863 · the Refusés year' },
+    { year: 1855, label: '1855 · Universal Exhibition' },
+    { year: 1874, label: '1874' },
+    { year: 1789, label: '1789' },
+  ];
+  const SALON_DEFAULT_YEAR = 1874;
+  const SALON_PAGE_SIZE = 50;
+  let salonIndex = null;
+  const salonYearCache = new Map();
+  const salonState = { year: SALON_DEFAULT_YEAR, section: 'all', query: '', page: 1, data: null, entry: null };
+  async function salonFetchJSON(url) {
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(`Could not load ${url} (HTTP ${r.status})`);
+    return r.json();
+  }
+  async function loadSalonIndex() {
+    if (!salonIndex) salonIndex = await salonFetchJSON('/data/salon/index.json');
+    return salonIndex;
+  }
+  async function loadSalonYear(year) {
+    if (!salonYearCache.has(year)) {
+      salonYearCache.set(year, salonFetchJSON(`/data/salon/${year}.json`).catch((e) => { salonYearCache.delete(year); throw e; }));
+    }
+    return salonYearCache.get(year);
+  }
+  const salonSectionLabel = (s) => SALON_SECTION_LABELS[s] || s.charAt(0) + s.slice(1).toLowerCase();
+  function salonOrderedSections(sections) {
+    const known = SALON_SECTION_ORDER.filter((s) => sections.includes(s));
+    const rest = sections.filter((s) => !SALON_SECTION_ORDER.includes(s));
+    return [...known, ...rest];
+  }
+  /** Full name for the Atlas name search: given names + surname as printed. */
+  function salonFullName(w) {
+    return [w[3], w[2]].filter(Boolean).join(' ');
+  }
+  function salonNumCell(w) {
+    if (w[1] == null) return '<span class="muted" title="No catalogue number in the livret — a prose entry, not a numbered work">—</span>';
+    if (w[9] & 2) return `${esc(w[1])} <span class="flag-mark" title="Catalogue number inferred from the sequence — the printed livret does not give it clearly">~</span>`;
+    if (w[9] & 1) return `${esc(w[1])} <span class="flag-mark" title="Catalogue number as printed, but it breaks the sequence — it may be an OCR misreading">~</span>`;
+    return esc(w[1]);
+  }
+  function salonFiltered() {
+    const { data, section, query } = salonState;
+    if (!data) return [];
+    const q = query.trim().toLowerCase();
+    return data.works.filter((w) => {
+      if (section !== 'all' && data.sections[w[0]] !== section) return false;
+      if (!q) return true;
+      return salonFullName(w).toLowerCase().includes(q) || (w[6] || '').toLowerCase().includes(q);
+    });
+  }
+  function renderSalonTable() {
+    const wrap = $('#salon-table-wrap');
+    if (!wrap || !salonState.data) return;
+    const rows = salonFiltered();
+    const pages = Math.max(1, Math.ceil(rows.length / SALON_PAGE_SIZE));
+    if (salonState.page > pages) salonState.page = pages;
+    const start = (salonState.page - 1) * SALON_PAGE_SIZE;
+    const pageRows = rows.slice(start, start + SALON_PAGE_SIZE);
+    const noteHtml = (w) => {
+      if (!w[8]) return '';
+      const n = w[8];
+      const short = n.length > 160 ? n.slice(0, 160) + '…' : n;
+      return `<div class="meta" title="${esc(n)}">${esc(short)}</div>`;
+    };
+    if (!rows.length) {
+      wrap.innerHTML = '<div class="notice">No works in this year match — try another spelling, a different section, or clear the search box.</div>';
+      return;
+    }
+    wrap.innerHTML = `<div class="table-wrap"><table class="table salon-table">
+      <thead><tr><th class="salon-num">No.</th><th>Title</th><th>Artist</th><th>Birthplace</th><th>Teacher</th><th>Medium</th></tr></thead>
+      <tbody>${pageRows.map((w) => `<tr>
+        <td class="salon-num">${salonNumCell(w)}</td>
+        <td>${esc(w[6] || '')}${noteHtml(w)}</td>
+        <td><a href="#/search?q=${enc(salonFullName(w))}">${esc(salonFullName(w))}</a></td>
+        <td>${esc(w[4] || '')}</td>
+        <td>${esc(w[5] || '')}</td>
+        <td>${esc(w[7] || '')}</td>
+      </tr>`).join('')}</tbody></table></div>
+      <div class="pager">
+        <button class="btn btn-sm" id="salon-prev-page" ${salonState.page <= 1 ? 'disabled' : ''}>← Previous</button>
+        <span class="meta">Page ${salonState.page} of ${pages.toLocaleString()} · showing ${(start + 1).toLocaleString()}–${Math.min(start + SALON_PAGE_SIZE, rows.length).toLocaleString()} of ${rows.length.toLocaleString()} work${rows.length === 1 ? '' : 's'}</span>
+        <button class="btn btn-sm" id="salon-next-page" ${salonState.page >= pages ? 'disabled' : ''}>Next →</button>
+      </div>`;
+    const prev = $('#salon-prev-page');
+    const next = $('#salon-next-page');
+    if (prev) prev.addEventListener('click', () => { salonState.page--; renderSalonTable(); });
+    if (next) next.addEventListener('click', () => { salonState.page++; renderSalonTable(); });
+  }
+  function renderSalonYear() {
+    const el = $('#salon-year');
+    const { data, entry, year } = salonState;
+    if (!el || !data) return;
+    const counts = salonOrderedSections(data.sections).map((s) => `${salonSectionLabel(s)} ${entry.sections[s].toLocaleString()}`).join(' · ');
+    const tabs = [{ id: 'all', label: 'All sections', n: entry.works }, ...salonOrderedSections(data.sections).map((s) => ({ id: s, label: salonSectionLabel(s), n: entry.sections[s] }))];
+    el.innerHTML = `<div class="results-head"><div><h2>${year} — ${esc(data.salon)}</h2><div class="meta">${plural(entry.works, 'work')} by ${plural(entry.artists, 'artist')} · ${counts}</div></div></div>
+      <div class="filters">${tabs.map((t) => `<button class="chip ${salonState.section === t.id ? 'active' : ''}" data-sec="${esc(t.id)}">${esc(t.label)} (${t.n.toLocaleString()})</button>`).join('')}</div>
+      <div class="salon-search"><input id="salon-q" type="search" placeholder="Filter this year by artist or title…" value="${esc(salonState.query)}" aria-label="Filter works by artist or title"></div>
+      <div id="salon-table-wrap"></div>
+      <div class="notice">About these records — transcribed from the printed Salon livrets (Garland reprints, via the Internet Archive) and parsed from OCR, so some titles carry OCR noise and a few artist names are fragments. A “~” after a catalogue number means the number was inferred from the sequence or looks suspect in the printed text. Every artist name links to the Atlas name search — pick the right person there to read the full research report. No images yet: most Salon works have no surviving image in the open sources, so this first version is the catalogue itself, browsable year by year.</div>`;
+    el.querySelectorAll('[data-sec]').forEach((b) => b.addEventListener('click', () => {
+      salonState.section = b.dataset.sec;
+      salonState.page = 1;
+      el.querySelectorAll('[data-sec]').forEach((x) => x.classList.toggle('active', x === b));
+      renderSalonTable();
+    }));
+    const q = $('#salon-q');
+    q.addEventListener('input', () => { salonState.query = q.value; salonState.page = 1; renderSalonTable(); });
+    renderSalonTable();
+  }
+  function renderSalonControls(idx, year) {
+    const el = $('#salon-controls');
+    if (!el) return;
+    const years = idx.years.map((y) => y.year);
+    const i = years.indexOf(year);
+    const prev = i > 0 ? years[i - 1] : null;
+    const next = i >= 0 && i < years.length - 1 ? years[i + 1] : null;
+    const inList = i >= 0;
+    const opt = (y) => `<option value="${y.year}"${y.year === year ? ' selected' : ''}>${y.year} — ${y.works.toLocaleString()} works</option>`;
+    el.innerHTML = `<form id="salon-form" class="browse-form">
+        <button class="btn" type="button" id="salon-prev-year" ${prev == null ? 'disabled' : ''}>← ${prev ?? ''}</button>
+        <label>Year <select id="salon-year-select" aria-label="Salon year">${inList ? '' : '<option value="" selected>Choose a year…</option>'}${idx.years.map(opt).join('')}</select></label>
+        <button class="btn" type="button" id="salon-next-year" ${next == null ? 'disabled' : ''}>${next ?? ''} →</button>
+      </form>
+      <div class="salon-famous"><span class="meta">Famous years:</span>${SALON_FAMOUS.map((f) => `<a class="chip" href="#/salon/${f.year}">${esc(f.label)}</a>`).join('')}</div>`;
+    $('#salon-year-select').addEventListener('change', (e) => { if (e.target.value) location.hash = '#/salon/' + e.target.value; });
+    if (prev != null) $('#salon-prev-year').addEventListener('click', () => { location.hash = '#/salon/' + prev; });
+    if (next != null) $('#salon-next-year').addEventListener('click', () => { location.hash = '#/salon/' + next; });
+  }
+  async function viewSalon(p, path) {
+    const seg = (path.split('/')[2] || p.year || '').trim();
+    let year = parseInt(seg || SALON_DEFAULT_YEAR, 10);
+    if (!Number.isFinite(year)) year = SALON_DEFAULT_YEAR;
+    salonState.year = year;
+    salonState.section = 'all';
+    salonState.query = '';
+    salonState.page = 1;
+    salonState.data = null;
+    salonState.entry = null;
+    app.innerHTML = `<h1 style="font-size:38px">Salon Time Machine</h1>
+      <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">Step into any Paris Salon, 1673–1881, as it was catalogued: every work, every exhibitor, in the sections the livret itself used. Pick a year — or walk year by year — and every artist name opens the Atlas name search, so a Salon exhibitor leads straight to the full research report.</p>
+      <div id="salon-controls">${spinner('Loading Salon years…')}</div>
+      <div id="salon-year"></div>`;
+    let idx;
+    try {
+      idx = await loadSalonIndex();
+    } catch (e) {
+      $('#salon-controls').innerHTML = `<div class="notice error">The Salon catalogue could not be loaded: ${esc(e.message)}</div>`;
+      return;
+    }
+    renderSalonControls(idx, year);
+    const entry = idx.years.find((y) => y.year === year);
+    if (!entry) {
+      const years = idx.years.map((y) => y.year);
+      const before = [...years].reverse().find((y) => y < year);
+      const after = years.find((y) => y > year);
+      $('#salon-year').innerHTML = `<div class="notice">There is no Salon catalogue for ${year} in this collection — either no Salon was held that year, or its livret has not survived.${before ? ` The previous Salon with a catalogue is <a href="#/salon/${before}">${before}</a>${after ? `, the next is <a href="#/salon/${after}">${after}</a>` : ''}.` : ''}</div>`;
+      return;
+    }
+    salonState.entry = entry;
+    $('#salon-year').innerHTML = spinner(`Loading the ${year} Salon…`);
+    try {
+      salonState.data = await loadSalonYear(year);
+    } catch (e) {
+      $('#salon-year').innerHTML = `<div class="notice error">The ${year} Salon catalogue could not be loaded: ${esc(e.message)}</div>`;
+      return;
+    }
+    renderSalonYear();
   }
 
   /* ========================================================== report view */
@@ -830,6 +1005,7 @@
         <li><b>Auction & art sales</b> — documented prices, sales and ownership events, provenance chains published by museums, the artist’s pages on Artnet, Artsy, MutualArt, Invaluable and others, and pre-filled searches of auction archives. Full auction records are in subscription databases and are linked rather than reproduced.</li>
         <li><b>Works & collections — linking to the holding institution</b> — a work's title links to the holding museum's own object page wherever one exists and can be verified; Wikidata is the finding aid, never the authority. How a link is resolved: the work list comes from Wikidata (a SPARQL query for works with the artist as creator, <i>wdt:P170</i>), together with the museum identifiers recorded there — the <i>Met object ID</i> (property P3634) and the <i>Art Institute of Chicago artwork ID</i> (property P4610). Each identifier is checked against the institution's own open API — the Met Collection API (<code>collectionapi.metmuseum.org/public/collection/v1/objects/{id}</code>), which returns the museum's canonical object page (<code>objectURL</code>), and the Art Institute of Chicago API (<code>api.artic.edu/api/v1/artworks/{id}</code>), whose public page is <code>artic.edu/artworks/{id}</code>. Only an identifier the institution's API confirms becomes the work's link; if it does not resolve, the work links to its Wikidata item page instead. Museum open-access records are fetched directly from the same APIs — the Met, the Art Institute of Chicago, and the Cleveland Museum of Art's open-access API (<code>openaccess-api.clevelandart.org</code>), which returns each object's own page URL with the record — and Europeana records link to the Europeana item page. Where no institutional page exists, the work links to its Wikidata page, shown plainly as such and never presented as a museum source. Direct automated checks of museum web pages are not reliable (their servers reject them), which is why verification runs through the institutions' open APIs.</li>
         <li><b>Browse</b> — the browse page lists artists by century (12th–20th), country, movement or medium, and any combination of the four: pick from the dropdowns and press GO. The country list is every country with eligible artists (a live count of citizenships, including the historical states grouped under the modern country — Rembrandt and Vermeer are recorded as citizens of the Dutch Republic, Leonardo of the Republic of Florence — so the Dutch masters and the Italian Renaissance appear where they belong; states that map to no modern country appear under their own name). Each list is a live Wikidata query restricted to painters, sculptors, draftsmen, engravers and printmakers, capped at 50 artists, best-documented first — plus a curated index of the twenty homepage artists grouped the same way. As everywhere on the site, Wikidata is the finding aid: it finds the artist, and the report then links each work to the holding institution's verified page.</li>
+        <li><b>Salon Time Machine</b> — the Paris Salon catalogues, 1673–1881: 144,081 works by year, section and catalogue number, transcribed from the printed livrets (Garland reprints via the Internet Archive) and parsed from OCR. Catalogue numbers marked ~ were inferred from the sequence or look suspect in the printed text; some titles carry OCR noise and a few artist names are fragments. Years with no surviving livret are simply absent. Each artist name links to the usual name search, so a Salon exhibitor leads straight to the full research report. No images in this first version: most Salon works have no surviving image in the open sources.</li>
         <li><b>Catalogue raisonné</b> — the standard catalogue raisonné of the artist’s works, where one exists, drawn from Open Library and Wikidata and shown in chronological order, including catalogues later superseded by newer ones; where a standard catalogue is published under another title it is listed from a short curated set.</li>
         <li><b>References</b> — every source is captured as a Chicago-style citation, grouped as biographical, exhibitions, academic, lifetime, market and database/authority records. <span class="tag-life">LIFETIME</span> marks sources dated within the artist’s life, drawn from historic dictionaries, the Internet Archive, the Library of Congress’s Chronicling America newspapers, Europeana and Open Library.</li>
       </ul>
