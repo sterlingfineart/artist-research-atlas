@@ -204,3 +204,20 @@ details summary { cursor: pointer; color: var(--accent); font-weight: 500; margi
 ol.refs li { overflow-wrap: anywhere; }
 .variant-cloud { font-size: 14px; line-height: 1.9; list-style: none; padding: 0; margin: 0; }
 .variant-cloud li { display: inline-block; background: #f3eee5; border-radius: 5px; padding: 0 8px; margin: 0 4px 4px 0; }
+
+/* salon time machine */
+.salon-famous { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 2px 0 18px; }
+.salon-famous a.chip { text-decoration: none; color: var(--ink); }
+.salon-famous a.chip:hover { color: var(--accent); border-color: var(--accent); }
+.salon-search { margin: 16px 0; max-width: 520px; }
+.salon-search input { width: 100%; font: 15px var(--sans); padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); outline: none; }
+.salon-search input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.table-wrap { overflow-x: auto; }
+.salon-table td { overflow-wrap: anywhere; }
+.salon-num { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.flag-mark { color: var(--warn); cursor: help; font-weight: 700; }
+.pager { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 14px 0; }
+.pager .meta { flex: 1; text-align: center; }
+.btn:disabled { opacity: .45; cursor: default; }
+.btn:disabled:hover { border-color: var(--line); color: var(--ink); }
+.btn-primary:disabled:hover { background: var(--accent); color: #fff; }
