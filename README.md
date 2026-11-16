@@ -19,7 +19,7 @@ A research website for **painters, sculptors, draftsmen and engravers**.
 
 The report can be printed or saved as PDF (all collapsed lists expand automatically). You can also copy or download every reference as `.txt` and download all the research data as `.json`.
 
-You can also browse artists without a name: the Browse page lists artists by century (12th–20th), country, movement or medium. Each list is a live Wikidata query restricted to the same five occupations, capped at 50 artists, and selecting an artist opens the same report. Country is by citizenship, counting historical states under the modern country (e.g. the Dutch Republic under the Netherlands, the Republic of Florence under Italy). The page also groups the twenty homepage artists by the same four facets.
+You can also browse artists without a name: the Browse page lists artists by century (12th–20th), country, movement or medium — pick any combination from the dropdowns and press GO. Each list is a live Wikidata query restricted to the same five occupations, capped at 50 artists, and selecting an artist opens the same report. The country list is every country with eligible artists (a live count of citizenships), counting historical states under the modern country (e.g. the Dutch Republic under the Netherlands, the Republic of Florence under Italy); states that map to no modern country appear under their own name. The page also groups the twenty homepage artists by the same four facets.
 
 ## Running it
 
@@ -77,6 +77,7 @@ public/            index.html, app.js (UI), styles.css (screen + print)
 GET /api/search?q=NAME
 GET /api/browse
 GET /api/browse?facet=movement&value=Q40415
+GET /api/browse?century=19&country=Q96&movement=Q40415&role=Q1028181
 GET /api/report/profile?wd=Q5598&ulan=500011051
 GET /api/report/{exhibitions|academic|market|collections|catalogue}?wd=…&name=…&by=1606&dy=1669
 GET /api/report/lifetime?wd=…&name=…&by=…&dy=…&variants=A|B|C
