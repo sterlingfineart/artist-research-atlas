@@ -65,6 +65,7 @@
     const p = Object.fromEntries(new URLSearchParams(q || ''));
     window.scrollTo(0, 0);
     if (path === '/search' && p.q) return viewSearch(p.q);
+    if (path === '/browse') return viewBrowse(p);
     if (path === '/artist' && (p.wd || p.ulan)) return viewReport(p);
     if (path === '/about') return viewAbout();
     return viewHome();
@@ -157,6 +158,112 @@
         </div></article>`;
     };
     render();
+  }
+
+  /* ========================================================== browse view */
+  /* The twenty homepage artists, grouped by the same four facets as Browse.
+   * Centuries are by birth year, countries in their modern form, movements
+   * the artist's best-known one. Every QID was verified against Wikidata. */
+  const SHOWCASE_INDEX = [
+    { name: 'Rembrandt', wd: 'Q5598', century: 17, country: 'Netherlands', movement: 'Baroque', roles: ['Painters', 'Engravers', 'Printmakers', 'Draftspeople'] },
+    { name: 'Hokusai', wd: 'Q5586', century: 18, country: 'Japan', movement: 'Ukiyo-e', roles: ['Painters', 'Printmakers', 'Draftspeople'] },
+    { name: 'Johannes Vermeer', wd: 'Q41264', century: 17, country: 'Netherlands', movement: 'Baroque', roles: ['Painters'] },
+    { name: 'Xu Beihong', wd: 'Q714152', century: 19, country: 'China', movement: 'Realism', roles: ['Painters'] },
+    { name: 'Artemisia Gentileschi', wd: 'Q212657', century: 16, country: 'Italy', movement: 'Baroque', roles: ['Painters'] },
+    { name: 'Behzad', wd: 'Q334875', century: 15, country: 'Iran', movement: 'Persian miniature', roles: ['Painters'] },
+    { name: 'Claude Monet', wd: 'Q296', century: 19, country: 'France', movement: 'Impressionism', roles: ['Painters'] },
+    { name: 'Raden Saleh', wd: 'Q1375979', century: 19, country: 'Indonesia', movement: 'Romanticism', roles: ['Painters', 'Draftspeople'] },
+    { name: 'Gustav Klimt', wd: 'Q34661', century: 19, country: 'Austria', movement: 'Art Nouveau', roles: ['Painters', 'Draftspeople'] },
+    { name: 'Raja Ravi Varma', wd: 'Q333453', century: 19, country: 'India', movement: 'Realism', roles: ['Painters'] },
+    { name: 'Albrecht Dürer', wd: 'Q5580', century: 15, country: 'Germany', movement: 'Northern Renaissance', roles: ['Painters', 'Engravers', 'Printmakers', 'Draftspeople'] },
+    { name: 'Osman Hamdi Bey', wd: 'Q1190012', century: 19, country: 'Turkey', movement: 'Orientalism', roles: ['Painters'] },
+    { name: 'Mary Cassatt', wd: 'Q173223', century: 19, country: 'United States', movement: 'Impressionism', roles: ['Painters', 'Printmakers'] },
+    { name: 'Joaquín Torres García', wd: 'Q520713', century: 19, country: 'Uruguay', movement: 'Universal Constructivism', roles: ['Painters', 'Sculptors'] },
+    { name: 'John Singer Sargent', wd: 'Q155626', century: 19, country: 'United States', movement: 'Impressionism', roles: ['Painters'] },
+    { name: 'Olowe of Ise', wd: 'Q7088530', century: 19, country: 'Nigeria', movement: 'Yoruba art', roles: ['Sculptors'] },
+    { name: 'Amrita Sher-Gil', wd: 'Q150312', century: 20, country: 'India', movement: 'Post-Impressionism', roles: ['Painters'] },
+    { name: 'Francisco Goya', wd: 'Q5432', century: 18, country: 'Spain', movement: 'Romanticism', roles: ['Painters', 'Engravers', 'Printmakers', 'Draftspeople'] },
+    { name: 'Pedro Américo', wd: 'Q540219', century: 19, country: 'Brazil', movement: 'Romanticism', roles: ['Painters'] },
+    { name: 'Hildegard von Bingen', wd: 'Q70991', century: 11, country: 'Germany', movement: 'Romanesque art', roles: ['Illuminator'] },
+  ];
+  const centuryLabel = (c) => {
+    const s = c % 10 === 1 && c % 100 !== 11 ? 'st' : c % 10 === 2 && c % 100 !== 12 ? 'nd' : c % 10 === 3 && c % 100 !== 13 ? 'rd' : 'th';
+    return `${c}${s} century`;
+  };
+  function indexGroup(title, key, sort) {
+    const groups = {};
+    for (const a of SHOWCASE_INDEX) {
+      const vals = Array.isArray(a[key]) ? a[key] : [a[key]];
+      for (const v of vals) (groups[v] ||= []).push(a);
+    }
+    return `<h3>${esc(title)}</h3>${Object.keys(groups).sort(sort).map((g) => `<h4>${esc(key === 'century' ? centuryLabel(+g) : g)}</h4><p>${groups[g].map((a) => `<a href="#/search?q=${enc(a.name)}">${esc(a.name)}</a>`).join(' · ')}</p>`).join('')}`;
+  }
+  function renderShowcaseIndex() {
+    const el = $('#browse-index');
+    if (!el) return;
+    el.innerHTML = `<h2>From the homepage</h2>
+      <p class="source-line">The twenty artists on the homepage, grouped by the same four facets. Each name opens the usual name search, so you can pick the right person and read the report.</p>
+      ${indexGroup('By century', 'century', (a, b) => +a - +b)}
+      ${indexGroup('By country', 'country', (a, b) => a.localeCompare(b))}
+      ${indexGroup('By movement', 'movement', (a, b) => a.localeCompare(b))}
+      ${indexGroup('By medium', 'roles', (a, b) => a.localeCompare(b))}`;
+  }
+  function browseCard(a, i) {
+    return `<article class="cand">
+      ${a.image ? `<img class="thumb" src="${esc(a.image)}" alt="">` : `<div class="thumb">${esc((a.name || '?')[0])}</div>`}
+      <div>
+        <h3>${esc(a.name)}</h3>
+        <div class="dates">${esc(lifeStr({ birth: a.birthYear ? String(a.birthYear) : null, death: a.deathYear ? String(a.deathYear) : null }))}</div>
+        <div class="meta">${a.birthPlace ? `Born: <b>${esc(a.birthPlace)}</b>` : 'Birthplace not recorded'}</div>
+        <div class="badges">${(a.roles || []).slice(0, 6).map((r) => `<span class="badge role">${esc(r)}</span>`).join('')}<span class="badge src">Wikidata</span></div>
+      </div>
+      <div class="cand-actions">
+        <button class="btn btn-primary" data-pick="${i}">Select this artist →</button>
+        ${a.id ? link(`https://www.wikidata.org/wiki/${a.id}`, `Wikidata ${a.id}`) : ''}
+        ${a.ulan ? link(`https://vocab.getty.edu/page/ulan/${a.ulan}`, `ULAN ${a.ulan}`) : ''}
+      </div></article>`;
+  }
+  async function viewBrowse(p) {
+    app.innerHTML = `<h1 style="font-size:38px">Browse artists</h1>
+      <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">Browse by century, country, movement or medium. Every list is a live query of Wikidata, restricted to painters, sculptors, draftsmen, engravers and printmakers — select an artist to generate the full research report.</p>
+      <div id="browse-facets">${spinner('Loading browse lists…')}</div>
+      <div id="browse-results"></div>
+      <section class="rs" id="browse-index"></section>`;
+    renderShowcaseIndex();
+    let defs;
+    try {
+      defs = await api('/api/browse', {});
+    } catch (e) {
+      $('#browse-facets').innerHTML = `<div class="notice error">Browse lists could not be loaded: ${esc(e.message)}</div>`;
+      return;
+    }
+    if (defs?.facets) {
+      $('#browse-facets').innerHTML = defs.facets.map((f) => `<h3>${esc(f.label)}</h3><div class="filters">${f.values.map((v) => `<a class="chip ${p.facet === f.id && p.value === v.id ? 'active' : ''}" href="#/browse?facet=${f.id}&value=${enc(v.id)}">${esc(v.label)}</a>`).join('')}</div>`).join('');
+    }
+    if (!p.facet || !p.value) return;
+    const out = $('#browse-results');
+    out.innerHTML = spinner('Finding artists…');
+    let d;
+    try {
+      d = await api('/api/browse', { facet: p.facet, value: p.value });
+    } catch (e) {
+      out.innerHTML = `<div class="notice error">Browse failed: ${esc(e.message)}</div>`;
+      return;
+    }
+    const artists = d.artists || [];
+    if (!artists.length) {
+      out.innerHTML = `${errs(d.errors)}<div class="notice">No artists were found for “${esc(d.label || p.value)}”. Wikidata may not record that combination — try another value.</div>`;
+      return;
+    }
+    out.innerHTML = `<div class="results-head"><div><h2>${plural(artists.length, 'artist')} — ${esc(d.label)}</h2><div class="meta">Showing up to 50 artists, best-documented first (by number of linked Wikimedia pages), then by birth year. Select an artist to generate the research report.</div></div></div>${errs(d.errors)}${artists.map((a, i) => browseCard(a, i)).join('')}`;
+    out.querySelectorAll('[data-pick]').forEach((b) =>
+      b.addEventListener('click', () => {
+        const a = artists[+b.dataset.pick];
+        const cand = { wikidata: a.id, ulan: a.ulan || null, name: a.name, birth: a.birthYear ? String(a.birthYear) : null, death: a.deathYear ? String(a.deathYear) : null, birthYear: a.birthYear, deathYear: a.deathYear, birthPlace: a.birthPlace, roles: a.roles, image: a.image, sources: ['Wikidata'], variants: [], citizenship: [] };
+        sessionStorage.setItem('cand:' + (cand.wikidata || cand.ulan), JSON.stringify(cand));
+        location.hash = `#/artist?wd=${cand.wikidata}${cand.ulan ? '&ulan=' + cand.ulan : ''}`;
+      })
+    );
   }
 
   /* ========================================================== report view */
@@ -692,6 +799,7 @@
         <li><b>Critical analyses</b> — encyclopaedic discussion of style, technique, reception and legacy, and arguments drawn from leading scholarship.</li>
         <li><b>Auction & art sales</b> — documented prices, sales and ownership events, provenance chains published by museums, the artist’s pages on Artnet, Artsy, MutualArt, Invaluable and others, and pre-filled searches of auction archives. Full auction records are in subscription databases and are linked rather than reproduced.</li>
         <li><b>Works & collections — linking to the holding institution</b> — a work's title links to the holding museum's own object page wherever one exists and can be verified; Wikidata is the finding aid, never the authority. How a link is resolved: the work list comes from Wikidata (a SPARQL query for works with the artist as creator, <i>wdt:P170</i>), together with the museum identifiers recorded there — the <i>Met object ID</i> (property P3634) and the <i>Art Institute of Chicago artwork ID</i> (property P4610). Each identifier is checked against the institution's own open API — the Met Collection API (<code>collectionapi.metmuseum.org/public/collection/v1/objects/{id}</code>), which returns the museum's canonical object page (<code>objectURL</code>), and the Art Institute of Chicago API (<code>api.artic.edu/api/v1/artworks/{id}</code>), whose public page is <code>artic.edu/artworks/{id}</code>. Only an identifier the institution's API confirms becomes the work's link; if it does not resolve, the work links to its Wikidata item page instead. Museum open-access records are fetched directly from the same APIs — the Met, the Art Institute of Chicago, and the Cleveland Museum of Art's open-access API (<code>openaccess-api.clevelandart.org</code>), which returns each object's own page URL with the record — and Europeana records link to the Europeana item page. Where no institutional page exists, the work links to its Wikidata page, shown plainly as such and never presented as a museum source. Direct automated checks of museum web pages are not reliable (their servers reject them), which is why verification runs through the institutions' open APIs.</li>
+        <li><b>Browse</b> — the browse page lists artists by century (12th–20th), country, movement or medium. Each list is a live Wikidata query restricted to painters, sculptors, draftsmen, engravers and printmakers, capped at 50 artists, best-documented first — plus a curated index of the twenty homepage artists grouped the same way. Country is by citizenship, counting the historical states under the modern country (Rembrandt and Vermeer are recorded as citizens of the Dutch Republic, Leonardo of the Republic of Florence), so the Dutch masters and the Italian Renaissance appear where they belong. As everywhere on the site, Wikidata is the finding aid: it finds the artist, and the report then links each work to the holding institution's verified page.</li>
         <li><b>Catalogue raisonné</b> — the standard catalogue raisonné of the artist’s works, where one exists, drawn from Open Library and Wikidata and shown in chronological order, including catalogues later superseded by newer ones; where a standard catalogue is published under another title it is listed from a short curated set.</li>
         <li><b>References</b> — every source is captured as a Chicago-style citation, grouped as biographical, exhibitions, academic, lifetime, market and database/authority records. <span class="tag-life">LIFETIME</span> marks sources dated within the artist’s life, drawn from historic dictionaries, the Internet Archive, the Library of Congress’s Chronicling America newspapers, Europeana and Open Library.</li>
       </ul>
