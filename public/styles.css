@@ -80,6 +80,11 @@ main { max-width: 1240px; margin: 0 auto; padding: 28px 24px 60px; min-height: 7
 .filters a.chip.active { color: var(--paper); }
 .filters a.chip:hover { color: var(--accent); border-color: var(--accent); }
 .filters a.chip.active:hover { color: var(--paper); border-color: var(--ink); }
+/* browse page: four dropdowns + GO, one compact row that wraps */
+.browse-form { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: end; margin-bottom: 8px; }
+.browse-form label { font: 600 13px var(--sans); color: var(--muted); display: flex; flex-direction: column; gap: 4px; }
+.browse-form select { font: 500 14px var(--sans); color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 9px 10px; max-width: 240px; cursor: pointer; }
+.browse-form select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .cand { display: grid; grid-template-columns: 88px 1fr auto; gap: 18px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; margin-bottom: 12px; align-items: start; }
 .cand:hover { border-color: #cdbfa9; box-shadow: 0 2px 10px rgba(60, 40, 20, .06); }
 .cand .thumb { width: 88px; height: 104px; border-radius: 6px; object-fit: cover; background: #ece6da; display: grid; place-items: center; color: #b3a891; font: 600 34px var(--serif); }
