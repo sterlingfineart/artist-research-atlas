@@ -225,7 +225,7 @@
   }
   async function viewBrowse(p) {
     app.innerHTML = `<h1 style="font-size:38px">Browse artists</h1>
-      <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">Browse by century, country, movement or medium. Every list is a live query of Wikidata, restricted to painters, sculptors, draftsmen, engravers and printmakers — select an artist to generate the full research report.</p>
+      <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">Browse by century, country, movement or medium — pick any combination and press GO. Every list is a live query of Wikidata, restricted to painters, sculptors, draftsmen, engravers and printmakers — select an artist to generate the full research report.</p>
       <div id="browse-facets">${spinner('Loading browse lists…')}</div>
       <div id="browse-results"></div>
       <section class="rs" id="browse-index"></section>`;
@@ -238,21 +238,51 @@
       return;
     }
     if (defs?.facets) {
-      $('#browse-facets').innerHTML = defs.facets.map((f) => `<h3>${esc(f.label)}</h3><div class="filters">${f.values.map((v) => `<a class="chip ${p.facet === f.id && p.value === v.id ? 'active' : ''}" href="#/browse?facet=${f.id}&value=${enc(v.id)}">${esc(v.label)}</a>`).join('')}</div>`).join('');
+      const byId = Object.fromEntries(defs.facets.map((f) => [f.id, f]));
+      // The current selection, from a combined URL (?century=19&country=Q96)
+      // or a legacy single-facet URL (?facet=country&value=Q96).
+      const selFor = (fid) => p[fid] || (p.facet === fid ? p.value : '');
+      const opt = (f, v) => `<option value="${esc(v.id)}"${selFor(f.id) === v.id ? ' selected' : ''}>${esc(v.label)}${v.count != null ? ` (${v.count.toLocaleString()})` : ''}</option>`;
+      const selectHtml = (f, placeholder) => {
+        if (f.id === 'country' && f.values.some((v) => v.historical)) {
+          const modern = f.values.filter((v) => !v.historical);
+          const hist = f.values.filter((v) => v.historical);
+          return `<select name="country" aria-label="Country"><option value="">${placeholder}</option><optgroup label="Countries">${modern.map((v) => opt(f, v)).join('')}</optgroup><optgroup label="Historical states &amp; regions">${hist.map((v) => opt(f, v)).join('')}</optgroup></select>`;
+        }
+        return `<select name="${f.id}" aria-label="${esc(f.label)}"><option value="">${placeholder}</option>${f.values.map((v) => opt(f, v)).join('')}</select>`;
+      };
+      $('#browse-facets').innerHTML = `<form id="browse-form" class="browse-form">
+        <label>Century ${selectHtml(byId.century, 'Choose a century…')}</label>
+        <label>Country ${selectHtml(byId.country, 'Choose a country…')}</label>
+        <label>Movement ${selectHtml(byId.movement, 'Choose a movement…')}</label>
+        <label>Medium ${selectHtml(byId.role, 'Choose a medium…')}</label>
+        <button class="btn btn-primary" type="submit">GO</button>
+      </form>${errs(defs.errors)}`;
+      $('#browse-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const q = ['century', 'country', 'movement', 'role']
+          .map((k) => (fd.get(k) ? `${k}=${enc(fd.get(k))}` : ''))
+          .filter(Boolean)
+          .join('&');
+        if (!q) return;
+        location.hash = '#/browse?' + q;
+      });
     }
-    if (!p.facet || !p.value) return;
+    const hasCombined = p.century || p.country || p.movement || p.role;
+    if (!p.facet && !p.value && !hasCombined) return;
     const out = $('#browse-results');
     out.innerHTML = spinner('Finding artists…');
     let d;
     try {
-      d = await api('/api/browse', { facet: p.facet, value: p.value });
+      d = await api('/api/browse', hasCombined ? { century: p.century, country: p.country, movement: p.movement, role: p.role } : { facet: p.facet, value: p.value });
     } catch (e) {
       out.innerHTML = `<div class="notice error">Browse failed: ${esc(e.message)}</div>`;
       return;
     }
     const artists = d.artists || [];
     if (!artists.length) {
-      out.innerHTML = `${errs(d.errors)}<div class="notice">No artists were found for “${esc(d.label || p.value)}”. Wikidata may not record that combination — try another value.</div>`;
+      out.innerHTML = `${errs(d.errors)}<div class="notice">No artists were found for “${esc(d.label || p.value || 'those filters')}”. Wikidata may not record that combination — try another value.</div>`;
       return;
     }
     out.innerHTML = `<div class="results-head"><div><h2>${plural(artists.length, 'artist')} — ${esc(d.label)}</h2><div class="meta">Showing up to 50 artists, best-documented first (by number of linked Wikimedia pages), then by birth year. Select an artist to generate the research report.</div></div></div>${errs(d.errors)}${artists.map((a, i) => browseCard(a, i)).join('')}`;
@@ -641,7 +671,7 @@
       ${startHere.length ? `<h3>Start here — the essential reading</h3><p class="source-line">The most widely held book (by number of editions) and the most-cited article. If you read two things about ${esc(pr.name)}, read these.</p>${list(startHere, pub, 5)}` : ''} 
       ${d.books?.length ? `<h3>Key books & monographs (${d.books.length})</h3><p class="source-line">Books with ${esc(pr.name)} as subject, from Open Library — ranked by number of editions, a rough measure of how widely a book is held and read. Fiction and children's books are excluded.</p>${list(d.books, pub, 10)}` : ''}
       ${d.subjectWorks.length ? `<h3>Scholarship with the artist as principal subject (${d.subjectWorks.length})</h3><p class="source-line">Books, articles, catalogues raisonnés and theses catalogued in Wikidata with the artist as main subject — a curated, high-precision list, in chronological order.</p>${list(d.subjectWorks, pub, 15)}` : ''}
-      ${d.scholarly.length ? `<h3>Most-cited scholarly literature (${d.scholarly.length})</h3><p class="source-line">Peer-reviewed articles, books and chapters mentioning “${esc(pr.name)}” in the title or abstract, ranked by citations (${esc(d.scholarlySource || 'OpenAlex')}). Restricted to Arts and Humanities, so namesake studies from other fields (medicine, the natural sciences, patent law) are excluded.</p>${list(d.scholarly, pub, 15)}` : ''}
+      ${d.scholarly.length ? `<h3>Most-cited scholarly literature (${d.scholarly.length})</h3><p class="source-line">Peer-reviewed articles, books and chapters mentioning “${esc(pr.name)}” in the title or abstract, ranked by citations (${esc(d.scholarlySource || 'OpenAlex')}). ${d.scholarlySource === 'Crossref' ? 'Crossref has no subject filter, so results are kept only when they name the artist in full or in an art context, and non-art venues (medicine, the sciences) and other people with the same surname are excluded.' : 'Restricted to Arts and Humanities, so namesake studies from other fields (medicine, the natural sciences, patent law) are excluded.'}</p>${list(d.scholarly, pub, 15)}` : ''}
       ${recent.length ? `<h3>Recent scholarship — last 10 years (${recent.length})</h3>${list(recent, pub, 8)}` : ''} 
       ${d.reviews.length ? `<h3>Reviews (${d.reviews.length})</h3>${list(d.reviews, pub, 8)}` : ''}
       ${quoteHtml}
@@ -799,7 +829,7 @@
         <li><b>Critical analyses</b> — encyclopaedic discussion of style, technique, reception and legacy, and arguments drawn from leading scholarship.</li>
         <li><b>Auction & art sales</b> — documented prices, sales and ownership events, provenance chains published by museums, the artist’s pages on Artnet, Artsy, MutualArt, Invaluable and others, and pre-filled searches of auction archives. Full auction records are in subscription databases and are linked rather than reproduced.</li>
         <li><b>Works & collections — linking to the holding institution</b> — a work's title links to the holding museum's own object page wherever one exists and can be verified; Wikidata is the finding aid, never the authority. How a link is resolved: the work list comes from Wikidata (a SPARQL query for works with the artist as creator, <i>wdt:P170</i>), together with the museum identifiers recorded there — the <i>Met object ID</i> (property P3634) and the <i>Art Institute of Chicago artwork ID</i> (property P4610). Each identifier is checked against the institution's own open API — the Met Collection API (<code>collectionapi.metmuseum.org/public/collection/v1/objects/{id}</code>), which returns the museum's canonical object page (<code>objectURL</code>), and the Art Institute of Chicago API (<code>api.artic.edu/api/v1/artworks/{id}</code>), whose public page is <code>artic.edu/artworks/{id}</code>. Only an identifier the institution's API confirms becomes the work's link; if it does not resolve, the work links to its Wikidata item page instead. Museum open-access records are fetched directly from the same APIs — the Met, the Art Institute of Chicago, and the Cleveland Museum of Art's open-access API (<code>openaccess-api.clevelandart.org</code>), which returns each object's own page URL with the record — and Europeana records link to the Europeana item page. Where no institutional page exists, the work links to its Wikidata page, shown plainly as such and never presented as a museum source. Direct automated checks of museum web pages are not reliable (their servers reject them), which is why verification runs through the institutions' open APIs.</li>
-        <li><b>Browse</b> — the browse page lists artists by century (12th–20th), country, movement or medium. Each list is a live Wikidata query restricted to painters, sculptors, draftsmen, engravers and printmakers, capped at 50 artists, best-documented first — plus a curated index of the twenty homepage artists grouped the same way. Country is by citizenship, counting the historical states under the modern country (Rembrandt and Vermeer are recorded as citizens of the Dutch Republic, Leonardo of the Republic of Florence), so the Dutch masters and the Italian Renaissance appear where they belong. As everywhere on the site, Wikidata is the finding aid: it finds the artist, and the report then links each work to the holding institution's verified page.</li>
+        <li><b>Browse</b> — the browse page lists artists by century (12th–20th), country, movement or medium, and any combination of the four: pick from the dropdowns and press GO. The country list is every country with eligible artists (a live count of citizenships, including the historical states grouped under the modern country — Rembrandt and Vermeer are recorded as citizens of the Dutch Republic, Leonardo of the Republic of Florence — so the Dutch masters and the Italian Renaissance appear where they belong; states that map to no modern country appear under their own name). Each list is a live Wikidata query restricted to painters, sculptors, draftsmen, engravers and printmakers, capped at 50 artists, best-documented first — plus a curated index of the twenty homepage artists grouped the same way. As everywhere on the site, Wikidata is the finding aid: it finds the artist, and the report then links each work to the holding institution's verified page.</li>
         <li><b>Catalogue raisonné</b> — the standard catalogue raisonné of the artist’s works, where one exists, drawn from Open Library and Wikidata and shown in chronological order, including catalogues later superseded by newer ones; where a standard catalogue is published under another title it is listed from a short curated set.</li>
         <li><b>References</b> — every source is captured as a Chicago-style citation, grouped as biographical, exhibitions, academic, lifetime, market and database/authority records. <span class="tag-life">LIFETIME</span> marks sources dated within the artist’s life, drawn from historic dictionaries, the Internet Archive, the Library of Congress’s Chronicling America newspapers, Europeana and Open Library.</li>
       </ul>
