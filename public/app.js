@@ -68,6 +68,7 @@
     if (path === '/browse') return viewBrowse(p);
     if (path === '/degrees') return viewDegrees(p);
     if (path === '/salon' || path.startsWith('/salon/')) return viewSalon(p, path);
+    if (path === '/ra' || path.startsWith('/ra/')) return viewRA(p, path);
     if (path === '/artist' && (p.wd || p.ulan)) return viewReport(p);
     if (path === '/about') return viewAbout();
     return viewHome();
@@ -661,6 +662,169 @@
     renderSalonYear();
   }
 
+  /* ==================================================== royal academy view */
+  const RA_OCCUPATION_ORDER = ['Painter', 'Sculptor', 'Architect', 'Engraver', 'Etcher', 'Draughtsman', 'Modeller', 'Lithographer', 'Designer', 'Carver', 'Enameller'];
+  const RA_MAIN_OCCUPATIONS = ['Painter', 'Sculptor', 'Architect', 'Engraver'];
+  const RA_OTHER_OCCUPATIONS = RA_OCCUPATION_ORDER.filter((o) => !RA_MAIN_OCCUPATIONS.includes(o));
+  const RA_FAMOUS = [
+    { year: 1769, label: '1769 · The first exhibition' },
+    { year: 1821, label: '1821 · The Hay Wain' },
+    { year: 1851, label: '1851' },
+    { year: 1905, label: '1905 · The last year here' },
+  ];
+  const RA_DEFAULT_YEAR = 1769;
+  const RA_PAGE_SIZE = 50;
+  let raIndex = null;
+  const raYearCache = new Map();
+  const raState = { year: RA_DEFAULT_YEAR, occupation: 'all', query: '', page: 1, data: null, entry: null };
+  async function loadRAIndex() {
+    if (!raIndex) raIndex = await salonFetchJSON('/data/ra/index.json');
+    return raIndex;
+  }
+  async function loadRAYear(year) {
+    if (!raYearCache.has(year)) {
+      raYearCache.set(year, salonFetchJSON(`/data/ra/${year}.json`)
+        .catch((e) => { raYearCache.delete(year); throw e; }));
+    }
+    return raYearCache.get(year);
+  }
+  /** Full name for the Atlas name search: given names + surname as printed. */
+  function raFullName(w) {
+    return [w[2], w[1]].filter(Boolean).join(' ');
+  }
+  function raNumCell(w) {
+    if (w[0] == null) return '<span class="muted" title="No catalogue number could be read in the source — none has been invented">—</span>';
+    if (w[7] & 1) return `${esc(w[0])} <span class="flag-mark" title="Catalogue number as printed in Graves’s dictionary, but uncertain — it may be an OCR misreading of the source scan">~</span>`;
+    return esc(w[0]);
+  }
+  function raFiltered() {
+    const { data, occupation, query } = raState;
+    if (!data) return [];
+    const q = query.trim().toLowerCase();
+    return data.works.filter((w) => {
+      if (occupation === 'other' && !RA_OTHER_OCCUPATIONS.includes(w[3])) return false;
+      if (occupation !== 'all' && occupation !== 'other' && w[3] !== occupation) return false;
+      if (!q) return true;
+      return raFullName(w).toLowerCase().includes(q) || (w[5] || '').toLowerCase().includes(q);
+    });
+  }
+  function renderRATable() {
+    const wrap = $('#ra-table-wrap');
+    if (!wrap || !raState.data) return;
+    const rows = raFiltered();
+    const pages = Math.max(1, Math.ceil(rows.length / RA_PAGE_SIZE));
+    if (raState.page > pages) raState.page = pages;
+    const start = (raState.page - 1) * RA_PAGE_SIZE;
+    const pageRows = rows.slice(start, start + RA_PAGE_SIZE);
+    if (!rows.length) {
+      wrap.innerHTML = '<div class="notice">No works in this year match — try another spelling, a different occupation, or clear the search box.</div>';
+      return;
+    }
+    wrap.innerHTML = `<div class="table-wrap"><table class="table salon-table">
+      <thead><tr><th class="salon-num">No.</th><th>Title</th><th>Artist</th><th>Address</th><th>Occupation</th><th>Medium</th></tr></thead>
+      <tbody>${pageRows.map((w) => `<tr>
+        <td class="salon-num">${raNumCell(w)}</td>
+        <td>${esc(w[5] || '')}</td>
+        <td><a href="#/search?q=${enc(raFullName(w))}">${esc(raFullName(w))}</a></td>
+        <td>${esc(w[4] || '')}</td>
+        <td>${esc(w[3] || '')}</td>
+        <td>${esc(w[6] || '')}</td>
+      </tr>`).join('')}</tbody></table></div>
+      <div class="pager">
+        <button class="btn btn-sm" id="ra-prev-page" ${raState.page <= 1 ? 'disabled' : ''}>← Previous</button>
+        <span class="meta">Page ${raState.page} of ${pages.toLocaleString()} · showing ${(start + 1).toLocaleString()}–${Math.min(start + RA_PAGE_SIZE, rows.length).toLocaleString()} of ${rows.length.toLocaleString()} work${rows.length === 1 ? '' : 's'}</span>
+        <button class="btn btn-sm" id="ra-next-page" ${raState.page >= pages ? 'disabled' : ''}>Next →</button>
+      </div>`;
+    const prev = $('#ra-prev-page');
+    const next = $('#ra-next-page');
+    if (prev) prev.addEventListener('click', () => { raState.page--; renderRATable(); });
+    if (next) next.addEventListener('click', () => { raState.page++; renderRATable(); });
+  }
+  function renderRAYear() {
+    const el = $('#ra-year');
+    const { data, entry, year } = raState;
+    if (!el || !data) return;
+    const occ = entry.occupations || {};
+    const counts = RA_OCCUPATION_ORDER.filter((o) => occ[o]).map((o) => `${o} ${occ[o].toLocaleString()}`).join(' · ');
+    const otherN = RA_OTHER_OCCUPATIONS.reduce((n, o) => n + (occ[o] || 0), 0);
+    const tabs = [{ id: 'all', label: 'All', n: entry.works },
+      ...RA_MAIN_OCCUPATIONS.filter((o) => occ[o]).map((o) => ({ id: o, label: o, n: occ[o] })),
+      ...(otherN ? [{ id: 'other', label: 'Other crafts', n: otherN }] : [])];
+    el.innerHTML = `<div class="results-head"><div><h2>${year} — ${esc(data.exhibition)}</h2><div class="meta">${plural(entry.works, 'work')} by ${plural(entry.artists, 'artist')}${counts ? ` · ${counts}` : ''}</div></div></div>
+      <div class="filters">${tabs.map((t) => `<button class="chip ${raState.occupation === t.id ? 'active' : ''}" data-occ="${esc(t.id)}">${esc(t.label)} (${t.n.toLocaleString()})</button>`).join('')}</div>
+      <div class="salon-search"><input id="ra-q" type="search" placeholder="Filter this year by artist or title…" value="${esc(raState.query)}" aria-label="Filter works by artist or title"></div>
+      <div id="ra-table-wrap"></div>
+      <div class="notice">About these records — compiled from Algernon Graves, “The Royal Academy of Arts: A Complete Dictionary of Contributors and Their Work” (1905–06), with the 1905 exhibition recovered from the Paul Mellon Centre’s RA Chronicle catalogue transcription. Names, addresses and titles are as printed, with the OCR noise of the source scans, so some titles carry garbled words and a few artist names are fragments. A “~” after a catalogue number means the number is uncertain in the source. About 12,200 records have no readable catalogue number and show “—” — no number has been invented for them. A further 1,543 records in the full database, whose year could not be resolved, are not in this browser. Every artist name links to the Atlas name search — pick the right person there to read the full research report. No images yet: this first version is the catalogue itself, browsable year by year.</div>`;
+    el.querySelectorAll('[data-occ]').forEach((b) => b.addEventListener('click', () => {
+      raState.occupation = b.dataset.occ;
+      raState.page = 1;
+      el.querySelectorAll('[data-occ]').forEach((x) => x.classList.toggle('active', x === b));
+      renderRATable();
+    }));
+    const q = $('#ra-q');
+    q.addEventListener('input', () => { raState.query = q.value; raState.page = 1; renderRATable(); });
+    renderRATable();
+  }
+  function renderRAControls(idx, year) {
+    const el = $('#ra-controls');
+    if (!el) return;
+    const years = idx.years.map((y) => y.year);
+    const i = years.indexOf(year);
+    const prev = i > 0 ? years[i - 1] : null;
+    const next = i >= 0 && i < years.length - 1 ? years[i + 1] : null;
+    const inList = i >= 0;
+    const opt = (y) => `<option value="${y.year}"${y.year === year ? ' selected' : ''}>${y.year} — ${y.works.toLocaleString()} works</option>`;
+    el.innerHTML = `<form id="ra-form" class="browse-form">
+        <button class="btn" type="button" id="ra-prev-year" ${prev == null ? 'disabled' : ''}>← ${prev ?? ''}</button>
+        <label>Year <select id="ra-year-select" aria-label="Royal Academy year">${inList ? '' : '<option value="" selected>Choose a year…</option>'}${idx.years.map(opt).join('')}</select></label>
+        <button class="btn" type="button" id="ra-next-year" ${next == null ? 'disabled' : ''}>${next ?? ''} →</button>
+      </form>
+      <div class="salon-famous"><span class="meta">Famous years:</span>${RA_FAMOUS.map((f) => `<a class="chip" href="#/ra/${f.year}">${esc(f.label)}</a>`).join('')}</div>`;
+    $('#ra-year-select').addEventListener('change', (e) => { if (e.target.value) location.hash = '#/ra/' + e.target.value; });
+    if (prev != null) $('#ra-prev-year').addEventListener('click', () => { location.hash = '#/ra/' + prev; });
+    if (next != null) $('#ra-next-year').addEventListener('click', () => { location.hash = '#/ra/' + next; });
+  }
+  async function viewRA(p, path) {
+    const seg = (path.split('/')[2] || p.year || '').trim();
+    let year = parseInt(seg || RA_DEFAULT_YEAR, 10);
+    if (!Number.isFinite(year)) year = RA_DEFAULT_YEAR;
+    raState.year = year;
+    raState.occupation = 'all';
+    raState.query = '';
+    raState.page = 1;
+    raState.data = null;
+    raState.entry = null;
+    app.innerHTML = `<h1 style="font-size:38px">Royal Academy Time Machine</h1>
+      <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">Step into any Royal Academy Summer Exhibition, 1769–1905, as Graves’s dictionary recorded it: every work, every contributor, with the address the catalogue itself printed. Pick a year — or walk year by year — and every artist name opens the Atlas name search, so an exhibitor leads straight to the full research report.</p>
+      <div id="ra-controls">${spinner('Loading Royal Academy years…')}</div>
+      <div id="ra-year"></div>`;
+    let idx;
+    try {
+      idx = await loadRAIndex();
+    } catch (e) {
+      $('#ra-controls').innerHTML = `<div class="notice error">The Royal Academy catalogue could not be loaded: ${esc(e.message)}</div>`;
+      return;
+    }
+    renderRAControls(idx, year);
+    const entry = idx.years.find((y) => y.year === year);
+    if (!entry) {
+      const years = idx.years.map((y) => y.year);
+      const before = [...years].reverse().find((y) => y < year);
+      const after = years.find((y) => y > year);
+      $('#ra-year').innerHTML = `<div class="notice">There is no Royal Academy Summer Exhibition for ${year} in this collection — the browser covers every year from 1769 to 1905.${before ? ` The nearest year before is <a href="#/ra/${before}">${before}</a>${after ? `, the next is <a href="#/ra/${after}">${after}</a>` : ''}.` : ''}</div>`;
+      return;
+    }
+    raState.entry = entry;
+    $('#ra-year').innerHTML = spinner(`Loading the ${year} Summer Exhibition…`);
+    try {
+      raState.data = await loadRAYear(year);
+    } catch (e) {
+      $('#ra-year').innerHTML = `<div class="notice error">The ${year} Summer Exhibition could not be loaded: ${esc(e.message)}</div>`;
+      return;
+    }
+    renderRAYear();
+  }
+
   /* ========================================================== report view */
   const SECTIONS = [
     ['synthesis', 'Research synthesis (AI)'],
@@ -1196,6 +1360,7 @@
         <li><b>Works & collections — linking to the holding institution</b> — a work's title links to the holding museum's own object page wherever one exists and can be verified; Wikidata is the finding aid, never the authority. How a link is resolved: the work list comes from Wikidata (a SPARQL query for works with the artist as creator, <i>wdt:P170</i>), together with the museum identifiers recorded there — the <i>Met object ID</i> (property P3634) and the <i>Art Institute of Chicago artwork ID</i> (property P4610). Each identifier is checked against the institution's own open API — the Met Collection API (<code>collectionapi.metmuseum.org/public/collection/v1/objects/{id}</code>), which returns the museum's canonical object page (<code>objectURL</code>), and the Art Institute of Chicago API (<code>api.artic.edu/api/v1/artworks/{id}</code>), whose public page is <code>artic.edu/artworks/{id}</code>. Only an identifier the institution's API confirms becomes the work's link; if it does not resolve, the work links to its Wikidata item page instead. Museum open-access records are fetched directly from the same APIs — the Met, the Art Institute of Chicago, and the Cleveland Museum of Art's open-access API (<code>openaccess-api.clevelandart.org</code>), which returns each object's own page URL with the record — and Europeana records link to the Europeana item page. Where no institutional page exists, the work links to its Wikidata page, shown plainly as such and never presented as a museum source. Direct automated checks of museum web pages are not reliable (their servers reject them), which is why verification runs through the institutions' open APIs.</li>
         <li><b>Browse</b> — the browse page lists artists by century (12th–20th), country, movement or medium, and any combination of the four: pick from the dropdowns and press GO. The country list is every country with eligible artists (a live count of citizenships, including the historical states grouped under the modern country — Rembrandt and Vermeer are recorded as citizens of the Dutch Republic, Leonardo of the Republic of Florence — so the Dutch masters and the Italian Renaissance appear where they belong; states that map to no modern country appear under their own name). Each list is a live Wikidata query restricted to painters, sculptors, draftsmen, engravers and printmakers, capped at 50 artists, best-documented first — plus a curated index of the twenty homepage artists grouped the same way. As everywhere on the site, Wikidata is the finding aid: it finds the artist, and the report then links each work to the holding institution's verified page.</li>
         <li><b>Salon Time Machine</b> — the Paris Salon catalogues, 1673–1881: 144,081 works by year, section and catalogue number, transcribed from the printed livrets (Garland reprints via the Internet Archive) and parsed from OCR. Catalogue numbers marked ~ were inferred from the sequence or look suspect in the printed text; some titles carry OCR noise and a few artist names are fragments. Years with no surviving livret are simply absent. Each artist name links to the usual name search, so a Salon exhibitor leads straight to the full research report. No images in this first version: most Salon works have no surviving image in the open sources.</li>
+        <li><b>Royal Academy Time Machine</b> — the Royal Academy Summer Exhibition catalogues, 1769–1905: 161,019 works by year, occupation and catalogue number, compiled from Algernon Graves’s <i>The Royal Academy of Arts: A Complete Dictionary of Contributors and Their Work</i> (1905–06), with the 1905 exhibition recovered from the Paul Mellon Centre’s RA Chronicle catalogue transcription, and parsed from OCR. Names, addresses and titles are as printed, with the OCR noise of the source scans. Catalogue numbers marked ~ are uncertain in the source; about 12,200 records have no readable catalogue number and show —, and no number has been invented for them. A further 1,543 records in the full database, whose year could not be resolved, are not in this browser. Each artist name links to the usual name search, so an exhibitor leads straight to the full research report. No images in this first version.</li>
         <li><b>Six Degrees</b> — the shortest chain between any two artists, up to six steps, through links Wikidata records: <i>student</i> (P802, taught), <i>student of</i> (P1066, taught by) and <i>influenced by</i> (P737, in both directions). The search is a breadth-first search over those links only, one batched query per step, with each link labeled by its direction; neighbors are verified to be people, so groups, schools and works never appear as a link. If no chain is recorded within six steps the page says so, with the number of artists explored — a missing chain means no chain is recorded, not that no connection existed.</li>
         <li><b>Catalogue raisonné</b> — the standard catalogue raisonné of the artist’s works, where one exists, drawn from Open Library and Wikidata and shown in chronological order, including catalogues later superseded by newer ones; where a standard catalogue is published under another title it is listed from a short curated set.</li>
         <li><b>References</b> — every source is captured as a Chicago-style citation, grouped as biographical, exhibitions, academic, lifetime, market and database/authority records. <span class="tag-life">LIFETIME</span> marks sources dated within the artist’s life, drawn from historic dictionaries, the Internet Archive, the Library of Congress’s Chronicling America newspapers, Europeana and Open Library.</li>

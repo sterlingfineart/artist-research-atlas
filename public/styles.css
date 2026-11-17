@@ -222,6 +222,11 @@ ol.refs li { overflow-wrap: anywhere; }
 .btn:disabled:hover { border-color: var(--line); color: var(--ink); }
 .btn-primary:disabled:hover { background: var(--accent); color: #fff; }
 
+/* royal academy time machine — reuses the salon-* rules above
+   (salon-famous chips, salon-search box, salon-table, salon-num, pager);
+   its markup differs only in element ids and column set, so no further
+   rules are needed. */
+
 /* six degrees */
 .degrees-pickers { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 10px; }
 .degrees-side > label { font: 600 13px var(--sans); color: var(--muted); display: block; margin-bottom: 4px; }
