@@ -11,6 +11,9 @@ static file server serves them as-is (no API route needed):
 
   public/data/ra/index.json     — per-year counts, totals, range
   public/data/ra/<year>.json    — one file per year, 1769-1905
+  public/data/ra/all.json       — every dated work in one file, for the
+                                  page's search-all-years (artist opus and
+                                  title search across 1769-1905)
 
 Records whose year could not be resolved (1,543) are skipped entirely:
 they are in the full database but not in this browser.
@@ -101,6 +104,17 @@ def build(records):
     return years_out, index, skipped
 
 
+def build_all(records):
+    """One combined file for search-all-years: every dated work as
+    [year, catalogueNo, surname, given, occupation, address, title,
+    medium, flags], in year then catalogue-number order (nulls last)."""
+    dated = [r for r in records if r.get('Year') is not None]
+    rows = [[r['Year']] + compact_row(r) for r in dated]
+    rows.sort(key=lambda w: (w[0], w[1] is None,
+                             w[1] if w[1] is not None else 0))
+    return {'works': rows}
+
+
 def write(years_out, index):
     os.makedirs(OUT, exist_ok=True)
     for year, doc in years_out:
@@ -160,6 +174,20 @@ def verify(records):
             errors.append(f'{year}: a null catalogue number is not sorted last')
     if seen_total != dated:
         errors.append(f'year files total {seen_total} works != dated source {dated}')
+    # all.json: every dated work exactly once, fields identical to source.
+    alldoc = json.load(open(os.path.join(OUT, 'all.json'), encoding='utf-8'))
+    if len(alldoc['works']) != dated:
+        errors.append(f"all.json has {len(alldoc['works'])} works != dated source {dated}")
+    key = lambda t: json.dumps(t, ensure_ascii=False)
+    expected = sorted(
+        ((r['Year'],) + tuple(compact_row(r)) for r in records
+         if r.get('Year') is not None), key=key)
+    got = sorted((tuple(w) for w in alldoc['works']), key=key)
+    if got != list(expected):
+        errors.append('all.json rows do not match the dated source records')
+    yrs = [w[0] for w in alldoc['works']]
+    if yrs != sorted(yrs):
+        errors.append('all.json works are not in year order')
     return errors
 
 
@@ -214,9 +242,14 @@ def main():
     print(f'source: {len(records)} records')
     years_out, index, skipped = build(records)
     write(years_out, index)
+    alldoc = build_all(records)
+    with open(os.path.join(OUT, 'all.json'), 'w', encoding='utf-8') as f:
+        json.dump(alldoc, f, ensure_ascii=False, separators=(',', ':'))
     size = sum(os.path.getsize(os.path.join(OUT, f))
                for f in os.listdir(OUT) if f.endswith('.json'))
-    print(f'wrote {len(years_out)} year files + index.json to {OUT}')
+    allsize = os.path.getsize(os.path.join(OUT, 'all.json'))
+    print(f'wrote {len(years_out)} year files + index.json + all.json '
+          f'({len(alldoc["works"]):,} works, {allsize:,} bytes) to {OUT}')
     print(f'skipped {skipped} records with no resolved year')
     print(f'compact size on disk: {size:,} bytes ({size / 1048576:.2f} MB)')
     print(f"index: {index['totalWorks']:,} works, {index['totalYears']} years, "
