@@ -221,3 +221,21 @@ ol.refs li { overflow-wrap: anywhere; }
 .btn:disabled { opacity: .45; cursor: default; }
 .btn:disabled:hover { border-color: var(--line); color: var(--ink); }
 .btn-primary:disabled:hover { background: var(--accent); color: #fff; }
+
+/* six degrees */
+.degrees-pickers { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 10px; }
+.degrees-side > label { font: 600 13px var(--sans); color: var(--muted); display: block; margin-bottom: 4px; }
+.degrees-pick { display: flex; gap: 8px; }
+.degrees-pick input { flex: 1; font: 15px var(--sans); padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); outline: none; min-width: 0; }
+.degrees-pick input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.degrees-chosen { margin-top: 8px; font-size: 14px; }
+.degrees-cands { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+.degrees-cand { text-align: left; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; cursor: pointer; font: 14px var(--sans); color: var(--ink); }
+.degrees-cand:hover { border-color: var(--accent); }
+.degrees-pairs { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 4px 0 6px; }
+.chain { max-width: 640px; margin: 8px 0 4px; }
+.chain-node { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 16px; font-size: 15px; }
+.chain-node a { font-family: var(--serif); font-size: 21px; font-weight: 600; }
+.chain-edge { display: flex; gap: 8px; align-items: center; padding: 2px 16px; color: var(--muted); font-size: 13.5px; }
+.chain-arrow { color: var(--accent); font-size: 18px; }
+.chain-rel { font-style: italic; }
