@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const { search } = require('./lib/search');
 const { browse, warmCountryFacets } = require('./lib/browse');
+const { degrees } = require('./lib/degrees');
 const report = require('./lib/report');
 const ai = require('./lib/ai');
 
@@ -52,6 +53,7 @@ const routes = {
     return search(q);
   },
   '/api/browse': async (u) => browse({ facet: u.searchParams.get('facet') || null, value: u.searchParams.get('value') || null, century: u.searchParams.get('century') || null, country: u.searchParams.get('country') || null, movement: u.searchParams.get('movement') || null, role: u.searchParams.get('role') || null }),
+  '/api/degrees': async (u) => degrees(u.searchParams.get('from'), u.searchParams.get('to')),
   '/api/report/profile': async (u) => {
     const p = params(u);
     if (!p.wd && !p.ulan) throw Object.assign(new Error('Missing artist identifier'), { status: 400 });
