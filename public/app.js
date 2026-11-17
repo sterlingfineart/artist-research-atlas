@@ -69,6 +69,7 @@
     if (path === '/degrees') return viewDegrees(p);
     if (path === '/salon' || path.startsWith('/salon/')) return viewSalon(p, path);
     if (path === '/ra' || path.startsWith('/ra/')) return viewRA(p, path);
+    if (path === '/loan' || path.startsWith('/loan/')) return viewLoan(p, path);
     if (path === '/artist' && (p.wd || p.ulan)) return viewReport(p);
     if (path === '/about') return viewAbout();
     return viewHome();
@@ -997,6 +998,244 @@
     renderRAYear();
   }
 
+  /* ================================================== loan exhibitions */
+  const LOAN_PAGE_SIZE = 50;
+  let loanIndex = null;
+  const loanLetterCache = new Map();
+  let loanAllWorks = null;
+  const loanState = { letter: null, data: null, selected: null };
+  const loanSearchState = { mode: 'artist', query: '', result: null, selected: null, page: 1 };
+  async function loadLoanIndex() {
+    if (!loanIndex) loanIndex = await salonFetchJSON('/data/loan/index.json');
+    return loanIndex;
+  }
+  async function loadLoanLetter(letter) {
+    if (!loanLetterCache.has(letter)) {
+      loanLetterCache.set(letter, salonFetchJSON(`/data/loan/${letter}.json`)
+        .catch((e) => { loanLetterCache.delete(letter); throw e; }));
+    }
+    return loanLetterCache.get(letter);
+  }
+  async function loadLoanAll() {
+    if (!loanAllWorks) {
+      loanAllWorks = salonFetchJSON('/data/loan/all.json')
+        .then((d) => d.works)
+        .catch((e) => { loanAllWorks = null; throw e; });
+    }
+    return loanAllWorks;
+  }
+  /* Work rows (letter files and all.json alike):
+     [artist|artistIdx, year, no, noSuspect, title, size, owner, venue, ownerUncertain] */
+  function loanNumCell(w) {
+    if (!w[2]) return '<span class="muted" title="No catalogue number could be read in the source — none has been invented">—</span>';
+    if (w[3]) return `${esc(w[2])} <span class="flag-mark" title="Catalogue number as printed in Graves, but the scan’s digits were ambiguous — the systematic OCR confusions (I/l for 1, O for 0, Q for 9) have been normalised">~</span>`;
+    return esc(w[2]);
+  }
+  function loanOwnerCell(w) {
+    if (!w[6]) return '<span class="muted">—</span>';
+    return esc(w[6]) + (w[8] ? ' <span class="flag-mark" title="This owner was separated from the title by column position alone and may be mis-split">~</span>' : '');
+  }
+  function loanReportName(name) {
+    return (name || '').replace(/\s*\d{3,4}\s*[-–]\s*\d{3,4}\.?$/, '').replace(/\.+$/, '').trim();
+  }
+  function loanWorkRow(w, artistName) {
+    return `<tr>
+      <td>${w[1] ?? '<span class="muted">—</span>'}</td>
+      <td>${esc(w[7] || '')}</td>
+      <td class="salon-num">${loanNumCell(w)}</td>
+      <td>${esc(w[4] || '')}</td>
+      <td>${esc(w[5] || '')}</td>
+      ${artistName !== undefined ? `<td><a href="#/search?q=${enc(loanReportName(artistName))}">${esc(artistName)}</a></td>` : `<td>${loanOwnerCell(w)}</td>`}
+    </tr>`;
+  }
+  function renderLoanSearch() {
+    const el = $('#loan-search');
+    if (!el) return;
+    const s = loanSearchState;
+    const total = loanIndex ? loanIndex.totalWorks.toLocaleString() : '42,727';
+    const artists = loanIndex ? loanIndex.totalArtists.toLocaleString() : '3,435';
+    el.innerHTML = `<div class="results-head"><div><h2>Search the whole book</h2>
+      <div class="meta">Every work in Graves’s <i>Century of Loan Exhibitions</i> at a keystroke: ${total} works under ${artists} artist headings. By artist — that artist’s complete loan-exhibition record in one view. By title — a work traced across every exhibition. By owner — everything a collector or institution lent, which is a provenance record in itself.</div></div></div>
+      <div class="filters">
+        <button class="chip ${s.mode === 'artist' ? 'active' : ''}" data-loan-mode="artist">By artist</button>
+        <button class="chip ${s.mode === 'title' ? 'active' : ''}" data-loan-mode="title">By title</button>
+        <button class="chip ${s.mode === 'owner' ? 'active' : ''}" data-loan-mode="owner">By owner (lender)</button>
+      </div>
+      <form id="loan-search-form" class="salon-search">
+        <input id="loan-search-q" type="search" placeholder="${s.mode === 'artist' ? 'Artist’s name — e.g. Turner, Gainsborough, Unknown Painters' : s.mode === 'title' ? 'A title, or its distinctive words — e.g. virgin child, shipwreck' : 'Owner’s name — e.g. Earl of Yarborough, Wynn Ellis, Royal Academy'}" value="${esc(s.query)}" aria-label="Search the loan exhibitions">
+        <button class="btn" type="submit">Search</button>
+      </form>
+      <div class="meta" style="margin:6px 0 10px">${s.mode === 'title' ? 'Tip: one or two distinctive words beat a full exact title — titles were printed in full and the OCR garbles the odd word, so an exact phrase can miss a work that a single word finds.' : 'Names are as Graves printed them, so the same person may appear under more than one printed form (initials vs a full name); those list separately.'}</div>
+      <div id="loan-search-results"></div>`;
+    el.querySelectorAll('[data-loan-mode]').forEach((b) => b.addEventListener('click', () => {
+      loanSearchState.mode = b.dataset.loanMode;
+      loanSearchState.result = null;
+      loanSearchState.selected = null;
+      loanSearchState.page = 1;
+      renderLoanSearch();
+    }));
+    $('#loan-search-form').addEventListener('submit', (e) => { e.preventDefault(); runLoanSearch(); });
+    renderLoanSearchResults();
+  }
+  async function runLoanSearch() {
+    const input = $('#loan-search-q');
+    const q = (input ? input.value : '').trim();
+    loanSearchState.query = q;
+    loanSearchState.selected = null;
+    loanSearchState.page = 1;
+    const wrap = $('#loan-search-results');
+    if (!q) { loanSearchState.result = null; renderLoanSearchResults(); return; }
+    if (wrap) wrap.innerHTML = spinner(loanAllWorks ? 'Searching the whole book…' : 'Searching the whole book — the first search downloads the complete index (about 6 MB); after that, searches are instant…');
+    let works;
+    try {
+      works = await loadLoanAll();
+    } catch (e) {
+      if (wrap) wrap.innerHTML = `<div class="notice error">The loan exhibitions index could not be loaded: ${esc(e.message)}</div>`;
+      return;
+    }
+    const words = raNorm(q).split(' ').filter(Boolean);
+    if (loanSearchState.mode === 'title') {
+      loanSearchState.result = { type: 'title', rows: works.filter((w) => raWordsMatch(w[4], words)) };
+    } else {
+      const field = loanSearchState.mode === 'artist' ? 0 : 6;
+      const groups = new Map();
+      for (const w of works) {
+        const name = w[field];
+        if (!name || !raWordsMatch(name, words)) continue;
+        if (!groups.has(name)) groups.set(name, []);
+        groups.get(name).push(w);
+      }
+      const list = [...groups.entries()].map(([name, ws]) => ({ name, works: ws }))
+        .sort((a, b) => a.name.localeCompare(b.name));
+      loanSearchState.result = { type: loanSearchState.mode, groups: list };
+      if (list.length === 1) loanSearchState.selected = list[0].name;
+    }
+    renderLoanSearchResults();
+  }
+  function renderLoanSearchResults() {
+    const wrap = $('#loan-search-results');
+    if (!wrap) return;
+    const s = loanSearchState;
+    const r = s.result;
+    if (!r) { wrap.innerHTML = ''; return; }
+    if (r.type === 'title') {
+      const rows = r.rows;
+      if (!rows.length) {
+        wrap.innerHTML = `<div class="notice">No title in 1813–1912 matches “${esc(s.query)}” — try fewer or different distinctive words; the OCR garbles the odd word.</div>`;
+        return;
+      }
+      const pages = Math.max(1, Math.ceil(rows.length / LOAN_PAGE_SIZE));
+      if (s.page > pages) s.page = pages;
+      const start = (s.page - 1) * LOAN_PAGE_SIZE;
+      const pageRows = rows.slice(start, start + LOAN_PAGE_SIZE);
+      wrap.innerHTML = `<div class="meta" style="margin-bottom:8px">${plural(rows.length, 'work')} across 1813–1912 match “${esc(s.query)}”${rows.length > 1000 ? ' — a lot; add another distinctive word to narrow it down' : ''}:</div>
+        <div class="table-wrap"><table class="table salon-table">
+        <thead><tr><th>Year</th><th>Venue</th><th class="salon-num">No.</th><th>Title</th><th>Size</th><th>Artist</th></tr></thead>
+        <tbody>${pageRows.map((w) => loanWorkRow(w, w[0])).join('')}</tbody></table></div>
+        <div class="pager">
+          <button class="btn btn-sm" id="loan-s-prev" ${s.page <= 1 ? 'disabled' : ''}>← Previous</button>
+          <span class="meta">Page ${s.page} of ${pages.toLocaleString()} · showing ${(start + 1).toLocaleString()}–${Math.min(start + LOAN_PAGE_SIZE, rows.length).toLocaleString()} of ${rows.length.toLocaleString()} works</span>
+          <button class="btn btn-sm" id="loan-s-next" ${s.page >= pages ? 'disabled' : ''}>Next →</button>
+        </div>`;
+      const prev = $('#loan-s-prev');
+      const next = $('#loan-s-next');
+      if (prev) prev.addEventListener('click', () => { s.page--; renderLoanSearchResults(); });
+      if (next) next.addEventListener('click', () => { s.page++; renderLoanSearchResults(); });
+      return;
+    }
+    const groups = r.groups;
+    const kind = r.type === 'artist' ? 'artist' : 'owner';
+    if (!groups.length) {
+      wrap.innerHTML = `<div class="notice">No ${kind} in Graves matches “${esc(s.query)}” — try the surname alone, or another spelling.</div>`;
+      return;
+    }
+    const sel = groups.find((g) => g.name === s.selected);
+    if (!sel) {
+      wrap.innerHTML = `<div class="meta" style="margin-bottom:8px">${plural(groups.length, kind)} in Graves match “${esc(s.query)}”:</div>
+      <div class="table-wrap"><table class="table salon-table"><thead><tr><th>${kind === 'artist' ? 'Artist' : 'Owner (lender)'}</th><th>Works</th><th>Years</th><th></th></tr></thead>
+      <tbody>${groups.map((g) => { const ys = g.works.map((w) => w[1]).filter((y) => y != null); return `<tr><td>${esc(g.name)}</td><td>${g.works.length.toLocaleString()}</td><td>${ys.length ? `${Math.min(...ys)}–${Math.max(...ys)}` : '—'}</td><td><button class="btn btn-sm" data-loan-group="${esc(g.name)}">View works →</button></td></tr>`; }).join('')}</tbody></table></div>`;
+      wrap.querySelectorAll('[data-loan-group]').forEach((b) => b.addEventListener('click', () => { loanSearchState.selected = b.dataset.loanGroup; renderLoanSearchResults(); }));
+      return;
+    }
+    const ys = sel.works.map((w) => w[1]).filter((y) => y != null);
+    const head = kind === 'artist'
+      ? `<h2>${esc(sel.name)}</h2><div class="meta">${plural(sel.works.length, 'work')} at loan exhibitions${ys.length ? `, ${Math.min(...ys)}–${Math.max(...ys)}` : ''} · <a href="#/search?q=${enc(loanReportName(sel.name))}">Atlas research report →</a></div>`
+      : `<h2>${esc(sel.name)}</h2><div class="meta">${plural(sel.works.length, 'work')} lent to loan exhibitions${ys.length ? `, ${Math.min(...ys)}–${Math.max(...ys)}` : ''} · by ${plural(new Set(sel.works.map((w) => w[0])).size, 'artist')}</div>`;
+    wrap.innerHTML = `${groups.length > 1 ? '<button class="btn btn-sm" id="loan-search-back" style="margin-bottom:10px">← All matching ' + (kind === 'artist' ? 'artists' : 'owners') + '</button>' : ''}
+      <div class="results-head"><div>${head}</div></div>
+      <div class="table-wrap"><table class="table salon-table">
+      <thead><tr><th>Year</th><th>Venue</th><th class="salon-num">No.</th><th>Title</th><th>Size</th><th>${kind === 'artist' ? 'Owner (lender)' : 'Artist'}</th></tr></thead>
+      <tbody>${sel.works.map((w) => kind === 'artist' ? loanWorkRow(w) : loanWorkRow(w, w[0])).join('')}</tbody></table></div>`;
+    const back = $('#loan-search-back');
+    if (back) back.addEventListener('click', () => { loanSearchState.selected = null; renderLoanSearchResults(); });
+  }
+  function renderLoanBrowse() {
+    const el = $('#loan-browse');
+    if (!el || !loanIndex) return;
+    const chips = loanIndex.letters.map((l) =>
+      `<a class="chip ${loanState.letter === l.letter ? 'active' : ''}" href="#/loan/${l.letter}">${l.letter} · ${l.works.toLocaleString()}</a>`).join('');
+    let body = '';
+    if (loanState.letter && loanState.data) {
+      const d = loanState.data;
+      const selIdx = d.artists.findIndex((a) => a[0] === loanState.selected);
+      if (selIdx >= 0) {
+        const a = d.artists[selIdx];
+        const works = d.works.filter((w) => w[0] === selIdx);
+        body = `<button class="btn btn-sm" id="loan-browse-back" style="margin:12px 0 10px">← All artists under ${esc(loanState.letter)}</button>
+          <div class="results-head"><div><h2>${esc(a[0])}</h2>
+          <div class="meta">${plural(a[1], 'work')} at loan exhibitions${a[2] != null ? `, ${a[2]}–${a[3]}` : ''} · <a href="#/search?q=${enc(loanReportName(a[0]))}">Atlas research report →</a></div></div></div>
+          <div class="table-wrap"><table class="table salon-table">
+          <thead><tr><th>Year</th><th>Venue</th><th class="salon-num">No.</th><th>Title</th><th>Size</th><th>Owner (lender)</th></tr></thead>
+          <tbody>${works.map((w) => loanWorkRow(w)).join('')}</tbody></table></div>`;
+      } else {
+        body = `<div class="results-head" style="margin-top:14px"><div><h2>Artists under ${esc(loanState.letter)}</h2>
+          <div class="meta">${plural(d.artists.length, 'artist heading')} as Graves printed them · ${plural(d.works.length, 'work')}</div></div></div>
+          <div class="table-wrap"><table class="table salon-table"><thead><tr><th>Artist</th><th>Works</th><th>Years</th><th></th></tr></thead>
+          <tbody>${d.artists.map((a) => `<tr><td>${esc(a[0])}</td><td>${a[1].toLocaleString()}</td><td>${a[2] != null ? `${a[2]}–${a[3]}` : '—'}</td><td><button class="btn btn-sm" data-loan-artist="${esc(a[0])}">View works →</button></td></tr>`).join('')}</tbody></table></div>`;
+      }
+    }
+    el.innerHTML = `<div class="results-head"><div><h2>Browse by artist</h2>
+      <div class="meta">The book is arranged by artist — pick a letter to walk its headings, exactly as printed.</div></div></div>
+      <div class="filters">${chips}</div>
+      <div id="loan-letter">${body}</div>`;
+    el.querySelectorAll('[data-loan-artist]').forEach((b) => b.addEventListener('click', () => {
+      loanState.selected = b.dataset.loanArtist;
+      renderLoanBrowse();
+    }));
+    const back = $('#loan-browse-back');
+    if (back) back.addEventListener('click', () => { loanState.selected = null; renderLoanBrowse(); });
+  }
+  async function viewLoan(p, path) {
+    const seg = (path.split('/')[2] || '').trim().toUpperCase();
+    const letter = /^[A-Z]$/.test(seg) ? seg : null;
+    if (loanState.letter !== letter) { loanState.selected = null; loanState.data = null; }
+    loanState.letter = letter;
+    app.innerHTML = `<h1 style="font-size:38px">A Century of Loan Exhibitions, 1813–1912</h1>
+      <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">Algernon Graves spent thirty years recording every work lent to a century of British loan exhibitions — the Royal Academy’s winter exhibitions, the British Institution, Manchester’s Art Treasures, the Grosvenor and New Galleries and hundreds more. His book is arranged by artist, and each work carries the owner who lent it: a provenance goldmine. Search it by artist, by title, or by the lender — or browse the artists letter by letter. Every artist name opens the Atlas name search, so an exhibitor leads straight to the full research report.</p>
+      <div id="loan-search">${spinner('Loading the loan exhibitions…')}</div>
+      <div id="loan-browse"></div>
+      <div class="notice" style="margin-top:22px">About these records — compiled from Algernon Graves, “A Century of Loan Exhibitions 1813–1912” (1913–15; Kingsmead reprint), parsed from the Internet Archive scan of the book. 42,727 works under 3,435 artist headings at 271 venues, all as printed, with the OCR noise of the source scan: some titles carry garbled words, and sizes in particular suffer — a printed fraction such as ¾ is often read as a plain digit. A “~” after a catalogue number means the printed digits were ambiguous in the scan (the systematic confusions — I/l for 1, O for 0, Q for 9 — have been normalised); about 1,790 records have no readable catalogue number and show “—” — no number has been invented for them. A “~” after an owner means the owner was separated from the title by column position alone and may be mis-split; about 9% of records have no owner read at all. Artist headings are as printed, so one person may appear under several forms; “Unknown Painters” is Graves’s own heading for unattributed works and alone holds 2,659 of them. The reprint’s third volume — Graves’s index of owners — is not included; the By owner search above is built from the work records themselves. No images in this first version.</div>`;
+    try {
+      await loadLoanIndex();
+    } catch (e) {
+      $('#loan-search').innerHTML = `<div class="notice error">The loan exhibitions index could not be loaded: ${esc(e.message)}</div>`;
+      return;
+    }
+    renderLoanSearch();
+    renderLoanBrowse();
+    if (letter) {
+      const wrap = $('#loan-letter');
+      if (wrap) wrap.innerHTML = spinner(`Loading artists under ${letter}…`);
+      try {
+        loanState.data = await loadLoanLetter(letter);
+      } catch (e) {
+        if (wrap) wrap.innerHTML = `<div class="notice error">The artists under ${letter} could not be loaded: ${esc(e.message)}</div>`;
+        return;
+      }
+      renderLoanBrowse();
+    }
+  }
+
   /* ========================================================== report view */
   const SECTIONS = [
     ['synthesis', 'Research synthesis (AI)'],
@@ -1624,6 +1863,7 @@
         <li><b>Browse</b> — the browse page lists artists by century (12th–20th), country, movement or medium, and any combination of the four: pick from the dropdowns and press GO. The country list is every country with eligible artists (a live count of citizenships, including the historical states grouped under the modern country — Rembrandt and Vermeer are recorded as citizens of the Dutch Republic, Leonardo of the Republic of Florence — so the Dutch masters and the Italian Renaissance appear where they belong; states that map to no modern country appear under their own name). Each list is a live Wikidata query restricted to painters, sculptors, draftsmen, engravers and printmakers, capped at 50 artists, best-documented first — plus a curated index of the twenty homepage artists grouped the same way. As everywhere on the site, Wikidata is the finding aid: it finds the artist, and the report then links each work to the holding institution's verified page.</li>
         <li><b>Salon Time Machine</b> — the Paris Salon catalogues, 1673–1881: 144,081 works by year, section and catalogue number, transcribed from the printed livrets (Garland reprints via the Internet Archive) and parsed from OCR. Catalogue numbers marked ~ were inferred from the sequence or look suspect in the printed text; some titles carry OCR noise and a few artist names are fragments. Years with no surviving livret are simply absent. Each artist name links to the usual name search, so a Salon exhibitor leads straight to the full research report. No images in this first version: most Salon works have no surviving image in the open sources.</li>
         <li><b>Royal Academy Time Machine</b> — the Royal Academy Summer Exhibition catalogues, 1769–1905: 161,019 works by year, occupation and catalogue number, compiled from Algernon Graves’s <i>The Royal Academy of Arts: A Complete Dictionary of Contributors and Their Work</i> (1905–06), with the 1905 exhibition recovered from the Paul Mellon Centre’s RA Chronicle catalogue transcription, and parsed from OCR. Names, addresses and titles are as printed, with the OCR noise of the source scans. Catalogue numbers marked ~ are uncertain in the source; about 12,200 records have no readable catalogue number and show —, and no number has been invented for them. A further 1,543 records in the full database, whose year could not be resolved, are not in this browser. Each artist name links to the usual name search, so an exhibitor leads straight to the full research report. No images in this first version.</li>
+        <li><b>Loan Exhibitions</b> — Algernon Graves’s <i>A Century of Loan Exhibitions 1813–1912</i> (1913–15): 42,727 works lent to a century of loan exhibitions, arranged by artist as Graves printed them, each with the exhibition, year, catalogue number, size and the owner who lent it — so the page searches three ways: by artist (the complete loan record in one view), by title (a work traced across exhibitions), and by owner (everything a collector or institution lent). It is also browsable letter by letter. Parsed from the Internet Archive scan of the Kingsmead reprint; names, titles and owners are as printed, with the scan’s OCR noise — sizes suffer most, their printed fractions often read as plain digits. Numbers marked ~ had ambiguous digits in the scan (the systematic confusions normalised, none invented); about 1,790 records have no readable number and show —. An owner marked ~ was split from the title by column position alone and may be mis-split. “Unknown Painters” is Graves’s own heading for unattributed works. Each artist name links to the usual name search. No images in this first version.</li>
         <li><b>Six Degrees</b> — the shortest chain between any two artists, up to six steps, through links Wikidata records: <i>student</i> (P802, taught), <i>student of</i> (P1066, taught by) and <i>influenced by</i> (P737, in both directions). The search is a breadth-first search over those links only, one batched query per step, with each link labeled by its direction; neighbors are verified to be people, so groups, schools and works never appear as a link. If no chain is recorded within six steps the page says so, with the number of artists explored — a missing chain means no chain is recorded, not that no connection existed.</li>
         <li><b>Catalogue raisonné</b> — the standard catalogue raisonné of the artist’s works, where one exists, drawn from Open Library and Wikidata and shown in chronological order, including catalogues later superseded by newer ones; where a standard catalogue is published under another title it is listed from a short curated set.</li>
         <li><b>References</b> — every source is captured as a Chicago-style citation, grouped as biographical, exhibitions, academic, lifetime, market and database/authority records. <span class="tag-life">LIFETIME</span> marks sources dated within the artist’s life, drawn from historic dictionaries, the Internet Archive, the Library of Congress’s Chronicling America newspapers, Europeana and Open Library.</li>
