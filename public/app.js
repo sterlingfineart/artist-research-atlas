@@ -677,6 +677,34 @@
   let raIndex = null;
   const raYearCache = new Map();
   const raState = { year: RA_DEFAULT_YEAR, occupation: 'all', query: '', page: 1, data: null, entry: null };
+  /* Search-all-years state. all.json rows are the year-file rows with the
+     year prepended: [year, catalogueNo, surname, given, occupation,
+     address, title, medium, flags]. */
+  let raAllWorks = null;
+  const raSearchState = { mode: 'artist', query: '', result: null, selected: null, page: 1 };
+  async function loadRAAll() {
+    if (!raAllWorks) {
+      raAllWorks = salonFetchJSON('/data/ra/all.json')
+        .then((d) => d.works)
+        .catch((e) => { raAllWorks = null; throw e; });
+    }
+    return raAllWorks;
+  }
+  function raAllName(w) {
+    return [w[3], w[2]].filter(Boolean).join(' ');
+  }
+  function raAllNumCell(w) {
+    if (w[1] == null) return '<span class="muted" title="No catalogue number could be read in the source — none has been invented">—</span>';
+    if (w[8] & 1) return `${esc(w[1])} <span class="flag-mark" title="Catalogue number as printed in Graves’s dictionary, but uncertain — it may be an OCR misreading of the source scan">~</span>`;
+    return esc(w[1]);
+  }
+  function raNorm(s) {
+    return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  }
+  function raWordsMatch(text, words) {
+    const t = raNorm(text);
+    return words.every((w) => t.includes(w));
+  }
   async function loadRAIndex() {
     if (!raIndex) raIndex = await salonFetchJSON('/data/ra/index.json');
     return raIndex;
@@ -784,6 +812,148 @@
     if (prev != null) $('#ra-prev-year').addEventListener('click', () => { location.hash = '#/ra/' + prev; });
     if (next != null) $('#ra-next-year').addEventListener('click', () => { location.hash = '#/ra/' + next; });
   }
+  function raArtistGroups(works, words) {
+    const groups = new Map();
+    for (const w of works) {
+      const name = raAllName(w);
+      if (!raWordsMatch(name, words)) continue;
+      // Group on the case-insensitive name: Graves prints surnames in
+      // capitals, the 1905 Mellon transcription in mixed case, and those
+      // are the same people, not different artists. The display name is
+      // the most frequent printed form. Genuinely different printed
+      // forms (initials vs full names) still list separately.
+      const key = `${raNorm(w[2])}|${raNorm(w[3])}`;
+      if (!groups.has(key)) groups.set(key, { key, forms: new Map(), works: [] });
+      const g = groups.get(key);
+      g.forms.set(name, (g.forms.get(name) || 0) + 1);
+      g.works.push(w);
+    }
+    return [...groups.values()].map((g) => ({
+      key: g.key,
+      name: [...g.forms.entries()].sort((a, b) => b[1] - a[1])[0][0],
+      works: g.works,
+    })).sort((a, b) => a.name.localeCompare(b.name));
+  }
+  function renderRASearch() {
+    const el = $('#ra-search');
+    if (!el) return;
+    const s = raSearchState;
+    const total = raIndex ? raIndex.totalWorks.toLocaleString() : '161,019';
+    el.innerHTML = `<div class="results-head"><div><h2>Search all years, 1769–1905</h2>
+      <div class="meta">An artist’s complete Royal Academy record in one view — or a title searched across every exhibition at once: all eight volumes of Graves at a keystroke. Covers the same ${total} dated records as the year browser below.</div></div></div>
+      <div class="filters">
+        <button class="chip ${s.mode === 'artist' ? 'active' : ''}" data-ra-mode="artist">By artist</button>
+        <button class="chip ${s.mode === 'title' ? 'active' : ''}" data-ra-mode="title">By title</button>
+      </div>
+      <form id="ra-search-form" class="salon-search">
+        <input id="ra-search-q" type="search" placeholder="${s.mode === 'artist' ? 'Artist’s name — e.g. Arthur Wardle' : 'A title, or its distinctive words — e.g. cimabue, trysting, muffet'}" value="${esc(s.query)}" aria-label="Search all Royal Academy years">
+        <button class="btn" type="submit">Search</button>
+      </form>
+      <div class="meta" style="margin:6px 0 10px">${s.mode === 'artist' ? 'Capitalisation is ignored — Graves prints surnames in capitals, the 1905 transcription does not, and those are the same people. Genuinely different printed forms of a name (initials vs a full name) still list separately.' : 'Tip: one or two distinctive words beat a full exact title — titles were printed in full and the OCR garbles the odd word, so an exact phrase can miss a work that a single word finds.'}</div>
+      <div id="ra-search-results"></div>`;
+    el.querySelectorAll('[data-ra-mode]').forEach((b) => b.addEventListener('click', () => {
+      raSearchState.mode = b.dataset.raMode;
+      raSearchState.result = null;
+      raSearchState.selected = null;
+      raSearchState.page = 1;
+      renderRASearch();
+    }));
+    $('#ra-search-form').addEventListener('submit', (e) => { e.preventDefault(); runRASearch(); });
+    renderRASearchResults();
+  }
+  async function runRASearch() {
+    const input = $('#ra-search-q');
+    const q = (input ? input.value : '').trim();
+    raSearchState.query = q;
+    raSearchState.selected = null;
+    raSearchState.page = 1;
+    const wrap = $('#ra-search-results');
+    if (!q) { raSearchState.result = null; renderRASearchResults(); return; }
+    if (wrap) wrap.innerHTML = spinner(raAllWorks ? 'Searching every year, 1769–1905…' : 'Searching every year, 1769–1905 — the first search downloads the complete index (about 18 MB); after that, searches are instant…');
+    let works;
+    try {
+      works = await loadRAAll();
+    } catch (e) {
+      if (wrap) wrap.innerHTML = `<div class="notice error">The all-years index could not be loaded: ${esc(e.message)}</div>`;
+      return;
+    }
+    const words = raNorm(q).split(' ').filter(Boolean);
+    if (raSearchState.mode === 'artist') {
+      const artists = raArtistGroups(works, words);
+      raSearchState.result = { type: 'artist', artists };
+      if (artists.length === 1) raSearchState.selected = artists[0].key;
+    } else {
+      raSearchState.result = { type: 'title', rows: works.filter((w) => raWordsMatch(w[6], words)) };
+    }
+    renderRASearchResults();
+  }
+  function renderRASearchResults() {
+    const wrap = $('#ra-search-results');
+    if (!wrap) return;
+    const s = raSearchState;
+    const r = s.result;
+    if (!r) { wrap.innerHTML = ''; return; }
+    if (r.type === 'artist') {
+      if (!r.artists.length) {
+        wrap.innerHTML = `<div class="notice">No artist in Graves matches “${esc(s.query)}” — try the surname alone, or another spelling.</div>`;
+        return;
+      }
+      const sel = r.artists.find((a) => a.key === s.selected);
+      if (!sel) {
+        wrap.innerHTML = `<div class="meta" style="margin-bottom:8px">${plural(r.artists.length, 'artist')} in Graves match “${esc(s.query)}”:</div>
+        <div class="table-wrap"><table class="table salon-table"><thead><tr><th>Artist</th><th>Works</th><th>Years exhibited</th><th></th></tr></thead>
+        <tbody>${r.artists.map((a) => { const ys = a.works.map((w) => w[0]); return `<tr><td>${esc(a.name)}</td><td>${a.works.length.toLocaleString()}</td><td>${Math.min(...ys)}–${Math.max(...ys)}</td><td><button class="btn btn-sm" data-ra-artist="${esc(a.key)}">View works →</button></td></tr>`; }).join('')}</tbody></table></div>`;
+        wrap.querySelectorAll('[data-ra-artist]').forEach((b) => b.addEventListener('click', () => { raSearchState.selected = b.dataset.raArtist; renderRASearchResults(); }));
+        return;
+      }
+      const ys = sel.works.map((w) => w[0]);
+      const occs = [...new Set(sel.works.map((w) => w[4]).filter(Boolean))].join(', ');
+      wrap.innerHTML = `${r.artists.length > 1 ? '<button class="btn btn-sm" id="ra-search-back" style="margin-bottom:10px">← All matching artists</button>' : ''}
+        <div class="results-head"><div><h2>${esc(sel.name)}</h2>
+        <div class="meta">${plural(sel.works.length, 'work')} at the Royal Academy, ${Math.min(...ys)}–${Math.max(...ys)}${occs ? ` · ${esc(occs)}` : ''} · <a href="#/search?q=${enc(sel.name)}">Atlas research report →</a></div></div></div>
+        <div class="table-wrap"><table class="table salon-table">
+        <thead><tr><th>Year</th><th class="salon-num">No.</th><th>Title</th><th>Address</th><th>Occupation</th><th>Medium</th></tr></thead>
+        <tbody>${sel.works.map((w) => `<tr>
+          <td><a href="#/ra/${w[0]}">${w[0]}</a></td>
+          <td class="salon-num">${raAllNumCell(w)}</td>
+          <td>${esc(w[6] || '')}</td>
+          <td>${esc(w[5] || '')}</td>
+          <td>${esc(w[4] || '')}</td>
+          <td>${esc(w[7] || '')}</td>
+        </tr>`).join('')}</tbody></table></div>`;
+      const back = $('#ra-search-back');
+      if (back) back.addEventListener('click', () => { raSearchState.selected = null; renderRASearchResults(); });
+      return;
+    }
+    const rows = r.rows;
+    if (!rows.length) {
+      wrap.innerHTML = `<div class="notice">No title in 1769–1905 matches “${esc(s.query)}” — try fewer or different distinctive words; the OCR garbles the odd word.</div>`;
+      return;
+    }
+    const pages = Math.max(1, Math.ceil(rows.length / RA_PAGE_SIZE));
+    if (s.page > pages) s.page = pages;
+    const start = (s.page - 1) * RA_PAGE_SIZE;
+    const pageRows = rows.slice(start, start + RA_PAGE_SIZE);
+    wrap.innerHTML = `<div class="meta" style="margin-bottom:8px">${plural(rows.length, 'work')} across 1769–1905 match “${esc(s.query)}”${rows.length > 1000 ? ' — a lot; add another distinctive word to narrow it down' : ''}:</div>
+      <div class="table-wrap"><table class="table salon-table">
+      <thead><tr><th>Year</th><th class="salon-num">No.</th><th>Title</th><th>Artist</th><th>Occupation</th></tr></thead>
+      <tbody>${pageRows.map((w) => `<tr>
+        <td><a href="#/ra/${w[0]}">${w[0]}</a></td>
+        <td class="salon-num">${raAllNumCell(w)}</td>
+        <td>${esc(w[6] || '')}</td>
+        <td><a href="#/search?q=${enc(raAllName(w))}">${esc(raAllName(w))}</a></td>
+        <td>${esc(w[4] || '')}</td>
+      </tr>`).join('')}</tbody></table></div>
+      <div class="pager">
+        <button class="btn btn-sm" id="ra-s-prev" ${s.page <= 1 ? 'disabled' : ''}>← Previous</button>
+        <span class="meta">Page ${s.page} of ${pages.toLocaleString()} · showing ${(start + 1).toLocaleString()}–${Math.min(start + RA_PAGE_SIZE, rows.length).toLocaleString()} of ${rows.length.toLocaleString()} works</span>
+        <button class="btn btn-sm" id="ra-s-next" ${s.page >= pages ? 'disabled' : ''}>Next →</button>
+      </div>`;
+    const prev = $('#ra-s-prev');
+    const next = $('#ra-s-next');
+    if (prev) prev.addEventListener('click', () => { s.page--; renderRASearchResults(); });
+    if (next) next.addEventListener('click', () => { s.page++; renderRASearchResults(); });
+  }
   async function viewRA(p, path) {
     const seg = (path.split('/')[2] || p.year || '').trim();
     let year = parseInt(seg || RA_DEFAULT_YEAR, 10);
@@ -797,6 +967,7 @@
     app.innerHTML = `<h1 style="font-size:38px">Royal Academy Time Machine</h1>
       <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">Step into any Royal Academy Summer Exhibition, 1769–1905, as Graves’s dictionary recorded it: every work, every contributor, with the address the catalogue itself printed. Pick a year — or walk year by year — and every artist name opens the Atlas name search, so an exhibitor leads straight to the full research report.</p>
       <div id="ra-controls">${spinner('Loading Royal Academy years…')}</div>
+      <div id="ra-search"></div>
       <div id="ra-year"></div>`;
     let idx;
     try {
@@ -806,6 +977,7 @@
       return;
     }
     renderRAControls(idx, year);
+    renderRASearch();
     const entry = idx.years.find((y) => y.year === year);
     if (!entry) {
       const years = idx.years.map((y) => y.year);
