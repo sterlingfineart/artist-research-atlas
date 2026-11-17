@@ -161,6 +161,10 @@ ol.refs { padding-left: 28px; font-size: 14px; }
 ol.refs li { margin-bottom: 7px; }
 ol.refs li.lifetime::marker { color: var(--gold); font-weight: 700; }
 .tag-life { font-size: 10.5px; background: #f4ead2; color: #7b5b14; border-radius: 4px; padding: 1px 6px; margin-left: 6px; font-weight: 600; letter-spacing: .03em; }
+.tag-post { font-size: 10.5px; background: #ece7f4; color: #5b4a8a; border-radius: 4px; padding: 1px 6px; margin-left: 6px; font-weight: 600; letter-spacing: .03em; }
+.tl-tag { font-size: 10.5px; background: #eef1f4; color: #44546a; border-radius: 4px; padding: 1px 6px; margin-left: 6px; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; }
+.tl-row { padding: 6px 0; border-bottom: 1px dotted var(--line); }
+.tl-row .sub { margin-left: 82px; }
 .muted { color: var(--muted); }
 .ai-box { border: 1px solid #d9c9a6; background: linear-gradient(#fffdf7, #fdf8ec); }
 .ai-out h2 { font-size: 24px; border: 0; margin-top: 18px; }

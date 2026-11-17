@@ -1002,6 +1002,7 @@
     ['synthesis', 'Research synthesis (AI)'],
     ['identity', 'Identity & names'],
     ['biography', 'Biography'],
+    ['timeline', 'Timeline'],
     ['exhibitions', 'Exhibition record'],
     ['academic', 'Bibliography & scholarship'],
     ['critical', 'Critical analyses'],
@@ -1077,6 +1078,7 @@
         done(target, 'error');
       }).finally(() => renderRefs(state));
     await Promise.allSettled(Object.values(jobs));
+    renderTimeline(state);
     done('references');
     done('critical');
   }
@@ -1298,6 +1300,94 @@
       ${pr.wikipedia ? `<h3>Life and career</h3>${wikiSource(pr.wikipedia)}${wikiSections(pr.wikipedia, 'biography')}` : '<p class="muted">No encyclopaedic biography is available in the open sources consulted. See the biographical references below.</p>'}
       ${lifeRows.length ? `<h3>Documented life facts</h3><p class="source-line">Structured statements from ${link('https://www.wikidata.org/wiki/' + pr.ids.wikidata, 'Wikidata')}${citeBtn(pr.wikidataCite)}</p><table class="table">${lifeRows.map((k) => `<tr><th style="width:220px">${esc(F[k].label)}</th><td>${F[k].values.map((x) => (x.id ? link('https://www.wikidata.org/wiki/' + x.id, x.label) : esc(x.label)) + (x.when ? ` <span class="muted">(${esc(x.when)})</span>` : '')).join('; ')}</td></tr>`).join('')}</table>` : ''}
       ${rels.length ? `<h3>Teachers, pupils, family & associates — Getty ULAN</h3><table class="table">${Object.entries(relGroups).map(([k, arr]) => `<tr><th style="width:220px">${esc(k)}</th><td>${arr.map((r) => link('https://vocab.getty.edu/page/ulan/' + r.ulan, r.name)).join('; ')}</td></tr>`).join('')}</table>` : ''}`;
+  }
+
+  /* --------------------------------------------------- Timeline */
+  // One chronological spine merging the dated records the report has
+  // already gathered — life, works, exhibitions, publications and
+  // catalogues raisonnés. No new data source: everything comes from
+  // state.prof and state.data as filled by the section renderers.
+  // Events after the artist's death are marked POSTHUMOUS so later
+  // scholarship, catalogues and retrospectives are not read as life
+  // events. Undated works stay off the spine and are counted in the
+  // note, and the works shown are the report's sample, not an oeuvre.
+  function renderTimeline(state) {
+    const el = $('#body-timeline');
+    if (!el) return;
+    const pr = state.prof;
+    const yrOf = (s) => {
+      const m = String(s || '').match(/\b(1\d{3}|[5-9]\d{2})\b/);
+      return m ? +m[1] : null;
+    };
+    const by = pr.birthYear || yrOf((pr.births || [])[0]);
+    const dy = pr.deathYear || yrOf((pr.deaths || [])[0]);
+    const ev = [];
+    const KIND = { life: ['Life', 0], work: ['Work', 1], exhibition: ['Exhibition', 2], publication: ['Publication', 3], catalogue: ['Catalogue', 4] };
+    const push = (y, k, html, sub, label) => {
+      if (y) ev.push({ y, k, html, sub: sub || '', label: label || String(y), post: !!(dy && y > dy && k !== 'life') });
+    };
+    if (by) push(by, 'life', `<b>Born</b>${pr.birthPlace ? ' — ' + esc(pr.birthPlace) : ''}`, (pr.births || []).join(' / '));
+    if (dy) push(dy, 'life', `<b>Died</b>${pr.deathPlace ? ' — ' + esc(pr.deathPlace) : ''}`, (pr.deaths || []).join(' / '));
+    // Works — the collections sample and museum objects, deduplicated.
+    const cw = state.data.collections;
+    let undated = 0;
+    if (cw) {
+      const seen = new Set();
+      for (const w of [...(cw.works || []), ...(cw.museumObjects || [])]) {
+        if (!w.title) continue;
+        const y = w.year || yrOf(w.date);
+        const key = w.title.toLowerCase() + '|' + (y || '');
+        if (seen.has(key)) continue;
+        seen.add(key);
+        if (!y) { undated++; continue; }
+        push(y, 'work', link(w.url, w.title), [w.institution || w.museum || (w.collections || []).join(', '), w.date && String(w.date) !== String(y) ? w.date : ''].filter(Boolean).join(' · '));
+      }
+    }
+    // Exhibitions — Wikidata chronology and the Art Institute's.
+    const ex = state.data.exhibitions;
+    if (ex) {
+      for (const e of ex.wikidata || [])
+        if (e.start) push(e.start, 'exhibition', link(e.url, /^Q\d+$/.test(e.title) ? `Untitled exhibition record (${e.title})` : e.title), (e.venues || []).join(', '));
+      for (const e of ex.aic || []) {
+        const y = yrOf(e.date);
+        if (y) push(y, 'exhibition', link(e.url, e.title), 'Art Institute of Chicago');
+      }
+    }
+    // Publications — books, subject works and scholarship, deduplicated
+    // the same way as the bibliography export (DOI, else title + year).
+    const ac = state.data.academic;
+    if (ac) {
+      const seen = new Set();
+      for (const w of [...(ac.books || []), ...(ac.subjectWorks || []), ...(ac.scholarly || [])]) {
+        if (!w.title || !w.year) continue;
+        const key = w.doi || (w.title.toLowerCase().replace(/[^a-z0-9]+/g, ' ') + '|' + w.year);
+        if (seen.has(key)) continue;
+        seen.add(key);
+        push(w.year, 'publication', link(w.doi ? 'https://doi.org/' + w.doi : w.url, w.title), [(w.authors || []).slice(0, 3).join(', '), w.venue].filter(Boolean).join(' · '));
+      }
+    }
+    // Catalogues raisonnés, in the chronological order of the section.
+    const cat = state.data.catalogue;
+    if (cat) for (const x of cat.items || [])
+      if (x.year) push(x.year, 'catalogue', link(x.url, x.title), [(x.authors || []).join(', '), x.note].filter(Boolean).join(' · '), x.yearEnd ? `${x.year}–${x.yearEnd}` : String(x.year));
+    ev.sort((a, b) => a.y - b.y || KIND[a.k][1] - KIND[b.k][1]);
+    const counts = {};
+    for (const e of ev) counts[e.k] = (counts[e.k] || 0) + 1;
+    const PLURAL = { life: 'Life', work: 'Works', exhibition: 'Exhibitions', catalogue: 'Catalogues', publication: 'Publications' };
+    const chips = [['all', 'All'], ...Object.keys(KIND).filter((k) => counts[k]).map((k) => [k, PLURAL[k]])]
+      .map(([k, l]) => `<button class="chip${k === 'all' ? ' active' : ''}" data-tl="${k}">${l} (${k === 'all' ? ev.length : counts[k]})</button>`).join(' ');
+    $('#sm-timeline').textContent = ev.length ? `${plural(ev.length, 'dated event')} · ${ev[0].y}–${ev[ev.length - 1].y}` : '';
+    el.innerHTML = `
+      <p class="source-line">One chronology for the dated records gathered in this report. It is only as complete as the open record: exhibition coverage is incomplete, especially before 1900${cw ? `; the works are the dated works gathered for Works &amp; collections, drawn from ${cw.totalWorks.toLocaleString()} catalogued works — not the complete oeuvre` : ''}${undated ? `; ${plural(undated, 'undated work')} among them ${undated === 1 ? 'is' : 'are'} left off the spine` : ''}. Events after the artist’s death are marked <span class="tag-post">POSTHUMOUS</span>.</p>
+      ${ev.length ? `<div class="filters" style="margin:0 0 10px">${chips}</div>
+      <div>${ev.map((e) => `<div class="tl-row" data-kind="${e.k}"><span class="yr">${esc(e.label)}</span> ${e.html}<span class="tl-tag">${KIND[e.k][0]}</span>${e.post ? '<span class="tag-post">POSTHUMOUS</span>' : ''}${e.sub ? `<div class="sub">${esc(e.sub)}</div>` : ''}</div>`).join('')}</div>`
+      : '<div class="notice">No dated records were found in the open sources for this artist — the report’s other sections hold what is known.</div>'}`;
+    el.querySelectorAll('[data-tl]').forEach((b) => b.addEventListener('click', () => {
+      el.querySelectorAll('[data-tl]').forEach((x) => x.classList.toggle('active', x === b));
+      const k = b.dataset.tl;
+      el.querySelectorAll('.tl-row').forEach((r) => { r.style.display = k === 'all' || r.dataset.kind === k ? '' : 'none'; });
+    }));
+    done('timeline');
   }
 
   /* --------------------------------------------------- 5. Critical (base) */
@@ -1525,6 +1615,7 @@
       <h3>2 · Building the report</h3>
       <ul>
         <li><b>Biography</b> — Getty ULAN biographical note and relationships (teachers, pupils, family), Wikipedia (English or the best available language), and structured Wikidata life facts.</li>
+        <li><b>Timeline</b> — one chronological spine merging the dated records gathered for the report: birth and death, dated works (with the same verified institutional links as Works &amp; collections), exhibitions, publications, and catalogues raisonnés in chronological order, including superseded ones. Anything dated after the artist’s death — later scholarship, catalogues, retrospectives — is marked posthumous, not presented as a life event. Undated works are left off the spine and counted in the section’s note; exhibition coverage in open sources is incomplete, especially before 1900; and the works are those gathered for the report, not the complete oeuvre.</li>
         <li><b>Exhibition record</b> — Wikidata exhibition items (including exhibitions at which individual works were shown), Art Institute of Chicago exhibitions, object-level exhibition histories from museum records, and exhibition catalogues from Open Library, plus links to DoME, Paris Salon, Royal Academy, RKD, MoMA and Artfacts.</li>
         <li><b>Bibliography & scholarship</b> — key books and monographs with the artist as subject (Open Library, ranked by number of editions), curated scholarship with the artist as main subject (Wikidata), the most-cited literature in OpenAlex (250M+ scholarly works) and Crossref, reviews, and chronologically arranged quotations from contemporaries, fellow artists and critics (Wikiquote). Start with the "Start here" shelf; the whole bibliography downloads as BibTeX or RIS for Zotero.</li>
         <li><b>Critical analyses</b> — encyclopaedic discussion of style, technique, reception and legacy, and arguments drawn from leading scholarship.</li>
