@@ -66,6 +66,7 @@
     window.scrollTo(0, 0);
     if (path === '/search' && p.q) return viewSearch(p.q);
     if (path === '/browse') return viewBrowse(p);
+    if (path === '/degrees') return viewDegrees(p);
     if (path === '/salon' || path.startsWith('/salon/')) return viewSalon(p, path);
     if (path === '/artist' && (p.wd || p.ulan)) return viewReport(p);
     if (path === '/about') return viewAbout();
@@ -295,6 +296,168 @@
         location.hash = `#/artist?wd=${cand.wikidata}${cand.ulan ? '&ulan=' + cand.ulan : ''}`;
       })
     );
+  }
+
+  /* ======================================================== six degrees view */
+  /* Six Degrees of Rembrandt: the shortest chain between two artists
+   * through recorded teacher/pupil/influence links (Wikidata P802/P1066/
+   * P737). Each side is picked through the usual name search; a single
+   * exact match is used directly, several candidates are offered as a
+   * small list to choose from. The suggested pairs below were all verified
+   * against the live endpoint (2026-11-16) — step counts are real, not
+   * guessed. */
+  const DEGREES_PAIRS = [
+    { from: 'Rembrandt', to: 'Johannes Vermeer', steps: 2 },
+    { from: 'Rembrandt', to: 'Claude Monet', steps: 2 },
+    { from: 'Hokusai', to: 'Vincent van Gogh', steps: 1 },
+    { from: 'Rembrandt', to: 'Pablo Picasso', steps: 3 },
+  ];
+  const degreesState = { from: null, to: null }; // each: { wd, ulan, name, birth, death }
+
+  async function viewDegrees(p) {
+    app.innerHTML = `<h1 style="font-size:38px">Six Degrees of Rembrandt</h1>
+      <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">Pick any two artists. The finder traces the shortest chain between them — up to six steps — through links Wikidata actually records: <b>taught</b>, <b>was taught by</b>, <b>influenced</b>, <b>was influenced by</b>. Every name in the chain links to that artist's Atlas report. If no chain is recorded within six steps, it says so — it never invents a link.</p>
+      <div class="degrees-pickers">
+        <div class="degrees-side" id="deg-from"></div>
+        <div class="degrees-side" id="deg-to"></div>
+      </div>
+      <div class="degrees-pairs"><span class="meta">Try a pair:</span>${DEGREES_PAIRS.map((pr, i) => `<button class="chip" data-pair="${i}">${esc(pr.from)} → ${esc(pr.to)} · ${pr.steps} step${pr.steps === 1 ? '' : 's'}</button>`).join('')}</div>
+      <div style="margin:14px 0"><button class="btn btn-primary" id="deg-find" disabled>Find the chain</button></div>
+      <div id="deg-out"></div>`;
+    renderDegreePicker('from', 'From');
+    renderDegreePicker('to', 'To');
+    document.querySelectorAll('[data-pair]').forEach((b) => b.addEventListener('click', () => runSuggestedPair(DEGREES_PAIRS[+b.dataset.pair])));
+    $('#deg-find').addEventListener('click', () => runDegrees(degreesState.from.wd, degreesState.to.wd));
+    // A shared link (#/degrees?from=Q5598&to=Q41264) runs the search
+    // directly; the pickers are filled from the result's labels.
+    if (/^Q\d+$/.test(p.from || '') && /^Q\d+$/.test(p.to || '')) {
+      runDegrees(p.from, p.to).then((d) => {
+        if (!d) return;
+        degreesState.from = { wd: p.from, ulan: null, name: d.fromLabel };
+        degreesState.to = { wd: p.to, ulan: null, name: d.toLabel };
+        renderDegreePicker('from', 'From');
+        renderDegreePicker('to', 'To');
+        updateDegreeFind();
+      });
+    }
+  }
+
+  function renderDegreePicker(side, label) {
+    const el = $('#deg-' + side);
+    if (!el) return;
+    const sel = degreesState[side];
+    el.innerHTML = `<label>${label} artist</label>
+      <div class="degrees-pick">
+        <input id="deg-${side}-q" type="search" placeholder="e.g. Rembrandt" aria-label="${label} artist name" value="${esc(sel?.name || '')}">
+        <button class="btn" id="deg-${side}-go">Look up</button>
+      </div>
+      ${sel ? `<div class="degrees-chosen">✓ <b>${esc(sel.name)}</b>${sel.birth || sel.death ? ` <span class="meta">(${esc(sel.birth || '?')}–${esc(sel.death || '?')})</span>` : ''} <button class="linkish" id="deg-${side}-clear">change</button></div>` : ''}
+      <div id="deg-${side}-cands"></div>`;
+    const input = $('#deg-' + side + '-q');
+    const lookup = async () => {
+      const q = input.value.trim();
+      const box = $('#deg-' + side + '-cands');
+      if (!box) return;
+      if (q.length < 2) { box.innerHTML = '<div class="notice">Enter at least two characters.</div>'; return; }
+      box.innerHTML = spinner('Looking up…');
+      let d;
+      try { d = await api('/api/search', { q }); }
+      catch (e) { box.innerHTML = `<div class="notice error">Lookup failed: ${esc(e.message)}</div>`; return; }
+      const cands = (d.candidates || []).slice(0, 5);
+      if (!cands.length) { box.innerHTML = `<div class="notice">No artists matching “${esc(q)}” were found. Try another spelling, or the surname alone.</div>`; return; }
+      const exact = cands.filter((c) => c.match === 'exact');
+      if (exact.length === 1) { pickDegree(side, exact[0]); return; }
+      box.innerHTML = `<div class="degrees-cands">${cands.map((c, i) => `<button class="degrees-cand" data-i="${i}"><b>${esc(c.name)}</b> <span class="meta">${esc(lifeStr(c))}${c.birthPlace ? ` · born ${esc(c.birthPlace)}` : ''}</span></button>`).join('')}</div>`;
+      box.querySelectorAll('[data-i]').forEach((b) => b.addEventListener('click', () => pickDegree(side, cands[+b.dataset.i])));
+    };
+    $('#deg-' + side + '-go').addEventListener('click', lookup);
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); lookup(); } });
+    const clear = $('#deg-' + side + '-clear');
+    if (clear) clear.addEventListener('click', () => {
+      degreesState[side] = null;
+      renderDegreePicker(side, label);
+      updateDegreeFind();
+    });
+  }
+
+  function pickDegree(side, c) {
+    if (!c.wikidata) {
+      const box = $('#deg-' + side + '-cands');
+      if (box) box.innerHTML = `<div class="notice">“${esc(c.name)}” has no Wikidata record, so the chain search cannot use this candidate — pick another.</div>`;
+      return;
+    }
+    degreesState[side] = { wd: c.wikidata, ulan: c.ulan || null, name: c.name, birth: c.birth || null, death: c.death || null };
+    renderDegreePicker(side, side === 'from' ? 'From' : 'To');
+    updateDegreeFind();
+  }
+
+  function updateDegreeFind() {
+    const b = $('#deg-find');
+    if (b) b.disabled = !(degreesState.from?.wd && degreesState.to?.wd);
+  }
+
+  async function runDegrees(fromQid, toQid) {
+    const out = $('#deg-out');
+    if (!out) return null;
+    out.innerHTML = spinner('Searching the teacher, pupil and influence links…');
+    const t0 = Date.now();
+    const timer = setInterval(() => {
+      const s = out.querySelector('.loading span');
+      if (s) s.textContent = `Searching the teacher, pupil and influence links… ${Math.floor((Date.now() - t0) / 1000)}s — Wikidata can be slow for some pairs.`;
+      else clearInterval(timer);
+    }, 1000);
+    let d;
+    try { d = await api('/api/degrees', { from: fromQid, to: toQid }); }
+    catch (e) {
+      clearInterval(timer);
+      out.innerHTML = `<div class="notice error">The chain search failed: ${esc(e.message)} — Wikidata is sometimes slow or unreachable; try again in a moment.</div>`;
+      return null;
+    }
+    clearInterval(timer);
+    renderDegreesResult(d);
+    return d;
+  }
+
+  function renderDegreesResult(d) {
+    const out = $('#deg-out');
+    if (!out) return;
+    const secs = ((d.ms || 0) / 1000).toFixed(1);
+    if (d.steps === 0) {
+      out.innerHTML = `<div class="notice">That is the same artist — <b>${esc(d.fromLabel)}</b>, 0 steps. Try two different artists.</div>`;
+      return;
+    }
+    if (!d.found) {
+      out.innerHTML = `<div class="notice">No chain found within six steps — ${plural(d.explored, 'artist')} explored in ${secs}s. Wikidata only records some teacher, pupil and influence links, so a missing chain means no chain is recorded, not that no connection existed in life.</div>`;
+      return;
+    }
+    const node = (n) => `<a href="#/artist?wd=${esc(n.qid)}">${esc(n.label)}</a>${n.born || n.died ? ` <span class="meta">(${esc(n.born ?? '?')}–${esc(n.died ?? '?')})</span>` : ''}`;
+    const steps = d.path.map((n, i) => (i === 0
+      ? `<div class="chain-node">${node(n)}</div>`
+      : `<div class="chain-edge"><span class="chain-arrow">↓</span><span class="chain-rel">${esc(n.edge)}</span></div><div class="chain-node">${node(n)}</div>`)).join('');
+    out.innerHTML = `<div class="results-head"><div><h2>${plural(d.steps, 'step')} — ${esc(d.fromLabel)} to ${esc(d.toLabel)}</h2><div class="meta">${plural(d.explored, 'artist')} explored · ${secs}s${d.cached ? ' · from cache' : ''}</div></div></div>
+      <div class="chain">${steps}</div>
+      <p class="source-line">Each link is a Wikidata record: <i>student</i> (P802), <i>student of</i> (P1066) or <i>influenced by</i> (P737). “Taught” and “influenced” run from the artist above to the one below; “was taught by” and “was influenced by” run the other way. Click any name for the full Atlas report.</p>`;
+  }
+
+  async function runSuggestedPair(pair) {
+    const out = $('#deg-out');
+    const resolve = async (side, name) => {
+      const d = await api('/api/search', { q: name });
+      const exact = (d.candidates || []).filter((c) => c.match === 'exact');
+      const c = exact[0] || (d.candidates || [])[0];
+      if (!c || !c.wikidata) throw new Error(`Could not resolve “${name}” — pick the artists by hand instead.`);
+      degreesState[side] = { wd: c.wikidata, ulan: c.ulan || null, name: c.name, birth: c.birth || null, death: c.death || null };
+      renderDegreePicker(side, side === 'from' ? 'From' : 'To');
+    };
+    if (out) out.innerHTML = spinner('Resolving the pair…');
+    try {
+      await resolve('from', pair.from);
+      await resolve('to', pair.to);
+      updateDegreeFind();
+      await runDegrees(degreesState.from.wd, degreesState.to.wd);
+    } catch (e) {
+      if (out) out.innerHTML = `<div class="notice error">${esc(e.message)}</div>`;
+    }
   }
 
   /* ========================================================== salon view */
@@ -1030,6 +1193,7 @@
         <li><b>Works & collections — linking to the holding institution</b> — a work's title links to the holding museum's own object page wherever one exists and can be verified; Wikidata is the finding aid, never the authority. How a link is resolved: the work list comes from Wikidata (a SPARQL query for works with the artist as creator, <i>wdt:P170</i>), together with the museum identifiers recorded there — the <i>Met object ID</i> (property P3634) and the <i>Art Institute of Chicago artwork ID</i> (property P4610). Each identifier is checked against the institution's own open API — the Met Collection API (<code>collectionapi.metmuseum.org/public/collection/v1/objects/{id}</code>), which returns the museum's canonical object page (<code>objectURL</code>), and the Art Institute of Chicago API (<code>api.artic.edu/api/v1/artworks/{id}</code>), whose public page is <code>artic.edu/artworks/{id}</code>. Only an identifier the institution's API confirms becomes the work's link; if it does not resolve, the work links to its Wikidata item page instead. Museum open-access records are fetched directly from the same APIs — the Met, the Art Institute of Chicago, and the Cleveland Museum of Art's open-access API (<code>openaccess-api.clevelandart.org</code>), which returns each object's own page URL with the record — and Europeana records link to the Europeana item page. Where no institutional page exists, the work links to its Wikidata page, shown plainly as such and never presented as a museum source. Direct automated checks of museum web pages are not reliable (their servers reject them), which is why verification runs through the institutions' open APIs.</li>
         <li><b>Browse</b> — the browse page lists artists by century (12th–20th), country, movement or medium, and any combination of the four: pick from the dropdowns and press GO. The country list is every country with eligible artists (a live count of citizenships, including the historical states grouped under the modern country — Rembrandt and Vermeer are recorded as citizens of the Dutch Republic, Leonardo of the Republic of Florence — so the Dutch masters and the Italian Renaissance appear where they belong; states that map to no modern country appear under their own name). Each list is a live Wikidata query restricted to painters, sculptors, draftsmen, engravers and printmakers, capped at 50 artists, best-documented first — plus a curated index of the twenty homepage artists grouped the same way. As everywhere on the site, Wikidata is the finding aid: it finds the artist, and the report then links each work to the holding institution's verified page.</li>
         <li><b>Salon Time Machine</b> — the Paris Salon catalogues, 1673–1881: 144,081 works by year, section and catalogue number, transcribed from the printed livrets (Garland reprints via the Internet Archive) and parsed from OCR. Catalogue numbers marked ~ were inferred from the sequence or look suspect in the printed text; some titles carry OCR noise and a few artist names are fragments. Years with no surviving livret are simply absent. Each artist name links to the usual name search, so a Salon exhibitor leads straight to the full research report. No images in this first version: most Salon works have no surviving image in the open sources.</li>
+        <li><b>Six Degrees</b> — the shortest chain between any two artists, up to six steps, through links Wikidata records: <i>student</i> (P802, taught), <i>student of</i> (P1066, taught by) and <i>influenced by</i> (P737, in both directions). The search is a breadth-first search over those links only, one batched query per step, with each link labeled by its direction; neighbors are verified to be people, so groups, schools and works never appear as a link. If no chain is recorded within six steps the page says so, with the number of artists explored — a missing chain means no chain is recorded, not that no connection existed.</li>
         <li><b>Catalogue raisonné</b> — the standard catalogue raisonné of the artist’s works, where one exists, drawn from Open Library and Wikidata and shown in chronological order, including catalogues later superseded by newer ones; where a standard catalogue is published under another title it is listed from a short curated set.</li>
         <li><b>References</b> — every source is captured as a Chicago-style citation, grouped as biographical, exhibitions, academic, lifetime, market and database/authority records. <span class="tag-life">LIFETIME</span> marks sources dated within the artist’s life, drawn from historic dictionaries, the Internet Archive, the Library of Congress’s Chronicling America newspapers, Europeana and Open Library.</li>
       </ul>
