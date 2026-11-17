@@ -320,9 +320,33 @@
     if (!salonIndex) salonIndex = await salonFetchJSON('/data/salon/index.json');
     return salonIndex;
   }
+  /* OCR name corrections (public/data/salon/name-corrections.json), fetched
+     once and cached. Applied in memory to a year's works right after the
+     year file loads; the per-year files keep the spellings as printed.
+     If the file cannot be loaded the page still works, uncorrected. */
+  let salonNameCorrections = null;
+  async function loadSalonNameCorrections() {
+    if (!salonNameCorrections) salonNameCorrections = salonFetchJSON('/data/salon/name-corrections.json').catch(() => null);
+    return salonNameCorrections;
+  }
+  function applySalonNameCorrections(data, year, corr) {
+    if (!corr) return;
+    // Prose years (1673, 1699, 1704) are not livret name fields: untouched.
+    if (year === 1673 || year === 1699 || year === 1704) return;
+    const { given, surname, teacher } = corr;
+    for (const w of data.works) {
+      if (w[2] && surname[w[2]]) w[2] = surname[w[2]];
+      if (w[3] && given[w[3]]) w[3] = given[w[3]];
+      if (w[5] && teacher[w[5]]) w[5] = teacher[w[5]];
+    }
+  }
   async function loadSalonYear(year) {
     if (!salonYearCache.has(year)) {
-      salonYearCache.set(year, salonFetchJSON(`/data/salon/${year}.json`).catch((e) => { salonYearCache.delete(year); throw e; }));
+      salonYearCache.set(year, (async () => {
+        const data = await salonFetchJSON(`/data/salon/${year}.json`);
+        applySalonNameCorrections(data, year, await loadSalonNameCorrections());
+        return data;
+      })().catch((e) => { salonYearCache.delete(year); throw e; }));
     }
     return salonYearCache.get(year);
   }
@@ -400,7 +424,7 @@
       <div class="filters">${tabs.map((t) => `<button class="chip ${salonState.section === t.id ? 'active' : ''}" data-sec="${esc(t.id)}">${esc(t.label)} (${t.n.toLocaleString()})</button>`).join('')}</div>
       <div class="salon-search"><input id="salon-q" type="search" placeholder="Filter this year by artist or title…" value="${esc(salonState.query)}" aria-label="Filter works by artist or title"></div>
       <div id="salon-table-wrap"></div>
-      <div class="notice">About these records — transcribed from the printed Salon livrets (Garland reprints, via the Internet Archive) and parsed from OCR, so some titles carry OCR noise and a few artist names are fragments. A “~” after a catalogue number means the number was inferred from the sequence or looks suspect in the printed text. Every artist name links to the Atlas name search — pick the right person there to read the full research report. No images yet: most Salon works have no surviving image in the open sources, so this first version is the catalogue itself, browsable year by year.</div>`;
+      <div class="notice">About these records — transcribed from the printed Salon livrets (Garland reprints, via the Internet Archive) and parsed from OCR, so some titles carry OCR noise and a few artist names are fragments. Artist names have been corrected where the OCR misread them, against authority records (Wikidata artist lists and the frequent clean spellings in the livrets themselves); only high-confidence corrections are applied, ambiguous names are left as printed, and the original printed spellings are preserved in the data files. A “~” after a catalogue number means the number was inferred from the sequence or looks suspect in the printed text. Every artist name links to the Atlas name search — pick the right person there to read the full research report. No images yet: most Salon works have no surviving image in the open sources, so this first version is the catalogue itself, browsable year by year.</div>`;
     el.querySelectorAll('[data-sec]').forEach((b) => b.addEventListener('click', () => {
       salonState.section = b.dataset.sec;
       salonState.page = 1;
