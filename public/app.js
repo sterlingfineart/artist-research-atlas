@@ -340,6 +340,9 @@
         updateDegreeFind();
       });
     }
+    // If both pickers are already filled (e.g. coming back from a chain
+    // artist's report), enable Find without making the user re-pick.
+    updateDegreeFind();
   }
 
   function renderDegreePicker(side, label) {
