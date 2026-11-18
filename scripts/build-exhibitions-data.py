@@ -133,6 +133,40 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'guildhall-1897',
+        'file': 'guildhall-1897.json',
+        'title': 'Catalogue of the Loan Collection of Pictures',
+        'subtitle': 'By Painters of the British School who have flourished during Her Majesty’s Reign',
+        'venue': 'Art Gallery of the Corporation of London (Guildhall Art Gallery)',
+        'dates': '7 April – 14 July 1897',
+        'year': 1897,
+        'organiser': 'A. G. Temple',
+        'label': 'Guildhall 1897',
+        'source': 'Internet Archive item catalogueofloanc00temp (Getty scan)',
+        'notes': ('This scan drops the printed margin numbers wholesale: 73 have been restored from '
+                  'their sequence position, each flagged in its record’s note and corroborated by the '
+                  'catalogue’s Index of Artists. Two sizes are illegible in the scan. Two unnumbered '
+                  'Jubilee exhibits shown with the exhibition — a marble bust and a miniature of Queen '
+                  'Victoria — stand outside the catalogue’s numbering and are not recorded here. '
+                  'Graves’s Century of Loan Exhibitions digests this exhibition but keys only 139 of '
+                  'its 167 works, folding several pictures into merged records and missing the lettered '
+                  'inserts — the printed catalogue is the authority here.'),
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 167,
+            'sections': {'Gallery I': 58, 'Gallery II': 50, 'Gallery III': 59},
+            # Plain catalogue numbers run 1–161 with no gaps; the
+            # lettered inserts are 36A, 45A, 54A, 54B, 89A and 120A;
+            # every record has a lender, a title and an artist.
+            'plain_range': (1, 161),
+            'lettered': {'36A', '45A', '54A', '54B', '89A', '120A'},
+            'no_lender': 0,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'guildhall-1904',
         'file': 'guildhall-1904.json',
         'title': 'Catalogue of The Exhibition of Works by Irish Painters',
