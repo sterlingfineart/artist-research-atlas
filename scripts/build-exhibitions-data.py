@@ -306,6 +306,45 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'guildhall-1903',
+        'file': 'guildhall-1903.json',
+        'title': 'Catalogue of the Exhibition of a Selection of Works by Early and Modern Painters of the Dutch School. With Descriptive and Biographical Notes',
+        'subtitle': 'By A. G. Temple, F.S.A., Director of the Art Gallery',
+        'venue': 'Art Gallery of the Corporation of London (Guildhall Art Gallery)',
+        'dates': '28 April – 25 July 1903',
+        'year': 1903,
+        'organiser': 'A. G. Temple',
+        'label': 'Guildhall 1903',
+        'source': 'Internet Archive item catalogueofexhib00guil_5 (Getty scan)',
+        'notes': ('The Twelfth Exhibition of the Guildhall series. Gallery I held the Gassiot '
+                  'bequest as part of the exhibition, but the catalogue prints no list of it, so '
+                  'those works are not recorded here. Eight catalogue numbers have been restored '
+                  'from their sequence position, each flagged in its record’s note. No. 100’s '
+                  'heading is lost in the scan — its artist and lender come from the catalogue’s '
+                  'own indexes, and its title, medium and size are not recorded. A printed notice '
+                  'in the catalogue records that nos. 137, 162 and 187 were returned to their '
+                  'owners in early June. Graves’s Century of Loan Exhibitions keys 144 of these '
+                  '196 numbers and covers 158 in substance, lacking 38 outright — the printed '
+                  'catalogue is the authority here.'),
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 196,
+            'sections': {'Galleries II and III': 133, 'Gallery IV': 63},
+            # Plain catalogue numbers run 1–195 with no gaps and no
+            # absent numbers; the only lettered insert is 187A; every
+            # record has an artist and a lender; exactly one record
+            # has no title (no. 100, whose heading is lost in the
+            # scan); 33 records print no medium.
+            'plain_range': (1, 195),
+            'lettered': {'187A'},
+            'no_lender': 0,
+            'no_title': 1,
+            'no_artist': 0,
+            'no_medium': 33,
+        },
+    },
+    {
         'id': 'guildhall-1904',
         'file': 'guildhall-1904.json',
         'title': 'Catalogue of The Exhibition of Works by Irish Painters',
