@@ -70,6 +70,7 @@
     if (path === '/salon' || path.startsWith('/salon/')) return viewSalon(p, path);
     if (path === '/ra' || path.startsWith('/ra/')) return viewRA(p, path);
     if (path === '/loan' || path.startsWith('/loan/')) return viewLoan(p, path);
+    if (path === '/exhibitions' || path.startsWith('/exhibitions/')) return viewExhibitions(p, path);
     if (path === '/artist' && (p.wd || p.ulan)) return viewReport(p);
     if (path === '/about') return viewAbout();
     return viewHome();
@@ -1236,6 +1237,380 @@
     }
   }
 
+  /* ============================================= record of exhibitions */
+  const EXH_PAGE_SIZE = 50;
+  let exhIndex = null;
+  const exhDataCache = new Map();
+  let exhAllWorks = null;
+  const exhSearchState = { mode: 'artist', query: '', result: null, selected: null, page: 1 };
+  const exhState = { id: null, entry: null, records: null, section: 'all', query: '', page: 1, letter: null, selected: null };
+  async function loadExhIndex() {
+    if (!exhIndex) exhIndex = await salonFetchJSON('/data/exhibitions/index.json');
+    return exhIndex;
+  }
+  async function loadExhRecords(id) {
+    if (!exhDataCache.has(id)) {
+      exhDataCache.set(id, salonFetchJSON(`/data/exhibitions/${id}.json`)
+        .catch((e) => { exhDataCache.delete(id); throw e; }));
+    }
+    return exhDataCache.get(id);
+  }
+  async function loadExhAll() {
+    if (!exhAllWorks) {
+      exhAllWorks = salonFetchJSON('/data/exhibitions/all.json')
+        .then((d) => d.works)
+        .catch((e) => { exhAllWorks = null; throw e; });
+    }
+    return exhAllWorks;
+  }
+  /* The name as printed, minus the post-nominal tail (", R.H.A." and the
+     like) — used for the Atlas name search and to find the surname. */
+  function exhNamePart(artist) {
+    return String(artist || '')
+      .split(/,\s*(?:P\.?R\.?H\.?A|A\.?R\.?H\.?A|R\.?H\.?A|R\.?S\.?A|A\.?R\.?A|R\.?A|Bart|Esq)\b/i)[0]
+      .replace(/[\s.,]+$/, '').trim();
+  }
+  /* Surname initial for the letter browse. Names are in natural order as
+     printed ("Walter F. Osborne, R.H.A."), so the surname is the last
+     name-like word of the name part; trailing OCR debris (a leaked
+     medium, dimensions) is skipped. */
+  function exhSurnameInitial(artist) {
+    const skip = new Set(['canvas', 'panel', 'millboard', 'inches', 'inehes', 'size']);
+    const toks = exhNamePart(artist).split(/\s+/);
+    for (let i = toks.length - 1; i >= 0; i--) {
+      const t = toks[i].replace(/\.+$/, '');
+      if (t.length < 2 || !/^[A-Za-z][A-Za-z'’-]*$/.test(t)) continue;
+      if (skip.has(t.toLowerCase())) continue;
+      return t.charAt(0).toUpperCase();
+    }
+    return '#';
+  }
+  function exhNoteHtml(note) {
+    if (!note) return '';
+    const short = note.length > 160 ? note.slice(0, 160) + '…' : note;
+    return `<div class="meta" title="${esc(note)}">${esc(short)}</div>`;
+  }
+  /* One works table for the Record of Exhibitions, global and local:
+     Exhibition (global only) | No. | Artist | Title | Medium | Size |
+     Lender. Artist names link to the Atlas name search, as on the Loan
+     page. */
+  function exhWorkRow(w, global) {
+    return `<tr>
+      ${global ? `<td><a href="#/exhibitions/${esc(w.exhibition)}">${esc(w.label)}</a></td>` : ''}
+      <td class="salon-num">${esc(w.no)}</td>
+      <td><a href="#/search?q=${enc(exhNamePart(w.artist))}">${esc(w.artist)}</a></td>
+      <td>${esc(w.title || '')}${exhNoteHtml(w.note)}</td>
+      <td>${esc(w.medium || '')}</td>
+      <td>${esc(w.size || '')}</td>
+      <td>${esc(w.lender || '')}</td>
+    </tr>`;
+  }
+  const EXH_TABLE_HEAD = (global) => `<thead><tr>${global ? '<th>Exhibition</th>' : ''}<th class="salon-num">No.</th><th>Artist</th><th>Title</th><th>Medium</th><th>Size</th><th>Lender</th></tr></thead>`;
+  /* Group works by a name field (artist or lender). Grouping is
+     case-insensitive — the catalogue's capitalisation varies from entry
+     to entry for the same person — and the display name is the most
+     frequent printed form. Genuinely different printed forms (initials
+     vs a full name) still list separately. */
+  function exhGroups(works, field, words) {
+    const groups = new Map();
+    for (const w of works) {
+      const name = w[field];
+      if (!name || !raWordsMatch(name, words)) continue;
+      const key = raNorm(name);
+      if (!groups.has(key)) groups.set(key, { key, forms: new Map(), works: [] });
+      const g = groups.get(key);
+      g.forms.set(name, (g.forms.get(name) || 0) + 1);
+      g.works.push(w);
+    }
+    return [...groups.values()].map((g) => ({
+      key: g.key,
+      name: [...g.forms.entries()].sort((a, b) => b[1] - a[1])[0][0],
+      works: g.works,
+    })).sort((a, b) => a.name.localeCompare(b.name));
+  }
+  function renderExhSearch() {
+    const el = $('#exh-search');
+    if (!el) return;
+    const s = exhSearchState;
+    const total = exhIndex ? exhIndex.reduce((n, e) => n + e.works, 0).toLocaleString() : '466';
+    el.innerHTML = `<div class="results-head"><div><h2>Search all recorded exhibitions</h2>
+      <div class="meta">Every work in every catalogue recorded here at a keystroke: ${total} works. By artist — that artist’s record across all the exhibitions. By title — a work traced from catalogue to catalogue. By lender — everything a collector or institution lent, which is a provenance record in itself.</div></div></div>
+      <div class="filters">
+        <button class="chip ${s.mode === 'artist' ? 'active' : ''}" data-exh-mode="artist">By artist</button>
+        <button class="chip ${s.mode === 'title' ? 'active' : ''}" data-exh-mode="title">By title</button>
+        <button class="chip ${s.mode === 'lender' ? 'active' : ''}" data-exh-mode="lender">By lender</button>
+      </div>
+      <form id="exh-search-form" class="salon-search">
+        <input id="exh-search-q" type="search" placeholder="${s.mode === 'artist' ? 'Artist’s name — e.g. Osborne, Lavery, Yeats' : s.mode === 'title' ? 'A title, or its distinctive words — e.g. fishmarket, octobre' : 'Lender’s name — e.g. Lane, McCulloch, National Gallery of Ireland'}" value="${esc(s.query)}" aria-label="Search all recorded exhibitions">
+        <button class="btn" type="submit">Search</button>
+      </form>
+      <div class="meta" style="margin:6px 0 10px">${s.mode === 'title' ? 'Tip: one or two distinctive words beat a full exact title — titles were printed in full and the OCR garbles the odd word, so an exact phrase can miss a work that a single word finds.' : 'Capitalisation is ignored — the catalogue varies it from entry to entry for the same person, and those entries list together. Genuinely different printed forms of a name (initials vs a full name) still list separately.'}</div>
+      <div id="exh-search-results"></div>`;
+    el.querySelectorAll('[data-exh-mode]').forEach((b) => b.addEventListener('click', () => {
+      exhSearchState.mode = b.dataset.exhMode;
+      exhSearchState.result = null;
+      exhSearchState.selected = null;
+      exhSearchState.page = 1;
+      renderExhSearch();
+    }));
+    $('#exh-search-form').addEventListener('submit', (e) => { e.preventDefault(); runExhSearch(); });
+    renderExhSearchResults();
+  }
+  async function runExhSearch() {
+    const input = $('#exh-search-q');
+    const q = (input ? input.value : '').trim();
+    exhSearchState.query = q;
+    exhSearchState.selected = null;
+    exhSearchState.page = 1;
+    const wrap = $('#exh-search-results');
+    if (!q) { exhSearchState.result = null; renderExhSearchResults(); return; }
+    if (wrap) wrap.innerHTML = spinner(exhAllWorks ? 'Searching all recorded exhibitions…' : 'Searching all recorded exhibitions — the first search downloads the combined index; after that, searches are instant…');
+    let works;
+    try {
+      works = await loadExhAll();
+    } catch (e) {
+      if (wrap) wrap.innerHTML = `<div class="notice error">The combined exhibitions index could not be loaded: ${esc(e.message)}</div>`;
+      return;
+    }
+    const words = raNorm(q).split(' ').filter(Boolean);
+    if (exhSearchState.mode === 'title') {
+      exhSearchState.result = { type: 'title', rows: works.filter((w) => raWordsMatch(w.title, words)) };
+    } else {
+      const groups = exhGroups(works, exhSearchState.mode === 'artist' ? 'artist' : 'lender', words);
+      exhSearchState.result = { type: exhSearchState.mode, groups };
+      if (groups.length === 1) exhSearchState.selected = groups[0].key;
+    }
+    renderExhSearchResults();
+  }
+  function renderExhSearchResults() {
+    const wrap = $('#exh-search-results');
+    if (!wrap) return;
+    const s = exhSearchState;
+    const r = s.result;
+    if (!r) { wrap.innerHTML = ''; return; }
+    if (r.type === 'title') {
+      const rows = r.rows;
+      if (!rows.length) {
+        wrap.innerHTML = `<div class="notice">No title in the recorded exhibitions matches “${esc(s.query)}” — try fewer or different distinctive words; the OCR garbles the odd word.</div>`;
+        return;
+      }
+      const pages = Math.max(1, Math.ceil(rows.length / EXH_PAGE_SIZE));
+      if (s.page > pages) s.page = pages;
+      const start = (s.page - 1) * EXH_PAGE_SIZE;
+      const pageRows = rows.slice(start, start + EXH_PAGE_SIZE);
+      wrap.innerHTML = `<div class="meta" style="margin-bottom:8px">${plural(rows.length, 'work')} in the recorded exhibitions match “${esc(s.query)}”${rows.length > 1000 ? ' — a lot; add another distinctive word to narrow it down' : ''}:</div>
+        <div class="table-wrap"><table class="table salon-table">
+        ${EXH_TABLE_HEAD(true)}
+        <tbody>${pageRows.map((w) => exhWorkRow(w, true)).join('')}</tbody></table></div>
+        <div class="pager">
+          <button class="btn btn-sm" id="exh-s-prev" ${s.page <= 1 ? 'disabled' : ''}>← Previous</button>
+          <span class="meta">Page ${s.page} of ${pages.toLocaleString()} · showing ${(start + 1).toLocaleString()}–${Math.min(start + EXH_PAGE_SIZE, rows.length).toLocaleString()} of ${rows.length.toLocaleString()} works</span>
+          <button class="btn btn-sm" id="exh-s-next" ${s.page >= pages ? 'disabled' : ''}>Next →</button>
+        </div>`;
+      const prev = $('#exh-s-prev');
+      const next = $('#exh-s-next');
+      if (prev) prev.addEventListener('click', () => { s.page--; renderExhSearchResults(); });
+      if (next) next.addEventListener('click', () => { s.page++; renderExhSearchResults(); });
+      return;
+    }
+    const groups = r.groups;
+    const kind = r.type === 'artist' ? 'artist' : 'lender';
+    if (!groups.length) {
+      wrap.innerHTML = `<div class="notice">No ${kind} in the recorded exhibitions matches “${esc(s.query)}” — try the surname alone, or another spelling.</div>`;
+      return;
+    }
+    const sel = groups.find((g) => g.key === s.selected);
+    if (!sel) {
+      wrap.innerHTML = `<div class="meta" style="margin-bottom:8px">${plural(groups.length, kind)} in the recorded exhibitions match “${esc(s.query)}”:</div>
+      <div class="table-wrap"><table class="table salon-table"><thead><tr><th>${kind === 'artist' ? 'Artist' : 'Lender'}</th><th>Works</th><th>Exhibitions</th><th></th></tr></thead>
+      <tbody>${groups.map((g) => `<tr><td>${esc(g.name)}</td><td>${g.works.length.toLocaleString()}</td><td>${esc([...new Set(g.works.map((w) => w.label))].join(', '))}</td><td><button class="btn btn-sm" data-exh-group="${esc(g.key)}">View works →</button></td></tr>`).join('')}</tbody></table></div>`;
+      wrap.querySelectorAll('[data-exh-group]').forEach((b) => b.addEventListener('click', () => { exhSearchState.selected = b.dataset.exhGroup; renderExhSearchResults(); }));
+      return;
+    }
+    const head = kind === 'artist'
+      ? `<h2>${esc(sel.name)}</h2><div class="meta">${plural(sel.works.length, 'work')} in the recorded exhibitions · <a href="#/search?q=${enc(exhNamePart(sel.name))}">Atlas research report →</a></div>`
+      : `<h2>${esc(sel.name)}</h2><div class="meta">${plural(sel.works.length, 'work')} lent to the recorded exhibitions · by ${plural(new Set(sel.works.map((w) => raNorm(w.artist))).size, 'artist')}</div>`;
+    wrap.innerHTML = `${groups.length > 1 ? '<button class="btn btn-sm" id="exh-search-back" style="margin-bottom:10px">← All matching ' + (kind === 'artist' ? 'artists' : 'lenders') + '</button>' : ''}
+      <div class="results-head"><div>${head}</div></div>
+      <div class="table-wrap"><table class="table salon-table">
+      ${EXH_TABLE_HEAD(true)}
+      <tbody>${sel.works.map((w) => exhWorkRow(w, true)).join('')}</tbody></table></div>`;
+    const back = $('#exh-search-back');
+    if (back) back.addEventListener('click', () => { exhSearchState.selected = null; renderExhSearchResults(); });
+  }
+  function renderExhList(idx) {
+    const el = $('#exh-list');
+    if (!el) return;
+    el.innerHTML = `<div class="results-head"><div><h2>Recorded exhibitions</h2>
+      <div class="meta">${plural(idx.length, 'exhibition')} recorded so far — the collection grows catalogue by catalogue as scans surface.</div></div></div>
+      ${idx.map((e) => `<div class="results-head"><div><h2 style="font-size:24px"><a href="#/exhibitions/${esc(e.id)}">${esc(e.title)}</a></h2>
+      <div class="meta">${esc(e.subtitle)} · ${esc(e.venue)} · ${esc(e.dates)} · organised by ${esc(e.organiser)} · ${plural(e.works, 'work')} in ${e.sections.map((s) => `${esc(s.name)} ${s.works.toLocaleString()}`).join(' · ')}</div></div></div>`).join('')}`;
+  }
+  function exhFiltered() {
+    const { records, section, query } = exhState;
+    if (!records) return [];
+    const q = query.trim().toLowerCase();
+    return records.filter((w) => {
+      if (section !== 'all' && w.section !== section) return false;
+      if (!q) return true;
+      return (w.artist || '').toLowerCase().includes(q) || (w.title || '').toLowerCase().includes(q) || (w.lender || '').toLowerCase().includes(q);
+    });
+  }
+  function renderExhTable() {
+    const wrap = $('#exh-table-wrap');
+    if (!wrap || !exhState.records) return;
+    const rows = exhFiltered();
+    const pages = Math.max(1, Math.ceil(rows.length / EXH_PAGE_SIZE));
+    if (exhState.page > pages) exhState.page = pages;
+    const start = (exhState.page - 1) * EXH_PAGE_SIZE;
+    const pageRows = rows.slice(start, start + EXH_PAGE_SIZE);
+    if (!rows.length) {
+      wrap.innerHTML = '<div class="notice">No works in this exhibition match — try another spelling, a different gallery, or clear the search box.</div>';
+      return;
+    }
+    wrap.innerHTML = `<div class="table-wrap"><table class="table salon-table">
+      ${EXH_TABLE_HEAD(false)}
+      <tbody>${pageRows.map((w) => exhWorkRow(w, false)).join('')}</tbody></table></div>
+      <div class="pager">
+        <button class="btn btn-sm" id="exh-prev-page" ${exhState.page <= 1 ? 'disabled' : ''}>← Previous</button>
+        <span class="meta">Page ${exhState.page} of ${pages.toLocaleString()} · showing ${(start + 1).toLocaleString()}–${Math.min(start + EXH_PAGE_SIZE, rows.length).toLocaleString()} of ${rows.length.toLocaleString()} work${rows.length === 1 ? '' : 's'}</span>
+        <button class="btn btn-sm" id="exh-next-page" ${exhState.page >= pages ? 'disabled' : ''}>Next →</button>
+      </div>`;
+    const prev = $('#exh-prev-page');
+    const next = $('#exh-next-page');
+    if (prev) prev.addEventListener('click', () => { exhState.page--; renderExhTable(); });
+    if (next) next.addEventListener('click', () => { exhState.page++; renderExhTable(); });
+  }
+  function renderExhMain() {
+    const el = $('#exh-main');
+    const { entry } = exhState;
+    if (!el || !entry) return;
+    const tabs = [{ id: 'all', label: 'All galleries', n: entry.works }, ...entry.sections.map((s) => ({ id: s.name, label: s.name, n: s.works }))];
+    el.innerHTML = `<div class="filters">${tabs.map((t) => `<button class="chip ${exhState.section === t.id ? 'active' : ''}" data-exh-sec="${esc(t.id)}">${esc(t.label)} (${t.n.toLocaleString()})</button>`).join('')}</div>
+      <div class="salon-search"><input id="exh-q" type="search" placeholder="Filter this exhibition by artist, title or lender…" value="${esc(exhState.query)}" aria-label="Filter works by artist, title or lender"></div>
+      <div id="exh-table-wrap"></div>`;
+    el.querySelectorAll('[data-exh-sec]').forEach((b) => b.addEventListener('click', () => {
+      exhState.section = b.dataset.exhSec;
+      exhState.page = 1;
+      el.querySelectorAll('[data-exh-sec]').forEach((x) => x.classList.toggle('active', x === b));
+      renderExhTable();
+    }));
+    const q = $('#exh-q');
+    q.addEventListener('input', () => { exhState.query = q.value; exhState.page = 1; renderExhTable(); });
+    renderExhTable();
+  }
+  function renderExhBrowse() {
+    const el = $('#exh-browse');
+    if (!el || !exhState.records) return;
+    const records = exhState.records;
+    const counts = new Map();
+    for (const w of records) {
+      const L = exhSurnameInitial(w.artist);
+      counts.set(L, (counts.get(L) || 0) + 1);
+    }
+    const letters = [...counts.keys()].sort((a, b) => (a === '#' ? 1 : b === '#' ? -1 : a.localeCompare(b)));
+    const chips = letters.map((L) =>
+      `<button class="chip ${exhState.letter === L ? 'active' : ''}" data-exh-letter="${esc(L)}">${esc(L)} · ${counts.get(L).toLocaleString()}</button>`).join('');
+    let body = '';
+    if (exhState.letter) {
+      const inLetter = records.filter((w) => exhSurnameInitial(w.artist) === exhState.letter);
+      const groups = exhGroups(inLetter, 'artist', []);
+      const sel = groups.find((g) => g.key === exhState.selected);
+      if (sel) {
+        body = `<button class="btn btn-sm" id="exh-browse-back" style="margin:12px 0 10px">← All artists under ${esc(exhState.letter)}</button>
+          <div class="results-head"><div><h2>${esc(sel.name)}</h2>
+          <div class="meta">${plural(sel.works.length, 'work')} in this exhibition · <a href="#/search?q=${enc(exhNamePart(sel.name))}">Atlas research report →</a></div></div></div>
+          <div class="table-wrap"><table class="table salon-table">
+          <thead><tr><th class="salon-num">No.</th><th>Title</th><th>Medium</th><th>Size</th><th>Lender</th><th>Gallery</th></tr></thead>
+          <tbody>${sel.works.map((w) => `<tr>
+            <td class="salon-num">${esc(w.no)}</td>
+            <td>${esc(w.title || '')}${exhNoteHtml(w.note)}</td>
+            <td>${esc(w.medium || '')}</td>
+            <td>${esc(w.size || '')}</td>
+            <td>${esc(w.lender || '')}</td>
+            <td>${esc(w.section || '')}</td>
+          </tr>`).join('')}</tbody></table></div>`;
+      } else {
+        body = `<div class="results-head" style="margin-top:14px"><div><h2>Artists under ${esc(exhState.letter)}</h2>
+          <div class="meta">${plural(groups.length, 'artist')} as the catalogue printed them · ${plural(inLetter.length, 'work')}</div></div></div>
+          <div class="table-wrap"><table class="table salon-table"><thead><tr><th>Artist</th><th>Works</th><th></th></tr></thead>
+          <tbody>${groups.map((g) => `<tr><td>${esc(g.name)}</td><td>${g.works.length.toLocaleString()}</td><td><button class="btn btn-sm" data-exh-artist="${esc(g.key)}">View works →</button></td></tr>`).join('')}</tbody></table></div>`;
+      }
+    }
+    el.innerHTML = `<div class="results-head"><div><h2>Browse by artist</h2>
+      <div class="meta">Pick a letter — the artists are filed under the initial of the surname as the catalogue printed it.</div></div></div>
+      <div class="filters">${chips}</div>
+      <div id="exh-letter">${body}</div>`;
+    el.querySelectorAll('[data-exh-letter]').forEach((b) => b.addEventListener('click', () => {
+      exhState.letter = exhState.letter === b.dataset.exhLetter ? null : b.dataset.exhLetter;
+      exhState.selected = null;
+      renderExhBrowse();
+    }));
+    el.querySelectorAll('[data-exh-artist]').forEach((b) => b.addEventListener('click', () => {
+      exhState.selected = b.dataset.exhArtist;
+      renderExhBrowse();
+    }));
+    const back = $('#exh-browse-back');
+    if (back) back.addEventListener('click', () => { exhState.selected = null; renderExhBrowse(); });
+  }
+  async function viewExhibitions(p, path) {
+    const seg = (path.split('/')[2] || '').trim();
+    let idx;
+    if (!seg) {
+      app.innerHTML = `<h1 style="font-size:38px">Record of Exhibitions</h1>
+        <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">A growing repository of original exhibition catalogues, digitised and parsed into searchable records — catalogue number, artist, title, medium, size and lender. These are the primary sources themselves, not a digest of them: what the catalogue printed is what is recorded here, uncertainties flagged and never smoothed over. Search across every exhibition recorded so far, or open one and browse it as its visitors did. Every artist name opens the Atlas name search, so an exhibitor leads straight to the full research report.</p>
+        <div id="exh-search">${spinner('Loading the recorded exhibitions…')}</div>
+        <div id="exh-list"></div>`;
+      try {
+        idx = await loadExhIndex();
+      } catch (e) {
+        $('#exh-search').innerHTML = `<div class="notice error">The recorded exhibitions could not be loaded: ${esc(e.message)}</div>`;
+        return;
+      }
+      renderExhSearch();
+      renderExhList(idx);
+      return;
+    }
+    if (exhState.id !== seg) {
+      exhState.id = seg;
+      exhState.entry = null;
+      exhState.records = null;
+      exhState.section = 'all';
+      exhState.query = '';
+      exhState.page = 1;
+      exhState.letter = null;
+      exhState.selected = null;
+    }
+    app.innerHTML = `<div id="exh-head">${spinner('Loading the exhibition…')}</div>
+      <div id="exh-main"></div>
+      <div id="exh-browse"></div>
+      <div id="exh-about"></div>`;
+    try {
+      idx = await loadExhIndex();
+    } catch (e) {
+      $('#exh-head').innerHTML = `<div class="notice error">The recorded exhibitions could not be loaded: ${esc(e.message)}</div>`;
+      return;
+    }
+    const entry = idx.find((e) => e.id === seg);
+    if (!entry) {
+      $('#exh-head').innerHTML = `<div class="notice">No exhibition with the address “${esc(seg)}” has been recorded yet. See the <a href="#/exhibitions">Record of Exhibitions</a> for the catalogues that have.</div>`;
+      return;
+    }
+    exhState.entry = entry;
+    $('#exh-head').innerHTML = `<p class="meta" style="margin-bottom:6px"><a href="#/exhibitions">← Record of Exhibitions</a></p>
+      <h1 style="font-size:38px">${esc(entry.title)}</h1>
+      <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">${esc(entry.subtitle)} · ${esc(entry.venue)} · ${esc(entry.dates)} · organised by ${esc(entry.organiser)} · ${plural(entry.works, 'work')} in ${entry.sections.map((s) => `${esc(s.name)} ${s.works.toLocaleString()}`).join(' · ')}</p>`;
+    $('#exh-about').innerHTML = `<div class="notice" style="margin-top:22px">About these records — the <i>${esc(entry.title)}</i> (${esc(entry.venue)}; ${esc(entry.dates)}; organised by ${esc(entry.organiser)}), parsed from the printed catalogue: ${esc(entry.source)}. ${plural(entry.works, 'work')} as printed, in the catalogue’s own galleries. Catalogue no. 258 does not exist in the printed catalogue — a gap in the original numbering, not a lost record. 27 catalogue numbers were illegible in the scan and have been restored from their sequence position; each is flagged in its record’s note, shown under the title. Some entries print no size, medium or lender, and none has been inferred. The catalogue’s text carries ordinary OCR noise, so the odd title or name is garbled. Every artist name links to the Atlas name search — pick the right person there to read the full research report. No images in this first version.</div>`;
+    try {
+      exhState.records = await loadExhRecords(seg);
+    } catch (e) {
+      $('#exh-main').innerHTML = `<div class="notice error">This exhibition’s records could not be loaded: ${esc(e.message)}</div>`;
+      return;
+    }
+    renderExhMain();
+    renderExhBrowse();
+  }
+
   /* ========================================================== report view */
   const SECTIONS = [
     ['synthesis', 'Research synthesis (AI)'],
@@ -1864,6 +2239,7 @@
         <li><b>Salon Time Machine</b> — the Paris Salon catalogues, 1673–1881: 144,081 works by year, section and catalogue number, transcribed from the printed livrets (Garland reprints via the Internet Archive) and parsed from OCR. Catalogue numbers marked ~ were inferred from the sequence or look suspect in the printed text; some titles carry OCR noise and a few artist names are fragments. Years with no surviving livret are simply absent. Each artist name links to the usual name search, so a Salon exhibitor leads straight to the full research report. No images in this first version: most Salon works have no surviving image in the open sources.</li>
         <li><b>Royal Academy Time Machine</b> — the Royal Academy Summer Exhibition catalogues, 1769–1905: 161,019 works by year, occupation and catalogue number, compiled from Algernon Graves’s <i>The Royal Academy of Arts: A Complete Dictionary of Contributors and Their Work</i> (1905–06), with the 1905 exhibition recovered from the Paul Mellon Centre’s RA Chronicle catalogue transcription, and parsed from OCR. Names, addresses and titles are as printed, with the OCR noise of the source scans. Catalogue numbers marked ~ are uncertain in the source; about 12,200 records have no readable catalogue number and show —, and no number has been invented for them. A further 1,543 records in the full database, whose year could not be resolved, are not in this browser. Each artist name links to the usual name search, so an exhibitor leads straight to the full research report. No images in this first version.</li>
         <li><b>Loan Exhibitions (UK)</b> — Algernon Graves’s <i>A Century of Loan Exhibitions 1813–1912</i> (1913–15): 42,727 works lent to a century of loan exhibitions, arranged by artist as Graves printed them, each with the exhibition, year, catalogue number, size and the owner who lent it — so the page searches three ways: by artist (the complete loan record in one view), by title (a work traced across exhibitions), and by owner (everything a collector or institution lent). It is also browsable letter by letter. Parsed from the Internet Archive scan of the Kingsmead reprint; names, titles and owners are as printed, with the scan’s OCR noise — sizes suffer most, their printed fractions often read as plain digits. Numbers marked ~ had ambiguous digits in the scan (the systematic confusions normalised, none invented); about 1,790 records have no readable number and show —. An owner marked ~ was split from the title by column position alone and may be mis-split. “Unknown Painters” is Graves’s own heading for unattributed works. Each artist name links to the usual name search. No images in this first version.</li>
+        <li><b>Record of Exhibitions</b> — original exhibition catalogues, digitised and parsed into searchable records (catalogue number, artist, title, medium, size and lender): the primary sources themselves, not a digest of them. It begins with the <i>Catalogue of the Exhibition of Works by Irish Painters</i> (Art Gallery of the Corporation of London — the Guildhall — 31 May–23 July 1904, organised by Hugh P. Lane): 466 works in four galleries, parsed from the Internet Archive scan of the catalogue (Getty scan). Catalogue no. 258 does not exist in the printed catalogue — a gap in the original numbering; 27 numbers illegible in the scan were restored from their sequence position and are flagged in each record’s note; entries that print no size, medium or lender show none — nothing has been inferred. The text carries the scan’s ordinary OCR noise. A search across all recorded exhibitions (by artist, by title, or by lender) sits above the list of exhibitions, and each artist name links to the usual name search. More catalogues will be added one at a time, as their scans surface.</li>
         <li><b>Six Degrees</b> — the shortest chain between any two artists, up to six steps, through links Wikidata records: <i>student</i> (P802, taught), <i>student of</i> (P1066, taught by) and <i>influenced by</i> (P737, in both directions). The search is a breadth-first search over those links only, one batched query per step, with each link labeled by its direction; neighbors are verified to be people, so groups, schools and works never appear as a link. If no chain is recorded within six steps the page says so, with the number of artists explored — a missing chain means no chain is recorded, not that no connection existed.</li>
         <li><b>Catalogue raisonné</b> — the standard catalogue raisonné of the artist’s works, where one exists, drawn from Open Library and Wikidata and shown in chronological order, including catalogues later superseded by newer ones; where a standard catalogue is published under another title it is listed from a short curated set.</li>
         <li><b>References</b> — every source is captured as a Chicago-style citation, grouped as biographical, exhibitions, academic, lifetime, market and database/authority records. <span class="tag-life">LIFETIME</span> marks sources dated within the artist’s life, drawn from historic dictionaries, the Internet Archive, the Library of Congress’s Chronicling America newspapers, Europeana and Open Library.</li>
