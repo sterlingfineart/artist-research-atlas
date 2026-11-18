@@ -1285,10 +1285,233 @@
     }
     return '#';
   }
+  /* EXH-NICE:BEGIN */
+  /* Display-only capitalisation for the Record of Exhibitions. The
+     parsed records stay exactly as printed; these functions regularise
+     case and typography at render time — names and titles only, never
+     spelling, so OCR garbles (corox, MARSHA^, DUG) survive untouched
+     apart from their case. Applied only where the exhibitions views
+     render artist, title or lender. */
+  const EXH_PARTICLES = new Set(['de', 'le', 'la', 'les', 'du', 'des', 'van', 'von', 'der', 'den', 'ten', 'y', 'e', 'di', 'da', 'and', 'of', 'the']);
+  const EXH_HONORIFICS = { sir: 'Sir', lord: 'Lord', lady: 'Lady', mrs: 'Mrs.', mr: 'Mr.', miss: 'Miss', dr: 'Dr.', rev: 'Rev.', hon: 'Hon.', rt: 'Rt.', esq: 'Esq.', mons: 'Mons.', monsieur: 'Monsieur', madame: 'Madame', mademoiselle: 'Mademoiselle', messrs: 'Messrs.', dame: 'Dame', capt: 'Capt.', col: 'Col.' };
+  const EXH_PAREN_SMALL = new Set(['called', 'dit', 'née', 'nee', 'formerly', 'known', 'as', 'after']);
+  const EXH_SMALL_WORDS = new Set(['a', 'an', 'the', 'of', 'in', 'on', 'at', 'to', 'and', 'or', 'by', 'for', 'with', 'from', 'de', 'la', 'le', 'les', 'du', 'des', 'et', 'au', 'aux', 'en', 'sur', 'un', 'une', 'à']);
+
+  /* The letters of an initial-cluster token ("j.", "R.A.", "m.p"), or
+     null when the token is not one. Multi-letter words with a trailing
+     period ("Hon.", "Dr.") do not match: their letters are not
+     separated by periods. */
+  function exhInitialLetters(tok) {
+    return /^[A-Za-z](\.[A-Za-z])*\.?$/.test(tok) ? tok.replace(/\./g, '').toUpperCase() : null;
+  }
+  /* The rendered form of a period-separated cluster token, or null.
+     Covers single-letter initials ("R.A.") and degree-style clusters
+     whose groups run to two letters and are all one case as printed
+     ("ll.d" -> "LL.D.", the garbled "R.II.A." stays "R.II.A."). */
+  function exhClusterForm(tok) {
+    const letters = exhInitialLetters(tok);
+    if (letters) return letters.split('').join('.') + '.';
+    if (/^([A-Za-z]{1,2}\.)+[A-Za-z]{1,2}\.?$/.test(tok)) {
+      const groups = tok.replace(/\.$/, '').split('.');
+      const all = groups.join('');
+      if (all.length >= 3 && groups.every((g) => g === g.toUpperCase() || g === g.toLowerCase())) return groups.map((g) => g.toUpperCase()).join('.') + '.';
+    }
+    return null;
+  }
+  /* Case one name word. isFirst is true only for the very first word of
+     the whole name; inParen marks words inside a parenthetical group,
+     whose descriptive openers ("called …", "after …") stay lowercase. */
+  function exhCaseWord(tok, isFirst, inParen) {
+    const bare = tok.toLowerCase().replace(/\.$/, '');
+    if (/^[A-Za-z]+\.?$/.test(tok) && EXH_HONORIFICS[bare]) return EXH_HONORIFICS[bare];
+    if (inParen && EXH_PAREN_SMALL.has(bare)) return bare;
+    if (tok.includes('-')) {
+      return tok.split('-').map((part, i) => (part ? exhCaseWord(part, isFirst && i === 0, inParen) : part)).join('-');
+    }
+    const lower = tok.toLowerCase();
+    if (!isFirst && EXH_PARTICLES.has(lower)) return lower;
+    const mc = tok.match(/^mc([a-z].*)$/i);
+    if (mc) {
+      if (/^Mc[A-Z]/.test(tok)) return tok; // already correctly cased
+      return 'Mc' + mc[1].charAt(0).toUpperCase() + mc[1].slice(1).toLowerCase();
+    }
+    const apm = tok.match(/^([^'’]*)(['’])([\s\S]*)$/);
+    if (apm && apm[1]) {
+      const pre = apm[1];
+      const rest = apm[3];
+      const preLow = pre.toLowerCase();
+      const preOut = preLow === 'd' || preLow === 'l' ? preLow : pre.charAt(0).toUpperCase() + pre.slice(1).toLowerCase();
+      return preOut + apm[2] + (rest ? rest.charAt(0).toUpperCase() + rest.slice(1).toLowerCase() : '');
+    }
+    return tok.charAt(0).toUpperCase() + tok.slice(1).toLowerCase();
+  }
+  /* One comma-separated segment of a name. post segments (post-nominals,
+     places — everything after the first comma) join runs of initials
+     without spaces ("K. p" -> "K.P.", "U. S. A" -> "U.S.A."); in the
+     name segment itself initials keep their spaced form ("J. C."). A
+     cluster printed as one token ("R.A.") stays compact anywhere. */
+  function exhNameSegment(seg, post, firstCap, inParen) {
+    const units = seg.match(/\([^()]*\)|\S+/g) || [];
+    const pieces = [];
+    units.forEach((u, i) => {
+      if (u.length > 1 && u.startsWith('(') && u.endsWith(')')) {
+        pieces.push({ text: '(' + exhNameSegment(u.slice(1, -1), post, false, true) + ')', initial: false });
+        return;
+      }
+      const bare = u.replace(/^["“”']+/, '');
+      const form = /^[ye]$/i.test(u) ? null : exhClusterForm(bare); // a bare "y"/"e" is the Spanish/Portuguese conjunction, not an initial
+      if (form) {
+        pieces.push({ text: u.slice(0, u.length - bare.length) + form, initial: true });
+        return;
+      }
+      pieces.push({ text: exhCaseWord(u, firstCap && i === 0, inParen), initial: false });
+    });
+    let out = '';
+    pieces.forEach((p, i) => {
+      if (i === 0) out = p.text;
+      else if (post && p.initial && pieces[i - 1].initial) out += p.text;
+      else out += ' ' + p.text;
+    });
+    return out;
+  }
+  function niceName(s) {
+    if (s == null) return '';
+    let str = String(s).trim().replace(/\s+/g, ' ');
+    if (!str) return str;
+    if (str.endsWith(',')) str = str.slice(0, -1).trim();
+    if (!str) return str;
+    const segs = [];
+    let depth = 0;
+    let cur = '';
+    for (const ch of str) {
+      if (ch === '(') depth++;
+      else if (ch === ')') depth = Math.max(0, depth - 1);
+      if (ch === ',' && depth === 0) { segs.push(cur); cur = ''; } else cur += ch;
+    }
+    segs.push(cur);
+    return segs
+      .map((seg, i) => exhNameSegment(seg.trim(), i > 0, i === 0, false))
+      .filter((x) => x !== '')
+      .join(', ');
+  }
+  /* Split a title token into leading punctuation, core and trailing
+     punctuation, so the core can be cased on its own. */
+  function exhPeel(tok) {
+    const m = String(tok).match(/^([^A-Za-zÀ-ÖØ-öø-ÿ]*)([\s\S]*?)([^A-Za-zÀ-ÖØ-öø-ÿ]*)$/);
+    return { lead: m[1], core: m[2], trail: m[3] };
+  }
+  /* A title is normalised only when its casing is shouting (>=70% of
+     its letters uppercase), whispering (>=90% lowercase) or mangled —
+     a word with a lowercase letter running into an uppercase one
+     ("CiESAR"), or all-caps and all-lowercase words mixed in one title
+     ("THE approaching STORM", "a mill in HOLLAND"). Mc/Mac tokens are
+     not mangling. A clean mixed-case title is returned byte-identical. */
+  function exhTitleNeedsFix(s) {
+    const cased = [...String(s)].filter((c) => c.toLowerCase() !== c.toUpperCase());
+    if (!cased.length) return false;
+    const upper = cased.filter((c) => c === c.toUpperCase()).length;
+    if (upper / cased.length >= 0.7) return true;
+    if ((cased.length - upper) / cased.length >= 0.9) return true;
+    let capsWords = 0;
+    let words = 0;
+    let hasLowerWord = false;
+    for (const raw of String(s).split(/\s+/)) {
+      const { core } = exhPeel(raw);
+      if (!core) continue;
+      if (/^ma?c[a-z]/i.test(core)) continue;
+      if (/[a-zà-öø-ÿ][A-ZÀ-Ö]/.test(core)) return true;
+      if (core.length < 2) continue;
+      words++;
+      if (/^[A-ZÀ-ÖØ-Þ]{2,}$/.test(core)) capsWords++;
+      else if (/^[a-zà-öø-ÿ]{2,}$/.test(core)) hasLowerWord = true;
+    }
+    if (hasLowerWord && capsWords > 0) return true;
+    /* A title whose words are half or more all-caps, with at least two
+       of them, is shouting in its main words even when a clean
+       parenthetical gloss ("L' AMOUR VAINQUEUR (Love Triumphant)")
+       dilutes the letter count below the 70% line. */
+    return capsWords >= 2 && capsWords * 2 >= words;
+  }
+  /* Title-case one word from the lowercased pass. origCore is the same
+     word as printed, used only to protect roman numerals of length >=2
+     that were printed in capitals ("VIII" stays "VIII"). */
+  function exhTitleWord(core, origCore, first, afterTerm) {
+    if (!core) return core;
+    if (origCore && /^[IVXLCDM]{2,}$/.test(origCore)) return origCore;
+    if (origCore) {
+      const rm = origCore.match(/^([IVXLCDM]{2,})(st|nd|rd|th)$/i);
+      if (rm && rm[1] === rm[1].toUpperCase()) return rm[1] + rm[2].toLowerCase(); // "XVth" stays "XVth"
+    }
+    if (core.includes('.') && exhClusterForm(core)) return exhClusterForm(core);
+    if (core === 'i') return 'I';
+    if (!first && !afterTerm && EXH_SMALL_WORDS.has(core)) return core;
+    const pm = core.match(/^([dl])(['’])(.*)$/);
+    if (pm) {
+      const rest = pm[3] ? exhTitleWord(pm[3], null, true, true) : '';
+      return (first ? pm[1].toUpperCase() : pm[1]) + pm[2] + rest;
+    }
+    const mc = core.match(/^mc([a-z].*)$/);
+    if (mc) return 'Mc' + mc[1].charAt(0).toUpperCase() + mc[1].slice(1);
+    if (core.includes('-')) {
+      return core.split('-').map((part, j) => {
+        if (!part) return part;
+        if (j > 0 && !afterTerm && EXH_SMALL_WORDS.has(part)) return part;
+        return exhTitleWord(part, null, first && j === 0, afterTerm);
+      }).join('-');
+    }
+    return core.charAt(0).toUpperCase() + core.slice(1);
+  }
+  function niceTitle(s) {
+    if (s == null) return '';
+    const str = String(s).trim();
+    if (!str || !exhTitleNeedsFix(str)) return String(s);
+    const toks = str.toLowerCase().split(/\s+/);
+    const origToks = str.split(/\s+/);
+    const pieces = [];
+    let seenCore = false;
+    let pending = null; // a detached "d'"/"l'" token waiting for its word
+    const flushPending = () => {
+      if (pending) { pieces.push({ text: pending.lead + pending.ch + pending.apo, glue: true }); pending = null; }
+    };
+    toks.forEach((tok, i) => {
+      const { lead, core, trail } = exhPeel(tok);
+      if (!core) { flushPending(); pieces.push({ text: tok, glue: false }); return; }
+      const first = !seenCore;
+      seenCore = true;
+      const prev = i > 0 ? toks[i - 1].replace(/[)\]}"”’»]+$/, '') : '';
+      const afterTerm = /[.:!?]$/.test(prev);
+      /* A word straight after an opening parenthesis starts a phrase of
+         its own (usually the translated gloss), so small words there
+         capitalise like a first word: "(The Break of Day)". */
+      const wordFirst = first || lead.includes('(');
+      if ((core === 'd' || core === 'l') && (trail === "'" || trail === '’')) {
+        flushPending();
+        pending = { ch: core, apo: trail, first: wordFirst, lead };
+        pieces.push({ text: '', glue: false });
+        return;
+      }
+      let useTrail = trail;
+      if (useTrail.startsWith('.') && core.includes('.') && exhClusterForm(core)) useTrail = useTrail.slice(1);
+      const origCore = exhPeel(origToks[i] || '').core;
+      let word = exhTitleWord(core, origCore, pending ? pending.first : wordFirst, afterTerm);
+      if (pending) {
+        word = pending.lead + (pending.first ? pending.ch.toUpperCase() : pending.ch) + pending.apo + lead + word;
+        pieces.push({ text: word + useTrail, glue: true });
+        pending = null;
+      } else {
+        pieces.push({ text: lead + word + useTrail, glue: false });
+      }
+    });
+    flushPending();
+    let out = '';
+    pieces.forEach((p, i) => { out += i === 0 || p.glue ? p.text : ' ' + p.text; });
+    return out;
+  }
+  /* EXH-NICE:END */
   function exhNoteHtml(note) {
     if (!note) return '';
     const short = note.length > 160 ? note.slice(0, 160) + '…' : note;
-    return `<div class="meta" title="${esc(note)}">${esc(short)}</div>`;
+    return `<div class="meta exh-note" title="${esc(note)}">${esc(short)}</div>`;
   }
   /* One works table for the Record of Exhibitions, global and local:
      Exhibition (global only) | No. | Artist | Title | Medium | Size |
@@ -1298,11 +1521,11 @@
     return `<tr>
       ${global ? `<td><a href="#/exhibitions/${esc(w.exhibition)}">${esc(w.label)}</a></td>` : ''}
       <td class="salon-num">${esc(w.no)}</td>
-      <td><a href="#/search?q=${enc(exhNamePart(w.artist))}">${esc(w.artist)}</a></td>
-      <td>${esc(w.title || '')}${exhNoteHtml(w.note)}</td>
+      <td><a href="#/search?q=${enc(exhNamePart(w.artist))}">${esc(niceName(w.artist))}</a></td>
+      <td>${esc(niceTitle(w.title || ''))}${exhNoteHtml(w.note)}</td>
       <td>${esc(w.medium || '')}</td>
-      <td>${esc(w.size || '')}</td>
-      <td>${esc(w.lender || '')}</td>
+      <td class="exh-size">${esc(w.size || '')}</td>
+      <td>${esc(niceName(w.lender))}</td>
     </tr>`;
   }
   const EXH_TABLE_HEAD = (global) => `<thead><tr>${global ? '<th>Exhibition</th>' : ''}<th class="salon-num">No.</th><th>Artist</th><th>Title</th><th>Medium</th><th>Size</th><th>Lender</th></tr></thead>`;
@@ -1423,13 +1646,13 @@
     if (!sel) {
       wrap.innerHTML = `<div class="meta" style="margin-bottom:8px">${plural(groups.length, kind)} in the recorded exhibitions match “${esc(s.query)}”:</div>
       <div class="table-wrap"><table class="table salon-table"><thead><tr><th>${kind === 'artist' ? 'Artist' : 'Lender'}</th><th>Works</th><th>Exhibitions</th><th></th></tr></thead>
-      <tbody>${groups.map((g) => `<tr><td>${esc(g.name)}</td><td>${g.works.length.toLocaleString()}</td><td>${esc([...new Set(g.works.map((w) => w.label))].join(', '))}</td><td><button class="btn btn-sm" data-exh-group="${esc(g.key)}">View works →</button></td></tr>`).join('')}</tbody></table></div>`;
+      <tbody>${groups.map((g) => `<tr><td>${esc(niceName(g.name))}</td><td>${g.works.length.toLocaleString()}</td><td>${esc([...new Set(g.works.map((w) => w.label))].join(', '))}</td><td><button class="btn btn-sm" data-exh-group="${esc(g.key)}">View works →</button></td></tr>`).join('')}</tbody></table></div>`;
       wrap.querySelectorAll('[data-exh-group]').forEach((b) => b.addEventListener('click', () => { exhSearchState.selected = b.dataset.exhGroup; renderExhSearchResults(); }));
       return;
     }
     const head = kind === 'artist'
-      ? `<h2>${esc(sel.name)}</h2><div class="meta">${plural(sel.works.length, 'work')} in the recorded exhibitions · <a href="#/search?q=${enc(exhNamePart(sel.name))}">Atlas research report →</a></div>`
-      : `<h2>${esc(sel.name)}</h2><div class="meta">${plural(sel.works.length, 'work')} lent to the recorded exhibitions · by ${plural(new Set(sel.works.map((w) => raNorm(w.artist))).size, 'artist')}</div>`;
+      ? `<h2>${esc(niceName(sel.name))}</h2><div class="meta">${plural(sel.works.length, 'work')} in the recorded exhibitions · <a href="#/search?q=${enc(exhNamePart(sel.name))}">Atlas research report →</a></div>`
+      : `<h2>${esc(niceName(sel.name))}</h2><div class="meta">${plural(sel.works.length, 'work')} lent to the recorded exhibitions · by ${plural(new Set(sel.works.map((w) => raNorm(w.artist))).size, 'artist')}</div>`;
     wrap.innerHTML = `${groups.length > 1 ? '<button class="btn btn-sm" id="exh-search-back" style="margin-bottom:10px">← All matching ' + (kind === 'artist' ? 'artists' : 'lenders') + '</button>' : ''}
       <div class="results-head"><div>${head}</div></div>
       <div class="table-wrap"><table class="table salon-table">
@@ -1519,23 +1742,23 @@
       const sel = groups.find((g) => g.key === exhState.selected);
       if (sel) {
         body = `<button class="btn btn-sm" id="exh-browse-back" style="margin:12px 0 10px">← All artists under ${esc(exhState.letter)}</button>
-          <div class="results-head"><div><h2>${esc(sel.name)}</h2>
+          <div class="results-head"><div><h2>${esc(niceName(sel.name))}</h2>
           <div class="meta">${plural(sel.works.length, 'work')} in this exhibition · <a href="#/search?q=${enc(exhNamePart(sel.name))}">Atlas research report →</a></div></div></div>
           <div class="table-wrap"><table class="table salon-table">
           <thead><tr><th class="salon-num">No.</th><th>Title</th><th>Medium</th><th>Size</th><th>Lender</th><th>Gallery</th></tr></thead>
           <tbody>${sel.works.map((w) => `<tr>
             <td class="salon-num">${esc(w.no)}</td>
-            <td>${esc(w.title || '')}${exhNoteHtml(w.note)}</td>
+            <td>${esc(niceTitle(w.title || ''))}${exhNoteHtml(w.note)}</td>
             <td>${esc(w.medium || '')}</td>
-            <td>${esc(w.size || '')}</td>
-            <td>${esc(w.lender || '')}</td>
+            <td class="exh-size">${esc(w.size || '')}</td>
+            <td>${esc(niceName(w.lender))}</td>
             <td>${esc(w.section || '')}</td>
           </tr>`).join('')}</tbody></table></div>`;
       } else {
         body = `<div class="results-head" style="margin-top:14px"><div><h2>Artists under ${esc(exhState.letter)}</h2>
           <div class="meta">${plural(groups.length, 'artist')} as the catalogue printed them · ${plural(inLetter.length, 'work')}</div></div></div>
           <div class="table-wrap"><table class="table salon-table"><thead><tr><th>Artist</th><th>Works</th><th></th></tr></thead>
-          <tbody>${groups.map((g) => `<tr><td>${esc(g.name)}</td><td>${g.works.length.toLocaleString()}</td><td><button class="btn btn-sm" data-exh-artist="${esc(g.key)}">View works →</button></td></tr>`).join('')}</tbody></table></div>`;
+          <tbody>${groups.map((g) => `<tr><td>${esc(niceName(g.name))}</td><td>${g.works.length.toLocaleString()}</td><td><button class="btn btn-sm" data-exh-artist="${esc(g.key)}">View works →</button></td></tr>`).join('')}</tbody></table></div>`;
       }
     }
     el.innerHTML = `<div class="results-head"><div><h2>Browse by artist</h2>
@@ -1559,7 +1782,7 @@
     let idx;
     if (!seg) {
       app.innerHTML = `<h1 style="font-size:38px">Record of Exhibitions</h1>
-        <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">A growing repository of original exhibition catalogues, digitised and parsed into searchable records — catalogue number, artist, title, medium, size and lender. These are the primary sources themselves, not a digest of them: what the catalogue printed is what is recorded here, uncertainties flagged and never smoothed over. Search across every exhibition recorded so far, or open one and browse it as its visitors did. Every artist name opens the Atlas name search, so an exhibitor leads straight to the full research report.</p>
+        <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">A growing repository of original exhibition catalogues, digitised and parsed into searchable records — catalogue number, artist, title, medium, size and lender. These are the primary sources themselves, not a digest of them: what the catalogue printed is what is recorded here, uncertainties flagged and never smoothed over. Search across every exhibition recorded so far, or open one and browse it as its visitors did. Every artist name opens the Atlas name search, so an exhibitor leads straight to the full research report. Names and titles are shown in standard capitalisation for readability; the underlying records stand exactly as printed in each catalogue.</p>
         <div id="exh-search">${spinner('Loading the recorded exhibitions…')}</div>
         <div id="exh-list"></div>`;
       try {
@@ -1601,7 +1824,7 @@
     $('#exh-head').innerHTML = `<p class="meta" style="margin-bottom:6px"><a href="#/exhibitions">← Record of Exhibitions</a></p>
       <h1 style="font-size:38px">${esc(entry.title)}</h1>
       <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">${esc(entry.subtitle)} · ${esc(entry.venue)} · ${esc(entry.dates)} · organised by ${esc(entry.organiser)} · ${plural(entry.works, 'work')} in ${entry.sections.map((s) => `${esc(s.name)} ${s.works.toLocaleString()}`).join(' · ')}</p>`;
-    $('#exh-about').innerHTML = `<div class="notice" style="margin-top:22px">About these records — the <i>${esc(entry.title)}</i> (${esc(entry.venue)}; ${esc(entry.dates)}; organised by ${esc(entry.organiser)}), parsed from the printed catalogue: ${esc(entry.source)}.${entry.notes ? ` ${esc(entry.notes)}` : ''}</div>`;
+    $('#exh-about').innerHTML = `<div class="notice" style="margin-top:22px">About these records — the <i>${esc(entry.title)}</i> (${esc(entry.venue)}; ${esc(entry.dates)}; organised by ${esc(entry.organiser)}), parsed from the printed catalogue: ${esc(entry.source)}.${entry.notes ? ` ${esc(entry.notes)}` : ''} Names and titles are shown in standard capitalisation for readability; the underlying records stand exactly as printed in each catalogue.</div>`;
     try {
       exhState.records = await loadExhRecords(seg);
     } catch (e) {
@@ -2240,7 +2463,7 @@
         <li><b>Salon Time Machine</b> — the Paris Salon catalogues, 1673–1881: 144,081 works by year, section and catalogue number, transcribed from the printed livrets (Garland reprints via the Internet Archive) and parsed from OCR. Catalogue numbers marked ~ were inferred from the sequence or look suspect in the printed text; some titles carry OCR noise and a few artist names are fragments. Years with no surviving livret are simply absent. Each artist name links to the usual name search, so a Salon exhibitor leads straight to the full research report. No images in this first version: most Salon works have no surviving image in the open sources.</li>
         <li><b>Royal Academy Time Machine</b> — the Royal Academy Summer Exhibition catalogues, 1769–1905: 161,019 works by year, occupation and catalogue number, compiled from Algernon Graves’s <i>The Royal Academy of Arts: A Complete Dictionary of Contributors and Their Work</i> (1905–06), with the 1905 exhibition recovered from the Paul Mellon Centre’s RA Chronicle catalogue transcription, and parsed from OCR. Names, addresses and titles are as printed, with the OCR noise of the source scans. Catalogue numbers marked ~ are uncertain in the source; about 12,200 records have no readable catalogue number and show —, and no number has been invented for them. A further 1,543 records in the full database, whose year could not be resolved, are not in this browser. Each artist name links to the usual name search, so an exhibitor leads straight to the full research report. No images in this first version.</li>
         <li><b>Loan Exhibitions (UK)</b> — Algernon Graves’s <i>A Century of Loan Exhibitions 1813–1912</i> (1913–15): 42,727 works lent to a century of loan exhibitions, arranged by artist as Graves printed them, each with the exhibition, year, catalogue number, size and the owner who lent it — so the page searches three ways: by artist (the complete loan record in one view), by title (a work traced across exhibitions), and by owner (everything a collector or institution lent). It is also browsable letter by letter. Parsed from the Internet Archive scan of the Kingsmead reprint; names, titles and owners are as printed, with the scan’s OCR noise — sizes suffer most, their printed fractions often read as plain digits. Numbers marked ~ had ambiguous digits in the scan (the systematic confusions normalised, none invented); about 1,790 records have no readable number and show —. An owner marked ~ was split from the title by column position alone and may be mis-split. “Unknown Painters” is Graves’s own heading for unattributed works. Each artist name links to the usual name search. No images in this first version.</li>
-        <li><b>Record of Exhibitions</b> — original exhibition catalogues, digitised and parsed into searchable records (catalogue number, artist, title, medium, size and lender): the primary sources themselves, not a digest of them. Nine Guildhall catalogues are recorded so far, all parsed from Internet Archive scans (Getty scans) of the Art Gallery of the Corporation of London’s catalogues. The <i>Descriptive Catalogue of the Loan Collection of Pictures</i> (28 March–30 June 1892, catalogued by A. G. Temple): 180 works in three rooms — the scan is rough and its ‘Lent by’ lines are the worst-read part of it, so 167 of the 180 lenders have been supplied from the catalogue’s own Index of Contributors, each flagged in its record’s note, and two lenders could not be recovered at all; Graves’s <i>Century of Loan Exhibitions</i> digests this exhibition but covers only 154 of its 180 works — the printed catalogue is the authority here. The <i>Descriptive Catalogue of the Loan Collection of Pictures</i> (2 April–30 June 1894, prepared by A. G. Temple): 154 works in three galleries — two lenders were supplied from the catalogue’s own Index of Contributors, each flagged, and two could not be recovered at all; Graves’s <i>Century of Loan Exhibitions</i> digests this exhibition but covers only 143 of its 154 works — the printed catalogue is the authority here. The <i>Catalogue of the Loan Collection of Pictures</i> (23 April–21 July 1895, prepared by A. G. Temple): 138 works in three galleries — this scan’s OCR drops most of the printed catalogue numbers, so 71 have been restored from their sequence position, each flagged in its record’s note and corroborated by the catalogue’s Index of Artists; Graves’s <i>Century of Loan Exhibitions</i> digests this exhibition and omits no work outright, but keys only 127 of its 138 numbers correctly, merging or misnumbering the rest — the printed catalogue is the authority here. The <i>Catalogue of the Loan Collection of Pictures</i> (7 April–14 July 1897, by painters of the British School, prepared by A. G. Temple): 167 works in three galleries — this scan drops the printed margin numbers wholesale, so 73 have been restored from their sequence position, each flagged in its record’s note and corroborated by the catalogue’s Index of Artists; Graves’s <i>Century of Loan Exhibitions</i> digests this exhibition but keys only 139 of its 167 works, folding several pictures into merged records and missing the lettered inserts — the printed catalogue is the authority here. The <i>Catalogue of the Loan Collection of Pictures by Painters of the French School</i> (6 June–31 August 1898, prepared by A. G. Temple): 156 works in three galleries — this copy of the catalogue is the pre-opening issue, marked ‘UNDER REVISION’ on its cover, and the records are taken from that text; 46 catalogue numbers have been restored from their sequence position, each flagged in its record’s note; Graves’s <i>Century of Loan Exhibitions</i> covers 143 of these 156 works in substance — the printed catalogue is the authority here. The <i>Catalogue of the Loan Collection of Pictures and Drawings by J. M. W. Turner, R.A.</i> (11 April–11 July 1899, prepared by A. G. Temple): 195 works in three galleries — a single-artist loan exhibition of Turner, with a selection of pictures by some of his contemporaries; nos. 66–69 do not exist in the printed catalogue — a gap in the Liber Studiorum list, which passes from 65 to 70; Graves’s <i>Century of Loan Exhibitions</i> keys only 119 of these 195 works, omitting the Liber Studiorum impressions and folding whole runs into unnumbered digests — the printed catalogue is the authority here. The <i>Descriptive and Biographical Catalogue of the Exhibition of the Works of Spanish Painters</i> (30 April–31 July 1901, prepared by A. G. Temple): 209 works in four galleries — a single-nation exhibition of Spanish painting, its third gallery given over entirely to Velasquez. This copy of the catalogue is the pre-opening issue, marked ‘Under revision’ on its cover, and the records are taken from that text; Graves’s <i>Century of Loan Exhibitions</i> mixes this exhibition with another Guildhall show of 1901, and covers 200 of its 209 works in substance — the printed catalogue is the authority here. The <i>Catalogue of the Exhibition of a Selection of Works by French and English Painters of the Eighteenth Century</i> (22 April–26 July 1902, prepared by A. G. Temple): 153 works in four galleries — a selection of French and English painting of the eighteenth century; Graves’s <i>Century of Loan Exhibitions</i> keys 124 of its 153 numbers and covers 136 in substance, folding eleven Gainsboroughs into one digest record and missing all seven Lancrets — the printed catalogue is the authority here. The <i>Catalogue of the Exhibition of Works by Irish Painters</i> (31 May–23 July 1904, organised by Hugh P. Lane): 466 works in four galleries. Catalogue no. 258 does not exist in the printed catalogue — a gap in the original numbering; 27 numbers illegible in the scan were restored from their sequence position and are flagged in each record’s note; entries that print no size, medium or lender show none — nothing has been inferred. The text carries the scans’ ordinary OCR noise. A search across all recorded exhibitions (by artist, by title, or by lender) sits above the list of exhibitions, and each artist name links to the usual name search. More catalogues will be added one at a time, as their scans surface.</li>
+        <li><b>Record of Exhibitions</b> — original exhibition catalogues, digitised and parsed into searchable records (catalogue number, artist, title, medium, size and lender): the primary sources themselves, not a digest of them. Nine Guildhall catalogues are recorded so far, all parsed from Internet Archive scans (Getty scans) of the Art Gallery of the Corporation of London’s catalogues. The <i>Descriptive Catalogue of the Loan Collection of Pictures</i> (28 March–30 June 1892, catalogued by A. G. Temple): 180 works in three rooms — the scan is rough and its ‘Lent by’ lines are the worst-read part of it, so 167 of the 180 lenders have been supplied from the catalogue’s own Index of Contributors, each flagged in its record’s note, and two lenders could not be recovered at all; Graves’s <i>Century of Loan Exhibitions</i> digests this exhibition but covers only 154 of its 180 works — the printed catalogue is the authority here. The <i>Descriptive Catalogue of the Loan Collection of Pictures</i> (2 April–30 June 1894, prepared by A. G. Temple): 154 works in three galleries — two lenders were supplied from the catalogue’s own Index of Contributors, each flagged, and two could not be recovered at all; Graves’s <i>Century of Loan Exhibitions</i> digests this exhibition but covers only 143 of its 154 works — the printed catalogue is the authority here. The <i>Catalogue of the Loan Collection of Pictures</i> (23 April–21 July 1895, prepared by A. G. Temple): 138 works in three galleries — this scan’s OCR drops most of the printed catalogue numbers, so 71 have been restored from their sequence position, each flagged in its record’s note and corroborated by the catalogue’s Index of Artists; Graves’s <i>Century of Loan Exhibitions</i> digests this exhibition and omits no work outright, but keys only 127 of its 138 numbers correctly, merging or misnumbering the rest — the printed catalogue is the authority here. The <i>Catalogue of the Loan Collection of Pictures</i> (7 April–14 July 1897, by painters of the British School, prepared by A. G. Temple): 167 works in three galleries — this scan drops the printed margin numbers wholesale, so 73 have been restored from their sequence position, each flagged in its record’s note and corroborated by the catalogue’s Index of Artists; Graves’s <i>Century of Loan Exhibitions</i> digests this exhibition but keys only 139 of its 167 works, folding several pictures into merged records and missing the lettered inserts — the printed catalogue is the authority here. The <i>Catalogue of the Loan Collection of Pictures by Painters of the French School</i> (6 June–31 August 1898, prepared by A. G. Temple): 156 works in three galleries — this copy of the catalogue is the pre-opening issue, marked ‘UNDER REVISION’ on its cover, and the records are taken from that text; 46 catalogue numbers have been restored from their sequence position, each flagged in its record’s note; Graves’s <i>Century of Loan Exhibitions</i> covers 143 of these 156 works in substance — the printed catalogue is the authority here. The <i>Catalogue of the Loan Collection of Pictures and Drawings by J. M. W. Turner, R.A.</i> (11 April–11 July 1899, prepared by A. G. Temple): 195 works in three galleries — a single-artist loan exhibition of Turner, with a selection of pictures by some of his contemporaries; nos. 66–69 do not exist in the printed catalogue — a gap in the Liber Studiorum list, which passes from 65 to 70; Graves’s <i>Century of Loan Exhibitions</i> keys only 119 of these 195 works, omitting the Liber Studiorum impressions and folding whole runs into unnumbered digests — the printed catalogue is the authority here. The <i>Descriptive and Biographical Catalogue of the Exhibition of the Works of Spanish Painters</i> (30 April–31 July 1901, prepared by A. G. Temple): 209 works in four galleries — a single-nation exhibition of Spanish painting, its third gallery given over entirely to Velasquez. This copy of the catalogue is the pre-opening issue, marked ‘Under revision’ on its cover, and the records are taken from that text; Graves’s <i>Century of Loan Exhibitions</i> mixes this exhibition with another Guildhall show of 1901, and covers 200 of its 209 works in substance — the printed catalogue is the authority here. The <i>Catalogue of the Exhibition of a Selection of Works by French and English Painters of the Eighteenth Century</i> (22 April–26 July 1902, prepared by A. G. Temple): 153 works in four galleries — a selection of French and English painting of the eighteenth century; Graves’s <i>Century of Loan Exhibitions</i> keys 124 of its 153 numbers and covers 136 in substance, folding eleven Gainsboroughs into one digest record and missing all seven Lancrets — the printed catalogue is the authority here. The <i>Catalogue of the Exhibition of Works by Irish Painters</i> (31 May–23 July 1904, organised by Hugh P. Lane): 466 works in four galleries. Catalogue no. 258 does not exist in the printed catalogue — a gap in the original numbering; 27 numbers illegible in the scan were restored from their sequence position and are flagged in each record’s note; entries that print no size, medium or lender show none — nothing has been inferred. The text carries the scans’ ordinary OCR noise. A search across all recorded exhibitions (by artist, by title, or by lender) sits above the list of exhibitions, and each artist name links to the usual name search. On the Record pages, names and titles are shown in standard capitalisation for readability; the underlying records stand exactly as printed in each catalogue. More catalogues will be added one at a time, as their scans surface.</li>
         <li><b>Six Degrees</b> — the shortest chain between any two artists, up to six steps, through links Wikidata records: <i>student</i> (P802, taught), <i>student of</i> (P1066, taught by) and <i>influenced by</i> (P737, in both directions). The search is a breadth-first search over those links only, one batched query per step, with each link labeled by its direction; neighbors are verified to be people, so groups, schools and works never appear as a link. If no chain is recorded within six steps the page says so, with the number of artists explored — a missing chain means no chain is recorded, not that no connection existed.</li>
         <li><b>Catalogue raisonné</b> — the standard catalogue raisonné of the artist’s works, where one exists, drawn from Open Library and Wikidata and shown in chronological order, including catalogues later superseded by newer ones; where a standard catalogue is published under another title it is listed from a short curated set.</li>
         <li><b>References</b> — every source is captured as a Chicago-style citation, grouped as biographical, exhibitions, academic, lifetime, market and database/authority records. <span class="tag-life">LIFETIME</span> marks sources dated within the artist’s life, drawn from historic dictionaries, the Internet Archive, the Library of Congress’s Chronicling America newspapers, Europeana and Open Library.</li>
