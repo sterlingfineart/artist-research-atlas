@@ -370,6 +370,42 @@ EXHIBITIONS = [
             'absent_numbers': [258],
         },
     },
+    {
+        'id': 'guildhall-1906',
+        'file': 'guildhall-1906.json',
+        'title': 'Catalogue of the Exhibition of Works by Flemish and Modern Belgian Painters',
+        'subtitle': 'By A. G. Temple, F.S.A., Director of the Art Gallery of the Corporation of London',
+        'venue': 'Art Gallery of the Corporation of London (Guildhall Art Gallery)',
+        'dates': '3 May – 28 July 1906',
+        'year': 1906,
+        'organiser': 'A. G. Temple',
+        'label': 'Guildhall 1906',
+        'source': 'Internet Archive item catalogueofexhib00temp_1 (Getty scan)',
+        'notes': ('The Fourteenth Exhibition of the Guildhall series. This copy of the catalogue '
+                  'is the pre-opening issue, marked “UNDER REVISION” on its cover; the records '
+                  'stand as that text prints them. Twenty-seven catalogue numbers have been '
+                  'restored from their sequence position, each flagged in its record’s note. '
+                  'No lender has been taken from the book’s indexes. Graves’s Century of Loan '
+                  'Exhibitions keys 191 of these 221 numbers and, counting his unnumbered '
+                  'records, covers 194 of the 221 works, lacking 27 outright — the printed '
+                  'catalogue is the authority here.'),
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 221,
+            'sections': {'Gallery I': 81, 'Gallery II': 42, 'Gallery III': 47, 'Gallery IV': 51},
+            # Plain catalogue numbers run 1–218 with no gaps and no
+            # absent numbers; the lettered inserts are 59A, 140A and
+            # 143A; exactly five records have no lender, one has no
+            # title, two have no artist, and four print no medium.
+            'plain_range': (1, 218),
+            'lettered': {'59A', '140A', '143A'},
+            'no_lender': 5,
+            'no_title': 1,
+            'no_artist': 2,
+            'no_medium': 4,
+        },
+    },
 ]
 
 
