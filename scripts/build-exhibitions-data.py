@@ -236,6 +236,42 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'guildhall-1901',
+        'file': 'guildhall-1901.json',
+        'title': 'Descriptive and Biographical Catalogue of the Exhibition of the Works of Spanish Painters',
+        'subtitle': 'By A. G. Temple, F.S.A., Director of the Art Gallery',
+        'venue': 'Art Gallery of the Corporation of London (Guildhall Art Gallery)',
+        'dates': '30 April – 31 July 1901',
+        'year': 1901,
+        'organiser': 'A. G. Temple',
+        'label': 'Guildhall 1901',
+        'source': 'Internet Archive item descriptivebiogr00guil_0 (Getty scan)',
+        'notes': ('Gallery III is given over to Velasquez, with a life of the painter; Gallery IV '
+                  'opens with a life of Fortuny. This copy is the pre-opening issue, marked '
+                  '“Under revision” on its cover; the records stand as that text prints them. '
+                  'Three numbers have been restored from their sequence position, each flagged; '
+                  'no. 91 is entered under “Painter unknown”, as printed; seven entries at the end '
+                  'are etchings and lithographs entered by heading only, with no medium or size '
+                  'printed. Graves’s Century of Loan Exhibitions mixes this exhibition with another '
+                  'Guildhall show of 1901; he keys 197 of these 209 numbers and covers 200 in '
+                  'substance — the printed catalogue is the authority here.'),
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 209,
+            'sections': {'Gallery I': 48, 'Gallery II': 50, 'Gallery III': 39, 'Gallery IV': 72},
+            # Plain catalogue numbers run 1–208 with no gaps; the only
+            # lettered insert is 73A; every record has a lender and a
+            # title; exactly one record has no artist (no. 91, entered
+            # under "Painter unknown").
+            'plain_range': (1, 208),
+            'lettered': {'73A'},
+            'no_lender': 0,
+            'no_title': 0,
+            'no_artist': 1,
+        },
+    },
+    {
         'id': 'guildhall-1904',
         'file': 'guildhall-1904.json',
         'title': 'Catalogue of The Exhibition of Works by Irish Painters',
