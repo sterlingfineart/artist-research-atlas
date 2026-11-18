@@ -62,6 +62,41 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'guildhall-1894',
+        'file': 'guildhall-1894.json',
+        'title': 'Descriptive Catalogue of the Loan Collection of Pictures',
+        'subtitle': 'Prepared by A. G. Temple, F.S.A., Director of the Art Gallery of the Corporation of London',
+        'venue': 'Art Gallery of the Corporation of London (Guildhall Art Gallery)',
+        'dates': '2 April – 30 June 1894',
+        'year': 1894,
+        'organiser': 'A. G. Temple',
+        'label': 'Guildhall 1894',
+        'source': 'Internet Archive item descriptivecatal00temp (Getty scan)',
+        'notes': ('Thirty-nine catalogue numbers were illegible or garbled in the scan and have been restored '
+                  'from their sequence position, each flagged in its record’s note; two lenders were supplied '
+                  'from the catalogue’s own Index of Contributors, each flagged, and two could not be recovered '
+                  'at all. Three sizes are lost from damaged scan lines and one title (no. 125) is absent from '
+                  'the scan. Names and titles keep the scan’s reading, garbles included. Graves’s Century of '
+                  'Loan Exhibitions digests this exhibition but covers only 143 of its 154 works — the printed '
+                  'catalogue is the authority here.'),
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 154,
+            'sections': {'Gallery I': 41, 'Gallery II': 60, 'Gallery III': 53},
+            # Plain catalogue numbers run 1–152 with no gaps; the only
+            # lettered inserts are 43A and 108A; exactly two records
+            # have no lender (nos. 99 and 116 — neither the scan nor
+            # the catalogue's Index of Contributors yielded one); and
+            # exactly one record has no title (no. 125, absent from
+            # the scan).
+            'plain_range': (1, 152),
+            'lettered': {'43A', '108A'},
+            'no_lender': 2,
+            'no_title': 1,
+        },
+    },
+    {
         'id': 'guildhall-1904',
         'file': 'guildhall-1904.json',
         'title': 'Catalogue of The Exhibition of Works by Irish Painters',
@@ -124,6 +159,10 @@ def verify(ex, recs):
         n = sum(1 for r in recs if not r.get('lender'))
         if n != exp['no_lender']:
             problems.append(f"{n} records with no lender != expected {exp['no_lender']}")
+    if 'no_title' in exp:
+        n = sum(1 for r in recs if not r.get('title'))
+        if n != exp['no_title']:
+            problems.append(f"{n} records with no title != expected {exp['no_title']}")
     if problems:
         raise SystemExit(f"VERIFY FAILED for {ex['id']}: " + '; '.join(problems))
     # Section order for the summary: the registry's expected order.
