@@ -200,6 +200,42 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'guildhall-1899',
+        'file': 'guildhall-1899.json',
+        'title': 'Catalogue of the Loan Collection of Pictures and Drawings by J. M. W. Turner, R.A.',
+        'subtitle': 'And of a Selection of Pictures by some of his Contemporaries. With Descriptive and Biographical Notes',
+        'venue': 'Art Gallery of the Corporation of London (Guildhall Art Gallery)',
+        'dates': '11 April – 11 July 1899',
+        'year': 1899,
+        'organiser': 'A. G. Temple',
+        'label': 'Guildhall 1899',
+        'source': 'Internet Archive item catalogueloanco00gallgoog (Harvard scan)',
+        'notes': ('Turner entries in Galleries I and II print no by-line; the artist is supplied from '
+                  'the catalogue’s title and flagged in each record. Gallery II prints no medium word '
+                  '— the works are the water colour drawings of its heading. Nos. 66–69 do not exist '
+                  'in the printed catalogue — the Liber Studiorum list passes from 65 to 70. '
+                  '26 numbers have been restored from their sequence position, each flagged, and '
+                  'seven sizes are illegible in the scan. Graves’s Century of Loan Exhibitions keys '
+                  'only 119 of these 195 works, omitting the Liber Studiorum impressions and folding '
+                  'whole runs into unnumbered digests — the printed catalogue is the authority here.'),
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 195,
+            'sections': {'Gallery I': 81, 'Gallery II': 79, 'Gallery III': 35},
+            # Plain catalogue numbers run 1–196, but nos. 66–69 do not
+            # exist in the printed catalogue (the Liber Studiorum list
+            # passes from 65 to 70); the lettered inserts are 82A, 82B
+            # and 82C; every record has a lender, a title and an artist.
+            'plain_range': (1, 196),
+            'absent_numbers': [66, 67, 68, 69],
+            'lettered': {'82A', '82B', '82C'},
+            'no_lender': 0,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'guildhall-1904',
         'file': 'guildhall-1904.json',
         'title': 'Catalogue of The Exhibition of Works by Irish Painters',
@@ -248,9 +284,12 @@ def verify(ex, recs):
     if 'plain_range' in exp:
         lo, hi = exp['plain_range']
         plain = {int(r['no']) for r in recs if _is_plain(r['no'])}
-        if plain != set(range(lo, hi + 1)):
-            missing = sorted(set(range(lo, hi + 1)) - plain)
-            extra = sorted(plain - set(range(lo, hi + 1)))
+        # Numbers the printed catalogue itself skips (listed under
+        # absent_numbers) are not expected in the range.
+        expected = set(range(lo, hi + 1)) - set(exp.get('absent_numbers', []))
+        if plain != expected:
+            missing = sorted(expected - plain)
+            extra = sorted(plain - expected)
             problems.append(f"plain numbers != {lo}–{hi} exactly "
                             f"(missing {missing}, extra {extra})")
     if 'lettered' in exp:
