@@ -2,7 +2,7 @@
 """Build the Salon Time Machine's static data files.
 
 Reads the combined Salon database (~/workspace/salon-database/data/salon-all.json,
-144,081 records across 100 Paris Salon years, 1673-1881) and writes compact
+185,441 records across 109 Paris Salon years, 1673-1897) and writes compact
 per-year JSON files plus an index into the Atlas's public/ tree, where the
 static file server serves them as-is (no API route needed):
 
