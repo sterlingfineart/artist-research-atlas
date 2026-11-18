@@ -272,6 +272,40 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'guildhall-1902',
+        'file': 'guildhall-1902.json',
+        'title': 'Catalogue of the Exhibition of a Selection of Works by French and English Painters of the Eighteenth Century',
+        'subtitle': 'With Descriptive and Biographical Notes',
+        'venue': 'Art Gallery of the Corporation of London (Guildhall Art Gallery)',
+        'dates': '22 April – 26 July 1902',
+        'year': 1902,
+        'organiser': 'A. G. Temple',
+        'label': 'Guildhall 1902',
+        'source': 'Internet Archive item catalogueofexhib00guil (Getty scan)',
+        'notes': ('One number has been restored from its sequence position, flagged in its record; '
+                  'five sizes are not printed or are illegible in the scan, and six more are read '
+                  'with Graves’s corroboration, each flagged. Two entries are headed “French School” '
+                  'in place of a by-line, as printed. Graves’s Century of Loan Exhibitions keys 124 '
+                  'of these 153 numbers and covers 136 in substance, folding eleven Gainsboroughs '
+                  'into one digest record and missing all seven Lancrets — the printed catalogue is '
+                  'the authority here.'),
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 153,
+            'sections': {'Gallery I': 52, 'Gallery II': 37, 'Gallery III': 14, 'Gallery IV': 50},
+            # Plain catalogue numbers run 1–151 with no gaps; the
+            # lettered inserts are 13A and 126A; every record has a
+            # lender, a title, an artist and a medium.
+            'plain_range': (1, 151),
+            'lettered': {'13A', '126A'},
+            'no_lender': 0,
+            'no_title': 0,
+            'no_artist': 0,
+            'no_medium': 0,
+        },
+    },
+    {
         'id': 'guildhall-1904',
         'file': 'guildhall-1904.json',
         'title': 'Catalogue of The Exhibition of Works by Irish Painters',
@@ -345,6 +379,10 @@ def verify(ex, recs):
         n = sum(1 for r in recs if not r.get('artist'))
         if n != exp['no_artist']:
             problems.append(f"{n} records with no artist != expected {exp['no_artist']}")
+    if 'no_medium' in exp:
+        n = sum(1 for r in recs if not r.get('medium'))
+        if n != exp['no_medium']:
+            problems.append(f"{n} records with no medium != expected {exp['no_medium']}")
     if problems:
         raise SystemExit(f"VERIFY FAILED for {ex['id']}: " + '; '.join(problems))
     # Section order for the summary: the registry's expected order.
