@@ -1872,6 +1872,8 @@
       <p>If the server operator configures an API key, a narrative synthesis can be generated <i>only</i> from the sources collected for the report, with numbered citations and explicit gaps.</p>
       <h3>Limitations</h3>
       <p>Open data is uneven: famous artists are richly documented, lesser-known ones may have few records. Name-based searches (academic literature, period sources) can include namesakes for common names — check each item. Always verify against the cited original.</p>
+      <h3>Privacy &amp; analytics</h3>
+      <p>The Atlas is free to use. It has no accounts, no sign-in and no payments, and it does not ask for or store your name, email address or any personal information. To understand how the site is used, visits are counted by two analytics services. <b>GoatCounter</b> counts page views without cookies and without tracking you across sites. <b>Google Analytics</b> uses cookies to measure visits, the pages viewed and approximate location (country and region). Google Signals is enabled: if you are signed in to a Google account when you visit, Google may associate the visit with that account in order to give this site aggregated, anonymous statistics — the age ranges, genders and interests of its readers as a group — and to count a reader who uses more than one device as one person. No individual reader is identified to us, and nothing recorded here is used to contact you. Questions about this note: <a href="mailto:john@sterlingfineart.com">john@sterlingfineart.com</a>.</p>
     </section>`;
   }
 
