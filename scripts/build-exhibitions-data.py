@@ -167,6 +167,39 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'guildhall-1898',
+        'file': 'guildhall-1898.json',
+        'title': 'Catalogue of the Loan Collection of Pictures by Painters of the French School',
+        'subtitle': 'With Descriptive and Biographical Notes',
+        'venue': 'Art Gallery of the Corporation of London (Guildhall Art Gallery)',
+        'dates': '6 June – 31 August 1898',
+        'year': 1898,
+        'organiser': 'A. G. Temple',
+        'label': 'Guildhall 1898',
+        'source': 'Internet Archive item catalogueofloanc00guil_0 (Getty scan)',
+        'notes': ('This copy of the catalogue is the pre-opening issue, marked “UNDER REVISION” on its '
+                  'cover; the records are taken from that text. 46 catalogue numbers have been restored '
+                  'from their sequence position, each flagged in its record’s note. Four sizes are '
+                  'incomplete in the scan. A separately numbered section of medals and objects of art '
+                  '(nos. 155–162) is not pictures and is not recorded here. Graves’s Century of Loan '
+                  'Exhibitions covers 143 of these 156 works in substance — the printed catalogue is '
+                  'the authority here.'),
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 156,
+            'sections': {'Gallery I': 49, 'Gallery II': 73, 'Gallery III': 34},
+            # Plain catalogue numbers run 1–154 with no gaps; the
+            # lettered inserts are 43A and 45A; every record has a
+            # lender, a title and an artist.
+            'plain_range': (1, 154),
+            'lettered': {'43A', '45A'},
+            'no_lender': 0,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'guildhall-1904',
         'file': 'guildhall-1904.json',
         'title': 'Catalogue of The Exhibition of Works by Irish Painters',
