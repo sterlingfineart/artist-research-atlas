@@ -695,6 +695,69 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'aws-1897',
+        'file': 'aws-1897.json',
+        'title': 'Illustrated Catalogue of the Thirtieth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Academy of Design, New York',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1 – 27 February 1897',
+        'year': 1897,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1897',
+        'source': 'Printed catalogue (New York, 1897); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The thirtieth annual exhibition of the American Water Color Society. '
+                  'This catalogue departs from every earlier volume in the run: its '
+                  'body has no “Owner or Price” column at all — number, subject and '
+                  'artist only — so no price and no owner is printed for any work, '
+                  'and no record here carries a price note or a lender; the book’s '
+                  'notices still say that prices include frames, and prices were '
+                  'evidently to be had at the desk in the gallery. The hang keeps '
+                  'the five sections of 1896 — the four galleries and the Corridor. '
+                  'Twenty works are illustrated in the catalogue, each flagged in '
+                  'its record’s note on the evidence of the body’s own '
+                  '“(Illustration).” mark — with the full stop again, where 1896 '
+                  'prints a comma — and twenty captioned plates are bound in, every '
+                  'one naming a body-marked work; one plate, of no. 322, L. C. '
+                  'Earle’s “The Pensioner”, is captioned “22.” in the book’s own '
+                  'error. Four catalogue numbers (7, 111, 317 and 371) were lost or '
+                  'garbled in the scan and have been restored from their sequence '
+                  'position, each flagged in its record’s note — no. 317 is printed '
+                  '“417” in the book itself, a misprint the sequence and the book’s '
+                  'own index both correct. Every catalogue page was read against '
+                  'the page images during the parse, as with the earlier '
+                  'catalogues. A handful of artist names and titles stand exactly '
+                  'as the scan reads them — the garbles are the scan’s, not the '
+                  'catalogue’s — and have not been corrected; the book’s own '
+                  'spellings likewise stand as printed. The Wm. T. Evans Prize was '
+                  '$300 this year, as in 1895 and 1896.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 509,
+            'sections': {'North Gallery': 97, 'East Gallery': 81,
+                         'South Gallery': 152, 'West Gallery': 97,
+                         'Corridor': 82},
+            # Plain catalogue numbers run 1–509 complete, in five
+            # contiguous blocks (North 1–97, East 98–178, South
+            # 179–330, West 331–427, Corridor 428–509), with no gaps
+            # and no lettered inserts; four numbers (7, 111, 317 and
+            # 371) were restored from their sequence position and are
+            # flagged in their records' notes. The catalogue prints
+            # no prices and no owners at all this year, so no record
+            # names a lender; no record prints a medium; every record
+            # has an artist and a title.
+            'plain_range': (1, 509),
+            'lettered': set(),
+            'no_lender': 509,
+            'no_medium': 509,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'rose-croix-1897',
         'file': 'rose-croix-1897.json',
         'title': 'VIe Geste esthétique — Sixième Salon de la Rose+Croix',
