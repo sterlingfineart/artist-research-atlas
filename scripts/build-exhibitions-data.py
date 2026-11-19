@@ -39,7 +39,7 @@ EXHIBITIONS = [
         'year': 1891,
         'organiser': 'American Water Color Society',
         'label': 'American Water Color Society 1891',
-        'source': 'Printed catalogue (New York, 1891); Frick Library scan supplied by John Finnegan (Internet Archive digitisation).',
+        'source': 'Printed catalogue (New York, 1891); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
         'notes': ('The twenty-fourth annual exhibition of the American Water Color Society. '
                   'The catalogue’s “Owner or Price” column is carried into these records: '
                   '617 works are priced for sale in the catalogue — the prices include '
@@ -73,6 +73,62 @@ EXHIBITIONS = [
             'no_lender': 641,
             'no_medium': 661,
             'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'aws-1892',
+        'file': 'aws-1892.json',
+        'title': 'Illustrated Catalogue of the Twenty-Fifth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Academy of Design, New York',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1 – 27 February 1892',
+        'year': 1892,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1892',
+        'source': 'Printed catalogue (New York, 1892); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The twenty-fifth annual exhibition of the American Water Color Society. '
+                  'The catalogue’s “Owner or Price” column is carried into these records: '
+                  '647 works are priced for sale in the catalogue — the prices include '
+                  'frames — and the price stands in each record’s note; 10 works name an '
+                  'owner, who is recorded as the lender; and 19 leave the column blank. '
+                  'Twenty-seven works are illustrated in the catalogue, each flagged in '
+                  'its record’s note — in this catalogue an asterisk marks illustrations '
+                  'from the artists’ own drawings. The dearest work in the catalogue is '
+                  'John La Farge’s “The Peak of Maona Roa Morea, Society Islands” '
+                  '(no. 178), priced at $4,200. One entry — no. 232, by Louis C. '
+                  'Tiffany — is printed with no title at all, and its record says so. '
+                  'Two catalogue numbers (378 and 672) were lost or garbled in the scan '
+                  'and have been restored from their sequence position, each flagged in '
+                  'its record’s note. The scan’s text layer displaces the price and '
+                  'artist columns, so every catalogue page was read against the page '
+                  'images during the parse, as with the 1891 catalogue. A handful of '
+                  'artist names stand exactly as the scan reads them — the garbles are '
+                  'the scan’s, not the catalogue’s — and have not been corrected.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 676,
+            'sections': {'North Gallery': 175, 'East Gallery': 147,
+                         'South Gallery': 203, 'West Gallery': 151},
+            # Plain catalogue numbers run 1–676 complete, in four
+            # contiguous gallery blocks (North 1–175, East 176–322,
+            # South 323–525, West 526–676), with no gaps and no
+            # lettered inserts; two numbers (378 and 672) were
+            # restored from their sequence position and are flagged
+            # in their records' notes. Only 10 records name a
+            # lender (the catalogue's owners); no record prints a
+            # medium; every record has an artist; exactly one
+            # record has no title (no. 232, Louis C. Tiffany — the
+            # catalogue prints none).
+            'plain_range': (1, 676),
+            'lettered': set(),
+            'no_lender': 666,
+            'no_medium': 676,
+            'no_title': 1,
             'no_artist': 0,
         },
     },
