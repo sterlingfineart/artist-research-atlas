@@ -439,6 +439,80 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'aws-1895',
+        'file': 'aws-1895.json',
+        'title': 'Illustrated Catalogue of the Twenty-Eighth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Academy of Design, New York',
+        'venue': 'National Academy of Design, New York',
+        'dates': '4 February – 2 March 1895',
+        'year': 1895,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1895',
+        'source': 'Printed catalogue (New York, 1895); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The twenty-eighth annual exhibition of the American Water Color Society. '
+                  'The catalogue’s “Owner or Price” column is carried into these records: '
+                  '475 works are priced for sale in the catalogue — the prices include '
+                  'frames — and the price stands in each record’s note; 5 works name an '
+                  'owner, who is recorded as the lender — at no. 288 the book prints the '
+                  'word “Artist” itself in the owner column; and 29 leave the column '
+                  'blank. One work — no. 347, Beatrice C. Wilcox’s “Roses” — is marked '
+                  '“Not for sale”, the catalogue’s only sale mark. Nineteen works are '
+                  'illustrated in the catalogue, each flagged in its record’s note — '
+                  'sixteen are marked “(Illustration.)” in the body, and three more '
+                  '(no. 14, L. E. Van Gorder’s “Old Fishing Town”, no. 264, Jules '
+                  'Guerin’s “A Fagot Gatherer of Holland”, and no. 308, Carleton '
+                  'Wiggins’s “A Holstein Cow”) are identified from the captions of '
+                  'the plates themselves; the plate of no. 302, J. G. Brown’s “Echoes '
+                  'from Town”, is the catalogue’s frontispiece. The dearest works in '
+                  'the catalogue are two pictures priced at $1,000 each: Henry '
+                  'Farrer’s “When leaves are brown, and the year is old” (no. 312) '
+                  'and Frank Russell Green’s “A Pastoral” (no. 324). No. 446 stands '
+                  'in the book as a bare printed number, with no artist, title or '
+                  'price against it — presumably a work withdrawn after the '
+                  'numbering was set — and its record stands empty, with a note '
+                  'saying so. One catalogue number (111) was garbled in the scan and '
+                  'has been restored from its sequence position, flagged in its '
+                  'record’s note. Forty-seven prices are read through the scan’s '
+                  'letter-for-figure garble and are flagged in their notes with the '
+                  'form read; five more (nos. 332, 360, 412, 473 and 476) were '
+                  'settled from the printed page where the garble could not be '
+                  'resolved, no. 89’s price is lost to the scan entirely and read '
+                  'from the printed page, and the prices of nos. 447–450 were '
+                  'settled from the printed page as a block, their notes stating the '
+                  'prices plainly. The scan’s text layer displaces the price and '
+                  'artist columns, so every catalogue page was read against the '
+                  'page images during the parse, as with the earlier catalogues. A '
+                  'handful of artist names stand exactly as the scan reads them — '
+                  'the garbles are the scan’s, not the catalogue’s — and have not '
+                  'been corrected. The Wm. T. Evans Prize fell to $300 this year, '
+                  'from $500 in 1893 and 1894.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 510,
+            'sections': {'North Gallery': 106, 'East Gallery': 92,
+                         'South Gallery': 160, 'West Gallery': 152},
+            # Plain catalogue numbers run 1–510 complete, in four
+            # contiguous gallery blocks (North 1–106, East 107–198,
+            # South 199–358, West 359–510), with no gaps and no
+            # lettered inserts; one number (111) was restored from
+            # its sequence position and is flagged in its record's
+            # note. Only 5 records name a lender (the catalogue's
+            # owners); no record prints a medium; exactly one record
+            # has no title and no artist (no. 446, which the book
+            # itself prints as a bare number).
+            'plain_range': (1, 510),
+            'lettered': set(),
+            'no_lender': 505,
+            'no_medium': 510,
+            'no_title': 1,
+            'no_artist': 1,
+        },
+    },
+    {
         'id': 'rose-croix-1895',
         'file': 'rose-croix-1895.json',
         'title': 'Catalogue du Salon de la Rose+Croix (IVe Geste esthétique)',
