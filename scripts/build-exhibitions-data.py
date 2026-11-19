@@ -1242,6 +1242,97 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'aws-1902',
+        'file': 'aws-1902.json',
+        'title': 'Illustrated Catalogue of the Thirty-Fifth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the American Art Galleries, Madison Square South, New York',
+        'venue': 'American Art Galleries, Madison Square South, New York',
+        'dates': '21 April – 4 May 1902',
+        'year': 1902,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1902',
+        'source': 'Printed catalogue (New York, 1902); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The thirty-fifth annual exhibition of the American Water Color Society. '
+                  'This year the exhibition is held at the American Art Galleries, '
+                  'Madison Square South, New York, under the management of the '
+                  'American Art Association. This catalogue changes the form of '
+                  'the earlier volumes entirely: the galleries of 1891–1901 are '
+                  'gone, and the body is arranged alphabetically by artist — each '
+                  'artist’s heading, surname first, with the artist’s address '
+                  'printed beneath it (the addresses are not carried into these '
+                  'records), followed by that artist’s works, the works numbered '
+                  'continuously 1–479 down the alphabet, all standing in the '
+                  'single section the book itself heads “CATALOGUE”; the 479 '
+                  'works stand under 222 artists’ headings as printed. The book '
+                  'keeps the price-less form of 1897–1901 for a sixth year: there '
+                  'is no “Owner or Price” column at all, so no price and no owner '
+                  'is printed for any work, and no record here carries a price '
+                  'note or a lender; the book’s notices still say that prices '
+                  'include frames, and inquiries in regard to works for sale were '
+                  'to be made at the desk in the gallery. Twenty-one works are '
+                  'illustrated in the catalogue, each flagged in its record’s '
+                  'note — the illustration evidence returns to the body this '
+                  'year, each illustrated work carrying a bracketed '
+                  '“[Illustration]” mark after its title — and the twenty-one '
+                  'agree exactly with the book’s own List of Illustrations; '
+                  'twenty plate leaves are bound in, but the plate for no. 35, '
+                  'J. G. Brown’s “Puppies”, named in the List and marked in the '
+                  'body, is not bound in this copy. Three catalogue numbers were '
+                  'lost or garbled in the scan and have been restored from their '
+                  'sequence position, each flagged in its record’s note — no. 1, '
+                  'and nos. 110 and 111, whose printed lines the scan fuses into '
+                  'two lines of interleaved type, so that neither title can be '
+                  'read from the scan in its own order; those two titles are read '
+                  'from the printed page — no. 110 is “Woodside, Maine” and '
+                  'no. 111 “The Old Road”, the reverse of the order in which the '
+                  'scan’s fragments stand — and each of those two records '
+                  'carries a second note recording the fusion. The book prints '
+                  'no artist index this year, so no index cross-check was '
+                  'possible; its member lists were used only to corroborate name '
+                  'forms. Every catalogue page was read against the page images '
+                  'during the parse, as with the earlier catalogues. One heading '
+                  'stands truncated in the book itself — “Of, George F., Jr.” '
+                  '(nos. 298–299), the surname cut off in print, with no letters '
+                  'before the “OF” — and one heading prints “Deceased” in place '
+                  'of the artist’s address: C. Harry Eaton (nos. 107–109), whose '
+                  'three records carry a note. A handful of artist names and '
+                  'titles stand exactly as the scan reads them — the garbles are '
+                  'the scan’s, not the catalogue’s — and have not been '
+                  'corrected: the scan drops the printed accent in “Gruyere” '
+                  '(no. 73), in Léon Moran’s name (nos. 246–252) and in '
+                  '“Sandor, Mathias” (no. 375). The book’s own spellings '
+                  'likewise stand as printed — it prints “Guidecca Canal, '
+                  'Venice” (no. 415), “Guenn” (no. 314), “Lowery Day, Grand '
+                  'Manan” (no. 25), “The Mosque of Tezzir Pasha Akka” (no. 132) '
+                  'and “Caskel, Glen Columbkille” (no. 44). The Wm. T. Evans '
+                  'Prize was $300 this year, as in 1895–1901; the book’s list '
+                  'of past winners ends with the 1901 winner, Edward H. '
+                  'Potthast’s “A Reverie”.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 479,
+            'sections': {'Catalogue': 479},
+            # Plain catalogue numbers run 1–479 complete down the
+            # alphabet, in the single section "Catalogue", with no
+            # gaps and no lettered inserts; three numbers (1, 110
+            # and 111) were restored from their sequence position
+            # and are flagged in their records' notes. The catalogue
+            # prints no prices and no owners at all this year, so no
+            # record names a lender; no record prints a medium;
+            # every record has an artist and a title.
+            'plain_range': (1, 479),
+            'lettered': set(),
+            'no_lender': 479,
+            'no_medium': 479,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'guildhall-1902',
         'file': 'guildhall-1902.json',
         'title': 'Catalogue of the Exhibition of a Selection of Works by French and English Painters of the Eighteenth Century',
