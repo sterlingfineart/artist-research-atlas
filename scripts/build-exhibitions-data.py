@@ -3698,6 +3698,213 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    {
+        'id': 'aws-nywcc-1922',
+        'file': 'aws-1922.json',
+        'title': 'Combined Annual Exhibition of the American Water Color Society and the New York Water Color Club, 1922',
+        'subtitle': 'Held at the American Fine Arts Building, 215 West Fifty-Seventh Street, New York',
+        'venue': 'American Fine Arts Building, 215 West Fifty-Seventh Street, New York',
+        'dates': '22 December 1922 – 9 January 1923',
+        'year': 1922,
+        'organiser': 'American Water Color Society and New York Water Color Club',
+        'label': 'American Water Color Society & New York Water Color Club 1922',
+        'source': 'Printed catalogue (New York, 1922); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The combined annual exhibition of the American Water '
+                  'Color Society and the New York Water Color Club, held at '
+                  'the American Fine Arts Building, 215 West Fifty-Seventh '
+                  'Street, New York — the two societies exhibiting together: '
+                  '609 records in FOUR sections under one continuous '
+                  'numbering — the South Gallery (nos. 1–167), the Centre '
+                  'Gallery (nos. 168–372), the Vanderbilt Gallery (nos. '
+                  '373–565) and Sculpture (nos. 566–609). The book’s title '
+                  'page prints “COMBINED ANNUAL EXHIBITION / AMERICAN WATER '
+                  'COLOR SOCIETY / AND / NEW YORK WATER COLOR CLUB” and NO '
+                  'ordinal and NO annual number for either society; the '
+                  'foreword (signed “HANNAH PIMERTON”) calls the previous '
+                  'year’s show the “First Combined Exhibition”, so this is '
+                  'the SECOND combined exhibition by inference — the book '
+                  'itself numbers nothing. The show stands in this Record '
+                  'as ONE exhibition, not one record per society. The '
+                  'arrangement breaks with the alphabetical order of '
+                  '1913–1919 and with the hanging order of 1921: the works '
+                  'are hung and listed BY GALLERY. The body opens under the '
+                  'head “Catalogue / Water Colors and Pastels” and the line '
+                  '“Information Regarding Prices of Work for Sale May Be '
+                  'Obtained at the Desk.”; the Sculpture section stands '
+                  'under its own head and the notice that, “by invitation '
+                  'of the Exhibition Committee, the National Sculpture '
+                  'Society has selected the following works”, with its own '
+                  'desk line for pictures and bronzes. The entry form is '
+                  'uniform: the number at the left margin; the TITLE in '
+                  'letter-spaced small capitals (normalised to title case '
+                  'in these records, by the standing convention of the '
+                  'gallery volumes); a dotted leader; the artist in '
+                  'NATURAL ORDER, title case — there are no artist '
+                  'headings, no addresses and no membership suffixes '
+                  'anywhere in the body; and at the right the price in '
+                  'whole dollars (the “$” sign stands on a page’s first '
+                  'price as a column convention) or a printed DASH where '
+                  'no price stands. Prices stand at the right of the entry '
+                  'line, and 550 works are priced for sale in the '
+                  'catalogue, the price standing in each record’s note; '
+                  'the printed dash stands on 56 records, and three '
+                  'Sculpture entries (nos. 586, 588 and 589) print “On '
+                  'application” in place of a price. The dearest work in '
+                  'the book is Max. Wieczorek’s “Ruth St. Denis” (no. 420, '
+                  'Vanderbilt Gallery) at $3,500.00; next stand $1,500.00 '
+                  '(no. 583, Emil Fuchs, “Forbes Robertson”, Sculpture) '
+                  'and $1,000.00 (no. 524, Wm. T. L. Armstrong, “The '
+                  'Birthday Bouquet”); the dearest work in the South '
+                  'Gallery stands at $600.00 (no. 10, Mary Russell Ferrell '
+                  'Colton, “Out on the Reservation”) and in the Centre '
+                  'Gallery at $500.00 (no. 226, Alphaeus P. Cole, “Lady in '
+                  'Green”). NO lender is named for any entry, and no '
+                  'medium or size is printed for any entry, so Lender, '
+                  'Medium and Size stand empty throughout. The book IS '
+                  'illustrated: fifteen plates stand on twelve leaves. '
+                  'There is NO List of Illustrations, and the plates are '
+                  'identified from their leaf captions — title and artist '
+                  'in capitals at the leaf’s foot, no catalogue number — '
+                  'matched to the body on artist and title. FOURTEEN match '
+                  'a body entry (nos. 2, 32, 37, 40, 50, 66, 96, 221, 381, '
+                  '404, 439, 478, 538 and 548) and are flagged on their '
+                  'records; six captions differ from their body titles, '
+                  'and the difference is quoted in the record’s note — no. '
+                  '2’s reads “San Juan Road” (the body “San Jaun Road”), '
+                  'no. 32’s “Girl in a Boat” (the body “Girl in Boat”), '
+                  'no. 66’s “The Yoke” (the body “The Yorke”), no. 439’s '
+                  '“Payne Bingham” (the body “Portrait of Payne Bingham”), '
+                  'no. 478’s “Winters End” (the body “Winter’s End”) and '
+                  'no. 538’s “A Foggy Day, East Gloucester” (the body '
+                  '“Foggy Morning, East Gloucester,”). The FRONTISPIECE is '
+                  'captioned with the artist’s name only — “HILDA BELCHER '
+                  '/ ENGRAVED BY H. C. MERRILL” — and Belcher has five '
+                  'entries in the body (nos. 444, 445, 447, 448 and 449), '
+                  'three of them portraits of children by title, so the '
+                  'plate cannot be tied to one entry and NO record is '
+                  'flagged for it. The numbering is continuous, 1–609, '
+                  'across all four sections: no lettered inserts, no '
+                  'duplicated numbers, no unnumbered entries and no '
+                  'absent numbers. ONE number is the BOOK’s own misprint: '
+                  'the entry between 279 and 281 (Egbert Cadmus, “Jagged '
+                  'Rocks, Maine”) is printed “200” — a number the book '
+                  'also prints correctly at no. 200; the record stands at '
+                  '280, restored from the sequence and flagged in its '
+                  'note, and the book’s own index cites Cadmus at 277, '
+                  '278, 280 and 281, corroborating the restoration. Three '
+                  'further numbers are lost to the scan’s TEXT LAYER only '
+                  '— they ARE printed in the book: no. 599’s number token, '
+                  'and nos. 608–609 entire, are supplied from the page '
+                  'render in sequence position, and no. 607 anchors on '
+                  'its garbled number sort “an1”, with its title supplied. '
+                  'One entry is printed with NO title at all: no. 511 '
+                  'stands as number, dotted leader, artist (Joseph '
+                  'Rayner) and a dash, and nothing else; the record keeps '
+                  'an empty title and a note saying so, and the index '
+                  'lists Rayner at 511, agreeing. This book HAS an Index '
+                  'of Contributors, WITH catalogue numbers, cross-checked '
+                  'entry by entry against the body: it contains NO entry '
+                  'for any artist of the Sculpture section — the National '
+                  'Sculpture Society exhibitors are not indexed at all — '
+                  'and is otherwise in substantial agreement with the '
+                  'body. The disagreements are the BOOK’s, and the body '
+                  'stands in every case: the index cites Chapman at 437, '
+                  '438 for the body’s 537, 538; Dunbar at 536 for 556; W. '
+                  'C. L. White at 560 for 550; Patterson at 239 for 238; '
+                  'Victor Julius at 185 for 186 (185 is Heuston’s, and is '
+                  'also cited under Heuston); Lenski at 355 for 353; and '
+                  'the Willson entry is printed TWICE — “Willson, James '
+                  'Mallery … 196, 331” and again “Willson, James Mallery … '
+                  '322” — the body’s 331 being Jane Mallery Willson’s, who '
+                  'has no index entry. The index’s own spelling variants '
+                  'against the body (Allen for Allan, Hazell throughout, '
+                  'Ochtonan for Ochtman, Wurtz for Wurts among them) stand '
+                  'logged, not followed. The BOOK’s own spellings stand as '
+                  'printed: no. 2 “San Jaun Road”; no. 25 “Lief Neandross” '
+                  '(the members list has LEIF); no. 66 “The Yorke”; no. '
+                  '114 “Calendulum”; no. 116 “Eliza D. Gardnier”; no. 218 '
+                  '“Lake Taho”; no. 322 “James Mallesy Willson” against '
+                  'no. 331 “Jane Mallery Willson”; no. 327 “Frank Hazel” '
+                  '(one l) against “Frank Hazell” at 323, 330, 332; no. '
+                  '341 “Chas. H. Caseau”; no. 343 “Hydrangias”; no. 392 '
+                  '“W. Emerton Heitland”; no. 393 “Catherine Wharton '
+                  'Moris” against no. 140 “Catharine Wharton Morris”; the '
+                  'surname printed “Kat” (nos. 395, 397, 400 — the index '
+                  'agrees); no. 431 “Kate Man Franklin” (the index gives '
+                  '“Kate Mann”); no. 435 “Tropic Tapistry” and “Nelly '
+                  'Littlehale Murphy” against no. 208 “Nelly Littledale '
+                  'Murphy”; no. 477 “Grand Casca Pedia”; no. 538 “Foggy '
+                  'Morning, East Gloucester,” with its printed trailing '
+                  'comma; no. 573 “Abastina St. L. Eberle”; no. 574 '
+                  '“Tergament”; no. 576 “(Insence Burner)”; and the same '
+                  'artist spelled differently at different entries '
+                  'throughout (Josef/Joseph Lenhard, Hoftrup/Hofstrup, '
+                  'S./J. Olaf Olson, Katharine/Katherine Breen, Carle/Carl '
+                  'Michel Boog) — each record carries its own entry’s '
+                  'printed form. The scan’s text layer is an OCR layer '
+                  'whose lines split each printed line into sub-rows by '
+                  'type size, and its headline defects were each settled '
+                  'from the page renders: on one body page the layer drops '
+                  'the ENTIRE price column — the printed prices of nos. '
+                  '215–265 are image-only, and all 51 elements were read '
+                  'from the 300-dpi page render, read twice; on another it '
+                  'drops the artist’s name on 27 entries, all supplied '
+                  'from the render; on the Sculpture page it line-merges '
+                  'entries 568/569 and 580/581 and seats no. 600’s price '
+                  'token in no. 598’s band (no. 598’s printed price is '
+                  '$700, no. 600’s is $60). A reader’s pencil stands in '
+                  'this copy — a pencilled “$350” against entries at the '
+                  'head of one body page, check marks in two margins — '
+                  'none of it is print, and none of it is carried. Every '
+                  'body page was verified RECORD BY RECORD against its '
+                  'render before the parse was signed off — number, '
+                  'artist, title and price element — and the parser’s '
+                  'per-page token checks (multiset) agree exactly on all '
+                  'thirteen body pages. Both societies’ prize pages are '
+                  'printed, and NEITHER names a winner for this '
+                  'exhibition. The AWS page prints the Hudnut Prize at '
+                  '$200, its awards now running through 1921 — in 1919, to '
+                  'Childe Hassam, for “Mount Beacon”; in 1920, to Horatio '
+                  'Walker, for “Pastoral—Sow and Pigs”; and in 1921, to '
+                  'Francis McComas, for “The Storm Cloud”, McComas’s award '
+                  'being FIRST PRINTED IN THIS BOOK — and the William T. '
+                  'Evans Prize recipients, 1889–1913, followed by “This '
+                  'prize has been discontinued.” The NYWCC page prints two '
+                  'prizes of the Club’s own: the Beal Prize, $200, '
+                  '“instituted in 1904 by William R. Beal”, its printed '
+                  'list of awards running 1904–1911 only; and the Club’s '
+                  'Hudnut Prize, $100, first awarded 1916, its printed '
+                  'list running 1916 (George Luks), 1917 (Hilda Belcher), '
+                  '1918 (Colin Campbell Cooper) and 1919 (Edward C. '
+                  'Volkert).'),
+        # The parse stores the catalogue numbers as strings already;
+        # the built file carries them all as strings.
+        'no_as_string': True,
+        # The parse dataset is named aws-1922.json, but the built
+        # file (which the site fetches by exhibition id) is named
+        # for the joint exhibition's registry id.
+        'out_file': 'aws-nywcc-1922.json',
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 609,
+            'sections': {'South Gallery': 167, 'Centre Gallery': 205,
+                         'Vanderbilt Gallery': 193, 'Sculpture': 44},
+            # Plain catalogue numbers run 1–609 complete across the
+            # four contiguous gallery blocks (South 1–167, Centre
+            # 168–372, Vanderbilt 373–565, Sculpture 566–609), with no
+            # gaps, no lettered inserts, no duplicated numbers and no
+            # unnumbered entries. Prices stand on 550 records; no
+            # record names a lender or prints a medium; one record
+            # (no. 511) prints no title.
+            'plain_range': (1, 609),
+            'lettered': set(),
+            'no_lender': 609,
+            'no_medium': 609,
+            'no_title': 1,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
@@ -3791,7 +3998,7 @@ for ex in EXHIBITIONS:
         for r in recs:
             r['no'] = str(r['no'])
     sections = verify(ex, recs)
-    with open(os.path.join(OUT, ex['file']), 'w') as f:
+    with open(os.path.join(OUT, ex.get('out_file', ex['file'])), 'w') as f:
         json.dump(recs, f, ensure_ascii=False)
     summaries.append({
         'id': ex['id'],
