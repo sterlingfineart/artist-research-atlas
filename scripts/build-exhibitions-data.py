@@ -2295,6 +2295,125 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    {
+        'id': 'aws-1911',
+        'file': 'aws-1911.json',
+        'title': 'Illustrated Catalogue of the Forty-fourth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the American Fine Arts Galleries, 215 West 57th Street, New York',
+        'venue': 'American Fine Arts Galleries, 215 West 57th Street, New York',
+        'dates': '27 April – 21 May 1911',
+        'year': 1911,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1911',
+        'source': 'Printed catalogue (New York, 1911); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The forty-fourth annual exhibition of the American Water Color Society, '
+                  'held at the American Fine Arts Galleries, 215 West 57th Street, '
+                  'New York. The book shrinks back to two galleries only — the South '
+                  'Gallery (nos. 1–109) and the Second Gallery (nos. 110–192), '
+                  '1910’s Central and Vanderbilt Galleries gone — the works numbered '
+                  'continuously 1–192 across the two, the galleries headed in display '
+                  'capitals with no sub-headings; the Second Gallery’s heading carries '
+                  'one line of gallery furniture, “Fountain Figure by Eli Harvey.”, '
+                  'which is no part of the catalogue and stands in no record. The '
+                  'one-line entry form of 1909–1910 stands: each entry on one line, '
+                  'its element a price in whole dollars, or “Lent by …” standing on '
+                  'its own line beneath the title, or nothing: 191 records in all, '
+                  'standing under 118 artists’ headings; 169 works are priced for '
+                  'sale in the catalogue, the price standing in each record’s note '
+                  'and the prices including frames, 9 name a lender — “Lent by” is '
+                  'this book’s only lender form, there being no “Owned by”, '
+                  '“Courtesy of” or permission lines anywhere in the body — and 13 '
+                  'have neither. The dearest work in the book is Mary Cassatt’s '
+                  '“A Cup of Tea—Pastel” (no. 102), priced at $1,600.00 — the prices '
+                  'print without a thousands comma (“$1600”), the records’ notes '
+                  'supplying it, as throughout the run — followed by Winslow Homer’s '
+                  '“Negro on Boat, Nassau” (no. 170) at $1,000.00 and Childe Hassam’s '
+                  '“The Thunderstorm” (no. 142) at $850.00; five works stand at '
+                  '$750.00, all of them Homer’s (nos. 164, 167, 168, 172 and 175); '
+                  'the cheapest is Jerome Myers’s “Rivington Street Gossip” (no. 22) '
+                  'at $40.00, then three works at $50.00 (nos. 11, 21 and 34); the '
+                  'priced works total $37,525. The numbering runs 1–192 with no '
+                  'no. 14: on the printed page the sequence passes directly from '
+                  'no. 13 (I. A. Josephi’s “The Pasture”) to no. 15 (Everett Shinn’s '
+                  '“Ballet Girl”) — the book prints no entry 14, and no placeholder '
+                  'stands in these records; the book’s own artist index cites '
+                  'Arthur B. Davies at “14, 37, 39, 41”, the 14 being the index’s '
+                  'own error. There are no lettered inserts, no number printed '
+                  'twice, no joint entries and no unnumbered entries. One number '
+                  'is restored from the sequence: no. 172 (Winslow Homer’s “Channel '
+                  'Bass, Florida”, $750.00), whose figures the scan’s text layer '
+                  'reduces to debris — a crop of the printed page shows “172.” — '
+                  'and the record’s note carries the standard restoration flag; it '
+                  'is the book’s only restored number. The artists’ headings are '
+                  'printed in both orders — surname-first and natural order '
+                  '(“Everett Shinn”, “Katharine N. Rhoades”) — each standing as '
+                  'printed; one heading carries a parenthetical “(Deceased)”: '
+                  'Winslow Homer, whose twelve works (nos. 164–175) run under the '
+                  'one heading, the mark recorded in each of the twelve records’ '
+                  'notes. Sixteen works are illustrated in the catalogue, each '
+                  'flagged in its record’s note; the body prints no illustration '
+                  'marks, so the illustrated works are named by the book’s List of '
+                  'Illustrations (nos. 16, 25, 40, 42, 45, 49, 57, 66, 101, 102, '
+                  '108, 116, 119, 149, 150 and 190), and all sixteen plates are '
+                  'bound in this copy, no. 25 (Gifford Beal’s “The Freight Yards”) '
+                  'standing as frontispiece before the title page; three captions '
+                  'diverge from their body entries, the body governing in each '
+                  'case: no. 45’s caption reads “WEDNESDAY’S MARKET” against the '
+                  'body’s “Wednesday Market, Bruges”, no. 119’s “BETSEY” against '
+                  '“Betsy”, and no. 149’s caption and the List both read “THE '
+                  'CALICO MART” against the body’s “Calico Market”. No medium line '
+                  'stands beneath any entry’s title and no dimensions are printed '
+                  'for any entry, so Medium and Size stand empty throughout, '
+                  'medium words standing inside very many titles as printed. The '
+                  'artists’ addresses stand only in the book’s artist index and '
+                  'are not carried into these records; the index is complete in '
+                  'this copy (Abbatt to Young) and was cross-checked against the '
+                  'body during the parse, the body governing every disagreement; '
+                  'its only other apparent conflict is the scan’s garble at no. 137, '
+                  'the print reading “Platt, Alethea Hill”. The book’s own name '
+                  'forms stand: the headings’ “Macrae” against the index’s '
+                  '“MacRae”, the particle forms “Alexander T. van Laer” and '
+                  '“E. van R. M. Heard” against the index’s capitalised “Van”, '
+                  '“HAROLD CAMP” at no. 121 against “HAROLD M. CAMP” at no. 97 '
+                  '(the index files both under the one entry), the mixed-case '
+                  '“Percival DeLuce” the book itself prints, and “Edward McDowell” '
+                  'with its lowercase c; and one price stands exactly as the book '
+                  'prints it — no. 68’s “A Palace—175”, its price printed without '
+                  'the dollar sign, flagged in the record’s note. A handful of '
+                  'readings were settled on the printed page where the scan’s text '
+                  'layer garbles them — nine headings and three prices among them, '
+                  'and the titles’ printed accents restored (“Street Café, '
+                  'Algeria” at no. 30, “The Cañon Road” at no. 117) — each recorded '
+                  'with its evidence in the parse log. The Wm. T. Evans Prize was '
+                  '$300 this year, on the standing terms; the book’s list of past '
+                  'winners ends with the 1910 award, R. M. Shurtleff’s “June” — '
+                  'the 1911 award is not recorded in this book.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 191,
+            'sections': {'South Gallery': 108, 'Second Gallery': 83},
+            # Plain catalogue numbers run 1–192 through the two
+            # galleries in the order hung (South 1–109, Second
+            # 110–192), the book itself printing no no. 14 — the
+            # sequence passes from 13 to 15 on the page — with no
+            # lettered inserts, no joint entries, no number printed
+            # twice and one number restored (172). 169 records carry
+            # a price in the note, 9 name a lender (all "Lent by")
+            # and 13 have neither; no record prints a medium or a
+            # size; every record has an artist and a title.
+            'plain_range': (1, 192),
+            'absent_numbers': [14],
+            'lettered': set(),
+            'no_lender': 182,
+            'no_medium': 191,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
