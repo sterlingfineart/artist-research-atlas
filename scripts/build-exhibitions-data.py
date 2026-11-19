@@ -586,6 +586,82 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'aws-1896',
+        'file': 'aws-1896.json',
+        'title': 'Illustrated Catalogue of the Twenty-Ninth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Academy of Design, New York',
+        'venue': 'National Academy of Design, New York',
+        'dates': '3 – 29 February 1896',
+        'year': 1896,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1896',
+        'source': 'Printed catalogue (New York, 1896); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The twenty-ninth annual exhibition of the American Water Color Society. '
+                  'The catalogue’s “Owner or Price” column is carried into these records: '
+                  '588 works are priced for sale in the catalogue — the prices include '
+                  'frames — and the price stands in each record’s note; 9 works name an '
+                  'owner, who is recorded as the lender; and 9 leave the column blank. '
+                  'Two works — nos. 115 and 170 — are marked “Not for sale”, the '
+                  'catalogue’s only sale marks, and no price in the book reaches $1,000. '
+                  'This year the hang gains a fifth section, the Corridor, beyond the '
+                  'four galleries of the earlier volumes, and one sub-numbered entry — '
+                  'no. 530a, Ethelyn Knowles Fenner’s “Water Lilies”, priced at $30.00 — '
+                  'stands between nos. 530 and 531, cited in the book’s own index as '
+                  '“530 a”. Nineteen works are illustrated in the catalogue, each '
+                  'flagged in its record’s note — all nineteen on the evidence of the '
+                  'body’s own “(Illustration),” mark, which this year prints a comma '
+                  'where the 1894 and 1895 catalogues print a full stop; eighteen '
+                  'captioned plates are bound in, every one naming a body-marked work, '
+                  'and no. 231 carries the mark but no plate of it is bound in this '
+                  'copy. The dearest work in the catalogue is W. Louis Sonntag, Jr.’s '
+                  '“Coup de Grace” (no. 462) — the book prints no accent — priced at '
+                  '$750.00. Two entries — nos. 535 and 590, both by Miss Holgate, at '
+                  '$45.00 each — are printed with no title at all, and their records say '
+                  'so. Four catalogue numbers (105, 110, 113 and 115) were lost or '
+                  'garbled in the scan and have been restored from their sequence '
+                  'position, each flagged in its record’s note — no. 105’s number was '
+                  'lost to the scan altogether. Forty-one prices are read through the '
+                  'scan’s letter-for-figure garble and are flagged in their notes with '
+                  'the form read; four of them were settled from the printed page where '
+                  'the garble could not be resolved, and one more — no. 200’s $75.00 — '
+                  'is lost to the scan’s text layer entirely and read from the printed '
+                  'page, its note stating the price plainly. The scan’s text layer '
+                  'displaces the price and artist columns, so every catalogue page was '
+                  'read against the page images during the parse, as with the earlier '
+                  'catalogues. A handful of artist names stand exactly as the scan '
+                  'reads them — the garbles are the scan’s, not the catalogue’s — and '
+                  'have not been corrected; the book’s own spelling variants between '
+                  'its body and its index likewise stand as printed in each place. The '
+                  'Wm. T. Evans Prize was $300 this year, as in 1895.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 608,
+            'sections': {'North Gallery': 116, 'East Gallery': 93,
+                         'South Gallery': 174, 'West Gallery': 125,
+                         'Corridor': 100},
+            # Plain catalogue numbers run 1–607 complete, in five
+            # contiguous blocks (North 1–116, East 117–209, South
+            # 210–383, West 384–508, Corridor 509–607), with no gaps;
+            # the only lettered insert is 530a; four numbers (105,
+            # 110, 113 and 115) were restored from their sequence
+            # position and are flagged in their records' notes. Only
+            # 9 records name a lender (the catalogue's owners); no
+            # record prints a medium; exactly two records have no
+            # title (nos. 535 and 590, which the book itself prints
+            # with no subject); every record has an artist.
+            'plain_range': (1, 607),
+            'lettered': {'530a'},
+            'no_lender': 599,
+            'no_medium': 608,
+            'no_title': 2,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'rose-croix-1896',
         'file': 'rose-croix-1896.json',
         'title': 'Salon de la Rose+Croix (Ve Geste esthétique)',
