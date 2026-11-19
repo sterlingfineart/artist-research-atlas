@@ -2972,6 +2972,154 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    {
+        'id': 'aws-1917',
+        'file': 'aws-1917.json',
+        'title': 'Catalogue of the Fiftieth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Arts Club, 119 East 19th Street, New York',
+        'venue': 'Galleries of the National Arts Club, 119 East 19th Street, New York',
+        'dates': '1 – 24 February 1917',
+        'year': 1917,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1917',
+        'source': 'Printed catalogue (New York, 1917); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The fiftieth annual exhibition of the American Water Color Society, '
+                  'held at the Galleries of the National Arts Club, One Nineteen '
+                  'East Nineteenth Street, New York — the exhibition stays at '
+                  'the National Arts Club, and the Society reaches its fiftieth '
+                  'annual: 330 records in a single alphabetical run by artist, '
+                  'as in 1902, 1913, 1915 and 1916, the works standing under 189 '
+                  'artists’ headings. The headings return to surname-first order '
+                  'this year (contrast 1916’s natural order), in capitals, '
+                  'members carrying the printed suffix “A. W. C. S.” set in '
+                  'spaced capitals where it stands — 67 of the 189 headings '
+                  'carry the mark; beneath each heading, or at its right, stands '
+                  'the artist’s address, which is not carried into these '
+                  'records, and the book prints no artist index, the addresses '
+                  'standing in the body instead. Each entry stands on one line '
+                  '— number, title and element together. Prices stand at the '
+                  'end of the entry line in whole dollars, and 293 works are '
+                  'priced for sale in the catalogue, the price standing in each '
+                  'record’s note; the dearest work is Horatio Walker’s “Swine '
+                  'and Swineherd” (no. 314) at $2,000.00 — three four-figure '
+                  'prices in all: no. 314 at $2,000.00, no. 124 (Hassam, “Old '
+                  'Fifth Avenue, 1898”) at $1,200.00 and no. 323 (Woodbury, '
+                  '“Porpoises”) at $1,000.00; eleven records stand at $600.00 or '
+                  'more, the cheapest price is $20.00, and the prices run from '
+                  '$20 to $2,000 with a median of $125. The lender stands in two '
+                  'forms: an “Owned by …” line beneath the title, on two '
+                  'records (nos. 127 and 128), and a parenthetical “(owned by '
+                  '…)” or “(Owned by …)” credit appended to the title line or '
+                  'standing on its own line beneath it, on twelve records (nos. '
+                  '14, 25, 100, 103, 167, 180, 190, 191, 230, 277, 292 and 295) '
+                  '— the named party stands in the lender field and the printed '
+                  'form is quoted in the record’s note; there are no “Lent by”, '
+                  '“Courtesy of” or “Made for” lines and no sale marks, and 23 '
+                  'records stand with no element at all. No dimensions are '
+                  'printed for any entry, so Size stands empty throughout; a '
+                  'medium line, “(Miniature.)”, is printed beneath the title on '
+                  'two records (nos. 305 and 306) and stands in the note, '
+                  '“(Miniature)” inside a title line standing in the title as '
+                  'printed (nos. 21, 100, 167, 178 and 185), and the dimensions '
+                  'stand in the titles of Ortlip’s three entries (nos. 215–217) '
+                  'as printed, so Medium stands empty throughout. The book IS '
+                  'illustrated (as in 1914, 1915 and 1916): its List of '
+                  'Illustrations names nine works by title and artist only, '
+                  'without numbers, and nine plates are bound in — no. 127 '
+                  '(Henry, “Lord Howe’s Headquarters, Germantown, 1777”) as the '
+                  'frontispiece, its caption printed vertically at the side of '
+                  'the leaf, and eight interleaved, one to a leaf: no. 11 '
+                  '(Aylward, “The Irish Emigrants”), no. 68 (Cooper, “Pan '
+                  'Fountain—San Diego Exposition”), no. 90 (Dunsmore, “A '
+                  'Perplexing Point”), no. 96 (Edwards, “Fair Amalfi”), no. 142 '
+                  '(Howell, “The Public Library, Washington”), no. 260 '
+                  '(Ritschel, “Waiting”) and no. 300 (Snell, “Twilight at '
+                  'Newcastle”) — eight plates matched to body entries on artist '
+                  'and title, every match unique in the body, and the eight '
+                  'carry the note “Illustrated in the catalogue.” The ninth '
+                  'plate has NO entry in the body: Albert Sterner’s “Nude in '
+                  'Studio” stands in the List and among the plates, but the '
+                  'body passes from Steele (no. 307) to Stoner (no. 308) with '
+                  'the numbering unbroken, and Sterner stands only in the List '
+                  'and in the members list. The List gives Aylward’s title in '
+                  'the singular, “The Irish Emigrant”, where the body and the '
+                  'caption read the plural; it spells Ritschel “Ritschell” '
+                  'where the body heading and the caption read “Ritschel”; and '
+                  'Henry’s caption gives his title in the fuller form “Lord '
+                  'Howe’s Headquarters, Germantown, October 4, 1777” against '
+                  'the body’s “…, 1777”. The numbering runs 1–327 with two '
+                  'lettered inserts standing as printed — 24a (Beckwith, '
+                  '“Movement for Decoration”, after Beal’s nos. 22–24) and 108a '
+                  '(Gruppe, “It Sure is Jan.”, after Granville-Smith’s nos. '
+                  '107–108) — and ONE ENTRY PRINTED WITHOUT A NUMBER: Grace H. '
+                  'Fletcher’s “A Winter Morn in Venice”, between nos. 101 and '
+                  '102, the sequence passing directly from 101 to 102 with no '
+                  'number left for it; it is recorded with its number empty and '
+                  'a note saying so, no number being supplied, because the book '
+                  'leaves no number unused — to restore one would be to invent '
+                  'a “101a” the book does not print. The book misprints one '
+                  'number: Kleen’s “Tic-Tac” is numbered “150.” in print, '
+                  'duplicating Klaw’s genuine no. 150; the record stands under '
+                  '153, restored from the sequence and flagged in its note. '
+                  'Three further numbers are restored from the sequence and '
+                  'flagged — nos. 1, 15 and 47, whose printed figures stand '
+                  'plainly in the printed page but are garbled in the scan’s '
+                  'text layer (read “i”, “IS.” and “4/.”); no. 55 prints no '
+                  'stop after its number; and no. 156’s price is settled at '
+                  '$300.00 on the printed page, its dollar sign so faintly '
+                  'inked that the layer reads “T300”. One record lacks a '
+                  'title: no. 170 (Lever), for whose title the book prints a '
+                  'rule; its price, $250.00, stands in the record. Peggy '
+                  'Bacon’s nos. 12 and 13 both print “The Yellow Jacket” at '
+                  '$50.00 — the book’s own duplication, recorded as printed. '
+                  'Two readings stand as read: Loven’s no. 177 title “The '
+                  'Hill’Top”, the apostrophe being the scan layer’s (the print '
+                  'reads “The Hill Top.”), and Lever’s no. 172 “Five Master, '
+                  'Gloucester.”, the “l” of Gloucester being a battered sort in '
+                  'the print. Every catalogue page was read against the page '
+                  'images during the parse. The prize page stands as in 1915 '
+                  'and 1916. It prints the list of recipients of the Wm. T. '
+                  'Evans Prize, 1888–1913, ending with the 1913 award, Arthur '
+                  'Schneider’s “A Morning Walk”, and then states: “This Prize '
+                  'has been discontinued.” The Hudnut Prize stands at $200, '
+                  'the gift of Alexander M. Hudnut, “for the most meritorious '
+                  'Water Color in the exhibition and to be free from any '
+                  'restriction whatever”, and the page now records three awards '
+                  '— in 1914, to Edward H. Potthast, for “A Holiday”; in 1915, '
+                  'to Hilda Belcher, for “Winifred Hunt”; and in 1916, to W. '
+                  'Granville-Smith, for “Old Philadelphia”. No Evans Prize '
+                  'amount is offered for this exhibition, and the 1917 Hudnut '
+                  'award is not recorded in this book.'),
+        # The parse stores the plain catalogue numbers as integers,
+        # the lettered inserts as strings and one entry's number as
+        # the empty string, as printed; the built file carries them
+        # all as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 330,
+            'sections': {'Catalogue': 330},
+            # Plain catalogue numbers run 1–327 complete in the single
+            # alphabetical sequence, each exactly once, with two
+            # lettered inserts standing as printed (24a, 108a) and one
+            # entry printed without a number, its number standing
+            # empty in the records (Fletcher's, between nos. 101 and
+            # 102). The book's misprinted "150." for Kleen's "Tic-Tac"
+            # stands in the records under its restored number, 153, so
+            # no plain number is duplicated. Prices stand on 293
+            # records and a lender is named on 14, so 316 records have
+            # no lender; no record prints a medium; one record has no
+            # title (no. 170, whose title is a printed rule) and every
+            # record has an artist.
+            'plain_range': (1, 327),
+            'lettered': {'24a', '108a'},
+            'no_lender': 316,
+            'no_medium': 330,
+            'no_title': 1,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
