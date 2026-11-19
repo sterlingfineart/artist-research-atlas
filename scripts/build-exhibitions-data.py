@@ -2414,6 +2414,116 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    {
+        'id': 'aws-1912',
+        'file': 'aws-1912.json',
+        'title': 'Illustrated Catalogue of the Forty-fifth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the American Fine Arts Galleries, 215 West 57th Street, New York',
+        'venue': 'American Fine Arts Galleries, 215 West 57th Street, New York',
+        'dates': '25 April – 12 May 1912',
+        'year': 1912,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1912',
+        'source': 'Printed catalogue (New York, 1912); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The forty-fifth annual exhibition of the American Water Color Society, '
+                  'held at the American Fine Arts Galleries, 215 West 57th Street, '
+                  'New York. The exhibition grows again after 1911’s small hang: two '
+                  'galleries — the First Gallery (nos. 1–130) and the Second Gallery '
+                  '(nos. 131–272) — the works numbered continuously 1–272 across the '
+                  'two, the galleries headed in display capitals with no sub-headings '
+                  'and no gallery-furniture line under either heading (contrast '
+                  '1911’s “Fountain Figure”). The one-line entry form of 1909–1911 '
+                  'stands: each entry on one line, its element a price in whole '
+                  'dollars, or “Owned by …” standing on its own line beneath the '
+                  'title, or nothing: 272 records in all, standing under 163 '
+                  'artists’ headings; 244 works are priced for sale in the '
+                  'catalogue, the price standing in each record’s note and the '
+                  'prices including frames, 9 name a lender — “Owned by” is this '
+                  'book’s only lender form, there being no “Lent by”, “Courtesy of” '
+                  'or permission lines anywhere in the body — and 19 have neither. '
+                  'The dearest works are two at $1,000.00: F. Hopkinson Smith’s “The '
+                  'Rug Market” (no. 59) and Leonard Ochtman’s “The Brook in the '
+                  'Winter” (no. 166) — this book prints the thousands comma '
+                  '(“$1,000”), where 1911’s did not — followed by Bernard Johannes '
+                  'Blommers’s “November at Scheveningen” (no. 7) at $800.00 and '
+                  'William J. Whittemore’s “Bacchante” (no. 47) at $750.00; the '
+                  'cheapest price is $50.00, carried by 46 records, nothing in the '
+                  'book priced below it; the priced works total $37,890. The '
+                  'numbering runs 1–272 complete — the cleanest of the 1906–1912 '
+                  'volumes: no number is restored, none is printed twice, there are '
+                  'no lettered inserts, no joint entries and no absent numbers; '
+                  'two numbers carry the book’s own trailing punctuation — no. 141 '
+                  'prints “141,” and no. 147 “147:” — read as their numbers without '
+                  'remark. The artists’ headings are printed in natural order '
+                  'throughout, members carrying the printed suffix “A.W.C.S.” '
+                  'where it stands; two headings on one page carry a parenthetical '
+                  '“(DECEASED)” in capitals: Howard Pyle, whose two works (nos. 203 '
+                  'and 204) are both lent by Mrs. Pyle, the mark recorded in each '
+                  'record’s note. Eight works are illustrated in the catalogue, '
+                  'each flagged in its record’s note; the body prints no '
+                  'illustration marks, so the illustrated works are named by the '
+                  'book’s List of Illustrations (nos. 3, 7, 11, 65, 77, 100, 142 '
+                  'and 196), and all eight plates are bound in this copy, no. 100 '
+                  'standing as frontispiece; no caption differs from its body '
+                  'entry. No medium line stands beneath any entry’s title and no '
+                  'dimensions are printed for any entry, so Medium and Size stand '
+                  'empty throughout, medium words standing inside very many titles '
+                  'as printed. The artists’ addresses stand only in the book’s '
+                  'artist index and are not carried into these records; the index '
+                  'is complete in this copy (Abbatt to Wigand) and was '
+                  'cross-checked against the body during the parse, the body '
+                  'governing every disagreement — the index cites Forsyth at '
+                  '“151, 249”, its 249 being its own figure error (the body’s '
+                  'no. 249 is Beauley’s, and no. 240, W. Forsyth’s “A Winter '
+                  'Brook”, goes uncited), and it prints Howard Pyle’s two numbers '
+                  'under the entry for “Pyle, Mrs. Howard”, the lender. The '
+                  'book’s own name forms stand: the secretary’s name printed '
+                  '“MERRITT” at no. 23’s heading and “MERRIT” at no. 39’s; Robert '
+                  'David Gauley’s surname “GAULEY” at no. 165 and “GAULY” at nos. '
+                  '208 and 216; Clara T. MacChesney’s surname spaced, “MAC '
+                  'CHESNEY”, at no. 176 and closed, “MacCHESNEY”, at no. 250; '
+                  'Norwood Mac Gilvary’s surname spaced at no. 105; no. 150’s '
+                  'heading carrying a compositor’s stray stop, “FIDELIA. '
+                  'BRIDGES”; no. 199’s title standing as printed, “The Cleremont”, '
+                  'no. 262’s as “Behind the Grootakirk”, and no. 188’s title '
+                  'ending “XIII.,” as printed. A handful of readings were settled '
+                  'on the printed page where the scan’s text layer garbles them — '
+                  'no. 189’s price, $150.00, the page’s folio clustering into the '
+                  'price segment in the layer; no. 41’s title, “Breezy Morning, '
+                  'Paris”, a reader’s ink stroke over “Paris” reducing the word '
+                  'to debris in the layer; and eight headings among them, '
+                  'including the Glintenkamp heading at no. 97, garbled entire '
+                  'behind an ink rule struck through it in this copy — each '
+                  'recorded with its evidence in the parse log. The Wm. T. Evans '
+                  'Prize was $300 this year, on the standing terms; the book’s '
+                  'list of past winners ends with the 1911 award, Charles H. '
+                  'Woodbury’s “Evening” — the 1912 award is not recorded in this '
+                  'book.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 272,
+            'sections': {'First Gallery': 130, 'Second Gallery': 142},
+            # Plain catalogue numbers run 1–272 complete through the
+            # two galleries in the order hung (First 1–130, Second
+            # 131–272) — the cleanest of the 1906–1912 volumes: no
+            # number restored, none printed twice, no lettered
+            # inserts, no joint entries and no absent numbers. 244
+            # records carry a price in the note, 9 name a lender (all
+            # "Owned by") and 19 have neither; no record prints a
+            # medium or a size; every record has an artist and a
+            # title.
+            'plain_range': (1, 272),
+            'lettered': set(),
+            'no_lender': 263,
+            'no_medium': 272,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
