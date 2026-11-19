@@ -214,6 +214,63 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'aws-1893',
+        'file': 'aws-1893.json',
+        'title': 'Illustrated Catalogue of the Twenty-Sixth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Academy of Design, New York',
+        'venue': 'National Academy of Design, New York',
+        'dates': '30 January – 25 February 1893',
+        'year': 1893,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1893',
+        'source': 'Printed catalogue (New York, 1893); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The twenty-sixth annual exhibition of the American Water Color Society. '
+                  'The catalogue’s “Owner or Price” column is carried into these records: '
+                  '608 works are priced for sale in the catalogue — the prices include '
+                  'frames — and the price stands in each record’s note; 8 works name an '
+                  'owner, who is recorded as the lender — among them Charles L. Freer, '
+                  'at no. 64; and 30 leave the column blank. Twenty-one works are '
+                  'illustrated in the catalogue, each flagged in its record’s note — '
+                  'this catalogue prints no illustration marks in the body, so the '
+                  'illustrated works are identified from the captions of the plates '
+                  'themselves. The dearest works in the catalogue are five pictures '
+                  'priced at $1,000 each, among them H. F. Farney’s “A Mountain '
+                  'Trail—Crow Indians” (no. 256) and John La Farge’s portrait of Faase '
+                  'of Samoa (no. 309). Two catalogue numbers (110 and 111) were lost or '
+                  'garbled in the scan and have been restored from their sequence '
+                  'position, each flagged in its record’s note. The scan’s text layer '
+                  'displaces the price and artist columns, so every catalogue page was '
+                  'read against the page images during the parse, as with the 1891 and '
+                  '1892 catalogues. A handful of artist names stand exactly as the scan '
+                  'reads them — the garbles are the scan’s, not the catalogue’s — and '
+                  'have not been corrected. The Wm. T. Evans Prize rose to $500 this '
+                  'year.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 646,
+            'sections': {'North Gallery': 163, 'East Gallery': 108,
+                         'South Gallery': 209, 'West Gallery': 166},
+            # Plain catalogue numbers run 1–646 complete, in four
+            # contiguous gallery blocks (North 1–163, East 164–271,
+            # South 272–480, West 481–646), with no gaps and no
+            # lettered inserts; two numbers (110 and 111) were
+            # restored from their sequence position and are flagged
+            # in their records' notes. Only 8 records name a lender
+            # (the catalogue's owners); no record prints a medium;
+            # every record has an artist and a title.
+            'plain_range': (1, 646),
+            'lettered': set(),
+            'no_lender': 638,
+            'no_medium': 646,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'rose-croix-1893',
         'file': 'rose-croix-1893.json',
         'title': 'Catalogue officiel illustré du second Salon de la Rose+Croix (IIe Geste esthétique)',
