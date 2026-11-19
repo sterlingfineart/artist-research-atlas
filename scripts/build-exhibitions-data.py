@@ -62,6 +62,45 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'rose-croix-1893',
+        'file': 'rose-croix-1893.json',
+        'title': 'Catalogue officiel illustré du second Salon de la Rose+Croix (IIe Geste esthétique)',
+        'subtitle': 'By Joséphin Péladan, for the Ordre de la Rose-Croix Catholique du Temple et du Graal',
+        'venue': 'Palais du Champ-de-Mars, Paris',
+        'dates': '28 March – 30 April 1893',
+        'year': 1893,
+        'organiser': 'Joséphin Péladan',
+        'label': 'Rose+Croix 1893',
+        'source': 'Printed catalogue, in a compilation by John Finnegan (supplied November 2026)',
+        'notes': ('The second Salon de la Rose+Croix — Péladan’s second Geste esthétique. '
+                  'These records come from John Finnegan’s compilation of the printed catalogue '
+                  'and stand as compiled: nothing has been corrected or completed. Titles are '
+                  'as catalogued, with the medium often given in parentheses within the title; '
+                  'these salons print no sizes and no lenders. Each artist’s address, as the '
+                  'catalogue prints it, is carried in the record’s note. The numbers run to '
+                  '275, but nos. 249–253 do not appear in the compilation; they are left '
+                  'absent, not filled.'),
+        # Expected values from the converted compilation — the build
+        # fails loudly rather than shipping numbers that do not
+        # match them.
+        'expect': {
+            'total': 270,
+            'sections': {'Catalogue': 270},
+            # Plain catalogue numbers run 1–275, but nos. 249–253 do
+            # not appear in the compilation; there are no lettered
+            # inserts; no record has a lender or a medium (both stand
+            # empty throughout — the medium is in the title), and
+            # every record has a title and an artist.
+            'plain_range': (1, 275),
+            'absent_numbers': [249, 250, 251, 252, 253],
+            'lettered': set(),
+            'no_lender': 270,
+            'no_medium': 270,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'guildhall-1894',
         'file': 'guildhall-1894.json',
         'title': 'Descriptive Catalogue of the Loan Collection of Pictures',
@@ -94,6 +133,77 @@ EXHIBITIONS = [
             'lettered': {'43A', '108A'},
             'no_lender': 2,
             'no_title': 1,
+        },
+    },
+    {
+        'id': 'rose-croix-1894',
+        'file': 'rose-croix-1894.json',
+        'title': 'Catalogue du Salon de la Rose+Croix (IIIe Geste esthétique)',
+        'subtitle': 'By Joséphin Péladan, for the Ordre de la Rose-Croix Catholique du Temple et du Graal',
+        'venue': 'Galerie des Artistes Contemporains, rue de la Paix, Paris',
+        'dates': 'May 1894',
+        'year': 1894,
+        'organiser': 'Joséphin Péladan',
+        'label': 'Rose+Croix 1894',
+        'source': 'Printed catalogue, in a compilation by John Finnegan (supplied November 2026)',
+        'notes': ('The third Salon de la Rose+Croix — Péladan’s third Geste esthétique. '
+                  'The small room at the Galerie des Artistes Contemporains, rue de la Paix, '
+                  'limited the hang to 83 works; the 84 records here are those 83 plus the '
+                  'inserted no. 73A. These records come from John Finnegan’s compilation of '
+                  'the printed catalogue and stand as compiled: nothing has been corrected '
+                  'or completed. Titles are as catalogued, with the medium often given in '
+                  'parentheses within the title; these salons print no sizes and no lenders. '
+                  'Each artist’s address, as the catalogue prints it, is carried in the '
+                  'record’s note.'),
+        'expect': {
+            'total': 84,
+            'sections': {'Catalogue': 84},
+            # Plain catalogue numbers run 1–83 with no gaps; the only
+            # lettered insert is 73A; no record has a lender or a
+            # medium, and every record has a title and an artist.
+            'plain_range': (1, 83),
+            'lettered': {'73A'},
+            'no_lender': 84,
+            'no_medium': 84,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'rose-croix-1895',
+        'file': 'rose-croix-1895.json',
+        'title': 'Catalogue du Salon de la Rose+Croix (IVe Geste esthétique)',
+        'subtitle': 'By Joséphin Péladan, for the Ordre de la Rose-Croix Catholique du Temple et du Graal',
+        'venue': 'Galerie des Artistes Contemporains, rue de la Paix, Paris',
+        'dates': '20 March – 20 April 1895',
+        'year': 1895,
+        'organiser': 'Joséphin Péladan',
+        'label': 'Rose+Croix 1895',
+        'source': 'Printed catalogue, in a compilation by John Finnegan (supplied November 2026)',
+        'notes': ('The fourth Salon de la Rose+Croix — Péladan’s fourth Geste esthétique. '
+                  'These records come from John Finnegan’s compilation of the printed catalogue '
+                  'and stand as compiled: nothing has been corrected or completed. Titles are '
+                  'as catalogued, with the medium often given in parentheses within the title; '
+                  'these salons print no sizes and no lenders. Each artist’s address, as the '
+                  'catalogue prints it, is carried in the record’s note. The numbering is the '
+                  'catalogue’s own tangle, kept as compiled: two notices for Louis Hawkins '
+                  'state in terms that the catalogue gives neither number nor title for his '
+                  'entry, three entries stand under no. 48 — the third of them, Léon '
+                  'Jacques’s, with no title at all — and no. 99 is shared by two works.'),
+        'expect': {
+            'total': 109,
+            'sections': {'Catalogue': 109},
+            # Plain catalogue numbers cover 1–106 (the set check is
+            # on distinct numbers: no. 48 stands three times and
+            # no. 99 twice, as compiled); there are no lettered
+            # inserts; no record has a lender or a medium; exactly
+            # one record has no title (Léon Jacques, no. 48).
+            'plain_range': (1, 106),
+            'lettered': set(),
+            'no_lender': 109,
+            'no_medium': 109,
+            'no_title': 1,
+            'no_artist': 0,
         },
     },
     {
@@ -130,6 +240,72 @@ EXHIBITIONS = [
             'no_lender': 0,
             'no_title': 3,
             'no_artist': 1,
+        },
+    },
+    {
+        'id': 'rose-croix-1896',
+        'file': 'rose-croix-1896.json',
+        'title': 'Salon de la Rose+Croix (Ve Geste esthétique)',
+        'subtitle': 'By Joséphin Péladan, for the Ordre de la Rose-Croix Catholique du Temple et du Graal',
+        'venue': 'Galerie des Arts Réunis, avenue de l’Opéra, Paris',
+        'dates': '20 March – 20 April 1896',
+        'year': 1896,
+        'organiser': 'Joséphin Péladan',
+        'label': 'Rose+Croix 1896',
+        'source': 'Printed catalogue, in a compilation by John Finnegan (supplied November 2026)',
+        'notes': ('The fifth Salon de la Rose+Croix — Péladan’s fifth Geste esthétique. '
+                  'These records come from John Finnegan’s compilation of the printed catalogue '
+                  'and stand as compiled: nothing has been corrected or completed. Titles are '
+                  'as catalogued, with the medium often given in parentheses within the title; '
+                  'these salons print no sizes and no lenders. Each artist’s address, as the '
+                  'catalogue prints it, is carried in the record’s note. The numbering is '
+                  'complete, 1–110.'),
+        'expect': {
+            'total': 110,
+            'sections': {'Catalogue': 110},
+            # Plain catalogue numbers run 1–110 with no gaps and no
+            # duplicates; there are no lettered inserts; no record
+            # has a lender or a medium, and every record has a title
+            # and an artist.
+            'plain_range': (1, 110),
+            'lettered': set(),
+            'no_lender': 110,
+            'no_medium': 110,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'rose-croix-1897',
+        'file': 'rose-croix-1897.json',
+        'title': 'VIe Geste esthétique — Sixième Salon de la Rose+Croix',
+        'subtitle': 'By Joséphin Péladan, for the Ordre de la Rose-Croix Catholique du Temple et du Graal',
+        'venue': 'Galerie Georges Petit, Paris',
+        'dates': '5 – 31 March 1897',
+        'year': 1897,
+        'organiser': 'Joséphin Péladan',
+        'label': 'Rose+Croix 1897',
+        'source': 'Printed catalogue, in a compilation by John Finnegan (supplied November 2026)',
+        'notes': ('The sixth and last Salon de la Rose+Croix — Péladan’s sixth Geste '
+                  'esthétique. These records come from John Finnegan’s compilation of the '
+                  'printed catalogue and stand as compiled: nothing has been corrected or '
+                  'completed. Titles are as catalogued, with the medium often given in '
+                  'parentheses within the title; these salons print no sizes and no lenders. '
+                  'Each artist’s address, as the catalogue prints it, is carried in the '
+                  'record’s note. The numbering is complete, 1–217.'),
+        'expect': {
+            'total': 217,
+            'sections': {'Catalogue': 217},
+            # Plain catalogue numbers run 1–217 with no gaps and no
+            # duplicates; there are no lettered inserts; no record
+            # has a lender or a medium, and every record has a title
+            # and an artist.
+            'plain_range': (1, 217),
+            'lettered': set(),
+            'no_lender': 217,
+            'no_medium': 217,
+            'no_title': 0,
+            'no_artist': 0,
         },
     },
     {
