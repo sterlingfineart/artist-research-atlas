@@ -925,6 +925,83 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'aws-1899',
+        'file': 'aws-1899.json',
+        'title': 'Illustrated Catalogue of the Thirty-Second Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Academy of Design, New York',
+        'venue': 'National Academy of Design, New York',
+        'dates': '13 February – 11 March 1899',
+        'year': 1899,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1899',
+        'source': 'Printed catalogue (New York, 1899); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The thirty-second annual exhibition of the American Water Color Society. '
+                  'This catalogue keeps the form of 1897 and 1898: its body has no '
+                  '“Owner or Price” column at all — number, subject and artist only '
+                  '— so no price and no owner is printed for any work, and no record '
+                  'here carries a price note or a lender; the book’s notices still '
+                  'say that prices include frames, and prices were evidently to be '
+                  'had at the desk in the gallery. The hang keeps the five sections '
+                  'of 1896–1898 — the four galleries and the Corridor — but the '
+                  'Corridor shrinks to nineteen works this year. Twenty-one works '
+                  'are illustrated in the catalogue, each flagged in its record’s '
+                  'note — twenty on the evidence of the body’s own '
+                  '“(Illustration).” mark, with the full stop as in 1897 and 1898, '
+                  'and one more (no. 340, L. C. Earle’s “Nimrod and his '
+                  'Granddaughter”) on the caption of its plate alone, the body '
+                  'printing no mark against it; twenty captioned plates are bound '
+                  'in, the plate of no. 84 serving as the frontispiece, and no. 341 '
+                  'carries the mark but no plate of it is bound in this copy. Ten '
+                  'of the plates are landscape plates whose captions stand '
+                  'vertically along the plate’s edge and appear nowhere in the '
+                  'scan’s text layer. Twenty-two catalogue numbers were lost or '
+                  'garbled in the scan and have been restored from their sequence '
+                  'position, each flagged in its record’s note — eighteen whose '
+                  'printed figures the scan loses or garbles beyond reading, and '
+                  'four seated where the scan reads a different figure (no. 119 '
+                  'read as 11, no. 143 as 43, no. 153 as 1, no. 482 as 0); the '
+                  'book’s own index corroborates the restored numbers, among them '
+                  'nos. 316 and 482, though the index carries faults of its own — '
+                  'from no. 471 to no. 490 it cites every number one lower than '
+                  'the body, leaving no. 491 cited by nobody, and it cites Sydney '
+                  'K. Hartman at an impossible “572”. Every catalogue page was '
+                  'read against the page images during the parse, as with the '
+                  'earlier catalogues. A handful of artist names and titles stand '
+                  'exactly as the scan reads them — the garbles are the scan’s, '
+                  'not the catalogue’s — and have not been corrected; the book’s '
+                  'own spellings likewise stand as printed — it prints “A '
+                  'Venician” (no. 144), and no. 84’s title, “Memories of the Red '
+                  'Ear”, stands in both the body and its plate caption, though '
+                  'the picture shows a man husking corn. The Wm. T. Evans Prize '
+                  'was $300 this year, as in 1895, 1896, 1897 and 1898.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 491,
+            'sections': {'North Gallery': 118, 'East Gallery': 99,
+                         'South Gallery': 143, 'West Gallery': 112,
+                         'Corridor': 19},
+            # Plain catalogue numbers run 1–491 complete, in five
+            # contiguous blocks (North 1–118, East 119–217, South
+            # 218–360, West 361–472, Corridor 473–491), with no gaps
+            # and no lettered inserts; twenty-two numbers were
+            # restored from their sequence position and are flagged
+            # in their records' notes. The catalogue prints no
+            # prices and no owners at all this year, so no record
+            # names a lender; no record prints a medium; every
+            # record has an artist and a title.
+            'plain_range': (1, 491),
+            'lettered': set(),
+            'no_lender': 491,
+            'no_medium': 491,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'guildhall-1899',
         'file': 'guildhall-1899.json',
         'title': 'Catalogue of the Loan Collection of Pictures and Drawings by J. M. W. Turner, R.A.',
