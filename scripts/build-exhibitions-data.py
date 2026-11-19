@@ -1636,6 +1636,96 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'aws-1905',
+        'file': 'aws-1905.json',
+        'title': 'Catalogue of the Thirty-Eighth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the National Arts Club, New York',
+        'venue': 'National Arts Club, New York',
+        'dates': '10 – 27 March 1905',
+        'year': 1905,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1905',
+        'source': 'Internet Archive item 1905AWS (Metropolitan Museum Library copy)',
+        'notes': ('The thirty-eighth annual exhibition of the American Water Color Society — '
+                  'a much smaller show than the years around it, held at the National '
+                  'Arts Club, 37–39 West Thirty-Fourth Street, New York, by courtesy '
+                  'of the National Arts Club; the copy recorded here is the Internet '
+                  'Archive’s digitisation of the Metropolitan Museum Library’s copy '
+                  '(item 1905AWS), not one of the Frick Library scans the rest of the '
+                  'run comes from. The catalogue keeps the alphabetical arrangement '
+                  'of 1902–1904 for a last year: the body is arranged alphabetically '
+                  'by artist — each artist’s heading, surname first, with the '
+                  'artist’s address printed beneath it (the addresses are not '
+                  'carried into these records), followed by that artist’s works, '
+                  'the works numbered 1–69 down the alphabet with four lettered '
+                  'inserts the book prints — no. 5A, J. G. Brown’s “Puzzling It '
+                  'Out”; no. 26A, Winslow Homer’s “Pulling in the Anchor”, which '
+                  'stands at the foot of its page and was missed by the search '
+                  'that first located this book, which reported 72 entries; and '
+                  'nos. 66A and 66B, Ross Turner’s “Summer” and “The Ship of '
+                  'Parsus” — 73 works in all, standing in the single section the '
+                  'book itself heads “Catalogue”, under 47 artists’ headings as '
+                  'printed. The book keeps the price-less form of the years since '
+                  '1897 for a ninth year: no price is printed against any entry '
+                  'and no owner or lender is named for any entry, so no record '
+                  'here carries a price note or a lender; no size or medium is '
+                  'printed for any entry either. The book’s notices still direct '
+                  'buyers to inquire at the desk, payments to be made before the '
+                  'close of the exhibition “to the order of James Symington, '
+                  'Treasurer”, under the standing line “PRICES INCLUDE FRAMES”. '
+                  'Unlike 1902–1904, no heading carries the Society’s “A.W.C.S.” '
+                  'mark this year, and the notices do not explain one: no artist '
+                  'string carries it. The book is not styled “Illustrated”, '
+                  'prints no List of Illustrations and carries no illustration '
+                  'mark against any entry, and there are no plates: no work is '
+                  'illustrated in the catalogue. One catalogue number was lost '
+                  'or garbled in the scan and has been restored from its '
+                  'sequence position, flagged in its record’s note — no. 33, '
+                  'Léon Moran’s “ Day Dreams ”, whose printed figure the scan '
+                  'garbles beyond reading; the figure stands correctly in '
+                  'print. The book prints no artist index, so the member rolls '
+                  'were cross-checked against the body instead: all 47 body '
+                  'surnames stand in the rolls. Every catalogue page was read '
+                  'against the page images during the parse, as with the '
+                  'earlier catalogues. Three titles stand exactly as the scan '
+                  'reads them, their punctuation the scan’s, not the '
+                  'catalogue’s — “The Norman Staircase. Canterburv” (no. 13), '
+                  '“The Silversmith’s Bazaar. Damascus” (no. 21) and “Along the '
+                  'Canal, Muiden. Holland” (no. 23) — and have not been '
+                  'corrected; no. 5’s “A Bit ot Beach” is the book’s own '
+                  'misprint, print and scan agreeing, and “The Ship of Parsus” '
+                  '(no. 66B) stands as printed. The Wm. T. Evans Prize was $300 '
+                  'this year, as in 1895–1904; the book’s list of winners runs '
+                  '1888–1905 complete, and its latest line is this year’s award '
+                  'itself: 1905, W. Granville Smith, “The Bay” — which hangs in '
+                  'this body as no. 63; the same list’s 1904 line names Charles '
+                  'Menté’s “The Old Mill Dam in Winter”.'),
+        # The parse stores the plain catalogue numbers as integers
+        # and the lettered inserts as strings; the built file
+        # carries them all as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 73,
+            'sections': {'Catalogue': 73},
+            # Plain catalogue numbers run 1–69 complete down the
+            # alphabet, in the single section "Catalogue"; the
+            # lettered inserts are 5A, 26A, 66A and 66B; one number
+            # (33) was restored from its sequence position and is
+            # flagged in its record's note. The catalogue prints no
+            # prices and no owners at all this year, so no record
+            # names a lender; no record prints a medium; every
+            # record has an artist and a title.
+            'plain_range': (1, 69),
+            'lettered': {'5A', '26A', '66A', '66B'},
+            'no_lender': 73,
+            'no_medium': 73,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'guildhall-1906',
         'file': 'guildhall-1906.json',
         'title': 'Catalogue of the Exhibition of Works by Flemish and Modern Belgian Painters',
