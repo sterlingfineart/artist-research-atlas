@@ -1952,6 +1952,118 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    {
+        'id': 'aws-1908',
+        'file': 'aws-1908.json',
+        'title': 'Illustrated Catalogue of the Forty-first Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the American Fine Arts Galleries, 215 West 57th Street, New York',
+        'venue': 'American Fine Arts Galleries, 215 West 57th Street, New York',
+        'dates': '30 April – 24 May 1908',
+        'year': 1908,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1908',
+        'source': 'Printed catalogue (New York, 1908); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The forty-first annual exhibition of the American Water Color Society, '
+                  'held at the American Fine Arts Galleries, 215 West 57th Street, '
+                  'New York. The format changes again: the five galleries of 1906–1907 '
+                  'shrink to three, and the printed sub-headings disappear altogether — '
+                  'the works are numbered continuously 1–610 through the South Gallery '
+                  '(nos. 1–181), the Central Gallery (nos. 182–437) and the Vanderbilt '
+                  'Gallery (nos. 438–610) — 610 records in all, standing under 291 '
+                  'artists’ headings, 180 of the records carrying the Society’s '
+                  '“A.W.C.S.” mark. Under each title stands a price, or a lender line '
+                  '(“Loaned by …”), or nothing — 507 works are priced for sale in the '
+                  'catalogue, the price standing in each record’s note and the prices '
+                  'including frames, 52 name a lender and 47 have neither — and four '
+                  'entries carry a fourth form in the element’s place, “Made for the '
+                  'Century Magazine.” (Jules Guerin’s nos. 376, 378, 381 and 413), '
+                  'carried in the records’ notes with the lender standing empty. No '
+                  'price in the book reaches $1,000 — after 1907’s $5,000 Mucha, the '
+                  'ceiling falls back below four figures: the dearest work is Childe '
+                  'Hassam’s “The Green Jade Gown” (no. 508), priced at $850.00, '
+                  'followed by three works at $750.00 — Wm. H. Lippincott’s '
+                  '“Helena—Pastel” (no. 9), Hugo Ballin’s “The Wood Nymph” (no. 549) '
+                  'and C. Y. Turner’s “Heirlooms” (no. 568). Two lender lines are '
+                  'printed in block form beneath a heading, over entries that carry no '
+                  'individual element line — “Numbers 272 to 283 loaned by the Century '
+                  'Company” under Timothy Cole and “423-426 loaned by Charles '
+                  'Scribner’s Sons” under Edward Penfield — the lender applied to '
+                  'every record of each block, each record’s note quoting the block '
+                  'line; and one lender, at no. 422, is genuinely just “Mr. W.” in '
+                  'print, and stands as printed. The numbering runs 1–610 complete, '
+                  'with no gaps, no lettered inserts, no joint entries and no number '
+                  'printed twice; three numbers were restored, each settled from the '
+                  'printed page: no. 11, F. K. M. Rehn’s “The Moonlit Sea—Pastel”, '
+                  'stands in the book without a printed number at all, between nos. 10 '
+                  'and 12, its number restored from the sequence and flagged in its '
+                  'record’s note; no. 111’s figures reach the scan only as letter '
+                  'debris; and no. 246’s number is glued to its title by a dash, the '
+                  'book’s own. Nine works are illustrated in the catalogue, each '
+                  'flagged in its record’s note; the body prints no illustration '
+                  'marks, so the illustrated works are named by the book’s List of '
+                  'Illustrations, and all nine plates are bound in this copy — '
+                  'no. 600, Colin Campbell Cooper’s “Grande Place, Antwerp”, is the '
+                  'frontispiece. Medium words stand inside the titles as printed '
+                  '(“The Hemlock Woods—Pastel”, “Charleston—Dry point”); no medium is '
+                  'printed as a field and no size is printed for any entry, so Medium '
+                  'and Size stand empty throughout. The artists’ addresses stand only '
+                  'in the book’s artist index and are not carried into these records; '
+                  'the index is incomplete in this copy — two of its leaves, carrying '
+                  'the surnames Nicholls to Smith, are wanting — and was cross-checked '
+                  'against the body on its surviving leaves during the parse, the body '
+                  'governing every disagreement; its conflicts with the body are all '
+                  'classified in the parse log, among them the index’s own spellings '
+                  '“Chamberlin” for Chamberlain (no. 172) and “Andresen” for Andersen '
+                  '(no. 450). The book’s own errors stand as printed: the doubled '
+                  'comma in “CRAWFORD,, EARL STETSON” at no. 377, the word “Brush” '
+                  'printed twice across a line break in no. 545’s title (“A Summer '
+                  'Shower in the Sage Brush Brush Country”), “Nicholas Biddle, Esd.” '
+                  'for Esq. in no. 32’s lender, the spellings “Poinsetta” (no. 95), '
+                  '“Juffrow Knitting” (no. 603), “Mt. Magunticook” (no. 465), '
+                  '“Caudebec” (no. 164) and “The Jinneeyeh” (no. 410), and Arthur '
+                  'Keller filed as “Arthur L.” at no. 338 and as “Arthur I.” at '
+                  'no. 346 — the book prints both, and both stand. Entries the book '
+                  'itself prints twice under two numbers stand twice — Ruth Sypherd '
+                  'Clements’s “Enfant au Luxembourg” at nos. 368 and 391 among them — '
+                  'each printing with its own element line. A handful of names and '
+                  'titles stand exactly as the scan reads them — “E.oth, Ernest D.” '
+                  'for Roth at nos. 296–300, “Squbre, Maud Hunt” for Squire at '
+                  'no. 243, “Watehing Leopards” (no. 439) and “Sfunset in the Alps” '
+                  '(no. 605) among them — and the scan’s dropping of the book’s '
+                  'accents stands throughout (“Vigee” for Vigée, “Cafe” for Café). '
+                  'The Wm. T. Evans Prize was $300 this year, as in 1895–1907; the '
+                  'book’s list of past winners runs 1888–1907, its latest line the '
+                  '1907 award, W. H. Drake’s “The Lion’s Lair”.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 610,
+            'sections': {'South Gallery': 181, 'Central Gallery': 256,
+                         'Vanderbilt Gallery': 173},
+            # Plain catalogue numbers run 1–610 complete through the
+            # three galleries in the order hung (South 1–181, Central
+            # 182–437, Vanderbilt 438–610), with no gaps, no lettered
+            # inserts, no joint entries and no number printed twice.
+            # Three numbers were restored from the printed page:
+            # no. 11, which the book prints without a number at all
+            # (flagged in its record's note), no. 111 (its figures
+            # reach the scan only as debris) and no. 246 (its number
+            # glued to its title). 507 records carry a price in the
+            # note, 52 name a lender, 47 have neither and four carry
+            # "Made for the Century Magazine" in the element's place;
+            # no record prints a medium or a size; every record has
+            # an artist and a title.
+            'plain_range': (1, 610),
+            'lettered': set(),
+            'no_lender': 558,
+            'no_medium': 610,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
