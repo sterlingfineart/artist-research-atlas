@@ -1038,6 +1038,79 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'aws-1900',
+        'file': 'aws-1900.json',
+        'title': 'Illustrated Catalogue of the Thirty-Third Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the Waldorf-Astoria, New York',
+        'venue': 'Waldorf-Astoria, New York',
+        'dates': '5 – 17 February 1900',
+        'year': 1900,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1900',
+        'source': 'Printed catalogue (New York, 1900); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The thirty-third annual exhibition of the American Water Color Society. '
+                  'This year the exhibition leaves the National Academy of Design, its '
+                  'home throughout the earlier volumes in this run, for the Galleries '
+                  'of the Waldorf-Astoria, New York, entered from Main 33rd Street. '
+                  'This catalogue keeps the form of 1897, 1898 and 1899 for a fourth '
+                  'year: its body has no “Owner or Price” column at all — number, '
+                  'subject and artist only — so no price and no owner is printed for '
+                  'any work, and no record here carries a price note or a lender; the '
+                  'book’s notices still say that prices include frames, and prices '
+                  'were evidently to be had at the desk in the gallery. The hang is '
+                  'arranged not by gallery but by room, in one continuous numbering: '
+                  'the Large Room holds nos. 1–169, with four lettered inserts — '
+                  '143a and 143b after no. 143, 169a and 169b after no. 169 — and the '
+                  'Small Room nos. 170–256. Nineteen works are illustrated in the '
+                  'catalogue, each flagged in its record’s note on the evidence of '
+                  'the captions of the plates alone — a change from 1897–1899, for '
+                  'this book prints no “(Illustration).” mark against any entry in '
+                  'its body at all; nineteen captioned plates are bound in, the '
+                  'plate of no. 16, J. G. Brown’s “Dreamers”, serving as the '
+                  'frontispiece. Twelve catalogue numbers were lost or garbled in '
+                  'the scan and have been restored from their sequence position, '
+                  'each flagged in its record’s note — nos. 11–21, whose tens figures '
+                  'the scan drops wholesale on the first catalogue page, and '
+                  'no. 111; the book’s own index corroborates the restored numbers '
+                  'and is the cleanest index of the ten volumes, agreeing with the '
+                  'body on every point the scan lets it be read, and citing all four '
+                  'lettered inserts. Every catalogue page was read against the page '
+                  'images during the parse, as with the earlier catalogues. A handful '
+                  'of artist names and titles stand exactly as the scan reads them — '
+                  'the garbles are the scan’s, not the catalogue’s — and have not '
+                  'been corrected; the book’s own spellings likewise stand as '
+                  'printed — it prints “Venice, from the San Giorgia” (no. 14), '
+                  '“Puetra del Patro Machuca, Alhambra” (no. 149) and “Campodoglio, '
+                  'from Roman Forum” (no. 148), and McCord’s name in full, “George '
+                  'H. McCord”, at nos. 172 and 181, “Geo. H. McCord” elsewhere. The '
+                  'Wm. T. Evans Prize was $300 this year, as in 1895–1899.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 260,
+            'sections': {'Large Room': 173, 'Small Room': 87},
+            # Plain catalogue numbers run 1–256 complete, in two
+            # contiguous room blocks (Large Room 1–169 with its four
+            # lettered inserts, Small Room 170–256), with no gaps;
+            # the lettered inserts are 143a, 143b, 169a and 169b;
+            # twelve numbers (11–21 and 111) were restored from
+            # their sequence position and are flagged in their
+            # records' notes. The catalogue prints no prices and no
+            # owners at all this year, so no record names a lender;
+            # no record prints a medium; every record has an artist
+            # and a title.
+            'plain_range': (1, 256),
+            'lettered': {'143a', '143b', '169a', '169b'},
+            'no_lender': 260,
+            'no_medium': 260,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'guildhall-1901',
         'file': 'guildhall-1901.json',
         'title': 'Descriptive and Biographical Catalogue of the Exhibition of the Works of Spanish Painters',
