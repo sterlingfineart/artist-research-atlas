@@ -825,6 +825,73 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'aws-1898',
+        'file': 'aws-1898.json',
+        'title': 'Illustrated Catalogue of the Thirty-First Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Academy of Design, New York',
+        'venue': 'National Academy of Design, New York',
+        'dates': '31 January – 26 February 1898',
+        'year': 1898,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1898',
+        'source': 'Printed catalogue (New York, 1898); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The thirty-first annual exhibition of the American Water Color Society. '
+                  'This catalogue keeps the form of 1897: its body has no “Owner or '
+                  'Price” column at all — number, subject and artist only — so no '
+                  'price and no owner is printed for any work, and no record here '
+                  'carries a price note or a lender; the book’s notices still say '
+                  'that prices include frames, and prices were evidently to be had '
+                  'at the desk in the gallery. The hang keeps the five sections of '
+                  '1896 and 1897 — the four galleries and the Corridor. Sixteen '
+                  'works are illustrated in the catalogue, each flagged in its '
+                  'record’s note — fourteen on the evidence of the body’s own '
+                  '“(Illustration).” mark, with the full stop as in 1897, and two '
+                  'more (no. 143, James Symington’s “Hypatia”, and no. 163, George '
+                  'Wharton Edwards’s “Breakfast at the Blue Grape”) on the captions '
+                  'of their plates alone, the body printing no mark against them; '
+                  'eight captioned plates are bound in. One catalogue number (12) '
+                  'was lost in the scan — an ink blot in this copy obscures its '
+                  'printed figures — and has been restored from its sequence '
+                  'position, flagged in its record’s note and corroborated by the '
+                  'book’s own index. This copy is a former owner’s annotated copy: '
+                  'pencil ticks, strokes and notes stand throughout it, and they '
+                  'corrupt the text layer of the book’s index, though no body '
+                  'reading. Every catalogue page was read against the page images '
+                  'during the parse, as with the earlier catalogues. A handful of '
+                  'artist names and titles stand exactly as the scan reads them — '
+                  'the garbles are the scan’s, not the catalogue’s — and have not '
+                  'been corrected; the book’s own spellings likewise stand as '
+                  'printed — it prints both “F. K. M. Rehm” and “F. K. M. Rehn”, '
+                  'and both “E. J. Hoklag” and “E. J. Holgate”. The Wm. T. Evans '
+                  'Prize was $300 this year, as in 1895, 1896 and 1897.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 517,
+            'sections': {'North Gallery': 98, 'East Gallery': 81,
+                         'South Gallery': 140, 'West Gallery': 109,
+                         'Corridor': 89},
+            # Plain catalogue numbers run 1–517 complete, in five
+            # contiguous blocks (North 1–98, East 99–179, South
+            # 180–319, West 320–428, Corridor 429–517), with no gaps
+            # and no lettered inserts; one number (12) was restored
+            # from its sequence position and is flagged in its
+            # record's note. The catalogue prints no prices and no
+            # owners at all this year, so no record names a lender;
+            # no record prints a medium; every record has an artist
+            # and a title.
+            'plain_range': (1, 517),
+            'lettered': set(),
+            'no_lender': 517,
+            'no_medium': 517,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'guildhall-1898',
         'file': 'guildhall-1898.json',
         'title': 'Catalogue of the Loan Collection of Pictures by Painters of the French School',
