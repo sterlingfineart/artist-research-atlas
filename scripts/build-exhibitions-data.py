@@ -2064,6 +2064,123 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    {
+        'id': 'aws-1909',
+        'file': 'aws-1909.json',
+        'title': 'Illustrated Catalogue of the Forty-second Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the American Fine Arts Galleries, 215 West 57th Street, New York',
+        'venue': 'American Fine Arts Galleries, 215 West 57th Street, New York',
+        'dates': '29 April – 23 May 1909',
+        'year': 1909,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1909',
+        'source': 'Printed catalogue (New York, 1909); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The forty-second annual exhibition of the American Water Color Society, '
+                  'held at the American Fine Arts Galleries, 215 West 57th Street, '
+                  'New York. The three galleries of 1908 stand again — the South '
+                  'Gallery (nos. 1–178), the Central Gallery (nos. 179–430) and the '
+                  'Vanderbilt Gallery (nos. 431–598), the works numbered '
+                  'continuously 1–598 — but the entry form changes entirely: the '
+                  'galleries are headed in roman capitals (1908’s blackletter is '
+                  'gone), there are no printed sub-headings anywhere, and each '
+                  'entry stands on one line, its element on the same line as its '
+                  'number and title — a price in whole dollars, or “Owned by …”, '
+                  'or “Courtesy of …”, or nothing: 598 records in all, standing '
+                  'under 248 artists’ headings, 216 of the records carrying the '
+                  'Society’s “A.W.C.S.” mark; 466 works are priced for sale in the '
+                  'catalogue, the price standing in each record’s note and the '
+                  'prices including frames, 54 name a lender (36 “Owned by”, 17 '
+                  '“Courtesy of”, and one permission credit) and 78 have neither. '
+                  'The dearest work in the book is Clara T. MacChesney’s “Still '
+                  'Life” (no. 57), priced at $1,000.00 — the only four-figure '
+                  'price in the book — followed by Ernest Albert’s “Moonrise” '
+                  '(no. 475) at $800.00, Albert Sterner’s “The Visitor” (no. 112) '
+                  'at $750.00 and three works at $600.00 (nos. 492, 500 and 559); '
+                  'the cheapest are two works by Frank Melville at $5.00 (nos. 204 '
+                  'and 266). One permission credit stands in the element’s place: '
+                  'no. 308, William Levy’s “Dr. William B. Guthrie”, “By permission '
+                  'of Dr. Guthrie.” — the lender standing as “Dr. Guthrie.” with '
+                  'the credit quoted in the record’s note, the book’s only '
+                  'instance. The numbering runs 1–598 complete, with no gaps, no '
+                  'lettered inserts, no joint entries and no number printed '
+                  'twice; three numbers were restored from the sequence, each '
+                  'flagged in its record’s note: no. 110, whose printed figures '
+                  'the scan’s text layer reads as the word “no.”; no. 111, whose '
+                  'figures reach the layer as the debris “HI.”; and no. 519, '
+                  'whose figures are fused to its title as “5i9i”, read on the '
+                  'printed page. Twenty-three works are illustrated in the '
+                  'catalogue, each flagged in its record’s note; the body prints '
+                  'no illustration marks, so the illustrated works are named by '
+                  'the book’s List of Illustrations, and all 23 plates are bound '
+                  'in this copy, one or two to a leaf — no. 578 is the '
+                  'frontispiece; the caption to no. 553 misprints its artist as '
+                  '“HARRY PENN” (the plate is signed Fenn; the body and the List '
+                  'read Fenn, the List spelling him “Hary Fenn”), and the plates '
+                  'of nos. 543 and 559 carry copyright lines beneath their '
+                  'captions. One medium line stands beneath a title — “Original '
+                  'Engraving.” under no. 288, carried in the record’s note — and '
+                  'no dimensions are printed for any entry, so Medium and Size '
+                  'stand empty throughout, medium words standing inside very many '
+                  'titles as printed. The artists’ addresses stand only in the '
+                  'book’s artist index and are not carried into these records; '
+                  'the index is complete in this copy (Abbatt to Zogbaum — a '
+                  'contrast with the 1908 copy’s two wanting leaves) and was '
+                  'cross-checked against the body during the parse, the body '
+                  'governing every disagreement; its 14 conflicts with the body '
+                  'are all classified in the parse log, among them the printed '
+                  'index’s own errors — it cites no. 48 under Chatterton (the '
+                  'body’s 46; 48 is Grant Gordon’s) and no. 594 under Needham '
+                  '(the body’s 591) — and its outright omissions of nos. 577 '
+                  '(Hirst) and 579 (Bicknell). The book’s own errors stand as '
+                  'printed: “Deirlbiss, Ida E.” at no. 47 (the book’s own '
+                  'misprint; the index prints Devilbiss), “Moonlinght” in '
+                  'no. 167’s title, “Gallilee” in no. 449’s, “ALPHONE” for '
+                  'Alphonse in Mucha’s heading at no. 430, the comma-less '
+                  'headings “TURNER ROSS” (no. 547; no. 131 carries the comma) '
+                  'and “GRANT GORDON” (nos. 48 and 446), and the stray printed '
+                  'closing quote in no. 353’s lender (“Scribner’s '
+                  'Magazine.””). A handful of names stand exactly as the scan '
+                  'reads them — “Kobbfi” for Kobbé (no. 133), “Wialter” for '
+                  'Walter (Palmer, no. 163), “Ruzigka” for Ruzicka (no. 283; '
+                  'the heading at no. 288 is clean), “Charjles” for Charles '
+                  '(Mielatz), “Emjma” for Emma (Maass, no. 454), “Carllton” for '
+                  'Carlton (Chapman) and “Wihittemore” for Whittemore (no. 130) '
+                  'among them — and the scan’s dropping of the book’s accents '
+                  'stands throughout (“Lave” for Lavé, no. 191; “Cafe” for '
+                  'Café, no. 337). The Wm. T. Evans Prize was $300 this year, as '
+                  'in 1895–1908; the book’s list of past winners runs 1888–1908, '
+                  'its latest line the 1908 award, Ross Turner’s “The Dawn”.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 598,
+            'sections': {'South Gallery': 178, 'Central Gallery': 252,
+                         'Vanderbilt Gallery': 168},
+            # Plain catalogue numbers run 1–598 complete through the
+            # three galleries in the order hung (South 1–178, Central
+            # 179–430, Vanderbilt 431–598), with no gaps, no lettered
+            # inserts, no joint entries and no number printed twice.
+            # Three numbers were restored from the sequence and are
+            # flagged in their records' notes: no. 110 (its printed
+            # figures read by the scan's text layer as the word
+            # "no."), no. 111 (its figures reach the layer as the
+            # debris "HI.") and no. 519 (its figures fused to its
+            # title as "5i9i"). 466 records carry a price in the
+            # note, 54 name a lender (36 "Owned by", 17 "Courtesy
+            # of", and one permission credit, no. 308) and 78 have
+            # neither; no record prints a medium or a size; every
+            # record has an artist and a title.
+            'plain_range': (1, 598),
+            'lettered': set(),
+            'no_lender': 544,
+            'no_medium': 598,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
