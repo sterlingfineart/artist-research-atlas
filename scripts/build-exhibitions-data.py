@@ -1111,6 +1111,101 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'aws-1901',
+        'file': 'aws-1901.json',
+        'title': 'Illustrated Catalogue of the Thirty-Fourth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the Building, formerly National Academy of Design, New York',
+        'venue': 'National Academy of Design, New York',
+        'dates': '11 February – 28 March 1901',
+        'year': 1901,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1901',
+        'source': 'Printed catalogue (New York, 1901); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The thirty-fourth annual exhibition of the American Water Color Society. '
+                  'This year the exhibition returns to its old home — the galleries '
+                  'of the building formerly the National Academy of Design, at '
+                  'Twenty-Third Street and Fourth Avenue — after 1900’s single '
+                  'year at the Waldorf-Astoria. This catalogue keeps the form of '
+                  '1897, 1898, 1899 and 1900 for a fifth year: its body has no '
+                  '“Owner or Price” column at all — number, subject and artist '
+                  'only — so no price and no owner is printed for any work, and '
+                  'no record here carries a price note or a lender; the book’s '
+                  'notices still say that prices include frames, and inquiries in '
+                  'regard to works for sale were to be made at the desk in the '
+                  'gallery. The hang is arranged by gallery again — 1900’s two '
+                  'rooms are gone — in one continuous numbering with no lettered '
+                  'inserts: the North Gallery holds nos. 1–96, the East Gallery '
+                  'nos. 97–172, the South Gallery nos. 173–321, the West Gallery '
+                  'nos. 322–427 and the Corridor nos. 428–500. Twenty-two works '
+                  'are illustrated in the catalogue, each flagged in its record’s '
+                  'note on the evidence of the captions of the plates alone — as '
+                  'in 1900, this book prints no “(Illustration).” mark against '
+                  'any entry in its body at all; twenty-two captioned plates are '
+                  'bound in, the plate of no. 131 serving as the frontispiece, '
+                  'and sixteen of them are landscape plates whose captions stand '
+                  'vertically along the plate’s edge and appear nowhere in the '
+                  'scan’s text layer. Six catalogue numbers were lost or garbled '
+                  'in the scan and have been restored from their sequence '
+                  'position, each flagged in its record’s note — nos. 111 and '
+                  '390, whose printed figures the scan loses outright, and nos. '
+                  '113, 115 and 313, of which it reads only the last figure; '
+                  'no. 141’s record carries a second note besides: the East '
+                  'Gallery leaf is bound into this scan twice, in two different '
+                  'print states — the copy parsed here omits no. 141 in print, '
+                  'while the second copy prints it but omits nos. 142–144 — and '
+                  'no. 141’s artist and title are read from the second copy’s '
+                  'printed page, the book’s own index citing all four numbers. '
+                  'No. 105’s number was reunited with its displaced printed '
+                  'figures and carries no flag. The scan’s last leaf is a '
+                  'frontispiece from another year’s catalogue — “35. '
+                  'Puppies.—J. G. Brown” — and is given no record here; no. 35 '
+                  'in this catalogue is Charles Warren Eaton’s “Evening in '
+                  'Holland”. Every catalogue page was read against the page '
+                  'images during the parse, as with the earlier catalogues, and '
+                  'the book’s own index of artists was parsed as a cross-check; '
+                  'the index carries faults of its own — it prints “Walter, '
+                  'Horatio” for Walker at nos. 227 and 242, cites Otto Stark’s '
+                  'no. 369 as “309” and Clark G. Voorhees’s no. 58 as “68”, and '
+                  'files no. 342 under Moser where the body prints Moses — and '
+                  'the body governs throughout. A handful of artist names and '
+                  'titles stand exactly as the scan reads them — the garbles '
+                  'are the scan’s, not the catalogue’s — and have not been '
+                  'corrected: Léon Moran stands as “L£on Moran” at nos. 202, '
+                  '391 and 396, as “L6on Moran” at no. 208 and unaccented at '
+                  'no. 165. The book’s own spellings likewise stand as printed '
+                  '— it prints “Rio St. Fraraco, Venice” (no. 212), “Canonicut” '
+                  '(no. 294), “SS. Giovanni Paolo” (no. 425) and “Cadennabbia” '
+                  '(no. 439), and the artist of nos. 133 and 272 under both '
+                  '“Ohlefeld” and “Ihlefeld”. The Wm. T. Evans Prize was $300 '
+                  'this year, as in 1895–1900.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 500,
+            'sections': {'North Gallery': 96, 'East Gallery': 76,
+                         'South Gallery': 149, 'West Gallery': 106,
+                         'Corridor': 73},
+            # Plain catalogue numbers run 1–500 complete, in five
+            # contiguous blocks (North 1–96, East 97–172, South
+            # 173–321, West 322–427, Corridor 428–500), with no gaps
+            # and no lettered inserts; six numbers (111, 113, 115,
+            # 141, 313 and 390) were restored from their sequence
+            # position and are flagged in their records' notes. The
+            # catalogue prints no prices and no owners at all this
+            # year, so no record names a lender; no record prints a
+            # medium; every record has an artist and a title.
+            'plain_range': (1, 500),
+            'lettered': set(),
+            'no_lender': 500,
+            'no_medium': 500,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'guildhall-1901',
         'file': 'guildhall-1901.json',
         'title': 'Descriptive and Biographical Catalogue of the Exhibition of the Works of Spanish Painters',
