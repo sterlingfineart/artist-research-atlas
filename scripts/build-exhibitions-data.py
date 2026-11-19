@@ -310,6 +310,66 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'aws-1894',
+        'file': 'aws-1894.json',
+        'title': 'Illustrated Catalogue of the Twenty-Seventh Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Academy of Design, New York',
+        'venue': 'National Academy of Design, New York',
+        'dates': '5 February – 3 March 1894',
+        'year': 1894,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1894',
+        'source': 'Printed catalogue (New York, 1894); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The twenty-seventh annual exhibition of the American Water Color Society. '
+                  'The catalogue’s “Owner or Price” column is carried into these records: '
+                  '577 works are priced for sale in the catalogue — the prices include '
+                  'frames — and the price stands in each record’s note; 5 works name an '
+                  'owner, who is recorded as the lender; and 25 leave the column blank. '
+                  'One work — no. 47, James D. Smillie’s “Well, Capuchin Monastery, '
+                  'Italy” — is marked “Not for sale”, the catalogue’s only sale mark. '
+                  'Twenty-one works are illustrated in the catalogue, each flagged in '
+                  'its record’s note — nineteen are marked “(Illustration.)” in the '
+                  'body, and two more (no. 60, Willard L. Metcalf’s “Beatrix”, and '
+                  'no. 458, Harry Fenn’s “Street Venders in Cairo”) are identified from '
+                  'the captions of the plates themselves; the plate of no. 347, Horatio '
+                  'Walker’s “Morning”, is the catalogue’s frontispiece. The dearest '
+                  'work in the catalogue is Wm. Magrath’s “Trafalgar Square, London” '
+                  '(no. 160), priced at $1,500. Three catalogue numbers (110, 111 and '
+                  '295) were lost or garbled in the scan and have been restored from '
+                  'their sequence position, each flagged in its record’s note — '
+                  'no. 295’s number was glued to its title in the scan; the printed '
+                  'title is “Ænid”. The scan’s text layer displaces the price and '
+                  'artist columns, so every catalogue page was read against the page '
+                  'images during the parse, as with the earlier catalogues. A handful '
+                  'of artist names stand exactly as the scan reads them — the garbles '
+                  'are the scan’s, not the catalogue’s — and have not been corrected. '
+                  'The Wm. T. Evans Prize was $500 this year.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 607,
+            'sections': {'North Gallery': 127, 'East Gallery': 141,
+                         'South Gallery': 190, 'West Gallery': 149},
+            # Plain catalogue numbers run 1–607 complete, in four
+            # contiguous gallery blocks (North 1–127, East 128–268,
+            # South 269–458, West 459–607), with no gaps and no
+            # lettered inserts; three numbers (110, 111 and 295) were
+            # restored from their sequence position and are flagged
+            # in their records' notes. Only 5 records name a lender
+            # (the catalogue's owners); no record prints a medium;
+            # every record has an artist and a title.
+            'plain_range': (1, 607),
+            'lettered': set(),
+            'no_lender': 602,
+            'no_medium': 607,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'guildhall-1894',
         'file': 'guildhall-1894.json',
         'title': 'Descriptive Catalogue of the Loan Collection of Pictures',
