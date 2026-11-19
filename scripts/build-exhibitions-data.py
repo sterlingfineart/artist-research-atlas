@@ -3398,6 +3398,147 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    {
+        'id': 'aws-1920',
+        'file': 'aws-1920.json',
+        'title': 'Catalogue of the Fifty-Third Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Arts Club, 119 East 19th Street, New York',
+        'venue': 'Galleries of the National Arts Club, 119 East 19th Street, New York',
+        'dates': '5 – 27 February 1920',
+        'year': 1920,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1920',
+        'source': 'Printed catalogue (New York, 1920); Internet Archive scan (Philadelphia Museum of Art collection)',
+        'notes': ('The fifty-third annual exhibition of the American Water Color Society, '
+                  'held at the Galleries of the National Arts Club, One Nineteen '
+                  'East Nineteenth Street, New York — the exhibition stays at '
+                  'the National Arts Club, as in 1915, 1916, 1917, 1918 and '
+                  '1919: 326 records in a single alphabetical run by artist, as '
+                  'in 1902, 1913, 1915, 1916, 1917, 1918 and 1919, the works '
+                  'standing under 165 artists’ headings. The headings stand '
+                  'surname-first, as in 1917, 1918 and 1919, in letter-spaced '
+                  'capitals, members carrying the printed suffix “A.W.C.S.” '
+                  'set in lowercase type where it stands; beneath each '
+                  'heading, or at its right, stands the artist’s address, '
+                  'which is not carried into these records. The book prints '
+                  'NO artist index — its back matter is the lists of members '
+                  'only, and they carry no catalogue numbers — so no index '
+                  'cross-check is possible. One heading line is a '
+                  'cross-reference only: “DE HAAS, ALICT TUCKER PREBLE,” — '
+                  'the book misprints the given name, ALICE read as ALICT — '
+                  'followed by “(See Nos. 109-110.)”; it creates no records, '
+                  'and her entries stand under her own correctly spelled '
+                  'heading (nos. 109 and 110). Each entry stands on one line '
+                  '— number, title and element together. Prices stand at the '
+                  'end of the entry line in whole dollars, and 294 works are '
+                  'priced for sale in the catalogue, the price standing in '
+                  'each record’s note; the dearest work is John S. Eland’s '
+                  '“Hail! Mary” (no. 87) at $3,500.00 — followed by Horatio '
+                  'Walker’s “A Pastoral—Sow and Pigs” (no. 287) at $3,000.00; '
+                  'fifteen records in all stand at $1,000.00 or more, the '
+                  'cheapest price is $50.00, and the prices run from $50 to '
+                  '$3,500 with a median of $100. One price is printed WITHOUT '
+                  'its dollar sign: no. 78c (Dougherty, “Mullion Cove”), '
+                  'tabled at 250 — the omission is the book’s, and the bare '
+                  'form is quoted in the record’s note. One price is '
+                  'misprinted by the book itself: no. 291 prints “$2.000.”, a '
+                  'full stop standing for the thousands comma (no. 290 '
+                  'directly above prints “$2,500.”); the price stands at '
+                  '$2,000.00 and the printed form is quoted in the record’s '
+                  'note. The lender stands in one form only: a “, owner …” '
+                  'credit appended to the title line itself, on ONE record '
+                  '(no. 272, Tiffany, “Village of Field, B. C”, owner Mrs. '
+                  'Robert De Forest) — the named party stands in the lender '
+                  'field and the printed form is quoted in the record’s note; '
+                  'there are no “Owned by” lines, no parenthetical credits, '
+                  'no “Lent by”, “Courtesy of” or “Made for” lines and no '
+                  'sale marks. No designation is printed after any title, no '
+                  'medium is printed for any entry and no dimensions are '
+                  'printed, so Medium and Size stand empty throughout. The '
+                  'book IS illustrated: its List of Illustrations names eight '
+                  'works, and eight plates are bound in, each captioned at '
+                  'the foot of its leaf. SEVEN plates match body entries — '
+                  'no. 22 (Beal, “Path of Gold”), no. 40 (Berneker, '
+                  '“Summer”), no. 50 (Browne, “Street to the Market—Le '
+                  'Puy”), no. 97 (Fisher, “The Canton Tea Jar”), no. 136 '
+                  '(Howell, “St. Thomas Church”), no. 243 (Ryder, “The Old '
+                  'Saw Mill”) and no. 275 (Volkert, “The Quiet Hour”) — and '
+                  'carry the note “Illustrated in the catalogue.”; the '
+                  'eighth — Charles W. Hawthorne’s “Interior”, standing in '
+                  'frontispiece position — matches NO body entry '
+                  '(Hawthorne’s body entries are nos. 123–127). Three '
+                  'captions differ from their body titles: no. 50’s reads '
+                  '“Street to the Market, Le Puy, France” against the body’s '
+                  '“Street to the Market—Le Puy”; no. 97’s reads “The Canton '
+                  'Crackled Tea Jar” against the body’s “The Canton Tea '
+                  'Jar”; and no. 136’s reads “Saint Thomas’ Church, New '
+                  'York” against the body’s “St. Thomas Church”. The '
+                  'Berneker plate leaf is cropped at its foot in this scan — '
+                  'only the word “SUMMER” of its caption survives — and the '
+                  'attribution to no. 40 rests on the List of Illustrations '
+                  'and on Berneker’s signature within the image. The '
+                  'numbering runs 1–315 with ELEVEN LETTERED INSERTS the book '
+                  'prints: 78a–78f (Dougherty), 188a–188d (McComas) and 274a '
+                  '(Tuttle) — 326 records in all. No number is absent, none '
+                  'is printed twice, none is misprinted as another number, '
+                  'there are no joint entries and no unnumbered entries, and '
+                  'NOTHING is restored: every printed figure stands in the '
+                  'scan’s text layer reading exactly the number the sequence '
+                  'assigns (contrast 1917 and 1919). A few numbers print '
+                  'with a comma after them instead of a stop — punctuation '
+                  'only, not carried into these records. The book’s own '
+                  'spellings stand as printed, among them the heading '
+                  '“HOWELL, FELECIE WALDO” (so also in the List of '
+                  'Illustrations) and the titles “Old Mission Near Tuckson” '
+                  '(no. 228), “Gate at Endosearch” (no. 284), “Ponciana '
+                  'Trees—Honolulu” (no. 189), “Misty Afternoon, Point Lobon” '
+                  '(no. 78e) and “Chicken Vender” (no. 117). Every catalogue '
+                  'page was read against the page images during the parse. '
+                  'The prize page stands as in 1915, 1916, 1917, 1918 and '
+                  '1919. It prints the list of recipients of the Wm. T. Evans '
+                  'Prize, 1888–1913, ending with the 1913 award, Arthur '
+                  'Schneider’s “A Morning Walk”, and then states: “This Prize '
+                  'has been discontinued.” The Hudnut Prize stands at $200, '
+                  'the gift of Alexander M. Hudnut, “awarded for the most '
+                  'meritorious Water Color in the exhibition and to be free '
+                  'from any restrictions whatever”, and the page now records '
+                  'six awards — in 1914, to Edward H. Potthast, for “A '
+                  'Holiday”; in 1915, to Hilda Belcher, for “Winifred Hunt”; '
+                  'in 1916, to W. Granville-Smith, for “Old Philadelphia”; in '
+                  '1917, to Sidney Dale Shaw, for “Snowy Roofs”; in 1918, to '
+                  'Hilda Belcher, for “The Bouncing Baby”; and in 1919, to '
+                  'Childe Hassam, for “Mount Beacon—From Broadway, '
+                  'Newburgh”. No Evans Prize amount is offered for this '
+                  'exhibition, and this book names NO winner for the 1920 '
+                  'exhibition itself: Horatio Walker’s Hudnut award belongs '
+                  'to this exhibition — his “A Pastoral—Sow and Pigs” stands '
+                  'at no. 287 in these records — but it is first printed in '
+                  'the 1921 volume’s list.'),
+        # The parse stores the plain catalogue numbers as integers;
+        # the built file carries them all as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 326,
+            'sections': {'Catalogue': 326},
+            # Plain catalogue numbers run 1–315 in the single
+            # alphabetical sequence, with eleven lettered inserts
+            # (78a–78f, 188a–188d and 274a), no absent numbers, no
+            # duplicated numbers, no unnumbered entries and nothing
+            # restored. Prices stand on 294 records and a lender is
+            # named on 1 (no. 272, in the ", owner …" form), so 325
+            # records have no lender; no record prints a medium or a
+            # title-less entry exists; every record has an artist.
+            'plain_range': (1, 315),
+            'lettered': {'78a', '78b', '78c', '78d', '78e', '78f',
+                         '188a', '188b', '188c', '188d', '274a'},
+            'no_lender': 325,
+            'no_medium': 326,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
