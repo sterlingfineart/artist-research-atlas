@@ -2612,6 +2612,109 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    {
+        'id': 'aws-1914',
+        'file': 'aws-1914.json',
+        'title': 'Catalogue of the Forty-seventh Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of M. Knoedler & Co., 556 and 558 Fifth Avenue, New York',
+        'venue': 'Galleries of M. Knoedler & Co., 556 and 558 Fifth Avenue, New York',
+        'dates': '16 – 28 February 1914',
+        'year': 1914,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1914',
+        'source': 'Printed catalogue (New York, 1914); Frick Library scan supplied by John Finnegan (Google Drive)',
+        'notes': ('The forty-seventh annual exhibition of the American Water Color Society, '
+                  'held at the Galleries of M. Knoedler & Co., Five Fifty-six and '
+                  'Five Fifty-eight Fifth Avenue, New York, where the exhibition '
+                  'had moved in 1913: 113 catalogue numbers in a single '
+                  'alphabetical run by artist, as in 1902 and 1913, the works '
+                  'standing under 89 artists’ headings, printed surname-first '
+                  'throughout, members carrying the suffix “A.W.C.S.” where it '
+                  'stands — 39 of the 89 headings carry the mark; beneath each '
+                  'heading stands the artist’s address in small type, which is '
+                  'not carried into these records, and the book prints no artist '
+                  'index, the addresses standing in the body instead. There are '
+                  'no prices in this book: no price column, no price lines and '
+                  'no sale marks, and there is no notices page — but the element '
+                  'stands in exactly one form, an “Owned by …” line beneath the '
+                  'title, on seven records: no. 35, whose owner is printed in '
+                  'quotation marks — Owned by “The Delineator.”, the lender '
+                  'field carrying the name and the record’s note quoting the '
+                  'printed form — no. 62 (Mrs. Charles H. Parker), no. 63 (Mrs. '
+                  'Herbert Scoville), no. 68 (Mrs. William R. Mercer), no. 93 '
+                  '(Mrs. J. D. Heard) and nos. 110 and 111 (Mrs. W. M. Ivins, '
+                  'Jr.); there are no “Lent by”, “Courtesy of” or permission '
+                  'lines, and the remaining 106 records stand with neither price '
+                  'nor lender. No dimensions and no medium lines are printed '
+                  'for any entry, so Medium and Size stand empty throughout. '
+                  'The book IS illustrated (contrast 1913): its List of '
+                  'Illustrations names eight works by catalogue number — nos. '
+                  '4, 20, 21, 65, 71, 88, 91 and 94 — and all eight plates are '
+                  'bound in, one to a leaf, every List entry agreeing with its '
+                  'plate caption and with the body entry of that number; the '
+                  'eight carry the note “Illustrated in the catalogue.”, the '
+                  'body itself printing no illustration marks. The numbering '
+                  'runs 1–112 with one lettered insert standing in the book as '
+                  'printed: G. Glenn Newell’s “A Bleak Day in the Pasture” is '
+                  'numbered “55A.” between Needham’s 55 and Hugh Newell’s 56, '
+                  'and its record’s number stands as the string “55A”. One '
+                  'number is restored from the sequence and flagged in its '
+                  'record’s note: no. 111 (Wyman, “The Market Place”), whose '
+                  'printed figures the scan’s text layer reads as the debris '
+                  '“HI” — the print reads “111.” cleanly, the same debris form '
+                  'as 1913’s no. 111. No number is printed twice for two '
+                  'works, there are no joint entries, no unnumbered entries '
+                  'and no absent numbers; exactly one title wraps to a second '
+                  'line (no. 74, “The Sea from the Shore, Magnolia, Mass.”). '
+                  'The book’s spaced surname forms stand as printed: “Mac '
+                  'Chesney, Clara T.”, “Mac Gilvary, Norwood”, “Mc Comas, '
+                  'Francis” and “Mc Millan, Mary Lane”; “Menzler (Peyton), '
+                  'Bertha S.” keeps the book’s parenthetical form, and “De '
+                  'Thulstrup, T.” follows the 1902 precedent. Every catalogue '
+                  'page was read against the page images during the parse. '
+                  'This is the hinge year for the Society’s prizes. The prize '
+                  'page announces the new Hudnut Prize: the Society is '
+                  'indebted to Mr. Alexander M. Hudnut for a prize of $200, to '
+                  'be awarded for the most meritorious water colour in the '
+                  'exhibition, painted in this country by an American artist, '
+                  'without limit as to age, the recipient to be thereafter '
+                  'ineligible — no winner is named in this book (the 1915 '
+                  'catalogue records the 1914 award: Edward H. Potthast’s “A '
+                  'Holiday”, no. 71 here, and illustrated). Below the '
+                  'announcement the book prints the list of recipients of the '
+                  'Wm. T. Evans Prize, 1888–1913, ending with the 1913 award, '
+                  'Arthur Schneider’s “A Morning Walk”, and then states: '
+                  '“This Prize has been discontinued.” The Evans Prize of '
+                  '$300 thus ends with this book, and no Evans amount is '
+                  'offered for this exhibition.'),
+        # The parse stores the plain catalogue numbers as integers
+        # (the lettered insert as a string); the built file carries
+        # them all as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 113,
+            'sections': {'Catalogue': 113},
+            # Plain catalogue numbers run 1–112 complete in the single
+            # alphabetical sequence, with one lettered insert standing
+            # as printed (55A, between 55 and 56): no number printed
+            # twice, no joint entries, no unnumbered entries and no
+            # absent numbers (one number is restored from the sequence
+            # — no. 111, read as debris in the scan's text layer — and
+            # stands in the records under its restored number). The
+            # book prints no prices at all; the element stands only as
+            # "Owned by" on 7 records, so 106 records have no lender;
+            # no record prints a medium; every record has an artist
+            # and a title.
+            'plain_range': (1, 112),
+            'lettered': {'55A'},
+            'no_lender': 106,
+            'no_medium': 113,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
