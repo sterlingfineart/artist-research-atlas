@@ -3539,6 +3539,165 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    {
+        'id': 'aws-1921',
+        'file': 'aws-1921.json',
+        'title': 'Catalogue of the Fifty-Fourth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Arts Club, 119 East 19th Street, New York',
+        'venue': 'Galleries of the National Arts Club, 119 East 19th Street, New York',
+        'dates': '3 – 24 February 1921',
+        'year': 1921,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1921',
+        'source': 'Printed catalogue (New York, 1921); Internet Archive scan (Philadelphia Museum of Art collection)',
+        'notes': ('The fifty-fourth annual exhibition of the American Water Color Society, '
+                  'held at the Galleries of the National Arts Club, One Nineteen '
+                  'East Nineteenth Street, New York — the exhibition stays at '
+                  'the National Arts Club, as in 1915, 1916, 1917, 1918, 1919 '
+                  'and 1920: 257 records in a single section, “Catalogue”. The '
+                  'book CHANGES ITS FORMAT this year, a change from 1920 and '
+                  'from every earlier volume in this run: the entries are no '
+                  'longer grouped under artists’ headings in an alphabetical '
+                  'run, but stand in HANGING ORDER — each entry a title line, '
+                  'the number token “N.” at its left margin and the price, '
+                  'when any, at the right end of the same line, followed by '
+                  'the artist’s name on the line beneath, indented and '
+                  'given-name-first. The artist strings stand given-name-first '
+                  'exactly as printed — the convention the 1922 dataset '
+                  'already follows — and the 257 records stand under 160 '
+                  'artists’ names as printed. UNLIKE the 1920 book, this book '
+                  'HAS an index — “Names and Addresses of Exhibitors”, citing '
+                  'catalogue numbers — so a full index cross-check was '
+                  'possible and was done: 252 of the 257 numbers are cited '
+                  'under the right artist. THE INDEX CONFLICTS WITH THE BODY '
+                  'in six places, and the body governs in every case: no. 168 '
+                  'stands under “John F. Lane” in the body, though the index '
+                  'cites the number under Carlson, John F.; the Eaton entry’s '
+                  'citation of 152 is an index error (no. 152 is George Elmer '
+                  'Browne’s, and the index’s own Browne entry cites it too); '
+                  'the Kaelin entry cites 405, 406, 407 and 409 — numbers '
+                  'beyond the catalogue’s range — while Kaelin’s body entries, '
+                  '30, 31, 34 and 35, are nowhere cited; a Lamb, F. M. entry '
+                  'cites 235, though there is no Lamb in the body and no. 235 '
+                  'is Sophie M. Brannan’s; the Leeper entry cites 90, which is '
+                  'Arthur I. Kellar’s, while Vera Leeper’s body entry, no. 70, '
+                  'is nowhere cited; and the Spiers entry cites 241, 245 and '
+                  '249, of which only 241 is his. A dozen INDEX NAME FORMS '
+                  'differ from the body’s — Bernath for the body’s Bernaph, '
+                  'Custis, Eleanor Parks for the body’s Eleanor Parke Curtis, '
+                  'Hutchins for Hutchens, McGillivray for MacGilvary, Penman '
+                  'for Pennan, Stroud for Sproud among them — and every record '
+                  'stands as the body prints it; the body itself prints '
+                  '“Matilda Browne” at no. 22 and “Mathilda Browne” at nos. 52 '
+                  'and 53, and the records keep both. Prices stand at the end '
+                  'of the title line, printed WITH CENTS, and 236 works are '
+                  'priced for sale in the catalogue, the price standing in '
+                  'each record’s note; the dearest works are Francis '
+                  'McComas’s “Storm Clouds” (no. 79) and “Arizona Cliffs” '
+                  '(no. 81) at $2,000.00 each — followed by Childe Hassam’s '
+                  'three pictures (nos. 147, 149 and 150) at $1,500.00 each '
+                  'and two works at $1,200.00, Edward Penfield’s “The Temple '
+                  'of Truth” (no. 24) and McComas’s “The Painted Desert” (no. '
+                  '83); seven records in all stand at $1,000.00 or more, the '
+                  'cheapest price is $50.00, and the prices run from $50 to '
+                  '$2,000 with a median of $125. TWO PRICES ARE PRINTED '
+                  'WITHOUT THEIR DOLLAR SIGNS — no. 76 (Groll, “A Coming '
+                  'Storm”), tabled at 275.00, and no. 123 (Baxter, “Street '
+                  'Corner, Grammercy Park”), tabled at 100.00 — printer’s '
+                  'slips; the records carry the standard price note. There are '
+                  'no lenders in any form — no “Owned by” lines, no '
+                  'parenthetical credits, no “, owner …” credits — no medium '
+                  'is printed for any entry and no dimensions are printed, so '
+                  'Lender, Medium and Size stand empty throughout. The book '
+                  'IS illustrated: its List of Illustrations names seven '
+                  'works, and seven plates are bound in. SIX plates match '
+                  'body entries — no. 72 (Anna Fisher, “Chinese Rose-hips”), '
+                  'no. 94 (Harry L. Hoffman, “Song of the Reef”), no. 100 '
+                  '(Norwood MacGilvary, “Autumnal”), no. 167 (Edward H. '
+                  'Potthast, “Study of a Head”), no. 176 (Roy Brown, “Wet Day, '
+                  'New York”) and no. 221 (George Laurence Nelson, “Lady with '
+                  'a Rose Tam”) — and carry the note “Illustrated in the '
+                  'catalogue.”; three captions differ from their body titles '
+                  '— no. 72’s reads “Chinese Rose-Hips”, no. 176’s “A Wet '
+                  'Day—New York” and no. 221’s “Lady in a Rose Tam” — and the '
+                  'differences stand in the records’ notes. THE SEVENTH PLATE '
+                  'MATCHES NO BODY ENTRY: “Hopi Adobes”, by Francis McComas, '
+                  'its caption standing vertically on its leaf; McComas’s '
+                  'three body entries are “Storm Clouds” (no. 79), “Arizona '
+                  'Cliffs” (no. 81) and “The Painted Desert” (no. 83), the '
+                  'book gives no way to assign the plate, and no McComas '
+                  'record carries an illustrated note. The numbering runs '
+                  'plain 1–256, COMPLETE, with ONE LETTERED INSERT the book '
+                  'prints: 120A — Evelyn Cohen’s second “A Swiss Interior”, '
+                  'between 120 and 121 (the index cites her “115, 120 A”) — '
+                  '257 records in all. No number is absent, none is printed '
+                  'twice and there are no joint entries; “(Deceased)” prints '
+                  'after the artist’s name on the artist line at nos. 14 (W. '
+                  'H. deB. Nelson) and 36 (A. T. van Laer), and stands in '
+                  'those records’ notes — the index also marks Nelson '
+                  '“Deceased” at no. 121, where the body prints nothing, and '
+                  'the record follows the body. THE SCAN’S TEXT LAYER IS MUCH '
+                  'POORER THAN 1920’S: whole lines drop out (no. 26’s title '
+                  'line, no. 79’s title line, the artist lines of nos. 146 '
+                  'and 222), number tokens drop or garble (“§6.” for 36, '
+                  '“Kid.” for 100), and price tokens drop, split and garble; '
+                  'in this typeface the hundreds digits 3 and 5 are '
+                  'confusable in BOTH directions — the layer reads several '
+                  'printed $350.00 prices as “$550.00”, while no. 72’s '
+                  'printed $550.00 is genuine. Every price, and every '
+                  'doubtful artist or title reading, was therefore settled on '
+                  'the printed page during the parse — a full '
+                  'record-by-record visual pass over all fifteen body pages, '
+                  'with closer crops of the readings most at risk — and the '
+                  'settlements stand in the records. The prize page stands '
+                  'as in 1915, 1916, 1917, 1918, 1919 and 1920. It prints the '
+                  'list of recipients of the Wm. T. Evans Prize, 1888–1913, '
+                  'ending with the 1913 award, Arthur Schneider’s “A Morning '
+                  'Walk”, and then states: “This Prize has been '
+                  'discontinued.” The Hudnut Prize stands at $200, the gift '
+                  'of Alexander M. Hudnut, “awarded for the most meritorious '
+                  'Water Color in the exhibition and to be free from any '
+                  'restrictions whatever”, and the page now records SEVEN '
+                  'awards — in 1914, to Edward H. Potthast, for “A Holiday”; '
+                  'in 1915, to Hilda Belcher, for “Winifred Hunt”; in 1916, to '
+                  'W. Granville-Smith, for “Old Philadelphia”; in 1917, to '
+                  'Sidney Dale Shaw, for “Snowy Roofs”; in 1918, to Hilda '
+                  'Belcher, for “The Bouncing Baby”; in 1919, to Childe '
+                  'Hassam, for “Mount Beacon—From Broadway, Newburgh”; and in '
+                  '1920, to Horatio Walker, for “Pastoral—Sow and Pigs”. '
+                  'Walker’s 1920 award — for the picture that stands at no. '
+                  '287 in the 1920 records — is FIRST PRINTED IN THIS BOOK: '
+                  'the 1920 volume named no winner for its own exhibition. No '
+                  'Evans Prize amount is offered for this exhibition, and '
+                  'this book names NO winner for the 1921 exhibition itself: '
+                  'Francis McComas’s 1921 award, for “The Storm Cloud”, is '
+                  'first printed in the 1922 volume (his body entry no. 79 in '
+                  'this book is “Storm Clouds”, priced $2,000.00).'),
+        # The parse stores the plain catalogue numbers as strings
+        # already; the built file carries them all as strings.
+        'no_as_string': True,
+        # The 1921 parse stores each record's note under 'notes' and
+        # carries working 'price' and 'page' fields; the build loop
+        # normalises its records to the standard eight fields.
+        'notes_plural': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 257,
+            'sections': {'Catalogue': 257},
+            # Plain catalogue numbers run 1–256 complete in the single
+            # section, with one lettered insert (120A), no absent
+            # numbers, no duplicated numbers and no unnumbered entries.
+            # Prices stand on 236 records; no record names a lender or
+            # prints a medium; every record has an artist and a title.
+            'plain_range': (1, 256),
+            'lettered': {'120A'},
+            'no_lender': 257,
+            'no_medium': 257,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
@@ -3620,6 +3779,14 @@ summaries = []
 all_works = []
 for ex in EXHIBITIONS:
     recs = json.load(open(os.path.join(SRC_DIR, ex['file'])))
+    if ex.get('notes_plural'):
+        # This parse stores the record note under 'notes' and carries
+        # working 'price' and 'page' fields; the built file carries
+        # the standard eight fields, in the standard order.
+        recs = [{'no': r['no'], 'artist': r['artist'], 'title': r['title'],
+                 'medium': r['medium'], 'size': r['size'],
+                 'lender': r['lender'], 'section': r['section'],
+                 'note': r['notes']} for r in recs]
     if ex.get('no_as_string'):
         for r in recs:
             r['no'] = str(r['no'])
