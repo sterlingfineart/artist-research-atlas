@@ -2181,6 +2181,120 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    {
+        'id': 'aws-1910',
+        'file': 'aws-1910.json',
+        'title': 'Illustrated Catalogue of the Forty-third Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the American Fine Arts Galleries, 215 West 57th Street, New York',
+        'venue': 'American Fine Arts Galleries, 215 West 57th Street, New York',
+        'dates': '28 April – 22 May 1910',
+        'year': 1910,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1910',
+        'source': 'Printed catalogue (New York, 1910); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The forty-third annual exhibition of the American Water Color Society, '
+                  'held at the American Fine Arts Galleries, 215 West 57th Street, '
+                  'New York. The three galleries of 1908–1909 stand again — the South '
+                  'Gallery (nos. 1–171), the Central Gallery (nos. 172–416) and the '
+                  'Vanderbilt Gallery (nos. 417–556), the works numbered '
+                  'continuously 1–556 — and 1909’s one-line entry form stands with '
+                  'them: the galleries are headed in display capitals, there are no '
+                  'printed sub-headings anywhere, and each entry stands on one line, '
+                  'its element on the same line as its number and title — a price in '
+                  'whole dollars, or “Owned by …”, or “Courtesy of …”, or nothing: '
+                  '556 records in all, standing under 231 artists’ headings, 230 of '
+                  'the records carrying the Society’s “A.W.C.S.” mark; 455 works are '
+                  'priced for sale in the catalogue, the price standing in each '
+                  'record’s note and the prices including frames, 26 name a lender '
+                  '(20 “Owned by” and 6 “Courtesy of” — Collier’s Weekly at nos. 349, '
+                  '379, 407 and 411, and the New York Herald at nos. 415 and 416) '
+                  'and 75 have neither. The dearest work in the book is E. Irving '
+                  'Couse’s “The Magic Flute” (no. 526), priced at $1,000.00 — the '
+                  'only four-figure price in the book — followed by two works at '
+                  '$800.00 (no. 47, Charles Austin Needham’s “The Golden Hour”, and '
+                  'no. 554, Charles P. Gruppe’s “Banks of the Genesee”), no. 456 at '
+                  '$700.00 and no. 29 at $600.00; the cheapest is J. Andre Smith’s '
+                  '“Doorway, Frauenkirche” (no. 262) at $6.00, then four works at '
+                  '$8.00 (nos. 174, 205, 211 and 265). The numbering runs 1–556 '
+                  'complete — no gaps, no lettered inserts, no joint entries, no '
+                  'number printed twice and no number needing restoration, the '
+                  'cleanest numbering of the run so far; many numbers are printed '
+                  'without their stop (nos. 19, 36, 42 and 81 among them), the '
+                  'figures themselves reaching the record in every case. The '
+                  'artists’ headings are printed in both orders — surname-first '
+                  '(“ABBATT, EDITH”) and natural order (“EUGENE HIGGINS”, “J. F. '
+                  'BURNS”) — each standing as printed; and three headings carry a '
+                  'parenthetical “(Deceased)” — J. Wells Champney (no. 28), James '
+                  'D. Smillie and Frederick Remington — the mark carried into the '
+                  'artist string in the usual form and recorded in the notes of 44 '
+                  'records in all. Twenty-three works are illustrated in the '
+                  'catalogue, each flagged in its record’s note; the body prints '
+                  'no illustration marks, so the illustrated works are named by '
+                  'the book’s List of Illustrations — whose own heading the book '
+                  'misprints “List ot Illustrations” — and all 23 plates are bound '
+                  'in this copy, one or two to a leaf, no. 159 standing before the '
+                  'title page; two captions differ from their body entries: '
+                  'no. 438’s caption reads “MOONLIGHT ON THE FRENCH RIVIERA” where '
+                  'the body reads “Moonlight on the Riviera” (the List agrees with '
+                  'the caption), and no. 520’s caption hyphenates “OLD-FASHIONED '
+                  'ROSES” where the body prints “Old Fashioned Roses”. No medium '
+                  'line stands beneath any entry’s title — a contrast with 1909’s '
+                  'single “Original Engraving.” — and no dimensions are printed '
+                  'for any entry, so Medium and Size stand empty throughout, '
+                  'medium words standing inside very many titles as printed. The '
+                  'artists’ addresses stand only in the book’s artist index and '
+                  'are not carried into these records; the index is complete in '
+                  'this copy (Abbatt to Zeigler) and was cross-checked against '
+                  'the body during the parse, the body governing every '
+                  'disagreement; the only body number the index does not cite is '
+                  'the illustrated no. 466, Mente’s “Stray Sheep”, and its own '
+                  'spellings stand against the body’s page forms at a handful of '
+                  'points, all classified in the parse log. The book’s own name '
+                  'forms vary from page to page and every form stands — “PERCIVAL '
+                  'DE DUCE” against “PERCIVAL De LUCE”, “CHARLES F. W. MIELANTZ” '
+                  'against MIELATZ, “CLARA T. Mac CHESNEY” spaced against '
+                  '“MacCHESNEY” closed, “ANNA MERRIMAN PECK” against “ANNE '
+                  'MERRIMAN PECK”, “W. MERRITT T. POST” with its extra initial — '
+                  'and its own title spellings stand: “In Brittainy” (no. 54), '
+                  '“Jerzual” (nos. 72, 250 and 535), “Mahonay” (no. 288), '
+                  '“Morroco” (no. 453), “Katwyjk” (no. 448), “Hereditary '
+                  'Assasins” (no. 370), “Edinburg” (no. 499), “Navaho Shepherd” '
+                  '(no. 532) and “Cuernavacca” throughout. A handful of readings '
+                  'were settled on the printed page where the scan’s text layer '
+                  'garbles them — fifteen headings, five prices and seventeen '
+                  'titles among them, each recorded with its evidence in the '
+                  'parse log; one price is settled by its figures’ only sensible '
+                  'form and is flagged in its record’s note: no. 52 at $50.00, '
+                  'the layer reading “$5C”, the printed glyph itself C-shaped in '
+                  'the scan. The Wm. T. Evans Prize was $300 this year, as in '
+                  '1895–1909; the book’s list of past winners runs 1888–1909, '
+                  'its latest line the 1909 award, Edward Dufner’s “Reflections”.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 556,
+            'sections': {'South Gallery': 171, 'Central Gallery': 245,
+                         'Vanderbilt Gallery': 140},
+            # Plain catalogue numbers run 1–556 complete through the
+            # three galleries in the order hung (South 1–171, Central
+            # 172–416, Vanderbilt 417–556), with no gaps, no lettered
+            # inserts, no joint entries, no number printed twice and
+            # no number needing restoration — the cleanest numbering
+            # of the run so far. 455 records carry a price in the
+            # note, 26 name a lender (20 "Owned by", 6 "Courtesy
+            # of") and 75 have neither; no record prints a medium or
+            # a size; every record has an artist and a title.
+            'plain_range': (1, 556),
+            'lettered': set(),
+            'no_lender': 530,
+            'no_medium': 556,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
