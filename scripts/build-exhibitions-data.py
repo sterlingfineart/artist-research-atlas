@@ -1499,6 +1499,117 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'aws-1904',
+        'file': 'aws-1904.json',
+        'title': 'Illustrated Catalogue of the Thirty-Seventh Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the American Art Galleries, Madison Square South, New York',
+        'venue': 'American Art Galleries, Madison Square South, New York',
+        'dates': '29 April – 13 May 1904',
+        'year': 1904,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1904',
+        'source': 'Internet Archive item 1904AWS (Philadelphia Museum of Art copy)',
+        'notes': ('The thirty-seventh annual exhibition of the American Water Color Society. '
+                  'This year the exhibition is held at the American Art Galleries, '
+                  'Madison Square South, New York, under the management of the '
+                  'American Art Association, as in 1902 and 1903; the copy '
+                  'recorded here is the Internet Archive’s digitisation of the '
+                  'Philadelphia Museum of Art’s copy (item 1904AWS), not one of '
+                  'the Frick Library scans the rest of the run comes from — this '
+                  'copy carries the owner’s stamp of the exhibiting artist '
+                  'J. C. Nicoll and a pencilled “May 1911”. The catalogue keeps '
+                  'the form of 1902 and 1903 entire: the body is arranged '
+                  'alphabetically by artist — each artist’s heading, surname '
+                  'first, with the artist’s address printed beneath it (the '
+                  'addresses are not carried into these records), followed by '
+                  'that artist’s works, the works numbered 1–345 down the '
+                  'alphabet with four lettered inserts the book prints with a '
+                  'capital letter after the figure — no. 167A, Percival '
+                  'De Luce’s “Solid Comfort”; nos. 270A and 270B, Alexander '
+                  'Schilling’s “Spring” and “Hay Stacks”; and no. 321A, Horatio '
+                  'Walker’s “Shepherdess and Sheep” — 349 works in all, standing '
+                  'in the single section the book itself heads “CATALOGUE”, '
+                  'under 184 artists’ headings as printed. The book keeps the '
+                  'price-less form of 1897–1903 for an eighth year: there is no '
+                  '“Owner or Price” column at all, so no price and no owner is '
+                  'printed for any work, and no record here carries a price '
+                  'note or a lender; no size or medium is printed for any entry '
+                  'either — the absence was verified directly, a sweep of the '
+                  'catalogue body’s text finding no “$”, “price”, “loaned”, '
+                  '“owner” or “for sale” token anywhere in it. The book’s '
+                  'notices still direct buyers to the desk, payments “to the '
+                  'order of the American Art Association, Managers”, and state '
+                  'that prices include frames. Sixteen works are illustrated '
+                  'in the catalogue, each flagged in its record’s note — each '
+                  'illustrated work carrying a bracketed “[Illustration]” mark '
+                  'after its title — and the sixteen agree exactly with the '
+                  'book’s own List of Illustrations; all sixteen plates are '
+                  'bound in, no. 16, J. G. Brown’s “Making a Soaker”, serving '
+                  'as the frontispiece, and five of the plate captions print '
+                  'vertically at the leaf’s right side and never reach the '
+                  'scan’s text layer, so every caption was read from its '
+                  'rendered leaf. Two entries stand transposed in print: Harry '
+                  'Fenn’s no. 91, “Mill Street, Warwick”, is printed above his '
+                  'no. 90, “A Surrey Garden” — the records stand in the printed '
+                  'order, each under its printed number, each carrying a note. '
+                  'Three catalogue numbers were lost or garbled in the scan '
+                  'and have been restored from their sequence position, each '
+                  'flagged in its record’s note — no. 8, whose printed figure '
+                  'the scan reads as the letter “K”, and nos. 98 and 180, whose '
+                  'figures it reads “gS.” and “ISo.”, the 5/8 confusion of 1903 '
+                  'in both; all three stand correctly in print. One entry '
+                  'carries a printed designation after its title: no. 318, '
+                  'T. De Thulstrup’s “Three Generals”, whose bracketed '
+                  '“[A Sketch]” stands in the record’s note, not its title. '
+                  'The book prints no artist index this year, so no index '
+                  'cross-check was possible; its member lists were '
+                  'cross-checked against the headings’ marks instead — every '
+                  'artist whose heading carries the Society’s mark stands in '
+                  'the member lists (52 distinct marked artists, 150 records '
+                  'under marked headings), and no heading prints “Deceased” in '
+                  'place of an address this year. Every catalogue page was '
+                  'read against the page images during the parse, as with the '
+                  'earlier catalogues. The book’s own spellings stand as '
+                  'printed — it prints “Dusk of River Launs” (no. 214), '
+                  '“Cyklamen” (no. 254) and “Mohigan Bluffs” (no. 259), not '
+                  'Mohegan; the body prints no. 222’s title with a comma, '
+                  '“Night, before Rain”, where the List of Illustrations and '
+                  'the plate caption print it without, and the record follows '
+                  'the body; and the List prints “Chicadees” for no. 13 where '
+                  'the body and the record print “Chickadees”. The Wm. T. '
+                  'Evans Prize was $300 this year, as in 1895–1903; the book’s '
+                  'list of past winners runs 1888–1903 and ends with the 1903 '
+                  'winner, Colin Campbell Cooper’s “Sky Scrapers, Broad St., '
+                  'New York” — so the 1903 award, unrecorded in the 1903 book, '
+                  'is recorded here; the 1904 award is not recorded in this '
+                  'book.'),
+        # The parse stores the plain catalogue numbers as integers
+        # and the lettered inserts as strings; the built file
+        # carries them all as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 349,
+            'sections': {'Catalogue': 349},
+            # Plain catalogue numbers run 1–345 complete down the
+            # alphabet, in the single section "Catalogue"; the
+            # lettered inserts are 167A, 270A, 270B and 321A; three
+            # numbers (8, 98 and 180) were restored from their
+            # sequence position and are flagged in their records'
+            # notes. The catalogue prints no prices and no owners
+            # at all this year, so no record names a lender; no
+            # record prints a medium; every record has an artist
+            # and a title.
+            'plain_range': (1, 345),
+            'lettered': {'167A', '270A', '270B', '321A'},
+            'no_lender': 349,
+            'no_medium': 349,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'guildhall-1904',
         'file': 'guildhall-1904.json',
         'title': 'Catalogue of The Exhibition of Works by Irish Painters',
