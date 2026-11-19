@@ -30,6 +30,53 @@ OUT = os.path.join(os.path.dirname(__file__), '..', 'public', 'data', 'exhibitio
 
 EXHIBITIONS = [
     {
+        'id': 'aws-1891',
+        'file': 'aws-1891.json',
+        'title': 'Illustrated Catalogue of the Twenty-Fourth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Academy of Design, New York',
+        'venue': 'National Academy of Design, New York',
+        'dates': '2 – 28 February 1891',
+        'year': 1891,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1891',
+        'source': 'Printed catalogue (New York, 1891); Frick Library scan supplied by John Finnegan (Internet Archive digitisation).',
+        'notes': ('The twenty-fourth annual exhibition of the American Water Color Society. '
+                  'The catalogue’s “Owner or Price” column is carried into these records: '
+                  '617 works are priced for sale in the catalogue — the prices include '
+                  'frames — and the price stands in each record’s note; 20 works name an '
+                  'owner, who is recorded as the lender; three are marked “For sale” with '
+                  'neither price nor owner given; and 21 leave the column blank. Fifty '
+                  'works are illustrated in the catalogue, each flagged in its record’s '
+                  'note. The scan’s text layer displaces the price and artist columns, so '
+                  'every one of the catalogue’s 29 pages was read against the page images '
+                  'during the parse. A handful of artist names stand exactly as the scan '
+                  'reads them — the garbles are the scan’s, not the catalogue’s — and have '
+                  'not been corrected. The Society offered the Wm. T. Evans Prize of $300 '
+                  'for the most meritorious picture in the exhibition.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 661,
+            'sections': {'North Gallery': 155, 'East Gallery': 137,
+                         'South Gallery': 181, 'West Gallery': 188},
+            # Plain catalogue numbers run 1–661 complete, in four
+            # contiguous gallery blocks (North 1–155, East 156–292,
+            # South 293–473, West 474–661), with no gaps, no lettered
+            # inserts and none restored. Only 20 records name a
+            # lender (the catalogue's owners); no record prints a
+            # medium or a size; every record has an artist and a title.
+            'plain_range': (1, 661),
+            'lettered': set(),
+            'no_lender': 641,
+            'no_medium': 661,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'rose-croix-1892',
         'file': 'rose-croix-1892.json',
         'title': 'Catalogue du Salon de la Rose+Croix : Geste esthétique',
@@ -703,6 +750,9 @@ summaries = []
 all_works = []
 for ex in EXHIBITIONS:
     recs = json.load(open(os.path.join(SRC_DIR, ex['file'])))
+    if ex.get('no_as_string'):
+        for r in recs:
+            r['no'] = str(r['no'])
     sections = verify(ex, recs)
     with open(os.path.join(OUT, ex['file']), 'w') as f:
         json.dump(recs, f, ensure_ascii=False)
