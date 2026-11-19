@@ -1849,6 +1849,109 @@ EXHIBITIONS = [
             'no_medium': 4,
         },
     },
+    {
+        'id': 'aws-1907',
+        'file': 'aws-1907.json',
+        'title': 'Illustrated Catalogue of the Fortieth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the American Fine Arts Galleries, 215 West 57th Street, New York',
+        'venue': 'American Fine Arts Galleries, 215 West 57th Street, New York',
+        'dates': '2 – 26 May 1907',
+        'year': 1907,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1907',
+        'source': 'Printed catalogue (New York, 1907); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The fortieth annual exhibition of the American Water Color Society, '
+                  'held at the American Fine Arts Galleries, 215 West 57th Street, '
+                  'New York. The form of 1906 continues unchanged: the works are '
+                  'numbered continuously 1–561 through five galleries — the South '
+                  'Gallery (nos. 1–143), the Central Gallery (nos. 144–238, '
+                  'sub-headed “ETCHINGS”), the East Gallery (nos. 239–302) and the '
+                  'West Gallery (nos. 303–383), both sub-headed “DRAWINGS FOR '
+                  'ILLUSTRATION IN BLACK AND WHITE, AND COLOR”, and the Vanderbilt '
+                  'Gallery (nos. 384–561), the largest of the five — 561 records in '
+                  'all, standing under 250 artists’ headings, 153 of the records '
+                  'carrying the Society’s “A.W.C.S.” mark, one heading carrying it '
+                  'qualified, “A.W.C.S. (Elect)”. Under each title stands a price, '
+                  'or a lender line (“Loaned by …”, one of them in the form '
+                  '“Owner,”), or nothing — 451 works are priced for sale in the '
+                  'catalogue, the price standing in each record’s note and the '
+                  'prices including frames, 44 name a lender and 66 have neither; '
+                  'the dearest work is Alphonse Mucha’s “Beatitudes” (no. 339), '
+                  'priced at $5,000.00 — the highest price in any of the Society’s '
+                  'catalogues parsed so far — followed by Childe Hassam’s '
+                  '“Aphrodite” (no. 467) at $1,500. One entry stands under two '
+                  'numbers in a single printed line: “295. 296. Two Decorations”, '
+                  'by Will H. Bradley, loaned by Collier’s Weekly — both numbers '
+                  'are recorded, each carrying the entry with a reciprocal note; '
+                  'no. 296 is no placeholder and is not flagged restored, and the '
+                  'book’s own index cites Bradley at both numbers. One catalogue '
+                  'number was lost in the scan and has been restored from its '
+                  'sequence position, flagged in its record’s note: no. 110, '
+                  'Aloysius O’Kelly’s “A Canal Driver and Donkey Boy, Cairo”. '
+                  'Nine works are illustrated in the catalogue, each flagged in '
+                  'its record’s note; the body prints no illustration marks, so '
+                  'the illustrated works are named by the book’s List of '
+                  'Illustrations — no. 512, Arthur I. Keller’s “The Golden '
+                  'Wedding”, is the frontispiece, and the plate of no. 111, '
+                  'Charles P. Gruppé’s “November Evening”, is not bound in this '
+                  'copy, that record resting on the List’s authority alone. '
+                  'Medium words printed over whole blocks stand in the records’ '
+                  'notes — Rufus Sheldon’s seven monotypes (nos. 305–311) and '
+                  'George Senseney’s etchings in color among them — the Medium '
+                  'field standing empty, as everywhere in this book; no medium '
+                  'and no size are printed for any entry. The artists’ addresses '
+                  'stand only in the book’s artist index and are not carried into '
+                  'these records; the index was cross-checked against the body '
+                  'during the parse and the body governs every disagreement '
+                  'between them — the index’s own errors include sweeping Ernest '
+                  'D. Ross’s five etchings (nos. 153–157) into its Roth entry and '
+                  'Addison T. Millar’s six works (nos. 225–230) into Charles '
+                  'Henry White’s. The book’s own errors stand as printed: the '
+                  'heading “AETON, CHARLES WARREN” for Eaton at no. 393, a full '
+                  'stop for the comma in “EATON. CHARLES WARREN” at no. 394 and '
+                  'in “NICOLL. J. C.” at no. 550, the doubled comma in '
+                  '“LABOURER,, J. E.” at no. 302, “The Yungfrau” twice over, the '
+                  'comma-less heading “BALLIN HUGO”, and the etcher filed both '
+                  'as “OLSON-NORDFELDT, BROR J.” and as “NORDFELDT, B. J. '
+                  'OLSSON”. A handful of names and titles stand exactly as the '
+                  'scan reads them — “Brigher, A. T.” for Bricher at no. 416 and '
+                  'the lender “The Cehtury Company” at no. 315 among them — and '
+                  'the scan’s dropping of the book’s accents stands throughout '
+                  '(“Gruppe” for Gruppé, “Moran, Leon” for Léon Moran). The Wm. '
+                  'T. Evans Prize was $300 this year, as in 1895–1906; the '
+                  'book’s list of past winners runs 1888–1906, its latest line '
+                  'the 1906 award, H. L. Hildebrandt’s “Sally”.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 561,
+            'sections': {'South Gallery': 143, 'Central Gallery': 95,
+                         'East Gallery': 64, 'West Gallery': 81,
+                         'Vanderbilt Gallery': 178},
+            # Plain catalogue numbers run 1–561 complete through the
+            # five galleries in the order hung (South 1–143, Central
+            # 144–238, East 239–302, West 303–383, Vanderbilt
+            # 384–561), with no gaps and no lettered inserts; no
+            # number is printed twice — but one entry, Will H.
+            # Bradley's "Two Decorations", is printed under two
+            # numbers in a single line, "295. 296.", and both numbers
+            # carry the entry, each with a reciprocal note. One
+            # number (110) was restored from its sequence position
+            # and is flagged in its record's note. 451 records carry
+            # a price in the note, 44 name a lender and 66 have
+            # neither; no record prints a medium or a size; every
+            # record has an artist and a title.
+            'plain_range': (1, 561),
+            'lettered': set(),
+            'no_lender': 517,
+            'no_medium': 561,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
