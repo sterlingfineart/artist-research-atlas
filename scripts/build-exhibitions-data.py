@@ -2824,6 +2824,154 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    {
+        'id': 'aws-1916',
+        'file': 'aws-1916.json',
+        'title': 'Catalogue of the Forty-ninth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Arts Club, 119 East 19th Street, New York',
+        'venue': 'Galleries of the National Arts Club, 119 East 19th Street, New York',
+        'dates': '3 – 27 February 1916',
+        'year': 1916,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1916',
+        'source': 'Printed catalogue (New York, 1916); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The forty-ninth annual exhibition of the American Water Color Society, '
+                  'held at the Galleries of the National Arts Club, One Nineteen '
+                  'East Nineteenth Street, New York — the exhibition stays at '
+                  'the National Arts Club, and grows again: 358 catalogue '
+                  'numbers in a single alphabetical run by artist, as in 1902, '
+                  '1913, 1914 and 1915, the works standing under 175 artists’ '
+                  'headings. The headings change their order this year: they '
+                  'are printed in natural order — given names first — in '
+                  'capitals, with the membership suffix set in lowercase, '
+                  '“A. w. c. s.,”, after the name, where it stands — 52 of the '
+                  '175 headings carry the mark; at the right of each heading '
+                  'line, or beneath it at the right when the heading fills '
+                  'the line, stands the artist’s address, which is not '
+                  'carried into these records, and the book prints no artist '
+                  'index, the addresses standing in the body instead. Prices '
+                  'are back (absent in 1913 and 1915): each entry is one line '
+                  '— number, title, and the price in whole dollars at the end '
+                  'of the line — and 328 works are priced for sale in the '
+                  'catalogue, the price standing in each record’s note; the '
+                  'lender element stands in exactly one form, an “Owned by '
+                  '…” line beneath the title, on four records: no. 19 (James '
+                  'Porter, Esq.), no. 70 (Miss Mary Shepard), no. 174 (Norman '
+                  'Davis, Esq.) and no. 232 (Mrs. Harry Payne Whitney); there '
+                  'are no “Lent by”, “Courtesy of” or permission lines, and '
+                  'the remaining 26 records stand with neither price nor '
+                  'lender. The dearest work is F. Hopkinson Smith’s “Rio '
+                  'Fontega, Venice” (no. 297) at $1,000.00 — the book’s only '
+                  'four-figure price, the book printing the thousands comma '
+                  '(“$1,000”) — followed by Childe Hassam’s “The Poppies” '
+                  '(no. 138) at $650.00 and seven works at $600.00; the '
+                  'cheapest price is $20.00, carried by two records, both J. '
+                  'H. Litchfield’s (nos. 185 and 187), and the prices run '
+                  'from $20 to $1,000 with a median of $100. One price is '
+                  'printed without its dollar sign — no. 131’s “Elefantasy. '
+                  '150” — and carries the bare-price note, in the form used '
+                  'for 1911; no. 22’s price follows a comma in its line, the '
+                  'comma being the price’s separator and not part of the '
+                  'title, and nos. 235 and 236 set the price after an '
+                  'em-dash. No dimensions and no medium lines are printed '
+                  'for any entry, so Medium and Size stand empty throughout. '
+                  'The book IS illustrated (as in 1914 and 1915): its List '
+                  'of Illustrations names eleven works by title and artist '
+                  'only, without numbers — no. 38 (Browne, “Return from the '
+                  'Weirs”), no. 73 (Crisp, “Along the River”), no. 76 '
+                  '(Curran, “Elizabeth”), no. 86 (Dufner, “Evening in '
+                  'June”), no. 88 (Eaton, “The Quai Verte, Bruges”), no. '
+                  '249 (Peterson, “A Busy Street”), no. 257 (Potthast, “A '
+                  'Day at the Seashore”), no. 269 (Robinson, “In the North '
+                  'Woods”), no. 271 (Ryder, “Little White House in '
+                  'Winter”), no. 326 (Volkert, “Summer Morning”) and no. '
+                  '328 (Warner, “West Street, New York”) — ten plates are '
+                  'bound in, one to a leaf, and the eleventh, no. 73, '
+                  'stands on the catalogue’s own printed cover, which '
+                  'survives inside this copy’s binding; each was matched to '
+                  'its body entry on artist and title, every match unique '
+                  'in the body, and the eleven carry the note “Illustrated '
+                  'in the catalogue.” No. 88’s plate caption styles its '
+                  'artist “C. Warren Eaton, A.W.C.S.” where the body '
+                  'heading prints no suffix; the record follows the body '
+                  'heading. The numbering runs 1–352 with six lettered '
+                  'inserts standing as printed — 90a (Edwards, after '
+                  'Eaton’s nos. 88–90), 116a (Granville-Smith), 178a (Lamb) '
+                  'and 233a, 233b and 233c (Newell’s, after Nelson’s no. '
+                  '233) — 358 records in all: no number is printed twice, '
+                  'there are no joint entries, and no number in 1–352 is '
+                  'absent. Six numbers are restored, each flagged in its '
+                  'record’s note: four — nos. 86, 88, 89 and 98 — stand '
+                  'plainly in the printed page but are dropped entire by '
+                  'the scan’s text layer; no. 158 is read by the layer as '
+                  '“15b”, its printed 8 imperfectly inked; and no. 177 is '
+                  'printed without a number at all — the entry stands '
+                  'numberless between nos. 176 and 178 — and is restored in '
+                  'the form used for 1908’s unnumbered no. 11. One '
+                  'collective heading stands in the body: the unnumbered, '
+                  'indented line “Sketches at Panama-Pacific Exposition” '
+                  'stands over Donna Schuster’s four sketches (nos. '
+                  '282–285); it is not a record, and the four records carry '
+                  'the group note. One heading carries a parenthetical '
+                  '“(Deceased)”: F. Hopkinson Smith, whose five works (nos. '
+                  '297–301) each record the mark in their note. The book’s '
+                  'own spellings stand as printed: no. 210’s “The Poylar.”, '
+                  'no. 274’s “Fountain, Bobuli Gardens, Florence.”, nos. '
+                  '300 and 301’s “Dortrecht”, no. 121’s “A Street in Acama, '
+                  'N. M.”, no. 131’s title “Elefantasy” — the print’s own '
+                  'fanciful word — and no. 7’s “Campo Marguita, Venice”; '
+                  'and the headings “Rokno Arai”, “Evelin Bodfish”, “C. F. '
+                  'Solian Schmitt”, “Euphanie Mallison” and “Mary '
+                  'Nicholena MacCord” stand exactly as the book prints '
+                  'them, each checked on its page render. Nine heading '
+                  'readings were settled on the printed page where the '
+                  'scan’s text layer garbles them — among them Edwards’s '
+                  '“WHARTON” (the layer inserts an “i”), Josephi’s first '
+                  'initial “I.” (the layer reads “R.”) and Whittemore’s '
+                  '“WILLIAM” (the layer reads “WILUAM”). Every body page '
+                  'was verified entry by entry against its page image '
+                  'during the parse. The prize page stands as in 1915. It '
+                  'prints the list of recipients of the Wm. T. Evans Prize, '
+                  '1888–1913, ending with the 1913 award, Arthur '
+                  'Schneider’s “A Morning Walk”, and then states: “This '
+                  'Prize has been discontinued.” The Hudnut Prize stands '
+                  'at $200, the gift of Alexander M. Hudnut, “for the most '
+                  'meritorious Water Color in the exhibition and to be free '
+                  'from any restriction whatever”, and the page now '
+                  'records two awards — in 1914, to Edward H. Potthast, for '
+                  '“A Holiday”, and in 1915, to Hilda Belcher, for '
+                  '“Winifred Hunt”. No Evans Prize amount is offered for '
+                  'this exhibition, and the 1916 Hudnut award is not '
+                  'recorded in this book.'),
+        # The parse stores the plain catalogue numbers as integers
+        # (the lettered inserts as strings); the built file carries
+        # them all as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 358,
+            'sections': {'Catalogue': 358},
+            # Plain catalogue numbers run 1–352 complete in the single
+            # alphabetical sequence, with six lettered inserts standing
+            # as printed (90a, 116a, 178a, 233a, 233b, 233c): no number
+            # printed twice, no joint entries and no number in 1–352
+            # absent (six numbers are restored — nos. 86, 88, 89 and
+            # 98 dropped entire by the scan's text layer, no. 158 read
+            # as letter debris, and no. 177 printed without a number —
+            # and stand in the records under their restored numbers).
+            # Prices are back: 328 records carry a price in the note,
+            # 4 name a lender (all "Owned by") and 26 have neither, so
+            # 354 records have no lender; no record prints a medium;
+            # every record has an artist and a title.
+            'plain_range': (1, 352),
+            'lettered': {'90a', '116a', '178a', '233a', '233b', '233c'},
+            'no_lender': 354,
+            'no_medium': 358,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
