@@ -3257,6 +3257,147 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    {
+        'id': 'aws-1919',
+        'file': 'aws-1919.json',
+        'title': 'Catalogue of the Fifty-Second Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Arts Club, 119 East 19th Street, New York',
+        'venue': 'Galleries of the National Arts Club, 119 East 19th Street, New York',
+        'dates': '6 – 28 February 1919',
+        'year': 1919,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1919',
+        'source': 'Printed catalogue (New York, 1919); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The fifty-second annual exhibition of the American Water Color Society, '
+                  'held at the Galleries of the National Arts Club, One Nineteen '
+                  'East Nineteenth Street, New York — the exhibition stays at '
+                  'the National Arts Club, as in 1915, 1916, 1917 and 1918: 360 '
+                  'records in a single alphabetical run by artist, as in 1902, '
+                  '1913, 1915, 1916, 1917 and 1918, the works standing under 184 '
+                  'artists’ headings. The headings stand surname-first, as in '
+                  '1917 and 1918, in letter-spaced capitals, members carrying '
+                  'the printed suffix “A.W.C.S.” set in lowercase type where it '
+                  'stands; beneath each heading, or at its right, stands the '
+                  'artist’s address, which is not carried into these records, '
+                  'and the book prints no artist index. Two headings print no '
+                  'comma after the surname — “KLAW ALONZO,” and “STARR SIDNEY,” '
+                  '— and stand surname-first in these records; one heading '
+                  'gives the surname only — “GRAHAM,” — his four entries '
+                  'standing under it; and the book prints two Albert headings, '
+                  '“ALBERT, ERNEST, A.W.C.S.,” (nos. 4–5) and “ALBERT, ERNEST, '
+                  'Jr.,” (no. 6), father and son, recorded as the two distinct '
+                  'artist strings the book prints. Three headings (Drake, '
+                  'Dufner and Leigh) print the membership suffix on a line of '
+                  'its own between the heading and the first entry, and it '
+                  'stands reattached in these records; the book prints both '
+                  'Nelson forms — “NELSON, W. H. de B.,” at no. 256’s heading '
+                  'and “NELSON, W. H. deB.,” at no. 257’s — the stop of the '
+                  'second standing restored. The scan’s text layer twice '
+                  'garbles the membership suffix — “A.WX.S.-” for Beal Reynolds '
+                  'and “A.W.C|S.,” for Peterson — and reads Kobbé’s heading as '
+                  '“KOBB6”; each stands in these records as the printed page '
+                  'shows it. Each entry stands on one line — number, title and '
+                  'element together; no title wraps. Prices stand at the end '
+                  'of the entry line in whole dollars, and 326 works are '
+                  'priced for sale in the catalogue, the price standing in '
+                  'each record’s note; the dearest works are Childe Hassam’s '
+                  'six pictures, nos. 146–151, at $1,500.00 each — followed by '
+                  'two records at $1,000.00 (no. 161, Pearl L. Hill’s “Portrait '
+                  'of a Chinese Lady”, and no. 261, G. Glenn Newell’s “Adventure '
+                  'Afoot”, itself one of the eight illustrated works), with the '
+                  'lettered insert no. 111a next at $800.00; eight records in '
+                  'all stand at $1,000.00 or more, the cheapest price is '
+                  '$50.00, and the prices run from $50 to $1,500 with a median '
+                  'of $80. The lender stands in one form only: a “, owner …” '
+                  'credit appended to the title line, on two records (no. 301, '
+                  '“Mist and Smoke”, owner Mrs. A. D. Wolf; and no. 312, '
+                  '“Summer”, owner R. S. Codman, Boston) — the named party '
+                  'stands in the lender field and the printed form is quoted '
+                  'in the record’s note; there are no own-line “Owned by” '
+                  'credits, no parenthetical credits, no “Lent by”, “Courtesy '
+                  'of” or “Made for” lines and no sale marks, and 32 records '
+                  'stand with no element at all. One designation stands after '
+                  'a title on the entry line: “A Poster.” on F. Luis Mora’s two '
+                  'war posters (nos. 240 and 241), carried in those records’ '
+                  'notes; no other medium is printed for any entry this year '
+                  'and no dimensions are printed, so Medium and Size stand '
+                  'empty throughout. The book IS illustrated: eight plates are '
+                  'bound in, each captioned at the foot of its leaf, and all '
+                  'eight match body entries on artist and title, every match '
+                  'unique — no. 5 (Albert, “December”), no. 15 (Basing, “The '
+                  'Old Billop House”), no. 126 (Giles, “Maine Shore”), no. 149 '
+                  '(Hassam, “Mount Beacon—From Broadway, Newburgh”), no. 206 '
+                  '(Leigh, “Resting”), no. 232 (Menzler-Peyton, “Butterflies”), '
+                  'no. 261 (Newell, “Adventure Afoot”) and no. 280 (Robinson, '
+                  '“Coast of Holland”) — and the eight carry the note '
+                  '“Illustrated in the catalogue.” The book prints NO List of '
+                  'Illustrations this year (contrast 1918), so the plate '
+                  'captions are its only illustration evidence; there is no '
+                  'frontispiece and no unmatched plate, and no printed cover '
+                  'is preserved in this copy. The numbering runs 1–359 with '
+                  'ONE LETTERED INSERT: no. 111a (Edwards, “Sunshine and '
+                  'Mist”, $800.00), standing between nos. 111 and 112. No '
+                  'number is absent, none is printed twice, none is '
+                  'misprinted, there are no joint entries and no unnumbered '
+                  'entries, and nothing is restored: every printed figure '
+                  'stands in the scan’s text layer reading exactly the number '
+                  'the sequence assigns. Some numbers print with a comma after '
+                  'them (229, 306, 308–312) — punctuation, not carried into '
+                  'these records. One record lacks a title: no. 310 (Sonn), '
+                  'for whose title the book prints a rule; its price, $100.00, '
+                  'stands in the record. The book’s own spellings stand as '
+                  'printed: the headings “LITSHFIELD, J. HOMER,” (printed '
+                  'without the C), “CRISE, STEWART S.,”, “BERMATH, SANDER,”, '
+                  '“GUISHAIN, J. M.,” and “IMLOCH, W. B.,”; and the titles “The '
+                  'Thangerts of Youth” (no. 219), “Street in Emness” (no. 14), '
+                  '“Exprestation” (no. 303), “St. Gean du Doigt” (no. 308), '
+                  '“Chasyord” (no. 309), “The Skinerdas” (no. 255), “Mt. '
+                  'Chocoaua” (no. 339), “The Glacin Cave” (no. 294), “An Old '
+                  'South Act” (no. 83), “An Old Poys Kuni” (no. 117), '
+                  '“-Challenge”, with its leading dash (no. 350), and “Trad '
+                  'Street, Charleston” (no. 333, for Tradd Street). No. 211’s '
+                  'title stands as “Ducks” — the book prints “Ducks, $55.”, the '
+                  'comma being its price separator. Every catalogue page was '
+                  'read against the page images during the parse. The prize '
+                  'page stands as in 1915, 1916, 1917 and 1918. It prints the '
+                  'list of recipients of the Wm. T. Evans Prize, 1888–1913, '
+                  'ending with the 1913 award, Arthur Schneider’s “A Morning '
+                  'Walk”, and then states: “This Prize has been discontinued.” '
+                  'The Hudnut Prize stands at $200, the gift of Alexander M. '
+                  'Hudnut, “awarded for the most meritorious Water Color in the '
+                  'exhibition and to be free from any restrictions, whatever”, '
+                  'and the page now records five awards — in 1914, to Edward H. '
+                  'Potthast, for “A Holiday”; in 1915, to Hilda Belcher, for '
+                  '“Winifred Hunt”; in 1916, to W. Granville-Smith, for “Old '
+                  'Philadelphia”; in 1917, to Sidney Dale Shaw, for “Snowy '
+                  'Roofs”; and in 1918, to Hilda Belcher, for “The Bouncing '
+                  'Baby”. No Evans Prize amount is offered for this exhibition, '
+                  'and the 1919 Hudnut award is not recorded in this book.'),
+        # The parse stores the plain catalogue numbers as integers;
+        # the built file carries them all as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 360,
+            'sections': {'Catalogue': 360},
+            # Plain catalogue numbers run 1–359 in the single
+            # alphabetical sequence, with one lettered insert (111a),
+            # no absent numbers, no duplicated numbers, no unnumbered
+            # entries and nothing restored. Prices stand on 326
+            # records and a lender is named on 2 (both in the
+            # ", owner …" form), so 358 records have no lender; no
+            # record prints a medium; one record has no title
+            # (no. 310, whose title is a printed rule) and every
+            # record has an artist.
+            'plain_range': (1, 359),
+            'lettered': {'111a'},
+            'no_lender': 358,
+            'no_medium': 360,
+            'no_title': 1,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
