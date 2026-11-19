@@ -2715,6 +2715,115 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    {
+        'id': 'aws-1915',
+        'file': 'aws-1915.json',
+        'title': 'Catalogue of the Forty-eighth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Arts Club, 119 East 19th Street, New York',
+        'venue': 'Galleries of the National Arts Club, 119 East 19th Street, New York',
+        'dates': '4 – 25 February 1915',
+        'year': 1915,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1915',
+        'source': 'Printed catalogue (New York, 1915); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The forty-eighth annual exhibition of the American Water Color Society, '
+                  'held at the Galleries of the National Arts Club, One Nineteen '
+                  'East Nineteenth Street, New York — the exhibition leaves '
+                  'Knoedler’s after two years, and grows again: 267 catalogue '
+                  'numbers in a single alphabetical run by artist, as in 1902, '
+                  '1913 and 1914, the works standing under 150 artists’ '
+                  'headings, printed surname-first throughout, members carrying '
+                  'the suffix “A.W.C.S.” where it stands — 35 of the 150 '
+                  'headings carry the mark; beneath each heading stands the '
+                  'artist’s address in small type, which is not carried into '
+                  'these records, and the book prints no artist index, the '
+                  'addresses standing in the body instead. There are no prices '
+                  'in this book: no price column, no price lines and no sale '
+                  'marks, and there is no notices page — but the element stands '
+                  'in exactly one form, an “Owned by …” line beneath the title, '
+                  'on five records: no. 4 (Samuel T. Shaw, Esq.), nos. 84 and '
+                  '89 (Mrs. W. F. Powers), no. 222 (W. D. Edwards, Esq.) and '
+                  'no. 261 (Mrs. Pascal Moore); there are no “Lent by”, '
+                  '“Courtesy of” or permission lines, and the remaining 262 '
+                  'records stand with neither price nor lender. No dimensions '
+                  'and no medium lines are printed for any entry, so Medium '
+                  'and Size stand empty throughout. The book IS illustrated '
+                  '(as in 1914, and contrast 1913): its List of Illustrations '
+                  'names ten works by title and artist, without numbers — no. '
+                  '13 (Belcher, “Winifred Hunt”), no. 67 (Couse, “A Papoose”), '
+                  'no. 75 (Dufner, “Springtime, Taormina”), no. 160 (Nicholls, '
+                  '“A Dancer”), no. 172 (Platt, “An Old Man’s Workshop”), no. '
+                  '179 (Potthast, “An Impression”), no. 190 (Ritschel, '
+                  '“Morning Breeze, California”), no. 192 (Robinson, “Rocky '
+                  'Pasture”), no. 197 (Schilling, “Autumn Ploughing”) and no. '
+                  '267 (Yates, “Landscape in Blue and Gold”) — and all ten '
+                  'plates are bound in, one to a leaf, each matched to its '
+                  'body entry on artist and title, every match unique in the '
+                  'body; the ten carry the note “Illustrated in the '
+                  'catalogue.” One caption defect stands: no. 267’s plate '
+                  'caption prints “LANDSCAPE IN BLUE AND COLD” — the book’s '
+                  'misprint; the body and the List both read “Gold”, and the '
+                  'record stands under the body reading. The numbering runs '
+                  '1–267 complete and clean — no number is printed twice for '
+                  'two works, there are no lettered inserts, no joint '
+                  'entries, no unnumbered entries, no absent numbers and no '
+                  'numbers restored from the sequence: the cleanest numbering '
+                  'since 1912. Two headings stand out of alphabetical order '
+                  'in print, and stand as printed: Aylward (no. 4) follows '
+                  'Arms (no. 3), and De Haas (no. 95) stands between Gruppe '
+                  '(no. 94) and Hartman (no. 96). The book’s own '
+                  'inconsistencies stand as printed: the body heading '
+                  '“Nichols, Rhoda Holmes” (single L) against the List’s and '
+                  'the plate caption’s “Nicholls”; the List’s “Alethea Hill '
+                  'Platt” against the members list’s “Piatt”, the body '
+                  'reading “Platt”; no. 25’s title “Magnali, Tuscany” (the '
+                  'place is Magliano; the book prints Magnali); no. 206’s '
+                  '“Poincettas”; no. 210’s “Church of The Vera Crux”; the '
+                  'headings printed without their comma, “Penman Edith” and '
+                  '“O’ Leary Angela”; and “Scott Mrs. E. M.” without a comma '
+                  'after the surname. A handful of readings were settled on '
+                  'the printed page where the scan’s text layer garbles '
+                  'them — a perforated Frick stamp falls across two body '
+                  'pages, garbling the Stoner and Straus headings, the Van '
+                  'Laer heading and no. 231’s title “Nymph” among them. '
+                  'Every catalogue page was read against the page images '
+                  'during the parse. The prize page carries the Society’s '
+                  'change of prizes. It prints the list of recipients of '
+                  'the Wm. T. Evans Prize, 1888–1913, ending with the 1913 '
+                  'award, Arthur Schneider’s “A Morning Walk”, and then '
+                  'states: “This Prize has been discontinued.” In its place '
+                  'the page announces the Hudnut Prize: “In 1914 Alexander '
+                  'M. Hudnut gave to the American Water Color Society a '
+                  'prize of $200, to be known as the Hudnut Prize, ‘for the '
+                  'most meritorious Water Color in the exhibition and to be '
+                  'free from any restriction whatever’”, and the page '
+                  'records the prize’s first award — in 1914, to Edward H. '
+                  'Potthast, for his picture entitled “A Holiday”. No Evans '
+                  'Prize amount is offered for this exhibition.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 267,
+            'sections': {'Catalogue': 267},
+            # Plain catalogue numbers run 1–267 complete and clean in
+            # the single alphabetical sequence: no number printed
+            # twice, no lettered inserts, no joint entries, no
+            # unnumbered entries, no absent numbers and no numbers
+            # restored from the sequence. The book prints no prices at
+            # all; the element stands only as "Owned by" on 5 records,
+            # so 262 records have no lender; no record prints a
+            # medium; every record has an artist and a title.
+            'plain_range': (1, 267),
+            'lettered': set(),
+            'no_lender': 262,
+            'no_medium': 267,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
