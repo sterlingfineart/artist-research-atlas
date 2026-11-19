@@ -1726,6 +1726,94 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'aws-1906',
+        'file': 'aws-1906.json',
+        'title': 'Illustrated Catalogue of the Thirty-Ninth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the American Fine Arts Galleries, 215 West 57th Street, New York',
+        'venue': 'American Fine Arts Galleries, 215 West 57th Street, New York',
+        'dates': '3 – 26 May 1906',
+        'year': 1906,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1906',
+        'source': 'Printed catalogue (New York, 1906); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The thirty-ninth annual exhibition of the American Water Color Society, '
+                  'held at the American Fine Arts Galleries, 215 West 57th Street, '
+                  'New York. After the alphabetical catalogues of 1902–1905 the book '
+                  'returns to the hanging order of 1891–1901: the works are numbered '
+                  'continuously 1–593 through five galleries — the South Gallery '
+                  '(nos. 1–128), the Central Gallery (nos. 129–242, sub-headed '
+                  '“ETCHINGS”), the East Gallery (nos. 243–328) and the West Gallery '
+                  '(nos. 329–416), both sub-headed “DRAWINGS FOR ILLUSTRATION IN '
+                  'BLACK AND WHITE, AND COLOR”, and the Vanderbilt Gallery '
+                  '(nos. 417–593), the largest of the five — 594 records in all, '
+                  'standing under 227 artists’ headings, 208 of the records carrying '
+                  'the Society’s “A.W.C.S.” mark. The price element returns with the '
+                  'galleries, after the nine price-less years 1897–1905: under each '
+                  'title stands a price, or a lender line (“Loaned by …”, three of '
+                  'them in the form “Owner,”), or nothing — 427 works are priced '
+                  'for sale in the catalogue, the price standing in each record’s '
+                  'note and the prices including frames, 75 name a lender and 92 '
+                  'have neither; the dearest work is Horatio Walker’s “The First '
+                  'Snow” (no. 437), priced at $1,200. One number is printed twice: '
+                  'no. 368, Arthur I. Keller’s “Illustration, Bret Harte’s ‘Her '
+                  'Letter’”, stands twice in succession in the West Gallery, the '
+                  'same number, title and price repeated — a duplication in the '
+                  'book, not in the scan — and both printings are recorded, each '
+                  'flagged in its note, so the West Gallery’s 88 numbers carry 89 '
+                  'records. Eighteen works are illustrated in the catalogue, each '
+                  'flagged in its record’s note; the body prints no illustration '
+                  'marks, so the illustrated works are named by the book’s List of '
+                  'Illustrations, and all eighteen plates are bound in this copy. '
+                  'Three catalogue numbers were lost or garbled in the scan and '
+                  'have been restored from their sequence position, each flagged '
+                  'in its record’s note: nos. 110 and 111, whose number lines reach '
+                  'the scan only as debris, and no. 584 — the book’s own misprint, '
+                  'which prints “548.” for F. Luis Mora’s “The Keeper of the Bulls” '
+                  'where the sequence and the book’s own index prove 584. The '
+                  'artists’ addresses, which stood under the headings in 1891–1902, '
+                  'stand only in the book’s artist index this year and are not '
+                  'carried into these records; the index was cross-checked against '
+                  'the body during the parse and the body governs every '
+                  'disagreement between them. No medium and no size are printed '
+                  'for any entry. A handful of names and titles stand exactly as '
+                  'the scan reads them — “Hardenberqh” and “The Cenitury Company” '
+                  'among them — and have not been corrected. The Wm. T. Evans Prize '
+                  'was $300 this year, as in 1895–1902; the book’s list of past '
+                  'winners runs 1888–1905, its latest line the 1905 award, '
+                  'W. Granville Smith’s “The Bay”.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 594,
+            'sections': {'South Gallery': 128, 'Central Gallery': 114,
+                         'East Gallery': 86, 'West Gallery': 89,
+                         'Vanderbilt Gallery': 177},
+            # Plain catalogue numbers run 1–593 complete through the
+            # five galleries in the order hung (South 1–128, Central
+            # 129–242, East 243–328, West 329–416, Vanderbilt
+            # 417–593), with no gaps and no lettered inserts; ONE
+            # number is printed twice in the book — no. 368 (Arthur
+            # I. Keller, West Gallery), the same entry typeset twice
+            # in succession — and both printings are recorded, so
+            # 593 numbers carry 594 records. Three numbers (110, 111
+            # and 584) were restored from their sequence position and
+            # are flagged in their records' notes. 427 records carry
+            # a price in the note, 75 name a lender and 92 have
+            # neither; no record prints a medium or a size; every
+            # record has an artist and a title.
+            'plain_range': (1, 593),
+            'lettered': set(),
+            'duplicated': {'368': 2},
+            'no_lender': 519,
+            'no_medium': 594,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'guildhall-1906',
         'file': 'guildhall-1906.json',
         'title': 'Catalogue of the Exhibition of Works by Flemish and Modern Belgian Painters',
@@ -1792,6 +1880,15 @@ def verify(ex, recs):
             extra = sorted(plain - expected)
             problems.append(f"plain numbers != {lo}–{hi} exactly "
                             f"(missing {missing}, extra {extra})")
+    if 'duplicated' in exp:
+        # Plain numbers the printed catalogue itself repeats, with
+        # their exact occurrence counts (the set check above cannot
+        # see repetitions). Any other repetition fails the build.
+        counts = Counter(str(r['no']) for r in recs if _is_plain(r['no']))
+        dups = {n: c for n, c in counts.items() if c > 1}
+        if dups != exp['duplicated']:
+            problems.append(f"duplicated numbers {dups} != "
+                            f"expected {exp['duplicated']}")
     if exp.get('no_numbers'):
         numbered = [r for r in recs if str(r.get('no') or '') != '']
         if numbered:
