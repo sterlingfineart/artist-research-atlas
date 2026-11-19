@@ -3120,6 +3120,143 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    {
+        'id': 'aws-1918',
+        'file': 'aws-1918.json',
+        'title': 'Catalogue of the Fifty-First Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of the National Arts Club, 119 East 19th Street, New York',
+        'venue': 'Galleries of the National Arts Club, 119 East 19th Street, New York',
+        'dates': '7 February – 1 March 1918',
+        'year': 1918,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1918',
+        'source': 'Printed catalogue (New York, 1918); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The fifty-first annual exhibition of the American Water Color Society, '
+                  'held at the Galleries of the National Arts Club, One Nineteen '
+                  'East Nineteenth Street, New York — the exhibition stays at '
+                  'the National Arts Club, as in 1915, 1916 and 1917: 309 '
+                  'records in a single alphabetical run by artist, as in 1902, '
+                  '1913, 1915, 1916 and 1917, the works standing under 171 '
+                  'artists’ headings. The headings stand surname-first, as in '
+                  '1917, in capitals, members carrying the printed suffix '
+                  '“A.W.C.S.” set in lowercase type where it stands — 55 of '
+                  'the 171 headings carry the mark; beneath each heading, or '
+                  'at its right, stands the artist’s address, which is not '
+                  'carried into these records, and the book prints no artist '
+                  'index. Three headings print a full stop in place of the '
+                  'comma after the surname — “HUMPHREY. STETSON,”, '
+                  '“MENZLER-PEYTON. BERTHA S.,” and “OCHTMAN. MINA FONDA,” — '
+                  'and stand in these records in the comma form; one heading '
+                  'keeps a comma between its given names (“Couper, Richard, '
+                  'H.”). Each entry stands on one line — number, title and '
+                  'element together; no title wraps. Prices stand at the end '
+                  'of the entry line in whole dollars, and 294 works are '
+                  'priced for sale in the catalogue, the price standing in '
+                  'each record’s note; the dearest work is Edward Dufner’s '
+                  '“Summer Evening” (no. 71) at $800.00, itself one of the '
+                  'eight illustrated works — followed by Herman T. '
+                  'Schladermundt’s “Palazzo, Contarini” (no. 260) at $750.00, '
+                  'with two records at $600.00 (nos. 5 and 6, A. E. '
+                  'Albright’s “The Sister” and “The Dooryard”); four records '
+                  'in all stand at $600.00 or more, the cheapest price is '
+                  '$25.00 (no. 145, Stetson Humphrey’s “Early Winter”), and '
+                  'the prices run from $25 to $800 with a median of $100. '
+                  'The lender stands in one form only: a parenthetical '
+                  '“(Owned by …)” credit appended to the title line, on four '
+                  'records (nos. 9, 29, 272 and 300) — the named party '
+                  'stands in the lender field and the printed form is quoted '
+                  'in the record’s note; there are no own-line “Owned by” '
+                  'credits, no “Lent by”, “Courtesy of” or “Made for” lines '
+                  'and no sale marks, and 11 records stand with no element at '
+                  'all (nos. 10, 11, 18, 66, 115, 117, 130, 147, 160, 170 '
+                  'and 302), those 11 being exactly the records without a '
+                  'note. No medium line is printed for any entry this year '
+                  'and no dimensions are printed, so Medium and Size stand '
+                  'empty throughout. The book IS illustrated: its List of '
+                  'Illustrations names eight works by title and artist only, '
+                  'without numbers, and eight plates are bound in, '
+                  'interleaved one to a leaf — no. 31 (Belcher, “The '
+                  'Bouncing Baby”), no. 50 (Chapman, “Westward Ho!”), no. 52 '
+                  '(Clark, “Sunset on the Hudson”), no. 71 (Dufner, “Summer '
+                  'Evening”), no. 98 (Griffin, “Old Roman Church—Boigneville”), '
+                  'no. 151 (Keller, “The Two Helmets”), no. 228 (Peterson, '
+                  '“Ballet Girls”) and no. 245 (Robinson, “Colored '
+                  'Sails—Venice”) — all eight matched to body entries on '
+                  'artist and title, every match unique, and the eight carry '
+                  'the note “Illustrated in the catalogue.” There is no '
+                  'frontispiece this year and no unmatched plate (contrast '
+                  '1917’s Sterner). The List gives Griffin’s title in the '
+                  'fuller form “Old Roman Church—Boigneville, France” against '
+                  'the body’s shorter form, gives Griffin a dash in place of '
+                  'the membership suffix, and names “Alexander Robinson” '
+                  'where his plate caption styles him “ALEX ROBINSON”. The '
+                  'numbering runs 1–310 with ONE ABSENCE: NO. 118 IS NOT '
+                  'PRINTED — the sequence passes from Hartman’s no. 117 '
+                  '(“Arctic Grip in Manhattan”) directly to Hasler’s no. 119 '
+                  '(“The Landing Place”), with no entry, numbered or '
+                  'unnumbered, between them; 118 is a gap in the book’s '
+                  'numbering, not an entry without a number, and no record '
+                  'is supplied for it. There are no lettered inserts, no '
+                  'duplicated numbers, no misprinted figures, no joint '
+                  'entries and no unnumbered entries, and nothing is '
+                  'restored: every printed figure stands in the scan’s text '
+                  'layer reading exactly the number the sequence assigns. '
+                  'Two records lack a title: nos. 82 (Edwards) and 84 '
+                  '(Emerson), for whose titles the book prints a rule; their '
+                  'prices, $125.00 and $50.00, stand in the records. The '
+                  'book’s own misprints stand as printed: no. 302’s title '
+                  '“Stll Life”, its “i” never printed; no. 18’s “Market '
+                  'Day—Lower Pyranees”; no. 113’s “Mayaquez”; no. 49’s “The '
+                  'Mangio Tower—Sienna”; no. 309’s “A Bowl of Zenias”; no. '
+                  '154’s “Tuluca”; no. 146’s “A Fancy Danse”; and the heading '
+                  '“Qackenbush, Ethel H.”, printed without the U. No. 125’s '
+                  'title stands as printed, “L’Imitation de Jesus '
+                  'Christ—1670.” — the capital I of “L’Imitation” is plain '
+                  'on the page, though the scan’s text layer reads it as a '
+                  'lowercase l. Every catalogue page was read against the '
+                  'page images during the parse. The prize page stands as in '
+                  '1915, 1916 and 1917. It prints the list of recipients of '
+                  'the Wm. T. Evans Prize, 1888–1913, ending with the 1913 '
+                  'award, Arthur Schneider’s “A Morning Walk”, and then '
+                  'states: “This Prize has been discontinued.” The Hudnut '
+                  'Prize stands at $200, the gift of Alexander M. Hudnut, '
+                  '“for the most meritorious Water Color in the exhibition '
+                  'and to be free from any restriction whatever”, and the '
+                  'page now records four awards — in 1914, to Edward H. '
+                  'Potthast, for “A Holiday”; in 1915, to Hilda Belcher, for '
+                  '“Winifred Hunt”; in 1916, to W. Granville-Smith, for “Old '
+                  'Philadelphia”; and in 1917, to Sidney Dale Shaw, for '
+                  '“Snowy Roofs”. No Evans Prize amount is offered for this '
+                  'exhibition, and the 1918 Hudnut award is not recorded in '
+                  'this book.'),
+        # The parse stores the plain catalogue numbers as integers;
+        # the built file carries them all as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 309,
+            'sections': {'Catalogue': 309},
+            # Plain catalogue numbers run 1–310 in the single
+            # alphabetical sequence, the book itself printing no
+            # no. 118 — the sequence passes from 117 to 119 on the
+            # page — with no lettered inserts, no duplicated
+            # numbers, no unnumbered entries and nothing restored.
+            # Prices stand on 294 records and a lender is named on
+            # 4 (all parenthetical "(Owned by …)" credits), so 305
+            # records have no lender; no record prints a medium;
+            # two records have no title (nos. 82 and 84, whose
+            # titles are printed rules) and every record has an
+            # artist.
+            'plain_range': (1, 310),
+            'absent_numbers': [118],
+            'lettered': set(),
+            'no_lender': 305,
+            'no_medium': 309,
+            'no_title': 2,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
