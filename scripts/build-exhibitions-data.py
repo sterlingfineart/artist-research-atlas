@@ -1367,6 +1367,99 @@ EXHIBITIONS = [
         },
     },
     {
+        'id': 'aws-1903',
+        'file': 'aws-1903.json',
+        'title': 'Illustrated Catalogue of the Thirty-Sixth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the American Art Galleries, Madison Square South, New York',
+        'venue': 'American Art Galleries, Madison Square South, New York',
+        'dates': '20 – 30 April 1903',
+        'year': 1903,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1903',
+        'source': 'Internet Archive item 1903AWS (Philadelphia Museum of Art copy)',
+        'notes': ('The thirty-sixth annual exhibition of the American Water Color Society. '
+                  'This year the exhibition is held at the American Art Galleries, '
+                  'Madison Square South, New York, under the management of the '
+                  'American Art Association, as in 1902; the copy recorded here is '
+                  'the Internet Archive’s digitisation of the Philadelphia Museum '
+                  'of Art’s copy (item 1903AWS), not one of the Frick Library scans '
+                  'the rest of the run comes from. The catalogue keeps the form of '
+                  '1902 entire: the galleries are gone, and the body is arranged '
+                  'alphabetically by artist — each artist’s heading, surname '
+                  'first, with the artist’s address printed beneath it (the '
+                  'addresses are not carried into these records), followed by that '
+                  'artist’s works, the works numbered continuously 1–299 down the '
+                  'alphabet, all standing in the single section the book itself '
+                  'heads “CATALOGUE”; the 299 works stand under 158 artists’ '
+                  'headings as printed. The book keeps the price-less form of '
+                  '1897–1902 for a seventh year: there is no “Owner or Price” '
+                  'column at all, so no price and no owner is printed for any '
+                  'work, and no record here carries a price note or a lender; the '
+                  'book’s notices still direct buyers to the desk, payments to the '
+                  'order of the American Art Association, and state that prices '
+                  'include frames. Sixteen works are illustrated in the '
+                  'catalogue, each flagged in its record’s note — each illustrated '
+                  'work carrying a bracketed “[Illustration]” mark after its '
+                  'title — and the sixteen agree exactly with the book’s own List '
+                  'of Illustrations; all sixteen plates are bound in, no. 26 '
+                  'serving as the frontispiece, and seven of the plate captions '
+                  'print vertically at the leaf’s right side and never reach the '
+                  'scan’s text layer, so every caption was read from its rendered '
+                  'leaf. Two catalogue numbers were lost or garbled in the scan '
+                  'and have been restored from their sequence position, each '
+                  'flagged in its record’s note — no. 118, whose figure the scan '
+                  'reads “lIS.”, the same garble it makes of no. 115’s figure, and '
+                  'no. 206, read “zoo.”, the same garble as no. 200’s; both stand '
+                  'correctly in print. The book prints no artist index this year, '
+                  'so no index cross-check was possible; its member lists were '
+                  'cross-checked against the headings’ marks instead — every '
+                  'artist whose heading carries the Society’s mark stands in the '
+                  'member lists, and three members’ headings print no mark at '
+                  'all, the book’s own inconsistencies, the records standing as '
+                  'printed: Geo. H. Smillie (nos. 257–261), F. Hopkinson Smith '
+                  '(nos. 262–264) and Wm. J. Whittemore (no. 288). One heading '
+                  'prints “Deceased” in place of the artist’s address: Henry '
+                  'Farrer (nos. 75–91), whose seventeen records carry a note. '
+                  'Every catalogue page was read against the page images during '
+                  'the parse, as with the earlier catalogues. A handful of titles '
+                  'stand exactly as the scan reads them — the garbles are the '
+                  'scan’s, not the catalogue’s — and have not been corrected: '
+                  '“The Wauderer” (no. 15), “Sheep on the Dnnes” (no. 48), '
+                  '“Suuset Glow” (no. 97) and “The Damascns Blade” (no. 239) '
+                  'among them. The book’s own spellings likewise stand as '
+                  'printed — it prints “Over High Haith” (no. 56), “Innsbrook” '
+                  '(no. 259), “Girl in Kimona” (no. 298) and “Fujiyama on a '
+                  'Winters Eve” (no. 299); and one heading, “Hilderbrandt, Howard '
+                  'L.”, is print-accurate with the R and stands uncorrected. The '
+                  'Wm. T. Evans Prize was $300 this year, as in 1895–1902; the '
+                  'book’s list of past winners ends with the 1902 winner, Arthur '
+                  'I. Keller’s “The Finishing Touches”, and the 1903 award is not '
+                  'recorded in this book.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 299,
+            'sections': {'Catalogue': 299},
+            # Plain catalogue numbers run 1–299 complete down the
+            # alphabet, in the single section "Catalogue", with no
+            # gaps and no lettered inserts; two numbers (118 and
+            # 206) were restored from their sequence position and
+            # are flagged in their records' notes. The catalogue
+            # prints no prices and no owners at all this year, so
+            # no record names a lender; no record prints a medium;
+            # every record has an artist and a title.
+            'plain_range': (1, 299),
+            'lettered': set(),
+            'no_lender': 299,
+            'no_medium': 299,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'guildhall-1903',
         'file': 'guildhall-1903.json',
         'title': 'Catalogue of the Exhibition of a Selection of Works by Early and Modern Painters of the Dutch School. With Descriptive and Biographical Notes',
