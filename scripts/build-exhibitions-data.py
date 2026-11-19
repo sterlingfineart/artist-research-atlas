@@ -30,6 +30,55 @@ OUT = os.path.join(os.path.dirname(__file__), '..', 'public', 'data', 'exhibitio
 
 EXHIBITIONS = [
     {
+        'id': 'rose-croix-1892',
+        'file': 'rose-croix-1892.json',
+        'title': 'Catalogue du Salon de la Rose+Croix : Geste esthétique',
+        'subtitle': 'By Joséphin Péladan, for the Ordre de la Rose-Croix Catholique du Temple et du Graal',
+        'venue': 'Galeries Durand-Ruel, Paris',
+        'dates': '10 March – 10 April 1892',
+        'year': 1892,
+        'organiser': 'Joséphin Péladan',
+        'label': 'Rose+Croix 1892',
+        'source': ('Printed catalogue (Paris: Librairie Nilsson, 1892), digitised by the '
+                   'Bibliothèque nationale de France — Gallica, ark:/12148/bpt6k5470406r; '
+                   'parsed from Gallica’s OCR text (no page images), recovered via the '
+                   'user’s browser because Gallica blocks direct access.'),
+        'notes': ('The first Salon de la Rose+Croix — Péladan’s first Geste esthétique. '
+                  'These records come from the illustrated catalogue’s works list, which '
+                  'is headed “Dessins” and prints no catalogue numbers, so no number is '
+                  'recorded for any work here; the book’s own note at the head of the list '
+                  'says that many drawings sent in late could not be included. Two entries '
+                  'print no title, and none has been supplied. The parse '
+                  'rests on Gallica’s OCR text of the Bibliothèque nationale de France '
+                  'digitisation, not on page images, so names and titles carry that text’s '
+                  'noise, and readings that had to be interpreted are flagged in the '
+                  'individual records. The Règle printed in the book says the salon closed '
+                  'on 9 April, though the Bibliothèque nationale de France dates the run '
+                  'to 10 April. John Finnegan’s compilation of these salons held only two '
+                  'Aman-Jean stub rows for 1892, with no works; the catalogue’s works list '
+                  'contains no Aman-Jean entry.'),
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 53,
+            'sections': {'Dessins': 53},
+            # The illustrated catalogue prints no catalogue numbers
+            # at all: every record's number stands empty, and the
+            # build must fail if any record carries one. No record
+            # has a lender or a medium, and every record has an
+            # artist; exactly two records have no title (De
+            # Egusquiza's entry, for which the catalogue gives none,
+            # and Sonnier's, whose name heads a page of verse) —
+            # each flagged in its record's note.
+            'no_numbers': True,
+            'lettered': set(),
+            'no_lender': 53,
+            'no_medium': 53,
+            'no_title': 2,
+            'no_artist': 0,
+        },
+    },
+    {
         'id': 'guildhall-1892',
         'file': 'guildhall-1892.json',
         'title': 'Descriptive Catalogue of the Loan Collection of Pictures',
@@ -613,8 +662,14 @@ def verify(ex, recs):
             extra = sorted(plain - expected)
             problems.append(f"plain numbers != {lo}–{hi} exactly "
                             f"(missing {missing}, extra {extra})")
+    if exp.get('no_numbers'):
+        numbered = [r for r in recs if str(r.get('no') or '') != '']
+        if numbered:
+            problems.append(f"{len(numbered)} records carry a catalogue number "
+                            f"but the catalogue prints none")
     if 'lettered' in exp:
-        lettered = {str(r['no']) for r in recs if not _is_plain(r['no'])}
+        lettered = {str(r['no']) for r in recs
+                    if str(r.get('no') or '') != '' and not _is_plain(r['no'])}
         if lettered != exp['lettered']:
             problems.append(f"lettered inserts {sorted(lettered)} != "
                             f"expected {sorted(exp['lettered'])}")
