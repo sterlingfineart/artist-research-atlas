@@ -2524,6 +2524,94 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    {
+        'id': 'aws-1913',
+        'file': 'aws-1913.json',
+        'title': 'Catalogue of the Forty-sixth Annual Exhibition of the American Water Color Society',
+        'subtitle': 'Held at the Galleries of M. Knoedler & Co., 556 and 558 Fifth Avenue, New York',
+        'venue': 'Galleries of M. Knoedler & Co., 556 and 558 Fifth Avenue, New York',
+        'dates': '3 – 15 March 1913',
+        'year': 1913,
+        'organiser': 'American Water Color Society',
+        'label': 'American Water Color Society 1913',
+        'source': 'Printed catalogue (New York, 1913); Frick Library scan supplied by John Finnegan (Internet Archive digitisation)',
+        'notes': ('The forty-sixth annual exhibition of the American Water Color Society, '
+                  'held at the Galleries of M. Knoedler & Co., Five Fifty-six and '
+                  'Five Fifty-eight Fifth Avenue, New York — the exhibition leaves '
+                  'the American Fine Arts Galleries, where it had hung since 1906, '
+                  'for Knoedler’s, and shrinks sharply: 143 catalogue numbers in a '
+                  'single alphabetical run by artist, as in 1902 and unlike every '
+                  'volume since, against 272 in two galleries in 1912. The works '
+                  'stand under 108 artists’ headings, printed surname-first '
+                  'throughout, members carrying the suffix “A.W.C.S.” where it '
+                  'stands — 56 of the 108 headings carry the mark; beneath each '
+                  'heading stands the artist’s address in small type, which is '
+                  'not carried into these records, and the book prints no artist '
+                  'index, the addresses standing in the body instead. There is '
+                  'no price, lender or any other element in this book: no price '
+                  'column, no “Owned by”, “Lent by” or “Courtesy of” lines and '
+                  'no sale marks — all 143 records stand with neither price nor '
+                  'lender, and there is no notices page, there being no prices '
+                  'to notice. No dimensions and no medium lines are printed for '
+                  'any entry, so Medium and Size stand empty throughout. The '
+                  'book is not styled “Illustrated”: it prints no plates and no '
+                  'List of Illustrations, and no work is illustrated. The '
+                  'numbering runs 1–143 complete — no number is printed twice '
+                  'for two works, there are no lettered inserts, no joint '
+                  'entries, no unnumbered entries and no absent numbers — but '
+                  'five numbers are restored from the sequence, each flagged in '
+                  'its record’s note: three the scan’s text layer garbles while '
+                  'the printed page is legible (nos. 11, 110 and 111), and two '
+                  'the book itself misprints, the compositor dropping a figure '
+                  '— no. 87 (Perrie, “An Old Vessel”) printed “7.” and no. 137 '
+                  '(Ward, “Horses Ploughing”) printed “17.”, each verified on '
+                  'the printed page (the 1906 treatment of no. 584, printed '
+                  '“548”). One listing-order curiosity stands: the entries run '
+                  'alphabetically by artist, but Post (no. 93) is listed before '
+                  'Potthast (nos. 91, 92) — “Post” precedes “Potthast” in the '
+                  'alphabet; the numbers simply follow the hang, and the '
+                  'records are keyed and ordered by number as usual. A handful '
+                  'of title readings were settled on the printed page where '
+                  'the scan’s text layer garbles them — no. 66’s “The Sketch '
+                  'Book”, no. 74’s “1860” (the title is the printed year), no. '
+                  '119’s “Cloudy Sky” and no. 124’s “Dolomites, Cortina” — and '
+                  'the book’s own misspellings stand as printed: no. 120’s '
+                  '“Glouscester Harbor”, no. 129’s “Edinboro” and no. 133’s '
+                  '“Assuan”. The book’s spaced surname forms stand as printed: '
+                  '“Mac Chesney, Clara T.” (as in 1910 and 1912) and “Mc '
+                  'Cormick, Katherine H.” Every catalogue page was read '
+                  'against the page images during the parse. The Wm. T. Evans '
+                  'Prize was $300 this year, on the standing terms; the '
+                  'book’s printed list of past winners (1888–1912) ends with '
+                  'the 1912 award, Childe Hassam’s “The Minuet” — the 1913 '
+                  'award is not recorded in this book. This is the prize’s '
+                  'last year: the Evans Prize was discontinued after 1913.'),
+        # The parse stores the catalogue numbers as integers; the
+        # built file carries them as strings.
+        'no_as_string': True,
+        # Expected values from the verified parse — the build fails
+        # loudly rather than shipping numbers that do not match them.
+        'expect': {
+            'total': 143,
+            'sections': {'Catalogue': 143},
+            # Plain catalogue numbers run 1–143 complete in the single
+            # alphabetical sequence: no number printed twice, no
+            # lettered inserts, no joint entries, no unnumbered entries
+            # and no absent numbers (five numbers are restored from the
+            # sequence — nos. 11, 110 and 111 garbled in the scan's text
+            # layer, nos. 87 and 137 misprinted by the book itself —
+            # and stand in the records under their restored numbers).
+            # The book prints no price, lender or any other element:
+            # all 143 records stand with no lender and no medium; every
+            # record has an artist and a title.
+            'plain_range': (1, 143),
+            'lettered': set(),
+            'no_lender': 143,
+            'no_medium': 143,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
