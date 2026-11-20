@@ -1270,18 +1270,35 @@
       .split(/,\s*(?:P\.?R\.?H\.?A|A\.?R\.?H\.?A|R\.?H\.?A|R\.?S\.?A|A\.?R\.?A|R\.?A|Bart|Esq)\b/i)[0]
       .replace(/[\s.,]+$/, '').trim();
   }
-  /* Surname initial for the letter browse. Names are in natural order as
-     printed ("Walter F. Osborne, R.H.A."), so the surname is the last
-     name-like word of the name part; trailing OCR debris (a leaked
-     medium, dimensions) is skipped. */
+  /* Surname initial for the letter browse. Natural-order names as
+     printed ("Walter F. Osborne, R.H.A.") file under the last name-like
+     word of the name part; surname-first headings ("AIKEN, Charles A.")
+     file under the name before the comma — its last word, so "De Wint,
+     Peter" files as W, matching the natural-order treatment. When the
+     part before the comma holds no surname (a comma inside initials,
+     "L. E, Van Gorder"), the whole name is scanned as before. Accented
+     letters count and fold to their base letter ("Guérin" files as G).
+     Trailing OCR debris (a leaked medium, dimensions) is skipped. */
   function exhSurnameInitial(artist) {
     const skip = new Set(['canvas', 'panel', 'millboard', 'inches', 'inehes', 'size']);
-    const toks = exhNamePart(artist).split(/\s+/);
-    for (let i = toks.length - 1; i >= 0; i--) {
-      const t = toks[i].replace(/\.+$/, '');
-      if (t.length < 2 || !/^[A-Za-z][A-Za-z'’-]*$/.test(t)) continue;
-      if (skip.has(t.toLowerCase())) continue;
-      return t.charAt(0).toUpperCase();
+    /* Honorifics are skipped in the surname-first scan only, so "Sir J,
+       E. Millais" falls through to the whole-name scan and files as M,
+       while a genuine surname like Lord in natural order still counts. */
+    const honorifics = new Set(['sir', 'dame', 'lord', 'lady', 'rev', 'hon', 'fra', 'mons', 'monsieur', 'madame', 'mademoiselle']);
+    const namePart = exhNamePart(artist);
+    const comma = namePart.indexOf(',');
+    const parts = comma >= 0
+      ? [[namePart.slice(0, comma), true], [namePart, false]]
+      : [[namePart, false]];
+    for (const [part, skipHonorifics] of parts) {
+      const toks = part.split(/\s+/);
+      for (let i = toks.length - 1; i >= 0; i--) {
+        const t = toks[i].replace(/[.,]+$/, '');
+        if (t.length < 2 || !/^[\p{L}][\p{L}'’-]*$/u.test(t)) continue;
+        if (skip.has(t.toLowerCase())) continue;
+        if (skipHonorifics && honorifics.has(t.toLowerCase())) continue;
+        return t.normalize('NFD').replace(/\p{M}/gu, '').charAt(0).toUpperCase();
+      }
     }
     return '#';
   }
