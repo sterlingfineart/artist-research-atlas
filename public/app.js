@@ -228,13 +228,89 @@
         ${a.ulan ? link(`https://vocab.getty.edu/page/ulan/${a.ulan}`, `ULAN ${a.ulan}`) : ''}
       </div></article>`;
   }
+  /* The Atlas's own collections, with counts taken from each
+     collection's index file, and a year browser across all of them:
+     pick a year and see every catalogue the Atlas holds for it — the
+     Paris Salon, the Royal Academy and the Record of Exhibitions. */
+  async function browseCollectionData() {
+    const [exh, salon, ra, loan] = await Promise.all([
+      exhIndex ? Promise.resolve(exhIndex) : salonFetchJSON('/data/exhibitions/index.json').then((d) => (exhIndex = d)).catch(() => null),
+      salonIndex ? Promise.resolve(salonIndex) : salonFetchJSON('/data/salon/index.json').then((d) => (salonIndex = d)).catch(() => null),
+      raIndex ? Promise.resolve(raIndex) : salonFetchJSON('/data/ra/index.json').then((d) => (raIndex = d)).catch(() => null),
+      loanIndex ? Promise.resolve(loanIndex) : salonFetchJSON('/data/loan/index.json').then((d) => (loanIndex = d)).catch(() => null),
+    ]);
+    return { exh, salon, ra, loan };
+  }
+  const sumWorks = (rows) => (rows || []).reduce((s, r) => s + (r.works || 0), 0);
+  const yearSpan = (rows) => {
+    const ys = (rows || []).map((r) => r.year).filter(Boolean);
+    return ys.length ? `${Math.min(...ys)}–${Math.max(...ys)}` : '';
+  };
+  async function renderBrowseCollections() {
+    const el = $('#browse-collections');
+    if (!el) return;
+    const { exh, salon, ra, loan } = await browseCollectionData();
+    const card = (href, title, meta, desc) => `<h3><a href="${href}">${esc(title)}</a></h3><p>${meta ? `<span class="meta">${esc(meta)}</span><br>` : ''}${esc(desc)}</p>`;
+    let html = `<h2>The collections</h2>
+      <p class="source-line">The Atlas's own databases — exhibition catalogues and reference dictionaries digitised in full and verified against their sources. Everything below is counted from the collections themselves.</p>`;
+    if (exh) html += card('#/exhibitions', 'Record of Exhibitions', `${exh.length} exhibitions · ${sumWorks(exh).toLocaleString()} works · ${yearSpan(exh)}`, 'Complete exhibition catalogues recorded work by work — the Guildhall exhibitions, the Salons de la Rose+Croix, the American Water Color Society annuals and more.');
+    if (salon) html += card('#/salon', 'Paris Salon', `${salon.years.length} Salon years · ${sumWorks(salon.years).toLocaleString()} works · ${yearSpan(salon.years)}`, 'The Paris Salon livrets, browsable year by year — every work in every catalogue.');
+    if (ra) html += card('#/ra', 'Royal Academy', `${ra.years.length} exhibition years · ${sumWorks(ra.years).toLocaleString()} works · ${yearSpan(ra.years)}`, 'The Royal Academy Summer Exhibitions, from Graves’s Complete Dictionary of Contributors and Their Work.');
+    if (loan) html += card('#/loan', 'Loan Exhibitions (UK)', `${(loan.totalWorks || 0).toLocaleString()} works · ${(loan.totalArtists || 0).toLocaleString()} artists`, 'British loan exhibitions, from Graves’s dictionary of the exhibitions and their contributors.');
+    el.innerHTML = html;
+  }
+  async function renderBrowseYears() {
+    const el = $('#browse-years');
+    if (!el) return;
+    const { exh, salon, ra } = await browseCollectionData();
+    const byYear = new Map();
+    const add = (year, item) => {
+      if (!byYear.has(year)) byYear.set(year, []);
+      byYear.get(year).push(item);
+    };
+    for (const y of (salon && salon.years) || []) add(y.year, { label: `Paris Salon ${y.year}`, href: `#/salon/${y.year}`, meta: `${y.works.toLocaleString()} works` });
+    for (const y of (ra && ra.years) || []) add(y.year, { label: `Royal Academy ${y.year}`, href: `#/ra/${y.year}`, meta: `${y.works.toLocaleString()} works` });
+    for (const e of exh || []) add(e.year, { label: e.label, href: `#/exhibitions/${e.id}`, meta: `${e.works.toLocaleString()} works · ${e.venue}` });
+    const years = [...byYear.keys()].sort((a, b) => b - a);
+    if (!years.length) { el.innerHTML = ''; return; }
+    const byDecade = new Map();
+    for (const y of years) {
+      const d = Math.floor(y / 10) * 10;
+      if (!byDecade.has(d)) byDecade.set(d, []);
+      byDecade.get(d).push(y);
+    }
+    el.innerHTML = `<h2>Exhibitions by year</h2>
+      <p class="source-line">Pick a year and see every catalogue the Atlas holds for it, across Paris, London and New York.</p>
+      <form class="browse-form" id="browse-year-form">
+        <label>Year <select id="browse-year-select" aria-label="Year"><option value="">Choose a year…</option>${years.map((y) => `<option value="${y}">${y}</option>`).join('')}</select></label>
+      </form>
+      <div id="browse-year-results"></div>
+      ${[...byDecade.entries()].sort((a, b) => b[0] - a[0]).map(([d, ys]) => `<h4>${d}s</h4><p>${ys.map((y) => `<a href="#" data-browse-year="${y}">${y}</a>`).join(' · ')}</p>`).join('')}`;
+    const showYear = (y) => {
+      const out = $('#browse-year-results');
+      const sel = $('#browse-year-select');
+      if (sel) sel.value = String(y);
+      const items = byYear.get(y) || [];
+      out.innerHTML = `<h3>${y}</h3>${items.map((it) => `<p><a href="${it.href}">${esc(it.label)}</a> <span class="meta">${esc(it.meta)}</span></p>`).join('')}`;
+    };
+    $('#browse-year-select').addEventListener('change', (e) => { if (e.target.value) showYear(+e.target.value); });
+    el.querySelectorAll('[data-browse-year]').forEach((a) =>
+      a.addEventListener('click', (e) => { e.preventDefault(); showYear(+a.dataset.browseYear); })
+    );
+  }
   async function viewBrowse(p) {
-    app.innerHTML = `<h1 style="font-size:38px">Browse artists</h1>
-      <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">Browse by century, country, movement or medium — pick any combination and press GO. Every list is a live query of Wikidata, restricted to painters, sculptors, draftsmen, engravers and printmakers — select an artist to generate the full research report.</p>
+    app.innerHTML = `<h1 style="font-size:38px">Browse</h1>
+      <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">Two ways in: the Atlas’s own collections — the exhibition catalogues and dictionaries it has digitised and verified — browsed by collection or by year; or artists by century, country, movement or medium, drawn live from Wikidata.</p>
+      <section class="rs" id="browse-collections"></section>
+      <section class="rs" id="browse-years"></section>
+      <h2>Artists by facet</h2>
+      <p class="source-line">Browse artists by century, country, movement or medium — pick any combination and press GO. Every list is a live query of Wikidata, restricted to painters, sculptors, draftsmen, engravers and printmakers — select an artist to generate the full research report.</p>
       <div id="browse-facets">${spinner('Loading browse lists…')}</div>
       <div id="browse-results"></div>
       <section class="rs" id="browse-index"></section>`;
     renderShowcaseIndex();
+    renderBrowseCollections();
+    renderBrowseYears();
     let defs;
     try {
       defs = await api('/api/browse', {});
