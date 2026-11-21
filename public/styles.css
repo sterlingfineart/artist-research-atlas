@@ -232,6 +232,26 @@ ol.refs li { overflow-wrap: anywhere; }
 .btn:disabled:hover { border-color: var(--line); color: var(--ink); }
 .btn-primary:disabled:hover { background: var(--accent); color: #fff; }
 
+/* historic art sales */
+.sales-switch { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 18px 0 4px; }
+.sales-feature { background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--gold); border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; }
+.sales-feature-label { font: 600 12px var(--sans); text-transform: uppercase; letter-spacing: .12em; color: var(--gold); margin-bottom: 6px; }
+.sales-feature-main { font-size: 17px; }
+.sales-feature-artist { font: 600 22px var(--serif); }
+.sales-feature-title { font-family: var(--serif); font-size: 20px; }
+.sales-feature-price { margin-top: 8px; }
+.sales-price { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.equiv { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+.sales-game-q { font-weight: 600; margin: 12px 0 8px; }
+.sales-game-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.sales-game-opt { font: 600 16px var(--sans); padding: 14px 10px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); color: var(--ink); cursor: pointer; min-height: 52px; }
+.sales-game-opt:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.sales-game-opt:disabled { cursor: default; opacity: .75; }
+.sales-game-opt.right { background: #e3f0e7; border-color: var(--ok); color: var(--ok); opacity: 1; }
+.sales-game-opt.wrong { background: #fbeeee; border-color: var(--accent); color: var(--accent); opacity: 1; }
+.sales-game-reveal { margin-top: 12px; font-size: 15px; }
+#sales-game .pager { justify-content: space-between; }
+
 /* royal academy time machine — reuses the salon-* rules above
    (salon-famous chips, salon-search box, salon-table, salon-num, pager);
    its markup differs only in element ids and column set, so no further
