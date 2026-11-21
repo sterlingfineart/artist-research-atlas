@@ -1,0 +1,59 @@
+{
+ "generated": "2026-11-21",
+ "standard": "Confirmed identity only: same artist, title identical on the museum record, sale not before the work, printed dimensions in agreement with the museum object, generic repeated titles excluded. See scripts/build-sales-picture-matches.py.",
+ "matches": [],
+ "rejected": [
+  {
+   "source": "graves-vol2",
+   "artist": "JORDAENS, Jacob.",
+   "subject": "Adoration of the Shepherds",
+   "saleDate": "1790 Mar. 5",
+   "lot": "36",
+   "page": 92,
+   "poolArtist": "Jacob Jordaens",
+   "poolTitle": "Adoration of the Shepherds",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/335661",
+   "reason": "The Met object is a small drawing (pen and brown ink, 9 13/16 x 8 3/16 in., Rogers Fund 1966). The 1790 sale entry gives no medium, no dimensions, no price and no buyer, and Jordaens treated the Adoration of the Shepherds repeatedly, in paint and on paper. Nothing in either record ties this sheet to that sale."
+  },
+  {
+   "source": "graves-vol2",
+   "artist": "MURILLO, Bartolomé Estéban.",
+   "subject": "Virgin and Child",
+   "saleDate": "1817 April 26",
+   "lot": "36",
+   "page": 265,
+   "poolArtist": "Bartolomé Esteban Murillo",
+   "poolTitle": "Virgin and Child",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437175",
+   "reason": "Generic title: the same artist + title heads 3 sales records — it denotes a class of pictures, not this one."
+  },
+  {
+   "source": "redford-vol2",
+   "artist": "MURILLO.",
+   "subject": "Virgin and Child. 53 x 42",
+   "saleDate": "1811",
+   "lot": "",
+   "page": 267,
+   "poolArtist": "Bartolomé Esteban Murillo",
+   "poolTitle": "Virgin and Child",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437175",
+   "reason": "Dimensions disagree: sales record prints 53 x 42 in.; the museum gives 65.24 x 42.99 in. for this object."
+  },
+  {
+   "source": "redford-vol2",
+   "artist": "MURILLO.",
+   "subject": "Virgin and Child",
+   "saleDate": "1849",
+   "lot": "",
+   "page": 267,
+   "poolArtist": "Bartolomé Esteban Murillo",
+   "poolTitle": "Virgin and Child",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437175",
+   "reason": "Generic title: the same artist + title heads 3 sales records — it denotes a class of pictures, not this one."
+  }
+ ]
+}
