@@ -72,6 +72,7 @@
     if (path === '/loan' || path.startsWith('/loan/')) return viewLoan(p, path);
     if (path === '/exhibitions' || path.startsWith('/exhibitions/')) return viewExhibitions(p, path);
     if (path === '/sales') return viewSales(p);
+    if (path === '/game') return viewGame(p);
     if (path === '/artist' && (p.wd || p.ulan)) return viewReport(p);
     if (path === '/about') return viewAbout();
     return viewHome();
@@ -1645,6 +1646,218 @@
       works: g.works,
     })).sort((a, b) => a.name.localeCompare(b.name));
   }
+  /* EXH-BROWSE-GROUP:BEGIN */
+  /* Display-layer grouping for the Record of Exhibitions "Browse by
+     artist" only. The records themselves stay exactly as printed; what
+     changes is how the browse groups them. One artist could be split
+     across several rows — and several letters — by OCR garbles, variant
+     printed forms and appended section words. The grouping key below
+     normalises those away deterministically: accents and case folded,
+     post-nominal suffix segments dropped (R.A., E.A., Bakt., LL.A. and
+     the like), catalogue section words dropped (Dessins, Études,
+     Peintures), name abbreviations expanded (Chas. = Charles), and the
+     known OCR confusion classes applied (6 for e, 0 for o, vv for w,
+     final fl for ff, a skeleton that treats c/g/q/o, k/r, y/v and i/t
+     as interchangeable, doubled letters collapsed, spaces ignored).
+     Rows group ONLY where the normalised keys match exactly — there is
+     no similarity scoring. Identity-bearing distinctions are never
+     normalised away: "the Elder" / "the Younger" stay in the key, so
+     the two Teniers never merge, and a bare "Carlos" never acquires
+     the surname of "Schwabe, Carlos". The letter a group files under
+     still comes from exhSurnameInitial applied to the group's display
+     name — that rule is unchanged — except where the surname token
+     itself is garbled, when its repaired form supplies the letter. */
+  const EXH_SUFFIX_SEGMENTS = new Set(['ra', 'ara', 'rsa', 'rha', 'prha', 'arha', 'ea', 'ua', 'lla', 'lia', 'usa', 'bakt', 'bart', 'esq', 'mp', 'ri', 'ha', 'pa', 'ba', 'aha', 'ei', 'frs', 'awcs', 'na', 'ana']);
+  const EXH_SECTION_WORDS = new Set(['dessins', 'etudes', 'peintures']);
+  const EXH_NAME_ABBREV = { chas: 'charles', thos: 'thomas', wm: 'william', jno: 'john', geo: 'george' };
+  const EXH_INITIAL_GARBLES = { it: 'h', rn: 'm' };
+  const EXH_SURNAME_REPAIRS = { yelde: 'velde' };
+  function exhFoldName(s) {
+    return String(s || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+  }
+  /* The name as comma-separated token segments (accents and case
+     folded, punctuation split away), with post-nominal suffix segments
+     and appended section words removed. Elder/Younger segments are
+     protected: they distinguish two people, not a printing variant. */
+  function exhBrowseSegments(artist) {
+    const segs = exhFoldName(artist).split(',')
+      .map((seg) => seg.split(/[^a-z0-9]+/).filter(Boolean))
+      .filter((tokens) => tokens.length);
+    while (segs.length > 1) {
+      const last = segs[segs.length - 1];
+      if (last.includes('elder') || last.includes('younger')) break;
+      const isSuffix = EXH_SUFFIX_SEGMENTS.has(last.join('')) && (last.length === 1 || last.every((t) => t.length <= 3));
+      if (!isSuffix) break;
+      segs.pop();
+    }
+    if (segs.length) {
+      const last = segs[segs.length - 1];
+      while (last.length > 1 && EXH_SECTION_WORDS.has(last[last.length - 1])) last.pop();
+    }
+    return segs;
+  }
+  function exhKeyToken(tok) {
+    let t = tok.replace(/6/g, 'e').replace(/0/g, 'o');
+    if (EXH_NAME_ABBREV[t]) t = EXH_NAME_ABBREV[t];
+    if (EXH_INITIAL_GARBLES[t]) t = EXH_INITIAL_GARBLES[t];
+    if (t === 'tbe') t = 'the';
+    t = t.replace(/vv/g, 'w');
+    if (t.length >= 6 && t.startsWith('ay')) t = 'w' + t.slice(2); // "Ayilliam" for William
+    if (/fl$/.test(t)) t = t.slice(0, -2) + 'ff'; // "Shurtlefl" for Shurtleff
+    return t;
+  }
+  function exhSkeleton(str) {
+    return str.replace(/[cgqo]/g, 'o').replace(/k/g, 'r').replace(/y/g, 'v').replace(/i/g, 't').replace(/(.)\1+/g, '$1');
+  }
+  /* The grouping key. Word tokens are skeletonised; single letters are
+     kept literal — an initial is identity-bearing, so "Nicoll, J. C."
+     and the garbled "Nicoll, J. G." stay apart — except a run of four
+     or more single letters, which is a spaced-out word ("G e o r g e")
+     and is skeletonised as one unit. Doubled letters collapse inside a
+     word unit, and across a word/word boundary (a surname split in two
+     by the OCR, "Far re r"), but never between an initial and the
+     surname: "W. L. Lathrop" and "W. Lathrop" stay apart. */
+  function exhBrowseKey(artist) {
+    const tokens = exhBrowseSegments(artist).flat();
+    const units = [];
+    let run = [];
+    const flushRun = () => {
+      if (!run.length) return;
+      if (run.length >= 4) units.push({ text: exhSkeleton(run.join('')), word: true });
+      else for (const t of run) units.push({ text: t.replace(/6/g, 'e').replace(/0/g, 'o'), word: false });
+      run = [];
+    };
+    for (const tok of tokens) {
+      if (tok.length === 1) { run.push(tok); continue; }
+      flushRun();
+      units.push({ text: exhSkeleton(exhKeyToken(tok)), word: true });
+    }
+    flushRun();
+    let key = '';
+    let prevWord = false;
+    for (const u of units) {
+      if (key && u.word && prevWord && key.charAt(key.length - 1) === u.text.charAt(0)) {
+        key += u.text.slice(1);
+      } else {
+        key += u.text;
+      }
+      prevWord = u.word;
+    }
+    return key;
+  }
+  /* The surname token of the cleaned name: the last word before the
+     first comma for surname-first headings, otherwise the last word —
+     with a split surname rejoined ("Go" + "yen") and garbled tokens
+     repaired (digits, Yelde). Used for the group's letter (only where
+     the printed surname is itself garbled) and for sorting. */
+  function exhBrowseSurname(artist, repaired) {
+    const segs = exhBrowseSegments(artist);
+    if (!segs.length) return '';
+    const honorifics = new Set(['sir', 'dame', 'lord', 'lady', 'rev', 'hon', 'fra', 'mons', 'monsieur', 'madame', 'mademoiselle', 'miss', 'mr', 'mrs', 'dr']);
+    const first = segs[0].filter((t) => t.length >= 2 && !honorifics.has(t));
+    let surname;
+    if (String(artist).includes(',') && first.length) {
+      surname = first[first.length - 1];
+    } else {
+      const all = segs.flat();
+      surname = all[all.length - 1];
+      const prev = all[all.length - 2];
+      if (repaired && prev && prev.length === 2 && surname.length <= 3) surname = prev + surname;
+    }
+    if (repaired) {
+      surname = surname.replace(/6/g, 'e').replace(/0/g, 'o').replace(/vv/g, 'w');
+      if (EXH_SURNAME_REPAIRS[surname]) surname = EXH_SURNAME_REPAIRS[surname];
+    }
+    return surname;
+  }
+  /* The printed form a group is shown under: the printed name with any
+     appended section word removed and stray trailing punctuation
+     trimmed — nothing else about it is altered. */
+  function exhBrowseDisplayForm(artist) {
+    let s = String(artist || '').trim().replace(/\s+/g, ' ');
+    const comma = s.lastIndexOf(',');
+    const head = comma >= 0 ? s.slice(0, comma + 1) : '';
+    const tail = comma >= 0 ? s.slice(comma + 1).trim() : s;
+    const toks = tail.split(' ');
+    while (toks.length > 1 && EXH_SECTION_WORDS.has(exhFoldName(toks[toks.length - 1]).replace(/[^a-z]/g, ''))) toks.pop();
+    s = (head ? head + ' ' : '') + toks.join(' ');
+    return s.replace(/[\s"“”']+$/, '').replace(/^[\s,]+/, '').replace(/[\s,]+$/, '').trim();
+  }
+  /* How garbled a printed form looks, for choosing which form a group
+     is shown under: digits and stray symbols, the vv digraph, a q with
+     no u after it, and the Ay- for W- garble. Clean forms beat garbled
+     ones however often the garble was printed. */
+  function exhGarbleScore(name) {
+    let score = 0;
+    for (const ch of String(name)) {
+      if (/[0-9]/.test(ch)) score += 2;
+      else if (!/[\p{L}\s,.'’()-]/u.test(ch)) score += 2;
+    }
+    for (const tok of exhFoldName(name).split(/[^a-z0-9]+/).filter(Boolean)) {
+      if (tok.includes('vv')) score += 2;
+      if (/q(?!u)/.test(tok)) score += 2;
+      if (tok.length >= 6 && tok.startsWith('ay')) score += 2;
+    }
+    return score;
+  }
+  const EXH_BLANK_KEY = 'artist-not-given';
+  /* Group one exhibition's works for the artist browse. Blank-artist
+     entries form their own group so their works stay reachable. Each
+     group carries its filing letter and a surname sort key. */
+  function exhBrowseGroups(records) {
+    const groups = new Map();
+    for (const w of records) {
+      const raw = (w.artist || '').trim();
+      /* Mc/Mac surname prefixes are identity-bearing: "B. M. Guinness"
+         and "B. McGuinness" skeletonise to the same key, but Guinness
+         and McGuinness are different families, so a Mc/Mac surname
+         never groups with the same surname shorn of its prefix. */
+      const mcGuard = raw && /^(mc|mac)/.test(exhBrowseSurname(raw, false)) && exhBrowseSurname(raw, false).length >= 5;
+      const key = raw ? exhBrowseKey(raw) + (mcGuard ? '|mc' : '') : EXH_BLANK_KEY;
+      if (!groups.has(key)) groups.set(key, { key, blank: !raw, forms: new Map(), works: [] });
+      const g = groups.get(key);
+      if (raw) {
+        const cand = exhBrowseDisplayForm(raw);
+        g.forms.set(cand, (g.forms.get(cand) || 0) + 1);
+      }
+      g.works.push(w);
+    }
+    return [...groups.values()].map((g) => {
+      if (g.blank) {
+        return { key: g.key, blank: true, name: 'Artist not given in catalogue', works: g.works, letter: '#', sortKey: 'artistnotgiven' };
+      }
+      /* Display form: the cleanest printed form wins; among equally
+         clean forms, the one whose name tokens are most usual across
+         the group's forms (so a one-off garble of the surname loses
+         to the spelling the catalogue used most), then the most
+         frequent, then alphabetical. */
+      const tokenFreq = new Map();
+      for (const cand of g.forms.keys()) {
+        for (const tok of new Set(exhBrowseSegments(cand).flat().map(exhKeyToken))) {
+          tokenFreq.set(tok, (tokenFreq.get(tok) || 0) + 1);
+        }
+      }
+      const centrality = (cand) => {
+        const toks = exhBrowseSegments(cand).flat();
+        if (!toks.length) return 0;
+        return toks.reduce((n, tok) => n + (tokenFreq.get(exhKeyToken(tok)) || 0), 0) / toks.length;
+      };
+      const forms = [...g.forms.entries()]
+        .sort((a, b) => exhGarbleScore(a[0]) - exhGarbleScore(b[0])
+          || centrality(b[0]) - centrality(a[0])
+          || b[1] - a[1]
+          || a[0].localeCompare(b[0]));
+      const name = forms[0][0];
+      const surname = exhBrowseSurname(name, true);
+      const rawSurname = exhBrowseSurname(name, false);
+      let letter = exhSurnameInitial(name);
+      if ((letter === '#' || surname !== rawSurname) && /^[a-z]/.test(surname)) {
+        letter = surname.charAt(0).toUpperCase();
+      }
+      return { key: g.key, blank: false, name, works: g.works, letter, sortKey: exhSkeleton(surname) + '|' + g.key };
+    });
+  }
+  /* EXH-BROWSE-GROUP:END */
   function renderExhSearch() {
     const el = $('#exh-search');
     if (!el) return;
@@ -1821,23 +2034,27 @@
     const el = $('#exh-browse');
     if (!el || !exhState.records) return;
     const records = exhState.records;
+    /* Group first (display-layer normalisation), then file each group
+       under its letter — a garbled variant no longer strands its works
+       under the wrong letter or in "#". */
+    const allGroups = exhBrowseGroups(records);
     const counts = new Map();
-    for (const w of records) {
-      const L = exhSurnameInitial(w.artist);
-      counts.set(L, (counts.get(L) || 0) + 1);
+    for (const g of allGroups) {
+      counts.set(g.letter, (counts.get(g.letter) || 0) + g.works.length);
     }
     const letters = [...counts.keys()].sort((a, b) => (a === '#' ? 1 : b === '#' ? -1 : a.localeCompare(b)));
     const chips = letters.map((L) =>
       `<button class="chip ${exhState.letter === L ? 'active' : ''}" data-exh-letter="${esc(L)}">${esc(L)} · ${counts.get(L).toLocaleString()}</button>`).join('');
     let body = '';
     if (exhState.letter) {
-      const inLetter = records.filter((w) => exhSurnameInitial(w.artist) === exhState.letter);
-      const groups = exhGroups(inLetter, 'artist', []);
+      const groups = allGroups.filter((g) => g.letter === exhState.letter)
+        .sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+      const inLetter = groups.reduce((n, g) => n + g.works.length, 0);
       const sel = groups.find((g) => g.key === exhState.selected);
       if (sel) {
         body = `<button class="btn btn-sm" id="exh-browse-back" style="margin:12px 0 10px">← All artists under ${esc(exhState.letter)}</button>
           <div class="results-head"><div><h2>${esc(niceName(sel.name))}</h2>
-          <div class="meta">${plural(sel.works.length, 'work')} in this exhibition · <a href="#/search?q=${enc(exhNamePart(sel.name))}">Atlas research report →</a></div></div></div>
+          <div class="meta">${plural(sel.works.length, 'work')} in this exhibition${sel.blank ? '' : ` · <a href="#/search?q=${enc(exhNamePart(sel.name))}">Atlas research report →</a>`}</div></div></div>
           <div class="table-wrap"><table class="table salon-table">
           <thead><tr><th class="salon-num">No.</th><th>Title</th><th>Medium</th><th>Size</th><th>Lender</th><th>Gallery</th></tr></thead>
           <tbody>${sel.works.map((w) => `<tr>
@@ -1850,7 +2067,7 @@
           </tr>`).join('')}</tbody></table></div>`;
       } else {
         body = `<div class="results-head" style="margin-top:14px"><div><h2>Artists under ${esc(exhState.letter)}</h2>
-          <div class="meta">${plural(groups.length, 'artist')} as the catalogue printed them · ${plural(inLetter.length, 'work')}</div></div></div>
+          <div class="meta">${plural(groups.length, 'artist')} as the catalogue printed them · ${plural(inLetter, 'work')}</div></div></div>
           <div class="table-wrap"><table class="table salon-table"><thead><tr><th>Artist</th><th>Works</th><th></th></tr></thead>
           <tbody>${groups.map((g) => `<tr><td>${esc(niceName(g.name))}</td><td>${g.works.length.toLocaleString()}</td><td><button class="btn btn-sm" data-exh-artist="${esc(g.key)}">View works →</button></td></tr>`).join('')}</tbody></table></div>`;
       }
@@ -1964,7 +2181,8 @@
   let salesConv = null;
   const salesData = new Map(); // source id -> records array
   let salesLoadPromise = null;
-  const salesState = { equiv: 'off', query: '', source: 'all', page: 1, results: null, counts: null, today: null, gamePool: null, game: null, score: { played: 0, correct: 0 } };
+  const salesState = { equiv: 'off', query: '', source: 'all', page: 1, results: null, counts: null, today: null, gamePool: null, game: null, ended: false, score: { played: 0, correct: 0, streak: 0, best: 0 } };
+  let salesPicDoc = null; // picture-matches.json — Confirmed sales↔pool-work links only
 
   async function loadSales() {
     if (!salesLoadPromise) {
@@ -1975,6 +2193,9 @@
           const doc = await salonFetchJSON('/data/sales/' + s.file);
           salesData.set(s.id, doc.records);
         }));
+        /* Picture matches are an enhancement, never a dependency: a
+           missing file must not take the archive down with it. */
+        try { salesPicDoc = await salonFetchJSON('/data/sales/picture-matches.json'); } catch (e) { salesPicDoc = null; }
         return salesManifest;
       })().catch((e) => { salesLoadPromise = null; throw e; });
     }
@@ -2090,6 +2311,16 @@
       + '<div class="meta">As recorded by ' + esc(meta ? meta.label : t.pick.id) + ', p. ' + esc(w[15]) + (t.n > 1 ? ' · the highest-priced of ' + t.n + ' Graves sales on this date' : '') + '</div></div>';
   }
   /* -------------------------------------------------- guess the price */
+  /* A picture for a sales record exists only where the cross-match
+     (scripts/build-sales-picture-matches.py) confirmed the identity at
+     the Atlas's Confirmed standard; the match carries the pool work's
+     image and museum credit. Most records have none — period pictures
+     are largely untraced — and the game says so rather than guessing. */
+  function salesPicFor(id, w) {
+    if (!salesPicDoc || !Array.isArray(salesPicDoc.matches)) return null;
+    return salesPicDoc.matches.find((m) => m.source === id && m.artist === w[0] && m.subject === w[2]
+      && m.saleDate === w[4] && String(m.lot) === String(w[3]) && m.page === w[15]) || null;
+  }
   function salesGamePool() {
     if (salesState.gamePool) return salesState.gamePool;
     const pool = [];
@@ -2101,6 +2332,8 @@
       if (!w[8] || !w[8].trim()) continue;                  // named buyer preferred — required here
       if (!w[2] || w[2].trim().length < 6) continue;        // a real subject
       if (w[5] == null) continue;
+      const pic = salesPicFor(r.id, w);
+      if (pic) r.pic = pic;
       pool.push(r);
     }
     salesState.gamePool = pool;
@@ -2110,26 +2343,59 @@
     for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; }
     return a;
   }
+  /* Distractor prices are the true price respread at clear steps
+     (×0.4, ×2.2, ×5), each rounded to a plausible £sd figure for its
+     size — not other records' prices clustered around the truth — so
+     the artist, date, size and owner on the card can genuinely
+     discriminate between the four. */
+  function salesPlausiblePrice(dec) {
+    const step = dec < 20 ? 0.25 : dec < 100 ? 1 : dec < 500 ? 5 : dec < 2000 ? 10 : 50;
+    const v = Math.max(step, Math.round(dec / step) * step);
+    let p = Math.floor(v + 1e-9);
+    let s = Math.round((v - p) * 20);
+    if (s === 20) { p += 1; s = 0; }
+    return { p, s, d: 0, dec: p + s / 20 };
+  }
   function newSalesRound() {
     const pool = salesGamePool();
     if (!pool.length) return null;
-    const pick = pool[Math.floor(Math.random() * pool.length)];
-    const trueDec = salesDec(pick.w);
-    const distract = [];
-    const seen = new Set([trueDec]);
-    const windows = [{ yrs: 30, lo: 1 / 3.5, hi: 3.5 }, { yrs: 75, lo: 1 / 6, hi: 6 }, { yrs: 10000, lo: 1 / 6, hi: 6 }];
-    for (const win of windows) {
-      if (distract.length >= 3) break;
-      const cands = salesShuffle(pool.filter((r) => Math.abs(r.w[5] - pick.w[5]) <= win.yrs && salesDec(r.w) >= trueDec * win.lo && salesDec(r.w) <= trueDec * win.hi && !seen.has(salesDec(r.w))));
-      for (const c of cands) {
-        if (distract.length >= 3) break;
-        seen.add(salesDec(c.w));
-        distract.push(c);
+    let pick = null;
+    const picPool = pool.filter((r) => r.pic);
+    if (picPool.length && Math.random() < 1 / 3) {
+      /* Picture rounds are rare treasure: favour the picture deck
+         regularly so they actually occur, without repeating the
+         picture just shown. */
+      let cands = picPool;
+      if (salesState.game && salesState.game.pick) {
+        const fresh = picPool.filter((r) => r !== salesState.game.pick);
+        if (fresh.length) cands = fresh;
       }
+      pick = cands[Math.floor(Math.random() * cands.length)];
+    } else {
+      pick = pool[Math.floor(Math.random() * pool.length)];
     }
-    if (distract.length < 3) return null;
-    const options = salesShuffle([{ r: pick, isTrue: true }, ...distract.map((r) => ({ r, isTrue: false }))]);
-    return { pick, options, answered: -1 };
+    const trueDec = salesDec(pick.w);
+    const seen = new Set([trueDec]);
+    const options = [{ price: [pick.w[9], pick.w[10], pick.w[11]], isTrue: true }];
+    for (const f of [0.4, 2.2, 5]) {
+      let v = trueDec * f;
+      let cand = salesPlausiblePrice(v);
+      let guard = 0;
+      while (seen.has(cand.dec) && guard++ < 60) { v *= f < 1 ? 0.87 : 1.15; cand = salesPlausiblePrice(v); }
+      if (seen.has(cand.dec)) return null;
+      seen.add(cand.dec);
+      options.push({ price: [cand.p, cand.s, cand.d], isTrue: false });
+    }
+    return { pick, options: salesShuffle(options), answered: -1 };
+  }
+  /* Saleroom rank for a finished session, by accuracy and rounds. */
+  function salesRank(played, correct) {
+    if (!played) return 'Novice';
+    const acc = correct / played;
+    if (played >= 8 && acc >= 0.9) return 'Auctioneer';
+    if (played >= 5 && acc >= 0.7) return 'Specialist';
+    if (played >= 3 && acc >= 0.5) return 'Cataloguer';
+    return 'Novice';
   }
   function renderSalesGame() {
     const el = $('#sales-game');
@@ -2137,6 +2403,23 @@
     const g = salesState.game;
     const s = salesState.score;
     const scoreLine = '<div class="meta">Score this session: ' + s.correct + ' of ' + s.played + '</div>';
+    if (salesState.ended) {
+      const acc = s.played ? Math.round((s.correct / s.played) * 100) : 0;
+      el.innerHTML = '<div class="sales-feature"><div class="sales-feature-label">Guess the price — session over</div>'
+        + '<div class="sales-feature-main">You called <strong>' + s.correct + ' of ' + s.played + '</strong> prices right'
+        + (s.played ? ' — <strong>' + acc + '%</strong> accuracy' : '')
+        + ', with a best streak of <strong>' + s.best + '</strong>.</div>'
+        + '<div class="sales-game-q">Saleroom rank: ' + esc(salesRank(s.played, s.correct)) + '</div>'
+        + '<div class="pager"><button class="btn btn-primary" id="sales-game-again">Play again</button></div></div>';
+      const again = $('#sales-game-again');
+      if (again) again.addEventListener('click', () => {
+        salesState.score = { played: 0, correct: 0, streak: 0, best: 0 };
+        salesState.ended = false;
+        salesState.game = newSalesRound();
+        renderSalesGame();
+      });
+      return;
+    }
     if (!g) {
       el.innerHTML = '<div class="sales-feature"><div class="sales-feature-label">Guess the price</div><div class="notice">The game could not be set up from the Graves records.</div></div>';
       return;
@@ -2146,8 +2429,12 @@
     let html = '<div class="sales-feature"><div class="sales-feature-label">Guess the price</div>'
       + '<div class="sales-feature-main"><span class="sales-feature-artist">' + esc(w[0]) + '</span> '
       + '<span class="sales-feature-title">' + esc(w[2]) + '</span></div>'
-      + '<div class="meta">' + esc(w[4]) + ' · ' + esc(w[6]) + (w[3] ? ' · lot ' + esc(w[3]) : '') + (w[7] ? ' · owner ' + esc(w[7]) : '') + '</div>'
-      + '<div class="sales-game-q">What did it make?</div><div class="sales-game-options">';
+      + '<div class="meta">' + esc(w[4]) + ' · ' + esc(w[6]) + (w[3] ? ' · lot ' + esc(w[3]) : '') + (w[7] ? ' · owner ' + esc(w[7]) : '') + '</div>';
+    if (g.pick.pic) {
+      html += '<figure class="sales-game-pic"><img src="' + esc(g.pick.pic.image) + '" alt="' + esc(g.pick.pic.poolTitle + ' by ' + g.pick.pic.poolArtist) + '" loading="lazy" onerror="this.closest(\'figure\').style.display=\'none\'">'
+        + '<figcaption class="meta">The picture itself: ' + esc(g.pick.pic.poolTitle) + ' — now at the ' + esc(g.pick.pic.museum) + '. <a href="' + esc(g.pick.pic.objectUrl) + '" target="_blank" rel="noopener">The museum’s record</a></figcaption></figure>';
+    }
+    html += '<div class="sales-game-q">What did it make?</div><div class="sales-game-options">';
     g.options.forEach((o, i) => {
       let cls = 'sales-game-opt';
       let dis = '';
@@ -2156,7 +2443,7 @@
         if (o.isTrue) cls += ' right';
         else if (i === g.answered) cls += ' wrong';
       }
-      html += '<button class="' + cls + '" data-game-opt="' + i + '"' + dis + '>' + esc(fmtLSD(o.r.w[9], o.r.w[10], o.r.w[11])) + '</button>';
+      html += '<button class="' + cls + '" data-game-opt="' + i + '"' + dis + '>' + esc(fmtLSD(o.price[0], o.price[1], o.price[2])) + '</button>';
     });
     html += '</div>';
     if (g.answered >= 0) {
@@ -2168,7 +2455,9 @@
         + '.<br><span class="meta">As recorded by ' + esc(meta ? meta.label : g.pick.id) + ', p. ' + esc(w[15]) + '.'
         + (eq ? ' ' + esc(eq) + (salesState.equiv === 'off' ? ' (equivalents are off above — shown here as the payoff)' : '') + '.' : '')
         + '</span></div>'
-        + '<div class="pager"><button class="btn btn-primary" id="sales-game-next">Next picture →</button>' + scoreLine + '</div>';
+        + '<div class="pager"><span class="sales-game-btns"><button class="btn btn-primary" id="sales-game-next">Next picture →</button><button class="btn" id="sales-game-end">End game</button></span>' + scoreLine + '</div>';
+    } else if (s.played > 0) {
+      html += '<div class="pager"><button class="btn" id="sales-game-end">End game</button>' + scoreLine + '</div>';
     } else {
       html += scoreLine;
     }
@@ -2179,11 +2468,19 @@
       if (salesState.game.answered >= 0) return;
       salesState.game.answered = i;
       salesState.score.played++;
-      if (salesState.game.options[i].isTrue) salesState.score.correct++;
+      if (salesState.game.options[i].isTrue) {
+        salesState.score.correct++;
+        salesState.score.streak++;
+        if (salesState.score.streak > salesState.score.best) salesState.score.best = salesState.score.streak;
+      } else {
+        salesState.score.streak = 0;
+      }
       renderSalesGame();
     }));
     const next = $('#sales-game-next');
     if (next) next.addEventListener('click', () => { salesState.game = newSalesRound(); renderSalesGame(); });
+    const end = $('#sales-game-end');
+    if (end) end.addEventListener('click', () => { salesState.ended = true; renderSalesGame(); });
   }
   /* --------------------------------------------------------- searching */
   function salesWords(q) {
@@ -2367,6 +2664,235 @@
     $('#sales-about').innerHTML = '<div class="notice">About these records — ' + countsLine + ' · ' + salesManifest.totalRecords.toLocaleString() + ' sales in all. The historic records stand exactly as Redford and Graves printed them, including their spelling and their errors; Graves set out to correct Redford, and where Redford gives only the year, Graves usually gives the full date and lot number. One caveat travels with the Graves set: for some early sales whose catalogues printed no prices, Graves supplied the figures “to the best of my ability”, unmarked — those figures are his estimates, not catalogue records. Prices are in pounds, shillings and pence as printed; the small number of franc-priced Paris sales stand in francs. A “braced” price is one printed figure covering two lots together, and it stands on both records.</div>'
       + '<details class="more"><summary>About the today’s-money conversions</summary><div class="notice">Equivalents are expressed in ' + salesConv.baseYear + ' pounds, and are built from two published sources. The Bank of England’s “A millennium of macroeconomic data for the UK” (version 3.1, Thomas &amp; Dimsdale), sheet A1. Headline series, runs to 2016: its consumer price index (2015 = 100) is used for “By prices” and its average weekly earnings for “By earnings”. From 2017 to ' + salesConv.baseYear + ' both series are extended with Office for National Statistics figures compounded onto the 2016 values — the CPI annual rate (series D7G7) for “By prices” and Average Weekly Earnings growth (series KAB9, whole economy total pay) for “By earnings”. Sources accessed November 2026. The multiplier for a sale year is the ' + salesConv.baseYear + ' index value divided by that year’s. Results are rounded to three significant figures and marked “≈”; the printed historic figure is always the primary number. Sterling records only: franc-priced sales show no equivalent, and the modern landmark sales are given as reported.</div></details>';
     if (salesState.query) runSalesSearch();
+  }
+
+  /* ================================================ who painted it? */
+  /* The pool (public/data/game/pool.json, built by
+     scripts/build-game-pool.py) holds open-access museum records only:
+     every work is a museum's own record for that object, and the artist
+     is the artist that record names. Levels are curatorial — canonical
+     works pinned low, the rest banded by the artist's fame; distractor
+     closeness is ruled by level from per-artist metadata (century,
+     movement, nationality, circle). See public/data/game/POOL.md. */
+  let gamePool = null;
+  let gameLoadPromise = null;
+  const gameState = { mode: null, level: 1, ladderStep: 0, score: 0, streak: 0, best: 0, played: 0, correct: 0, round: null, used: new Set(), bad: new Set(), finished: false };
+  const GAME_RANKS = [[5800, 'Chief Curator'], [4600, 'Curator'], [3400, 'Connoisseur'], [2200, 'Docent'], [1000, 'Art Lover'], [0, 'Gallery Visitor']];
+  const gameRank = (score) => GAME_RANKS.find(([min]) => score >= min)[1];
+  const gameNormName = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+  async function loadGamePool() {
+    if (!gameLoadPromise) {
+      gameLoadPromise = salonFetchJSON('/data/game/pool.json').then((d) => { gamePool = d; return d; })
+        .catch((e) => { gameLoadPromise = null; throw e; });
+    }
+    return gameLoadPromise;
+  }
+
+  /* Distractor rule by level: 1–2 far eras; 3–4 same broad period,
+     different movement; 5–6 same movement, or same nationality nearby;
+     7–8 same movement; 9–10 the artist's own circle. Each rule falls
+     back through looser ones until three names are found. */
+  function gameDistractors(work, level) {
+    const meta = gamePool.artists[work.artist];
+    if (!meta) return [];
+    const names = Object.keys(gamePool.artists).filter((n) => n !== work.artist);
+    const M = (n) => gamePool.artists[n];
+    const cdiff = (n) => Math.abs(M(n).century - meta.century);
+    let rule;
+    if (level <= 2) rule = (n) => cdiff(n) >= 2;
+    else if (level <= 4) rule = (n) => cdiff(n) <= 1 && M(n).movement !== meta.movement;
+    else if (level <= 6) rule = (n) => M(n).movement === meta.movement || (M(n).nationality === meta.nationality && cdiff(n) <= 1);
+    else if (level <= 8) rule = (n) => M(n).movement === meta.movement;
+    else rule = (n) => M(n).circle === meta.circle;
+    const chain = [rule,
+      (n) => M(n).movement === meta.movement,
+      (n) => M(n).circle === meta.circle,
+      (n) => M(n).nationality === meta.nationality && cdiff(n) <= 1,
+      (n) => cdiff(n) <= 1,
+      () => true];
+    const picked = [];
+    const seen = new Set([gameNormName(work.artist)]);
+    for (const f of chain) {
+      if (picked.length >= 3) break;
+      for (const c of salesShuffle(names.filter((n) => f(n) && !seen.has(gameNormName(n))))) {
+        if (picked.length >= 3) break;
+        seen.add(gameNormName(c));
+        picked.push(c);
+      }
+    }
+    return picked;
+  }
+
+  function newGameRound(level) {
+    const fresh = gamePool.works.filter((w) => w.level === level && !gameState.used.has(w.image) && !gameState.bad.has(w.image));
+    const any = gamePool.works.filter((w) => w.level === level && !gameState.bad.has(w.image));
+    const src = fresh.length ? fresh : any;
+    if (!src.length) return null;
+    const work = src[Math.floor(Math.random() * src.length)];
+    gameState.used.add(work.image);
+    const distract = gameDistractors(work, level);
+    if (distract.length < 3) return null;
+    return { work, options: salesShuffle([work.artist, ...distract]), answered: -1, level, gained: 0, bonus: 0 };
+  }
+
+  function startGame(mode, level) {
+    gameState.mode = mode;
+    gameState.finished = false;
+    gameState.round = null;
+    if (mode === 'ladder') {
+      gameState.score = 0; gameState.streak = 0; gameState.best = 0;
+      gameState.played = 0; gameState.correct = 0;
+      gameState.used = new Set();
+      gameState.ladderStep = 1;
+      gameState.round = newGameRound(1);
+    } else {
+      gameState.level = level;
+      gameState.ladderStep = 0;
+      gameState.round = newGameRound(level);
+    }
+    renderGame();
+  }
+
+  function gameAnswer(i) {
+    const g = gameState.round;
+    if (!g || g.answered >= 0) return;
+    g.answered = i;
+    gameState.played++;
+    if (g.options[i] === g.work.artist) {
+      gameState.correct++;
+      gameState.streak++;
+      gameState.best = Math.max(gameState.best, gameState.streak);
+      g.bonus = gameState.streak >= 2 ? Math.min(250, 50 * (gameState.streak - 1)) : 0;
+      g.gained = g.level * 100 + g.bonus;
+      gameState.score += g.gained;
+    } else {
+      gameState.streak = 0;
+    }
+    renderGameStage();
+  }
+
+  function gameNext() {
+    if (gameState.mode === 'ladder') {
+      if (gameState.ladderStep >= 10) { gameState.finished = true; gameState.round = null; renderGame(); return; }
+      gameState.ladderStep++;
+      gameState.round = newGameRound(gameState.ladderStep);
+    } else {
+      gameState.round = newGameRound(gameState.level);
+    }
+    renderGameStage();
+    renderGameControls();
+  }
+
+  async function viewGame() {
+    app.innerHTML = '<h1 style="font-size:38px">Who Painted It?</h1>'
+      + '<p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">One painting, four names. The works are all open-access museum pictures, and the higher the level, the closer the wrong answers crowd in — by level 10 the alternatives are the artist’s own circle. A correct answer scores the level × 100, and a streak adds a bonus. Play a single level, or climb the ladder from level 1 to 10.</p>'
+      + '<div id="game-main">' + spinner('Loading the gallery…') + '</div>';
+    try {
+      await loadGamePool();
+    } catch (e) {
+      $('#game-main').innerHTML = '<div class="notice error">The game pictures could not be loaded: ' + esc(e.message) + '</div>';
+      return;
+    }
+    if (!gameState.mode) startGame('level', 1);
+    else renderGame();
+  }
+
+  function renderGame() {
+    const main = $('#game-main');
+    if (!main) return;
+    main.innerHTML = '<div id="game-controls"></div><div id="game-stage"></div>'
+      + '<div class="notice">Every picture is an open-access image from the museum that holds the work — the Metropolitan Museum of Art, the Art Institute of Chicago or the Cleveland Museum of Art — and the answer is the artist that museum’s own record names. Levels are set curatorially: the most famous pictures sit at levels 1–3, and obscurer works by closer-matched artists rise to 10. <a href="/data/game/POOL.md" target="_blank" rel="noopener">How the pool was built</a>.</div>';
+    renderGameControls();
+    renderGameStage();
+  }
+
+  function renderGameControls() {
+    const el = $('#game-controls');
+    if (!el || !gamePool) return;
+    const counts = {};
+    for (const w of gamePool.works) counts[w.level] = (counts[w.level] || 0) + 1;
+    const chips = [];
+    for (let l = 1; l <= 10; l++) {
+      chips.push('<button class="chip' + (gameState.mode === 'level' && gameState.level === l ? ' active' : '') + '" data-game-level="' + l + '">Level ' + l + '</button>');
+    }
+    el.innerHTML = '<div class="game-modes">'
+      + '<button class="btn btn-primary" id="game-ladder">Play the ladder · levels 1 → 10</button>'
+      + '<span class="meta">or play one level:</span>'
+      + '<span class="filters">' + chips.join('') + '</span></div>'
+      + '<div class="game-scorebar"><span>Score <b>' + gameState.score.toLocaleString() + '</b></span>'
+      + '<span>Streak <b>' + gameState.streak + '</b></span>'
+      + '<span>Right <b>' + gameState.correct + '</b> of <b>' + gameState.played + '</b></span>'
+      + (gameState.mode === 'ladder' && !gameState.finished ? '<span>Question <b>' + gameState.ladderStep + '</b> of 10</span>' : '')
+      + '</div>';
+    $('#game-ladder').addEventListener('click', () => startGame('ladder'));
+    el.querySelectorAll('[data-game-level]').forEach((b) => b.addEventListener('click', () => startGame('level', +b.dataset.gameLevel)));
+  }
+
+  function renderGameStage() {
+    const el = $('#game-stage');
+    if (!el || !gamePool) return;
+    const sb = $('.game-scorebar');
+    if (sb) renderGameControls();
+    if (gameState.finished) {
+      const acc = gameState.played ? Math.round((100 * gameState.correct) / gameState.played) : 0;
+      el.innerHTML = '<div class="game-stage"><h2 style="font-size:30px">The ladder climbed</h2>'
+        + '<p class="game-final-score">' + gameState.score.toLocaleString() + ' points</p>'
+        + '<p>' + gameState.correct + ' right of ' + gameState.played + ' (' + acc + '%), best streak ' + gameState.best + '.</p>'
+        + '<p class="game-rank">Your rank: <b>' + esc(gameRank(gameState.score)) + '</b></p>'
+        + '<p class="meta">Ranks run Gallery Visitor · Art Lover · Docent · Connoisseur · Curator · Chief Curator. A perfect ladder — every level right, streak unbroken — scores 7,250.</p>'
+        + '<div class="game-modes"><button class="btn btn-primary" id="game-again">Climb again</button></div></div>';
+      $('#game-again').addEventListener('click', () => startGame('ladder'));
+      return;
+    }
+    const g = gameState.round;
+    if (!g) {
+      el.innerHTML = '<div class="game-stage"><div class="notice">No picture is available at this level just now — try another level.</div></div>';
+      return;
+    }
+    const w = g.work;
+    let html = '<div class="game-stage">'
+      + '<div class="sales-feature-label">Level ' + g.level + (gameState.mode === 'ladder' ? ' · question ' + gameState.ladderStep + ' of 10' : '') + ' · ' + (g.level * 100) + ' points</div>'
+      + '<figure class="game-figure"><img id="game-img" src="' + esc(w.image) + '" alt="A painting to identify">'
+      + '<figcaption class="game-credit">Image: ' + esc(w.museum) + ' · open access</figcaption></figure>'
+      + '<div class="game-q">Who painted this?</div><div class="game-options">';
+    g.options.forEach((name, i) => {
+      let cls = 'game-opt';
+      let dis = '';
+      if (g.answered >= 0) {
+        dis = ' disabled';
+        if (name === w.artist) cls += ' right';
+        else if (i === g.answered) cls += ' wrong';
+      }
+      html += '<button class="' + cls + '" data-game-opt="' + i + '"' + dis + '><span class="game-letter">' + 'ABCD'[i] + '</span>' + esc(name) + '</button>';
+    });
+    html += '</div>';
+    if (g.answered >= 0) {
+      const right = g.options[g.answered] === w.artist;
+      const meta = gamePool.artists[w.artist];
+      html += '<div class="game-verdict ' + (right ? 'is-right' : 'is-wrong') + '">'
+        + (right ? '<strong>Right — +' + g.gained + ' points</strong>' + (g.bonus ? ' (including a ' + g.bonus + '-point streak bonus)' : '') + '.'
+                 : '<strong>Not quite.</strong> It is ' + esc(w.artist) + '.')
+        + '<div class="game-work"><i>' + esc(w.title) + '</i>' + (w.date ? ', ' + esc(w.date) : '')
+        + ' — ' + esc(w.artist) + (meta && (meta.birth || meta.death) ? ' (' + (meta.birth || '?') + '–' + (meta.death || '?') + ')' : '')
+        + '<br>' + esc(w.museum) + ' · ' + link(w.objectUrl, 'the museum’s object page')
+        + '<br><a href="#/search?q=' + enc(w.artist) + '">Research ' + esc(w.artist) + ' in the Atlas →</a></div></div>'
+        + '<div class="pager"><button class="btn btn-primary" id="game-next">'
+        + (gameState.mode === 'ladder' ? (gameState.ladderStep >= 10 ? 'See your rank →' : 'Next level →') : 'Next painting →')
+        + '</button></div>';
+    }
+    html += '</div>';
+    el.innerHTML = html;
+    const img = $('#game-img');
+    if (img) img.addEventListener('error', () => {
+      if (g.answered >= 0) return;
+      gameState.bad.add(w.image);
+      gameState.round = newGameRound(g.level);
+      renderGameStage();
+    });
+    el.querySelectorAll('[data-game-opt]').forEach((b) => b.addEventListener('click', () => gameAnswer(+b.dataset.gameOpt)));
+    const next = $('#game-next');
+    if (next) next.addEventListener('click', gameNext);
   }
 
   async function viewReport(p) {
