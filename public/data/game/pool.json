@@ -1,0 +1,4359 @@
+{
+ "generated": "2026-11-21",
+ "about": "Open-access works only. Every work is the museum's own record for that object; the artist shown is the artist that record names.",
+ "circles": {
+  "impressionists": "the Impressionist circle",
+  "post-impressionists": "the Post-Impressionist circle",
+  "dutch-golden": "the Dutch Golden Age",
+  "flemish-baroque": "the Flemish Baroque",
+  "italian-renaissance": "the Italian Renaissance",
+  "northern-renaissance": "the Northern Renaissance",
+  "roman-baroque": "the Roman Baroque",
+  "spanish-masters": "the Spanish masters",
+  "barbizon-realists": "the Barbizon school and the Realists",
+  "british-classics": "the British school",
+  "pre-raphaelites": "the Pre-Raphaelites and Victorians",
+  "american-19th": "the American nineteenth century",
+  "french-academic": "the French academic and symbolist salons",
+  "french-rococo": "the French Rococo",
+  "venetian-18th": "the Venetian eighteenth century",
+  "romantic-neoclassical": "the Neoclassicists and Romantics",
+  "japanese-prints": "the ukiyo-e masters",
+  "vienna-modern": "Vienna around 1900",
+  "early-modern": "the early modernists",
+  "chinese-literati": "the Chinese literati painters"
+ },
+ "artists": {
+  "Claude Monet": {
+   "birth": 1840,
+   "death": 1926,
+   "century": 19,
+   "movement": "Impressionism",
+   "nationality": "French",
+   "circle": "impressionists",
+   "tier": 1
+  },
+  "Pierre-Auguste Renoir": {
+   "birth": 1841,
+   "death": 1919,
+   "century": 19,
+   "movement": "Impressionism",
+   "nationality": "French",
+   "circle": "impressionists",
+   "tier": 1
+  },
+  "Edgar Degas": {
+   "birth": 1834,
+   "death": 1917,
+   "century": 19,
+   "movement": "Impressionism",
+   "nationality": "French",
+   "circle": "impressionists",
+   "tier": 1
+  },
+  "Édouard Manet": {
+   "birth": 1832,
+   "death": 1883,
+   "century": 19,
+   "movement": "Realism",
+   "nationality": "French",
+   "circle": "impressionists",
+   "tier": 1
+  },
+  "Camille Pissarro": {
+   "birth": 1830,
+   "death": 1903,
+   "century": 19,
+   "movement": "Impressionism",
+   "nationality": "French",
+   "circle": "impressionists",
+   "tier": 2
+  },
+  "Berthe Morisot": {
+   "birth": 1841,
+   "death": 1895,
+   "century": 19,
+   "movement": "Impressionism",
+   "nationality": "French",
+   "circle": "impressionists",
+   "tier": 2
+  },
+  "Mary Cassatt": {
+   "birth": 1844,
+   "death": 1926,
+   "century": 19,
+   "movement": "Impressionism",
+   "nationality": "American",
+   "circle": "impressionists",
+   "tier": 2
+  },
+  "Gustave Caillebotte": {
+   "birth": 1848,
+   "death": 1894,
+   "century": 19,
+   "movement": "Impressionism",
+   "nationality": "French",
+   "circle": "impressionists",
+   "tier": 2
+  },
+  "Alfred Sisley": {
+   "birth": 1839,
+   "death": 1899,
+   "century": 19,
+   "movement": "Impressionism",
+   "nationality": "British",
+   "circle": "impressionists",
+   "tier": 3
+  },
+  "Frédéric Bazille": {
+   "birth": 1841,
+   "death": 1870,
+   "century": 19,
+   "movement": "Impressionism",
+   "nationality": "French",
+   "circle": "impressionists",
+   "tier": 3
+  },
+  "Armand Guillaumin": {
+   "birth": 1841,
+   "death": 1927,
+   "century": 19,
+   "movement": "Impressionism",
+   "nationality": "French",
+   "circle": "impressionists",
+   "tier": 4
+  },
+  "Johan Barthold Jongkind": {
+   "birth": 1819,
+   "death": 1891,
+   "century": 19,
+   "movement": "Impressionism",
+   "nationality": "Dutch",
+   "circle": "impressionists",
+   "tier": 4
+  },
+  "Vincent van Gogh": {
+   "birth": 1853,
+   "death": 1890,
+   "century": 19,
+   "movement": "Post-Impressionism",
+   "nationality": "Dutch",
+   "circle": "post-impressionists",
+   "tier": 1
+  },
+  "Paul Gauguin": {
+   "birth": 1848,
+   "death": 1903,
+   "century": 19,
+   "movement": "Post-Impressionism",
+   "nationality": "French",
+   "circle": "post-impressionists",
+   "tier": 1
+  },
+  "Paul Cézanne": {
+   "birth": 1839,
+   "death": 1906,
+   "century": 19,
+   "movement": "Post-Impressionism",
+   "nationality": "French",
+   "circle": "post-impressionists",
+   "tier": 1
+  },
+  "Georges Seurat": {
+   "birth": 1859,
+   "death": 1891,
+   "century": 19,
+   "movement": "Neo-Impressionism",
+   "nationality": "French",
+   "circle": "post-impressionists",
+   "tier": 1
+  },
+  "Henri de Toulouse-Lautrec": {
+   "birth": 1864,
+   "death": 1901,
+   "century": 19,
+   "movement": "Post-Impressionism",
+   "nationality": "French",
+   "circle": "post-impressionists",
+   "tier": 2
+  },
+  "Henri Rousseau": {
+   "birth": 1844,
+   "death": 1910,
+   "century": 19,
+   "movement": "Post-Impressionism",
+   "nationality": "French",
+   "circle": "post-impressionists",
+   "tier": 2
+  },
+  "Paul Signac": {
+   "birth": 1863,
+   "death": 1935,
+   "century": 19,
+   "movement": "Neo-Impressionism",
+   "nationality": "French",
+   "circle": "post-impressionists",
+   "tier": 3
+  },
+  "Odilon Redon": {
+   "birth": 1840,
+   "death": 1916,
+   "century": 19,
+   "movement": "Symbolism",
+   "nationality": "French",
+   "circle": "post-impressionists",
+   "tier": 3
+  },
+  "Pierre Bonnard": {
+   "birth": 1867,
+   "death": 1947,
+   "century": 20,
+   "movement": "Post-Impressionism",
+   "nationality": "French",
+   "circle": "post-impressionists",
+   "tier": 3
+  },
+  "Édouard Vuillard": {
+   "birth": 1868,
+   "death": 1940,
+   "century": 20,
+   "movement": "Post-Impressionism",
+   "nationality": "French",
+   "circle": "post-impressionists",
+   "tier": 3
+  },
+  "Edvard Munch": {
+   "birth": 1863,
+   "death": 1944,
+   "century": 19,
+   "movement": "Symbolism",
+   "nationality": "Norwegian",
+   "circle": "post-impressionists",
+   "tier": 2
+  },
+  "Maurice Denis": {
+   "birth": 1870,
+   "death": 1943,
+   "century": 20,
+   "movement": "Post-Impressionism",
+   "nationality": "French",
+   "circle": "post-impressionists",
+   "tier": 4
+  },
+  "Félix Vallotton": {
+   "birth": 1865,
+   "death": 1925,
+   "century": 19,
+   "movement": "Post-Impressionism",
+   "nationality": "Swiss",
+   "circle": "post-impressionists",
+   "tier": 4
+  },
+  "Henri-Edmond Cross": {
+   "birth": 1856,
+   "death": 1910,
+   "century": 19,
+   "movement": "Neo-Impressionism",
+   "nationality": "French",
+   "circle": "post-impressionists",
+   "tier": 4
+  },
+  "Maximilien Luce": {
+   "birth": 1858,
+   "death": 1941,
+   "century": 19,
+   "movement": "Neo-Impressionism",
+   "nationality": "French",
+   "circle": "post-impressionists",
+   "tier": 4
+  },
+  "Rembrandt van Rijn": {
+   "birth": 1606,
+   "death": 1669,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Dutch",
+   "circle": "dutch-golden",
+   "tier": 1
+  },
+  "Johannes Vermeer": {
+   "birth": 1632,
+   "death": 1675,
+   "century": 17,
+   "movement": "Dutch Golden Age",
+   "nationality": "Dutch",
+   "circle": "dutch-golden",
+   "tier": 1
+  },
+  "Frans Hals": {
+   "birth": 1582,
+   "death": 1666,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Dutch",
+   "circle": "dutch-golden",
+   "tier": 2
+  },
+  "Jan Steen": {
+   "birth": 1626,
+   "death": 1679,
+   "century": 17,
+   "movement": "Dutch Golden Age",
+   "nationality": "Dutch",
+   "circle": "dutch-golden",
+   "tier": 2
+  },
+  "Jacob van Ruisdael": {
+   "birth": 1628,
+   "death": 1682,
+   "century": 17,
+   "movement": "Dutch Golden Age",
+   "nationality": "Dutch",
+   "circle": "dutch-golden",
+   "tier": 2
+  },
+  "Meindert Hobbema": {
+   "birth": 1638,
+   "death": 1709,
+   "century": 17,
+   "movement": "Dutch Golden Age",
+   "nationality": "Dutch",
+   "circle": "dutch-golden",
+   "tier": 3
+  },
+  "Aelbert Cuyp": {
+   "birth": 1620,
+   "death": 1691,
+   "century": 17,
+   "movement": "Dutch Golden Age",
+   "nationality": "Dutch",
+   "circle": "dutch-golden",
+   "tier": 3
+  },
+  "Pieter de Hooch": {
+   "birth": 1629,
+   "death": 1684,
+   "century": 17,
+   "movement": "Dutch Golden Age",
+   "nationality": "Dutch",
+   "circle": "dutch-golden",
+   "tier": 3
+  },
+  "Gerard ter Borch": {
+   "birth": 1617,
+   "death": 1681,
+   "century": 17,
+   "movement": "Dutch Golden Age",
+   "nationality": "Dutch",
+   "circle": "dutch-golden",
+   "tier": 4
+  },
+  "Gabriel Metsu": {
+   "birth": 1629,
+   "death": 1667,
+   "century": 17,
+   "movement": "Dutch Golden Age",
+   "nationality": "Dutch",
+   "circle": "dutch-golden",
+   "tier": 4
+  },
+  "Gerard Dou": {
+   "birth": 1613,
+   "death": 1675,
+   "century": 17,
+   "movement": "Dutch Golden Age",
+   "nationality": "Dutch",
+   "circle": "dutch-golden",
+   "tier": 4
+  },
+  "Adriaen van Ostade": {
+   "birth": 1610,
+   "death": 1685,
+   "century": 17,
+   "movement": "Dutch Golden Age",
+   "nationality": "Dutch",
+   "circle": "dutch-golden",
+   "tier": 4
+  },
+  "Salomon van Ruysdael": {
+   "birth": 1602,
+   "death": 1670,
+   "century": 17,
+   "movement": "Dutch Golden Age",
+   "nationality": "Dutch",
+   "circle": "dutch-golden",
+   "tier": 4
+  },
+  "Peter Paul Rubens": {
+   "birth": 1577,
+   "death": 1640,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Flemish",
+   "circle": "flemish-baroque",
+   "tier": 1
+  },
+  "Anthony van Dyck": {
+   "birth": 1599,
+   "death": 1641,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Flemish",
+   "circle": "flemish-baroque",
+   "tier": 2
+  },
+  "Jacob Jordaens": {
+   "birth": 1593,
+   "death": 1678,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Flemish",
+   "circle": "flemish-baroque",
+   "tier": 3
+  },
+  "Jan Brueghel the Elder": {
+   "birth": 1568,
+   "death": 1625,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Flemish",
+   "circle": "flemish-baroque",
+   "tier": 3
+  },
+  "Frans Snyders": {
+   "birth": 1579,
+   "death": 1657,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Flemish",
+   "circle": "flemish-baroque",
+   "tier": 4
+  },
+  "David Teniers the Younger": {
+   "birth": 1610,
+   "death": 1690,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Flemish",
+   "circle": "flemish-baroque",
+   "tier": 4
+  },
+  "Clara Peeters": {
+   "birth": 1594,
+   "death": 1657,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Flemish",
+   "circle": "flemish-baroque",
+   "tier": 4
+  },
+  "Jan Brueghel the Younger": {
+   "birth": 1601,
+   "death": 1678,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Flemish",
+   "circle": "flemish-baroque",
+   "tier": 4
+  },
+  "Sandro Botticelli": {
+   "birth": 1445,
+   "death": 1510,
+   "century": 15,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 1
+  },
+  "Leonardo da Vinci": {
+   "birth": 1452,
+   "death": 1519,
+   "century": 15,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 1
+  },
+  "Raphael": {
+   "birth": 1483,
+   "death": 1520,
+   "century": 16,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 1
+  },
+  "Michelangelo": {
+   "birth": 1475,
+   "death": 1564,
+   "century": 16,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 1
+  },
+  "Titian": {
+   "birth": 1488,
+   "death": 1576,
+   "century": 16,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 1
+  },
+  "Tintoretto": {
+   "birth": 1518,
+   "death": 1594,
+   "century": 16,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 2
+  },
+  "Paolo Veronese": {
+   "birth": 1528,
+   "death": 1588,
+   "century": 16,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 2
+  },
+  "Andrea Mantegna": {
+   "birth": 1431,
+   "death": 1506,
+   "century": 15,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 2
+  },
+  "Giovanni Bellini": {
+   "birth": 1430,
+   "death": 1516,
+   "century": 15,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 2
+  },
+  "Fra Angelico": {
+   "birth": 1395,
+   "death": 1455,
+   "century": 15,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 2
+  },
+  "Piero della Francesca": {
+   "birth": 1415,
+   "death": 1492,
+   "century": 15,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 2
+  },
+  "Domenico Ghirlandaio": {
+   "birth": 1448,
+   "death": 1494,
+   "century": 15,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 3
+  },
+  "Perugino": {
+   "birth": 1446,
+   "death": 1523,
+   "century": 15,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 3
+  },
+  "Correggio": {
+   "birth": 1489,
+   "death": 1534,
+   "century": 16,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 3
+  },
+  "Giorgione": {
+   "birth": 1477,
+   "death": 1510,
+   "century": 16,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 3
+  },
+  "Parmigianino": {
+   "birth": 1503,
+   "death": 1540,
+   "century": 16,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 4
+  },
+  "Andrea del Sarto": {
+   "birth": 1486,
+   "death": 1530,
+   "century": 16,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 4
+  },
+  "Pontormo": {
+   "birth": 1494,
+   "death": 1557,
+   "century": 16,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 4
+  },
+  "Lorenzo Lotto": {
+   "birth": 1480,
+   "death": 1557,
+   "century": 16,
+   "movement": "Renaissance",
+   "nationality": "Italian",
+   "circle": "italian-renaissance",
+   "tier": 4
+  },
+  "Albrecht Dürer": {
+   "birth": 1471,
+   "death": 1528,
+   "century": 16,
+   "movement": "Northern Renaissance",
+   "nationality": "German",
+   "circle": "northern-renaissance",
+   "tier": 1
+  },
+  "Jan van Eyck": {
+   "birth": 1390,
+   "death": 1441,
+   "century": 15,
+   "movement": "Northern Renaissance",
+   "nationality": "Flemish",
+   "circle": "northern-renaissance",
+   "tier": 1
+  },
+  "Hans Holbein the Younger": {
+   "birth": 1497,
+   "death": 1543,
+   "century": 16,
+   "movement": "Northern Renaissance",
+   "nationality": "German",
+   "circle": "northern-renaissance",
+   "tier": 2
+  },
+  "Lucas Cranach the Elder": {
+   "birth": 1472,
+   "death": 1553,
+   "century": 16,
+   "movement": "Northern Renaissance",
+   "nationality": "German",
+   "circle": "northern-renaissance",
+   "tier": 2
+  },
+  "Rogier van der Weyden": {
+   "birth": 1399,
+   "death": 1464,
+   "century": 15,
+   "movement": "Northern Renaissance",
+   "nationality": "Flemish",
+   "circle": "northern-renaissance",
+   "tier": 2
+  },
+  "Hieronymus Bosch": {
+   "birth": 1450,
+   "death": 1516,
+   "century": 15,
+   "movement": "Northern Renaissance",
+   "nationality": "Dutch",
+   "circle": "northern-renaissance",
+   "tier": 2
+  },
+  "Pieter Brueghel the Elder": {
+   "birth": 1525,
+   "death": 1569,
+   "century": 16,
+   "movement": "Northern Renaissance",
+   "nationality": "Flemish",
+   "circle": "northern-renaissance",
+   "tier": 2
+  },
+  "Albrecht Altdorfer": {
+   "birth": 1480,
+   "death": 1538,
+   "century": 16,
+   "movement": "Northern Renaissance",
+   "nationality": "German",
+   "circle": "northern-renaissance",
+   "tier": 3
+  },
+  "Hans Memling": {
+   "birth": 1430,
+   "death": 1494,
+   "century": 15,
+   "movement": "Northern Renaissance",
+   "nationality": "Flemish",
+   "circle": "northern-renaissance",
+   "tier": 3
+  },
+  "Joachim Patinir": {
+   "birth": 1480,
+   "death": 1524,
+   "century": 16,
+   "movement": "Northern Renaissance",
+   "nationality": "Flemish",
+   "circle": "northern-renaissance",
+   "tier": 4
+  },
+  "Quinten Massys": {
+   "birth": 1466,
+   "death": 1530,
+   "century": 16,
+   "movement": "Northern Renaissance",
+   "nationality": "Flemish",
+   "circle": "northern-renaissance",
+   "tier": 4
+  },
+  "Martin Schongauer": {
+   "birth": 1445,
+   "death": 1491,
+   "century": 15,
+   "movement": "Northern Renaissance",
+   "nationality": "German",
+   "circle": "northern-renaissance",
+   "tier": 4
+  },
+  "Caravaggio": {
+   "birth": 1571,
+   "death": 1610,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Italian",
+   "circle": "roman-baroque",
+   "tier": 1
+  },
+  "Artemisia Gentileschi": {
+   "birth": 1593,
+   "death": 1653,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Italian",
+   "circle": "roman-baroque",
+   "tier": 2
+  },
+  "Nicolas Poussin": {
+   "birth": 1594,
+   "death": 1665,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "French",
+   "circle": "roman-baroque",
+   "tier": 2
+  },
+  "Claude Lorrain": {
+   "birth": 1600,
+   "death": 1682,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "French",
+   "circle": "roman-baroque",
+   "tier": 2
+  },
+  "Guido Reni": {
+   "birth": 1575,
+   "death": 1642,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Italian",
+   "circle": "roman-baroque",
+   "tier": 3
+  },
+  "Guercino": {
+   "birth": 1591,
+   "death": 1666,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Italian",
+   "circle": "roman-baroque",
+   "tier": 3
+  },
+  "Salvator Rosa": {
+   "birth": 1615,
+   "death": 1673,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Italian",
+   "circle": "roman-baroque",
+   "tier": 4
+  },
+  "Diego Velázquez": {
+   "birth": 1599,
+   "death": 1660,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Spanish",
+   "circle": "spanish-masters",
+   "tier": 1
+  },
+  "El Greco": {
+   "birth": 1541,
+   "death": 1614,
+   "century": 16,
+   "movement": "Renaissance",
+   "nationality": "Greek",
+   "circle": "spanish-masters",
+   "tier": 1
+  },
+  "Francisco Goya": {
+   "birth": 1746,
+   "death": 1828,
+   "century": 18,
+   "movement": "Romanticism",
+   "nationality": "Spanish",
+   "circle": "spanish-masters",
+   "tier": 1
+  },
+  "Bartolomé Esteban Murillo": {
+   "birth": 1617,
+   "death": 1682,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Spanish",
+   "circle": "spanish-masters",
+   "tier": 2
+  },
+  "Francisco de Zurbarán": {
+   "birth": 1598,
+   "death": 1664,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Spanish",
+   "circle": "spanish-masters",
+   "tier": 2
+  },
+  "Jusepe de Ribera": {
+   "birth": 1591,
+   "death": 1652,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Spanish",
+   "circle": "spanish-masters",
+   "tier": 3
+  },
+  "Joaquín Sorolla": {
+   "birth": 1863,
+   "death": 1923,
+   "century": 19,
+   "movement": "Impressionism",
+   "nationality": "Spanish",
+   "circle": "spanish-masters",
+   "tier": 3
+  },
+  "Alonso Cano": {
+   "birth": 1601,
+   "death": 1667,
+   "century": 17,
+   "movement": "Baroque",
+   "nationality": "Spanish",
+   "circle": "spanish-masters",
+   "tier": 4
+  },
+  "Gustave Courbet": {
+   "birth": 1819,
+   "death": 1877,
+   "century": 19,
+   "movement": "Realism",
+   "nationality": "French",
+   "circle": "barbizon-realists",
+   "tier": 1
+  },
+  "Jean-Baptiste-Camille Corot": {
+   "birth": 1796,
+   "death": 1875,
+   "century": 19,
+   "movement": "Barbizon",
+   "nationality": "French",
+   "circle": "barbizon-realists",
+   "tier": 2
+  },
+  "Jean-François Millet": {
+   "birth": 1814,
+   "death": 1875,
+   "century": 19,
+   "movement": "Realism",
+   "nationality": "French",
+   "circle": "barbizon-realists",
+   "tier": 2
+  },
+  "Honoré Daumier": {
+   "birth": 1808,
+   "death": 1879,
+   "century": 19,
+   "movement": "Realism",
+   "nationality": "French",
+   "circle": "barbizon-realists",
+   "tier": 2
+  },
+  "Théodore Rousseau": {
+   "birth": 1812,
+   "death": 1867,
+   "century": 19,
+   "movement": "Barbizon",
+   "nationality": "French",
+   "circle": "barbizon-realists",
+   "tier": 3
+  },
+  "Henri Fantin-Latour": {
+   "birth": 1836,
+   "death": 1904,
+   "century": 19,
+   "movement": "Realism",
+   "nationality": "French",
+   "circle": "barbizon-realists",
+   "tier": 3
+  },
+  "Charles-François Daubigny": {
+   "birth": 1817,
+   "death": 1878,
+   "century": 19,
+   "movement": "Barbizon",
+   "nationality": "French",
+   "circle": "barbizon-realists",
+   "tier": 3
+  },
+  "Narcisse Virgilio Díaz de la Peña": {
+   "birth": 1807,
+   "death": 1876,
+   "century": 19,
+   "movement": "Barbizon",
+   "nationality": "French",
+   "circle": "barbizon-realists",
+   "tier": 4
+  },
+  "Jules Dupré": {
+   "birth": 1811,
+   "death": 1889,
+   "century": 19,
+   "movement": "Barbizon",
+   "nationality": "French",
+   "circle": "barbizon-realists",
+   "tier": 4
+  },
+  "Constant Troyon": {
+   "birth": 1810,
+   "death": 1865,
+   "century": 19,
+   "movement": "Barbizon",
+   "nationality": "French",
+   "circle": "barbizon-realists",
+   "tier": 4
+  },
+  "John Constable": {
+   "birth": 1776,
+   "death": 1837,
+   "century": 19,
+   "movement": "Romanticism",
+   "nationality": "British",
+   "circle": "british-classics",
+   "tier": 1
+  },
+  "J.M.W. Turner": {
+   "birth": 1775,
+   "death": 1851,
+   "century": 19,
+   "movement": "Romanticism",
+   "nationality": "British",
+   "circle": "british-classics",
+   "tier": 1
+  },
+  "Thomas Gainsborough": {
+   "birth": 1727,
+   "death": 1788,
+   "century": 18,
+   "movement": "British School",
+   "nationality": "British",
+   "circle": "british-classics",
+   "tier": 2
+  },
+  "Joshua Reynolds": {
+   "birth": 1723,
+   "death": 1792,
+   "century": 18,
+   "movement": "British School",
+   "nationality": "British",
+   "circle": "british-classics",
+   "tier": 2
+  },
+  "William Hogarth": {
+   "birth": 1697,
+   "death": 1764,
+   "century": 18,
+   "movement": "British School",
+   "nationality": "British",
+   "circle": "british-classics",
+   "tier": 2
+  },
+  "George Stubbs": {
+   "birth": 1724,
+   "death": 1806,
+   "century": 18,
+   "movement": "British School",
+   "nationality": "British",
+   "circle": "british-classics",
+   "tier": 3
+  },
+  "Thomas Lawrence": {
+   "birth": 1769,
+   "death": 1830,
+   "century": 18,
+   "movement": "British School",
+   "nationality": "British",
+   "circle": "british-classics",
+   "tier": 3
+  },
+  "Joseph Wright of Derby": {
+   "birth": 1734,
+   "death": 1797,
+   "century": 18,
+   "movement": "British School",
+   "nationality": "British",
+   "circle": "british-classics",
+   "tier": 3
+  },
+  "John Singleton Copley": {
+   "birth": 1738,
+   "death": 1815,
+   "century": 18,
+   "movement": "British School",
+   "nationality": "American",
+   "circle": "british-classics",
+   "tier": 3
+  },
+  "Gilbert Stuart": {
+   "birth": 1755,
+   "death": 1828,
+   "century": 18,
+   "movement": "British School",
+   "nationality": "American",
+   "circle": "british-classics",
+   "tier": 3
+  },
+  "George Romney": {
+   "birth": 1734,
+   "death": 1802,
+   "century": 18,
+   "movement": "British School",
+   "nationality": "British",
+   "circle": "british-classics",
+   "tier": 4
+  },
+  "Henry Raeburn": {
+   "birth": 1756,
+   "death": 1823,
+   "century": 18,
+   "movement": "British School",
+   "nationality": "Scottish",
+   "circle": "british-classics",
+   "tier": 4
+  },
+  "Dante Gabriel Rossetti": {
+   "birth": 1828,
+   "death": 1882,
+   "century": 19,
+   "movement": "Pre-Raphaelitism",
+   "nationality": "British",
+   "circle": "pre-raphaelites",
+   "tier": 2
+  },
+  "John Everett Millais": {
+   "birth": 1829,
+   "death": 1896,
+   "century": 19,
+   "movement": "Pre-Raphaelitism",
+   "nationality": "British",
+   "circle": "pre-raphaelites",
+   "tier": 2
+  },
+  "William Holman Hunt": {
+   "birth": 1827,
+   "death": 1910,
+   "century": 19,
+   "movement": "Pre-Raphaelitism",
+   "nationality": "British",
+   "circle": "pre-raphaelites",
+   "tier": 3
+  },
+  "Edward Burne-Jones": {
+   "birth": 1833,
+   "death": 1898,
+   "century": 19,
+   "movement": "Pre-Raphaelitism",
+   "nationality": "British",
+   "circle": "pre-raphaelites",
+   "tier": 3
+  },
+  "John William Waterhouse": {
+   "birth": 1849,
+   "death": 1917,
+   "century": 19,
+   "movement": "Pre-Raphaelitism",
+   "nationality": "British",
+   "circle": "pre-raphaelites",
+   "tier": 3
+  },
+  "Frederic Leighton": {
+   "birth": 1830,
+   "death": 1896,
+   "century": 19,
+   "movement": "Academic",
+   "nationality": "British",
+   "circle": "pre-raphaelites",
+   "tier": 3
+  },
+  "Lawrence Alma-Tadema": {
+   "birth": 1836,
+   "death": 1912,
+   "century": 19,
+   "movement": "Academic",
+   "nationality": "Dutch",
+   "circle": "pre-raphaelites",
+   "tier": 3
+  },
+  "Ford Madox Brown": {
+   "birth": 1821,
+   "death": 1893,
+   "century": 19,
+   "movement": "Pre-Raphaelitism",
+   "nationality": "British",
+   "circle": "pre-raphaelites",
+   "tier": 4
+  },
+  "Winslow Homer": {
+   "birth": 1836,
+   "death": 1910,
+   "century": 19,
+   "movement": "American Realism",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 1
+  },
+  "John Singer Sargent": {
+   "birth": 1856,
+   "death": 1925,
+   "century": 19,
+   "movement": "Realism",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 1
+  },
+  "Thomas Cole": {
+   "birth": 1801,
+   "death": 1848,
+   "century": 19,
+   "movement": "Hudson River School",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 2
+  },
+  "Frederic Edwin Church": {
+   "birth": 1826,
+   "death": 1900,
+   "century": 19,
+   "movement": "Hudson River School",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 2
+  },
+  "Albert Bierstadt": {
+   "birth": 1830,
+   "death": 1902,
+   "century": 19,
+   "movement": "Hudson River School",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 2
+  },
+  "Thomas Eakins": {
+   "birth": 1844,
+   "death": 1916,
+   "century": 19,
+   "movement": "American Realism",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 2
+  },
+  "James McNeill Whistler": {
+   "birth": 1834,
+   "death": 1903,
+   "century": 19,
+   "movement": "Tonalism",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 2
+  },
+  "Thomas Moran": {
+   "birth": 1837,
+   "death": 1926,
+   "century": 19,
+   "movement": "Hudson River School",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 3
+  },
+  "John Frederick Kensett": {
+   "birth": 1816,
+   "death": 1872,
+   "century": 19,
+   "movement": "Hudson River School",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 3
+  },
+  "Martin Johnson Heade": {
+   "birth": 1819,
+   "death": 1904,
+   "century": 19,
+   "movement": "Luminism",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 3
+  },
+  "George Inness": {
+   "birth": 1825,
+   "death": 1894,
+   "century": 19,
+   "movement": "Tonalism",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 3
+  },
+  "William Merritt Chase": {
+   "birth": 1849,
+   "death": 1916,
+   "century": 19,
+   "movement": "American Impressionism",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 3
+  },
+  "Childe Hassam": {
+   "birth": 1859,
+   "death": 1935,
+   "century": 19,
+   "movement": "American Impressionism",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 3
+  },
+  "Sanford Robinson Gifford": {
+   "birth": 1823,
+   "death": 1880,
+   "century": 19,
+   "movement": "Hudson River School",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 4
+  },
+  "Jasper Francis Cropsey": {
+   "birth": 1823,
+   "death": 1900,
+   "century": 19,
+   "movement": "Hudson River School",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 4
+  },
+  "Fitz Henry Lane": {
+   "birth": 1804,
+   "death": 1865,
+   "century": 19,
+   "movement": "Luminism",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 4
+  },
+  "Eastman Johnson": {
+   "birth": 1824,
+   "death": 1906,
+   "century": 19,
+   "movement": "American Realism",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 4
+  },
+  "John Henry Twachtman": {
+   "birth": 1853,
+   "death": 1902,
+   "century": 19,
+   "movement": "American Impressionism",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 4
+  },
+  "J. Alden Weir": {
+   "birth": 1852,
+   "death": 1919,
+   "century": 19,
+   "movement": "American Impressionism",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 4
+  },
+  "Cecilia Beaux": {
+   "birth": 1855,
+   "death": 1942,
+   "century": 19,
+   "movement": "American Impressionism",
+   "nationality": "American",
+   "circle": "american-19th",
+   "tier": 4
+  },
+  "William-Adolphe Bouguereau": {
+   "birth": 1825,
+   "death": 1905,
+   "century": 19,
+   "movement": "Academic",
+   "nationality": "French",
+   "circle": "french-academic",
+   "tier": 2
+  },
+  "Gustave Moreau": {
+   "birth": 1826,
+   "death": 1898,
+   "century": 19,
+   "movement": "Symbolism",
+   "nationality": "French",
+   "circle": "french-academic",
+   "tier": 3
+  },
+  "Pierre Puvis de Chavannes": {
+   "birth": 1824,
+   "death": 1898,
+   "century": 19,
+   "movement": "Symbolism",
+   "nationality": "French",
+   "circle": "french-academic",
+   "tier": 3
+  },
+  "Jean-Léon Gérôme": {
+   "birth": 1824,
+   "death": 1904,
+   "century": 19,
+   "movement": "Academic",
+   "nationality": "French",
+   "circle": "french-academic",
+   "tier": 3
+  },
+  "Alexandre Cabanel": {
+   "birth": 1823,
+   "death": 1889,
+   "century": 19,
+   "movement": "Academic",
+   "nationality": "French",
+   "circle": "french-academic",
+   "tier": 4
+  },
+  "Jules Breton": {
+   "birth": 1827,
+   "death": 1906,
+   "century": 19,
+   "movement": "Realism",
+   "nationality": "French",
+   "circle": "french-academic",
+   "tier": 4
+  },
+  "Léon Bonnat": {
+   "birth": 1833,
+   "death": 1922,
+   "century": 19,
+   "movement": "Academic",
+   "nationality": "French",
+   "circle": "french-academic",
+   "tier": 4
+  },
+  "Antoine Watteau": {
+   "birth": 1684,
+   "death": 1721,
+   "century": 18,
+   "movement": "Rococo",
+   "nationality": "French",
+   "circle": "french-rococo",
+   "tier": 2
+  },
+  "François Boucher": {
+   "birth": 1703,
+   "death": 1770,
+   "century": 18,
+   "movement": "Rococo",
+   "nationality": "French",
+   "circle": "french-rococo",
+   "tier": 2
+  },
+  "Jean-Honoré Fragonard": {
+   "birth": 1732,
+   "death": 1806,
+   "century": 18,
+   "movement": "Rococo",
+   "nationality": "French",
+   "circle": "french-rococo",
+   "tier": 2
+  },
+  "Jean-Baptiste-Siméon Chardin": {
+   "birth": 1699,
+   "death": 1779,
+   "century": 18,
+   "movement": "Rococo",
+   "nationality": "French",
+   "circle": "french-rococo",
+   "tier": 2
+  },
+  "Jean-Baptiste Greuze": {
+   "birth": 1725,
+   "death": 1805,
+   "century": 18,
+   "movement": "Rococo",
+   "nationality": "French",
+   "circle": "french-rococo",
+   "tier": 3
+  },
+  "Élisabeth Louise Vigée Le Brun": {
+   "birth": 1755,
+   "death": 1842,
+   "century": 18,
+   "movement": "Rococo",
+   "nationality": "French",
+   "circle": "french-rococo",
+   "tier": 3
+  },
+  "Nicolas Lancret": {
+   "birth": 1690,
+   "death": 1743,
+   "century": 18,
+   "movement": "Rococo",
+   "nationality": "French",
+   "circle": "french-rococo",
+   "tier": 4
+  },
+  "Jean-Baptiste Pater": {
+   "birth": 1695,
+   "death": 1736,
+   "century": 18,
+   "movement": "Rococo",
+   "nationality": "French",
+   "circle": "french-rococo",
+   "tier": 4
+  },
+  "Maurice-Quentin de La Tour": {
+   "birth": 1704,
+   "death": 1788,
+   "century": 18,
+   "movement": "Rococo",
+   "nationality": "French",
+   "circle": "french-rococo",
+   "tier": 4
+  },
+  "Giovanni Battista Tiepolo": {
+   "birth": 1696,
+   "death": 1770,
+   "century": 18,
+   "movement": "Venetian School",
+   "nationality": "Italian",
+   "circle": "venetian-18th",
+   "tier": 2
+  },
+  "Canaletto": {
+   "birth": 1697,
+   "death": 1768,
+   "century": 18,
+   "movement": "Venetian School",
+   "nationality": "Italian",
+   "circle": "venetian-18th",
+   "tier": 2
+  },
+  "Francesco Guardi": {
+   "birth": 1712,
+   "death": 1793,
+   "century": 18,
+   "movement": "Venetian School",
+   "nationality": "Italian",
+   "circle": "venetian-18th",
+   "tier": 3
+  },
+  "Bernardo Bellotto": {
+   "birth": 1721,
+   "death": 1780,
+   "century": 18,
+   "movement": "Venetian School",
+   "nationality": "Italian",
+   "circle": "venetian-18th",
+   "tier": 3
+  },
+  "Giovanni Paolo Panini": {
+   "birth": 1691,
+   "death": 1765,
+   "century": 18,
+   "movement": "Venetian School",
+   "nationality": "Italian",
+   "circle": "venetian-18th",
+   "tier": 4
+  },
+  "Jacques-Louis David": {
+   "birth": 1748,
+   "death": 1825,
+   "century": 18,
+   "movement": "Neoclassicism",
+   "nationality": "French",
+   "circle": "romantic-neoclassical",
+   "tier": 1
+  },
+  "Jean-Auguste-Dominique Ingres": {
+   "birth": 1780,
+   "death": 1867,
+   "century": 19,
+   "movement": "Neoclassicism",
+   "nationality": "French",
+   "circle": "romantic-neoclassical",
+   "tier": 1
+  },
+  "Eugène Delacroix": {
+   "birth": 1798,
+   "death": 1863,
+   "century": 19,
+   "movement": "Romanticism",
+   "nationality": "French",
+   "circle": "romantic-neoclassical",
+   "tier": 1
+  },
+  "Théodore Géricault": {
+   "birth": 1791,
+   "death": 1824,
+   "century": 19,
+   "movement": "Romanticism",
+   "nationality": "French",
+   "circle": "romantic-neoclassical",
+   "tier": 2
+  },
+  "Caspar David Friedrich": {
+   "birth": 1774,
+   "death": 1840,
+   "century": 19,
+   "movement": "Romanticism",
+   "nationality": "German",
+   "circle": "romantic-neoclassical",
+   "tier": 2
+  },
+  "Angelica Kauffmann": {
+   "birth": 1741,
+   "death": 1807,
+   "century": 18,
+   "movement": "Neoclassicism",
+   "nationality": "Swiss",
+   "circle": "romantic-neoclassical",
+   "tier": 3
+  },
+  "Benjamin West": {
+   "birth": 1738,
+   "death": 1820,
+   "century": 18,
+   "movement": "Neoclassicism",
+   "nationality": "American",
+   "circle": "romantic-neoclassical",
+   "tier": 3
+  },
+  "Anne-Louis Girodet": {
+   "birth": 1767,
+   "death": 1824,
+   "century": 18,
+   "movement": "Neoclassicism",
+   "nationality": "French",
+   "circle": "romantic-neoclassical",
+   "tier": 4
+  },
+  "Antoine-Jean Gros": {
+   "birth": 1771,
+   "death": 1835,
+   "century": 18,
+   "movement": "Neoclassicism",
+   "nationality": "French",
+   "circle": "romantic-neoclassical",
+   "tier": 4
+  },
+  "Pierre-Paul Prud'hon": {
+   "birth": 1758,
+   "death": 1823,
+   "century": 18,
+   "movement": "Neoclassicism",
+   "nationality": "French",
+   "circle": "romantic-neoclassical",
+   "tier": 4
+  },
+  "Katsushika Hokusai": {
+   "birth": 1760,
+   "death": 1849,
+   "century": 19,
+   "movement": "Ukiyo-e",
+   "nationality": "Japanese",
+   "circle": "japanese-prints",
+   "tier": 1
+  },
+  "Utagawa Hiroshige": {
+   "birth": 1797,
+   "death": 1858,
+   "century": 19,
+   "movement": "Ukiyo-e",
+   "nationality": "Japanese",
+   "circle": "japanese-prints",
+   "tier": 2
+  },
+  "Kitagawa Utamaro": {
+   "birth": 1753,
+   "death": 1806,
+   "century": 18,
+   "movement": "Ukiyo-e",
+   "nationality": "Japanese",
+   "circle": "japanese-prints",
+   "tier": 2
+  },
+  "Utagawa Kuniyoshi": {
+   "birth": 1798,
+   "death": 1861,
+   "century": 19,
+   "movement": "Ukiyo-e",
+   "nationality": "Japanese",
+   "circle": "japanese-prints",
+   "tier": 3
+  },
+  "Suzuki Harunobu": {
+   "birth": 1725,
+   "death": 1770,
+   "century": 18,
+   "movement": "Ukiyo-e",
+   "nationality": "Japanese",
+   "circle": "japanese-prints",
+   "tier": 4
+  },
+  "Tsukioka Yoshitoshi": {
+   "birth": 1839,
+   "death": 1892,
+   "century": 19,
+   "movement": "Ukiyo-e",
+   "nationality": "Japanese",
+   "circle": "japanese-prints",
+   "tier": 4
+  },
+  "Tōshūsai Sharaku": {
+   "birth": null,
+   "death": null,
+   "century": 18,
+   "movement": "Ukiyo-e",
+   "nationality": "Japanese",
+   "circle": "japanese-prints",
+   "tier": 4
+  },
+  "Gustav Klimt": {
+   "birth": 1862,
+   "death": 1918,
+   "century": 19,
+   "movement": "Symbolism",
+   "nationality": "Austrian",
+   "circle": "vienna-modern",
+   "tier": 1
+  },
+  "Egon Schiele": {
+   "birth": 1890,
+   "death": 1918,
+   "century": 20,
+   "movement": "Expressionism",
+   "nationality": "Austrian",
+   "circle": "vienna-modern",
+   "tier": 2
+  },
+  "Koloman Moser": {
+   "birth": 1868,
+   "death": 1918,
+   "century": 19,
+   "movement": "Symbolism",
+   "nationality": "Austrian",
+   "circle": "vienna-modern",
+   "tier": 4
+  },
+  "Wassily Kandinsky": {
+   "birth": 1866,
+   "death": 1944,
+   "century": 20,
+   "movement": "Early Modernism",
+   "nationality": "Russian",
+   "circle": "early-modern",
+   "tier": 2
+  },
+  "Piet Mondrian": {
+   "birth": 1872,
+   "death": 1944,
+   "century": 20,
+   "movement": "Early Modernism",
+   "nationality": "Dutch",
+   "circle": "early-modern",
+   "tier": 2
+  },
+  "Paul Klee": {
+   "birth": 1879,
+   "death": 1940,
+   "century": 20,
+   "movement": "Early Modernism",
+   "nationality": "Swiss",
+   "circle": "early-modern",
+   "tier": 2
+  },
+  "James Ensor": {
+   "birth": 1860,
+   "death": 1949,
+   "century": 19,
+   "movement": "Symbolism",
+   "nationality": "Belgian",
+   "circle": "early-modern",
+   "tier": 3
+  },
+  "Ernst Ludwig Kirchner": {
+   "birth": 1880,
+   "death": 1938,
+   "century": 20,
+   "movement": "Expressionism",
+   "nationality": "German",
+   "circle": "early-modern",
+   "tier": 3
+  },
+  "Franz Marc": {
+   "birth": 1880,
+   "death": 1916,
+   "century": 20,
+   "movement": "Expressionism",
+   "nationality": "German",
+   "circle": "early-modern",
+   "tier": 3
+  },
+  "Emil Nolde": {
+   "birth": 1867,
+   "death": 1956,
+   "century": 20,
+   "movement": "Expressionism",
+   "nationality": "German",
+   "circle": "early-modern",
+   "tier": 3
+  },
+  "August Macke": {
+   "birth": 1887,
+   "death": 1914,
+   "century": 20,
+   "movement": "Expressionism",
+   "nationality": "German",
+   "circle": "early-modern",
+   "tier": 4
+  },
+  "Alexej von Jawlensky": {
+   "birth": 1864,
+   "death": 1941,
+   "century": 20,
+   "movement": "Expressionism",
+   "nationality": "Russian",
+   "circle": "early-modern",
+   "tier": 4
+  },
+  "Shen Zhou": {
+   "birth": 1427,
+   "death": 1509,
+   "century": 15,
+   "movement": "Chinese Literati Painting",
+   "nationality": "Chinese",
+   "circle": "chinese-literati",
+   "tier": 3
+  },
+  "Wen Zhengming": {
+   "birth": 1470,
+   "death": 1559,
+   "century": 16,
+   "movement": "Chinese Literati Painting",
+   "nationality": "Chinese",
+   "circle": "chinese-literati",
+   "tier": 3
+  },
+  "Qiu Ying": {
+   "birth": 1494,
+   "death": 1552,
+   "century": 16,
+   "movement": "Chinese Literati Painting",
+   "nationality": "Chinese",
+   "circle": "chinese-literati",
+   "tier": 4
+  },
+  "Dong Qichang": {
+   "birth": 1555,
+   "death": 1636,
+   "century": 16,
+   "movement": "Chinese Literati Painting",
+   "nationality": "Chinese",
+   "circle": "chinese-literati",
+   "tier": 4
+  }
+ },
+ "works": [
+  {
+   "artist": "Claude Monet",
+   "title": "Water Lilies",
+   "date": "1906",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/16568",
+   "image": "https://www.artic.edu/iiif/2/3c27b499-af56-f0d5-93b5-a7f2f1ad5813/full/843,/0/default.jpg",
+   "level": 1
+  },
+  {
+   "artist": "El Greco",
+   "title": "View of Toledo",
+   "date": "ca. 1599–1600",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436575",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP349564.jpg",
+   "level": 1
+  },
+  {
+   "artist": "Frederic Edwin Church",
+   "title": "Heart of the Andes",
+   "date": "1859",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/10481",
+   "image": "https://images.metmuseum.org/CRDImages/ad/web-large/DT78.jpg",
+   "level": 1
+  },
+  {
+   "artist": "Georges Seurat",
+   "title": "A Sunday on La Grande Jatte — 1884",
+   "date": "1884–86, border added 1888–89",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/27992",
+   "image": "https://www.artic.edu/iiif/2/2d484387-2509-5e8e-2c43-22f9981972eb/full/843,/0/default.jpg",
+   "level": 1
+  },
+  {
+   "artist": "Gustave Caillebotte",
+   "title": "Paris Street; Rainy Day",
+   "date": "1877",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/20684",
+   "image": "https://www.artic.edu/iiif/2/f8fd76e9-c396-5678-36ed-6a348c904d27/full/843,/0/default.jpg",
+   "level": 1
+  },
+  {
+   "artist": "Katsushika Hokusai",
+   "title": "Under the Wave off Kanagawa (Kanagawa oki nami ura), also known as The Great Wave, from the series Thirty-six Views of Mount Fuji (Fugaku sanjūrokkei)",
+   "date": "ca. 1830–32",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/36491",
+   "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP141063.jpg",
+   "level": 1
+  },
+  {
+   "artist": "Paul Cézanne",
+   "title": "The Card Players",
+   "date": "1890–92",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/435868",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP231550.jpg",
+   "level": 1
+  },
+  {
+   "artist": "Vincent van Gogh",
+   "title": "Self-Portrait with a Straw Hat (obverse: The Potato Peeler)",
+   "date": "1887",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436532",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT1502_cropped2.jpg",
+   "level": 1
+  },
+  {
+   "artist": "Vincent van Gogh",
+   "title": "The Bedroom",
+   "date": "1889",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/28560",
+   "image": "https://www.artic.edu/iiif/2/6644829f-f292-c5c4-a73c-0356a6fdbf0d/full/843,/0/default.jpg",
+   "level": 1
+  },
+  {
+   "artist": "Albert Bierstadt",
+   "title": "The Rocky Mountains, Lander's Peak",
+   "date": "1863",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/10154",
+   "image": "https://images.metmuseum.org/CRDImages/ad/web-large/DT82.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Albrecht Dürer",
+   "title": "The Four Horsemen, from \"The Apocalypse\"",
+   "date": "1498",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/336215",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP816773.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Camille Pissarro",
+   "title": "The Boulevard Montmartre on a Winter Morning",
+   "date": "1897",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437310",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-21959-001.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Caravaggio",
+   "title": "The Crucifixion of Saint Andrew",
+   "date": "1606–7",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1976.2",
+   "image": "https://openaccess-cdn.clevelandart.org/1976.2/1976.2_web.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Caspar David Friedrich",
+   "title": "Two Men Contemplating the Moon",
+   "date": "ca. 1825–30",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/438417",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-31997-001-NEW.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Claude Monet",
+   "title": "Stacks of Wheat",
+   "date": "1891",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/186316",
+   "image": "https://www.artic.edu/iiif/2/b7c3fa7f-d2bd-27b6-4a5c-0c8943d2b944/full/843,/0/default.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Claude Monet",
+   "title": "Stacks of Wheat (Sunset, Snow Effect)",
+   "date": "1890–91",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/81545",
+   "image": "https://www.artic.edu/iiif/2/be0d3e50-a600-6f33-ea8f-16a34d892442/full/843,/0/default.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Diego Velázquez",
+   "title": "Juan de Pareja (ca. 1608–1670)",
+   "date": "1650",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437869",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14286-001.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Edgar Degas",
+   "title": "The Dance Class",
+   "date": "1874",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/438817",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-20101-001.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Francisco Goya",
+   "title": "Plate 43 from \"Los Caprichos\": The sleep of reason produces monsters (El sueño de la razon produce monstruos)",
+   "date": "1799 (published 1908–12)",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/334453",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP816991.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Francisco Goya",
+   "title": "The Sleep of Reason Produces Monsters, Plate 43",
+   "date": "1799 (c. 1855)",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1922.638",
+   "image": "https://openaccess-cdn.clevelandart.org/1922.638/1922.638_web.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Henri de Toulouse-Lautrec",
+   "title": "A Gala Evening at the Moulin Rouge",
+   "date": "1893",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/35751",
+   "image": "https://www.artic.edu/iiif/2/b3e42174-8b15-1d16-6d94-7fe88c7ed92c/full/843,/0/default.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Henri de Toulouse-Lautrec",
+   "title": "At the Moulin Rouge",
+   "date": "1892–95",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/61128",
+   "image": "https://www.artic.edu/iiif/2/defb4004-b500-218d-3d9b-9a02423f097d/full/843,/0/default.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Henri de Toulouse-Lautrec",
+   "title": "At the Moulin Rouge: A Rude! A Real Rude!",
+   "date": "1893",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/35963",
+   "image": "https://www.artic.edu/iiif/2/a0b5ea00-70b8-306f-04a3-740dd166c8a3/full/843,/0/default.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Henri de Toulouse-Lautrec",
+   "title": "At the Moulin Rouge, La Goulue and Her Sister",
+   "date": "1892",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/55814",
+   "image": "https://www.artic.edu/iiif/2/a8a6de1e-19b7-d99a-ed0f-1777efc723cf/full/843,/0/default.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Johannes Vermeer",
+   "title": "Young Woman with a Water Pitcher",
+   "date": "ca. 1662",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437881",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP353257.jpg",
+   "level": 2
+  },
+  {
+   "artist": "John Singer Sargent",
+   "title": "Madame X (Virginie Amélie Avegno Gautreau)",
+   "date": "1883–84",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/12127",
+   "image": "https://images.metmuseum.org/CRDImages/ad/web-large/DP-29006-001.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Katsushika Hokusai",
+   "title": "South Wind, Clear Sky, from Thirty-Six Views of Mount Fuji",
+   "date": "early 1830s",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1930.189",
+   "image": "https://openaccess-cdn.clevelandart.org/1930.189/1930.189_web.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Katsushika Hokusai",
+   "title": "South Wind, Clear Sky (Gaifū kaisei), also known as Red Fuji, from the series Thirty-six Views of Mount Fuji (Fugaku sanjūrokkei)",
+   "date": "ca. 1830–32",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/36490",
+   "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP141062.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Mary Cassatt",
+   "title": "The Child's Bath",
+   "date": "1893",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/111442",
+   "image": "https://www.artic.edu/iiif/2/3b885ae0-4d46-5fe4-d70a-00474827f02c/full/843,/0/default.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Paul Gauguin",
+   "title": "Hail Mary (Ia Orana Maria)",
+   "date": "ca. 1893–95",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337168",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DT229278.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Pierre-Auguste Renoir",
+   "title": "Two Sisters (On the Terrace)",
+   "date": "1881",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/14655",
+   "image": "https://www.artic.edu/iiif/2/3a608f55-d76e-fa96-d0b1-0789fbc48f1e/full/843,/0/default.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Rembrandt van Rijn",
+   "title": "Self-Portrait Frowning: Bust",
+   "date": "1630",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1947.487",
+   "image": "https://openaccess-cdn.clevelandart.org/1947.487/1947.487_web.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Rembrandt van Rijn",
+   "title": "Self-Portrait in a Cap and Scarf with the Face Dark: Bust",
+   "date": "1633",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/29220",
+   "image": "https://www.artic.edu/iiif/2/b0449785-8df5-5c84-9b0b-cf5cbd1f3752/full/843,/0/default.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Thomas Cole",
+   "title": "View from Mount Holyoke, Northampton, Massachusetts, after a Thunderstorm—The Oxbow",
+   "date": "1836",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/10497",
+   "image": "https://images.metmuseum.org/CRDImages/ad/web-large/DP-12550-001.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Utagawa Hiroshige",
+   "title": "Sudden Shower over Shin-Ōhashi Bridge and Atake (Ōhashi Atake no yūdachi), from the series One Hundred Famous Views of Edo (Meisho Edo hyakkei)",
+   "date": "1857",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/36461",
+   "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP121525.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Vincent van Gogh",
+   "title": "Self-Portrait",
+   "date": "1887",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/80607",
+   "image": "https://www.artic.edu/iiif/2/47c5bcb8-62ef-e5d7-55e7-f5121f409a30/full/843,/0/default.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Winslow Homer",
+   "title": "Prisoners from the Front",
+   "date": "1866",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/11133",
+   "image": "https://images.metmuseum.org/CRDImages/ad/web-large/DT83.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Winslow Homer",
+   "title": "The Gulf Stream",
+   "date": "1899; reworked by 1906",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/11122",
+   "image": "https://images.metmuseum.org/CRDImages/ad/web-large/DP-20821-001.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Édouard Manet",
+   "title": "Boating",
+   "date": "1874",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436947",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-25466-001.jpg",
+   "level": 2
+  },
+  {
+   "artist": "Antoine Watteau",
+   "title": "Mezzetin",
+   "date": "ca. 1718–20",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437926",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP170811.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Artemisia Gentileschi",
+   "title": "Esther before Ahasuerus",
+   "date": "1620s",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436453",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-20748-001.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Diego Velázquez",
+   "title": "Aesop",
+   "date": "1778",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1985.130",
+   "image": "https://openaccess-cdn.clevelandart.org/1985.130/1985.130_web.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Edgar Degas",
+   "title": "Édouard Manet, Seated, Holding His Hat",
+   "date": "ca. 1868",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/333813",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP805813.jpg",
+   "level": 3
+  },
+  {
+   "artist": "El Greco",
+   "title": "Cardinal Fernando Niño de Guevara (1541–1609)",
+   "date": "ca. 1600",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436573",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-17777-001.jpg",
+   "level": 3
+  },
+  {
+   "artist": "El Greco",
+   "title": "Christ Carrying the Cross",
+   "date": "ca. 1577–87",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/459087",
+   "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP347226.jpg",
+   "level": 3
+  },
+  {
+   "artist": "El Greco",
+   "title": "Saint Jerome as Scholar",
+   "date": "ca. 1610",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/459088",
+   "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DT3103.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Eugène Delacroix",
+   "title": "The Natchez",
+   "date": "1823–24 and 1835",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436180",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14345-001.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Frans Hals",
+   "title": "Merrymakers at Shrovetide",
+   "date": "ca. 1616–17",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436622",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP145901.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Gustav Klimt",
+   "title": "Half-figure of a Young Woman",
+   "date": "1918",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/334895",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP819708.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Gustav Klimt",
+   "title": "Mäda Primavesi (1903–2000)",
+   "date": "1912–13",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436819",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP243354.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Gustave Courbet",
+   "title": "The Woman in the Waves",
+   "date": "1868",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436004",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT887.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Gustave Courbet",
+   "title": "Woman with a Parrot",
+   "date": "1866",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436002",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-17680-001.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Jacques-Louis David",
+   "title": "The Lictors Bringing Brutus the Bodies of his Sons",
+   "date": "1787",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/371418",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP213752.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Jan van Eyck",
+   "title": "The Crucifixion; The Last Judgment",
+   "date": "ca. 1436–38",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436282",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/LC-33_92ab-Primary_Temp.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Jean-Auguste-Dominique Ingres",
+   "title": "The Kaunitz Sisters (Leopoldine, Caroline, and Ferdinandine)",
+   "date": "1818",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/334710",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DT632.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Johannes Vermeer",
+   "title": "Study of a Young Woman",
+   "date": "ca. 1665–67",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437879",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP353256.jpg",
+   "level": 3
+  },
+  {
+   "artist": "John Constable",
+   "title": "Salisbury Cathedral from the Bishop's Grounds",
+   "date": "ca. 1825",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/435922",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP164837.jpg",
+   "level": 3
+  },
+  {
+   "artist": "John Constable",
+   "title": "Salisbury Cathedral from the Meadows (Small Plate)",
+   "date": "1855",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/2014.226",
+   "image": "https://openaccess-cdn.clevelandart.org/2014.226/2014.226_web.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Leonardo da Vinci",
+   "title": "A Bear Walking",
+   "date": "ca. 1482–85",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/459184",
+   "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP324213.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Leonardo da Vinci",
+   "title": "Compositional Sketches for the Virgin Adoring the Christ Child, with and without the Infant St. John the Baptist; Diagram of a Perspectival Projection (recto); Slight Doodles (verso)",
+   "date": "1480–85",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337494",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP832657.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Leonardo da Vinci",
+   "title": "The Head of the Virgin in Three-Quarter View Facing Right",
+   "date": "1510–13",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337496",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP102382.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Michelangelo",
+   "title": "Anatomical Studies of a Leg (recto); Study of a Leg (verso)",
+   "date": "1475–1564",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/340787",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP810667.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Michelangelo",
+   "title": "Architectural Study",
+   "date": "n.d.",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/363335",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP810670.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Michelangelo",
+   "title": "Studies for the Libyan Sibyl (recto); Studies for the Libyan Sibyl and a small Sketch for a Seated Figure (verso)",
+   "date": "ca. 1510–11",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337497",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP826907.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Paul Gauguin",
+   "title": "Tahitian Faces (Frontal View and Profiles)",
+   "date": "ca. 1899",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337172",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DT641.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Peter Paul Rubens",
+   "title": "A Faun Grasping a Bunch of Grapes",
+   "date": "after 1616–18",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1943.341",
+   "image": "https://openaccess-cdn.clevelandart.org/1943.341/1943.341_web.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Peter Paul Rubens",
+   "title": "Portrait of Nicolas Trigault in Chinese Costume",
+   "date": "1617",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337844",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP820062.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Peter Paul Rubens",
+   "title": "Wolf and Fox Hunt",
+   "date": "ca. 1616",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437536",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-27136-001.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Raphael",
+   "title": "The Agony in the Garden",
+   "date": "ca. 1504",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437371",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP136373.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Rembrandt van Rijn",
+   "title": "Christ Crucified between the Two Thieves: The Three Crosses",
+   "date": "1653",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/347371",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP815614.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Thomas Eakins",
+   "title": "The Champion Single Sculls (Max Schmitt in a Single Scull)",
+   "date": "1871",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/10819",
+   "image": "https://images.metmuseum.org/CRDImages/ad/web-large/DT86.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Titian",
+   "title": "Venus and Adonis",
+   "date": "1550s",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437826",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-19299-001.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Titian",
+   "title": "Venus and the Lute Player",
+   "date": "ca. 1565–70",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437827",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-28918-001.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Vincent van Gogh",
+   "title": "A Peasant Woman Digging in Front of Her Cottage",
+   "date": "c. 1885",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/28862",
+   "image": "https://www.artic.edu/iiif/2/1d3a275d-45dd-6026-b6ed-d7d8df417a3d/full/843,/0/default.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Vincent van Gogh",
+   "title": "Corridor in the Asylum",
+   "date": "September 1889",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/336327",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DT365509.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Vincent van Gogh",
+   "title": "Irises",
+   "date": "1890",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436528",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP346474.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Édouard Manet",
+   "title": "Young Lady in 1866",
+   "date": "1866",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436964",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP273977.jpg",
+   "level": 3
+  },
+  {
+   "artist": "Albert Bierstadt",
+   "title": "Mount Starr King, Yosemite",
+   "date": "1866",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1922.684",
+   "image": "https://openaccess-cdn.clevelandart.org/1922.684/1922.684_web.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Albrecht Dürer",
+   "title": "Adam and Eve",
+   "date": "1504",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/336222",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP816026.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Albrecht Dürer",
+   "title": "Music-Making Angels",
+   "date": "1521",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/334816",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP802950.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Anthony van Dyck",
+   "title": "Self-Portrait, from \"The Iconography\"",
+   "date": "ca. 1640",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337062",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP802956.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Bartolomé Esteban Murillo",
+   "title": "Virgin and Child",
+   "date": "1670s",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437175",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14936-010.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Berthe Morisot",
+   "title": "A Woman Seated at a Bench on the Avenue du Bois",
+   "date": "1885",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337864",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP807732.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Canaletto",
+   "title": "Imaginary View of Venice, houses at left with figures on terraces, a domed church at center in the background, boats and boat-sheds below, and a seated man observing from a wall at right in the foreground, from \"Views\" (Vedute altre prese da i luoghi altre ideate da Antonio Canal)",
+   "date": "1741",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/335287",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP232853.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Claude Lorrain",
+   "title": "Queen Esther Approaching the Palace of Ahasuerus",
+   "date": "1658",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/336489",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP832663.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Dante Gabriel Rossetti",
+   "title": "Lady Lilith",
+   "date": "1867",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337500",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP289717.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Edvard Munch",
+   "title": "Alpha and Omega",
+   "date": "1908/09",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/93407",
+   "image": "https://www.artic.edu/iiif/2/b91b09e5-6d32-eeb3-3920-fead52a90435/full/843,/0/default.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Eugène Delacroix",
+   "title": "Saada, the Wife of Abraham Ben-Chimol, and Préciada, One of Their Daughters",
+   "date": "1832",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/336046",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP837212.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Georges Seurat",
+   "title": "Aman-Jean (Portrait of Edmond François Aman-Jean)",
+   "date": "1882–83",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/339751",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP158522.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Georges Seurat",
+   "title": "Architectural Motif:  Double Acanthus Fleuron",
+   "date": "ca. 1875",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/349778",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP812191.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Georges Seurat",
+   "title": "Circus Sideshow (Parade de cirque)",
+   "date": "1887–88",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437654",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP375450_cropped.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Giovanni Bellini",
+   "title": "Madonna and Child",
+   "date": "late 1480s",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/435641",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT375.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Henri Rousseau",
+   "title": "The Repast of the Lion",
+   "date": "ca. 1907",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/438822",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT50.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Honoré Daumier",
+   "title": "The Connoisseur",
+   "date": "ca. 1860–65",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/333915",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/dp29.100.200.R.jpg",
+   "level": 4
+  },
+  {
+   "artist": "James McNeill Whistler",
+   "title": "Nocturne (Nocturne: The Thames at Battersea)",
+   "date": "1878",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337702",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP813769.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Jean-Auguste-Dominique Ingres",
+   "title": "Amédée-David, the Comte de Pastoret",
+   "date": "1823–26",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/111317",
+   "image": "https://www.artic.edu/iiif/2/8d119fd0-2f57-f20e-a3f5-a573904001e9/full/843,/0/default.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Johannes Vermeer",
+   "title": "Young Woman at a Window",
+   "date": "1907",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1924.989",
+   "image": "https://openaccess-cdn.clevelandart.org/1924.989/1924.989_web.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Joshua Reynolds",
+   "title": "Captain George K. H. Coussmaker (1759–1801)",
+   "date": "1782",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437447",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP169215.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Nicolas Poussin",
+   "title": "Bacchanal",
+   "date": "ca. 1635–36",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/335240",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP807962.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Nicolas Poussin",
+   "title": "Blind Orion Searching for the Rising Sun",
+   "date": "1658",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437326",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP148490.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Nicolas Poussin",
+   "title": "The Abduction of the Sabine Women",
+   "date": "probably 1633–34",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437329",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-29324-001.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Paolo Veronese",
+   "title": "Mars and Venus United by Love",
+   "date": "1570s",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437891",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP167124.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Paul Cézanne",
+   "title": "Still-Life with a Watermelon and Pomegranates",
+   "date": "1900–1906",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/343735",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DT4962.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Paul Klee",
+   "title": "God of War",
+   "date": "1937",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1992.278",
+   "image": "https://openaccess-cdn.clevelandart.org/1992.278/1992.278_web.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Piet Mondrian",
+   "title": "Field with Young Trees in the Foreground",
+   "date": "c. 1907",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1971.220",
+   "image": "https://openaccess-cdn.clevelandart.org/1971.220/1971.220_web.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Rogier van der Weyden",
+   "title": "Francesco d'Este (born ca. 1429, died after 1486)",
+   "date": "ca. 1460",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437487",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-26278-001.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Théodore Géricault",
+   "title": "Two Draft Horses with a Sleeping Driver",
+   "date": "1820–22",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337192",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP806426.jpg",
+   "level": 4
+  },
+  {
+   "artist": "Anthony van Dyck",
+   "title": "A Group a Trees",
+   "date": "early 17th century",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/335447",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP802097.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Canaletto",
+   "title": "Piazza San Marco",
+   "date": "late 1720s",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/435839",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14286-009.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Dante Gabriel Rossetti",
+   "title": "Design for Old Testament Window",
+   "date": "ca. 1870",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/363972",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP805903.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Fra Angelico",
+   "title": "Justice",
+   "date": "ca. 1440",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/459466",
+   "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP358976.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Francisco de Zurbarán",
+   "title": "Saint Romanus of Antioch and Saint Barulas",
+   "date": "1638",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/61665",
+   "image": "https://www.artic.edu/iiif/2/5fa784d4-f5d4-cc88-2f8c-0d7bad4945c4/full/843,/0/default.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Francisco de Zurbarán",
+   "title": "The Young Virgin",
+   "date": "ca. 1632–33",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437971",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-26971-001.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Frans Hals",
+   "title": "Boy with a Lute",
+   "date": "ca. 1625",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436626",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP145900.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Hans Holbein the Younger",
+   "title": "Adam and Eve Driven out of Paradise",
+   "date": "n.d.",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/22220",
+   "image": "https://www.artic.edu/iiif/2/97731a59-beff-6abe-e828-607dd09e663c/full/843,/0/default.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Hans Holbein the Younger",
+   "title": "Dance of Death, plate 39 from Woodcuts from Books of the XVI Century",
+   "date": "1567, assembled into portfolio 1937",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/132184",
+   "image": "https://www.artic.edu/iiif/2/b4efc279-b81d-fd01-1cb3-a9d1eef8d4e2/full/843,/0/default.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Honoré Daumier",
+   "title": "A Candidate",
+   "date": "1837",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1946.213",
+   "image": "https://openaccess-cdn.clevelandart.org/1946.213/1946.213_web.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Jacob van Ruisdael",
+   "title": "Dune Landscape with Oak Tree",
+   "date": "1650–55",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337493",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP800672.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Jacob van Ruisdael",
+   "title": "Wheat Fields",
+   "date": "ca. 1670",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437549",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP145911.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Jan Steen",
+   "title": "Merry Company on a Terrace",
+   "date": "ca. 1670",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437749",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP146455.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Jan Steen",
+   "title": "Two Sketches of Standing Man Leaning on Staff",
+   "date": "n.d.",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/83949",
+   "image": "https://www.artic.edu/iiif/2/269eff7b-9436-cf9f-253f-685db42d763e/full/843,/0/default.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Jean-Baptiste-Camille Corot",
+   "title": "Arleux-Palluel, The Bridge of Trysts",
+   "date": "1871–72",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/81509",
+   "image": "https://www.artic.edu/iiif/2/2661329a-3c67-6216-82eb-90c755bb42b8/full/843,/0/default.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Jean-François Millet",
+   "title": "A Sheep Grazing",
+   "date": "1849",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/47366",
+   "image": "https://www.artic.edu/iiif/2/ae5d90d3-15ad-13b2-90c7-a8be9b741ad5/full/843,/0/default.jpg",
+   "level": 5
+  },
+  {
+   "artist": "John Singer Sargent",
+   "title": "Girl in Spanish Costume",
+   "date": "1879/80",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/227483",
+   "image": "https://www.artic.edu/iiif/2/52270042-a6c0-d325-72b7-53a83d3f40c2/full/843,/0/default.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Leonardo da Vinci",
+   "title": "Head of a Man in Profile Facing to the Left",
+   "date": "1490–94",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/339116",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP810248.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Mary Cassatt",
+   "title": "Afternoon Tea Party",
+   "date": "1890–91",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/13520",
+   "image": "https://www.artic.edu/iiif/2/22eaf094-2d13-50e4-cf46-0a02c12031af/full/843,/0/default.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Pierre-Auguste Renoir",
+   "title": "Baigneuse assise",
+   "date": "c. 1905",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1961.285",
+   "image": "https://openaccess-cdn.clevelandart.org/1961.285/1961.285_web.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Raphael",
+   "title": "Allegory of Sea Trade",
+   "date": "18th century",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/95752",
+   "image": "https://www.artic.edu/iiif/2/a0637b8e-4420-ed82-a91c-619a775a9342/full/843,/0/default.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Thomas Cole",
+   "title": "Distant View of Niagara Falls",
+   "date": "1830",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/90048",
+   "image": "https://www.artic.edu/iiif/2/18092196-50ae-3ff1-9205-1b3110e966c3/full/843,/0/default.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Thomas Gainsborough",
+   "title": "Coastal View",
+   "date": "1786/88",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/73460",
+   "image": "https://www.artic.edu/iiif/2/7caaaeb7-3bc6-d611-6523-ebe1a285ca44/full/843,/0/default.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Théodore Géricault",
+   "title": "A Party of Life Guards, plate 5 from Various Subjects Drawn from Life on Stone",
+   "date": "1821",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/10197",
+   "image": "https://www.artic.edu/iiif/2/3b74309e-037a-9e0b-c220-2e815763ed0b/full/843,/0/default.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Tintoretto",
+   "title": "Doge Alvise Mocenigo (1507–1577) Presented to the Redeemer",
+   "date": "probably 1577",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437819",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT216453.jpg",
+   "level": 5
+  },
+  {
+   "artist": "William-Adolphe Bouguereau",
+   "title": "Arion on a Sea Horse",
+   "date": "1855",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1980.238.1",
+   "image": "https://openaccess-cdn.clevelandart.org/1980.238.1/1980.238.1_web.jpg",
+   "level": 5
+  },
+  {
+   "artist": "William-Adolphe Bouguereau",
+   "title": "Arion on a Sea Horse and Bacchante on a Panther (pair)",
+   "date": "1855",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1980.238",
+   "image": "https://openaccess-cdn.clevelandart.org/1980.238/1980.238_web.jpg",
+   "level": 5
+  },
+  {
+   "artist": "William-Adolphe Bouguereau",
+   "title": "Bacchante on a Panther",
+   "date": "1855",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1980.238.2",
+   "image": "https://openaccess-cdn.clevelandart.org/1980.238.2/1980.238.2_web.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Winslow Homer",
+   "title": "A Cadet Hop at West Point",
+   "date": "published September 3, 1859",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/158322",
+   "image": "https://www.artic.edu/iiif/2/e100dc6f-9df8-6146-1b41-6ed5da504004/full/843,/0/default.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Édouard Manet",
+   "title": "A Cat Curled Up, Sleeping",
+   "date": "1861",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/334638",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP807593.jpg",
+   "level": 5
+  },
+  {
+   "artist": "Albrecht Altdorfer",
+   "title": "Landscape with a Double Spruce",
+   "date": "ca. 1521–22",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/336259",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP822181.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Angelica Kauffmann",
+   "title": "Female Figure Seated Beside an Urn",
+   "date": "1800",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/334892",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP803832.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Angelica Kauffmann",
+   "title": "Portrait of Emma Hamilton",
+   "date": "1791",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/359453",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP819694.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Claude Lorrain",
+   "title": "Buildings Beside Lagoon",
+   "date": "n.d.",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/109118",
+   "image": "https://www.artic.edu/iiif/2/dd7c7a67-8f7e-52e0-ab6c-f298c336e9bd/full/843,/0/default.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Edvard Munch",
+   "title": "A Boat Tied to a Pier",
+   "date": "1892",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/24908",
+   "image": "https://www.artic.edu/iiif/2/dbb99c09-8510-1f8b-c0d5-dda3185146c2/full/843,/0/default.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Edvard Munch",
+   "title": "Alpha and Omega:  The Wife Omega and the Donkey",
+   "date": "1908–9",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1952.80",
+   "image": "https://openaccess-cdn.clevelandart.org/1952.80/1952.80_web.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Frédéric Bazille",
+   "title": "Porte de la Reine at Aigues-Mortes",
+   "date": "1867",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/435626",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-17243-001.jpg",
+   "level": 6
+  },
+  {
+   "artist": "George Stubbs",
+   "title": "A Lion (A Lion Resting on a Rock)",
+   "date": "May 1, 1788",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/343646",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP833337.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Giovanni Battista Tiepolo",
+   "title": "A Magician, A Soldier, and Three Figures Watching a Burning Skull, from Scherzi",
+   "date": "1735–40",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/23602",
+   "image": "https://www.artic.edu/iiif/2/d3582874-982f-67d1-b020-fa3743b8d239/full/843,/0/default.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Gustave Caillebotte",
+   "title": "Sketchbook",
+   "date": "June 1883–September 1887",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/208200",
+   "image": "https://www.artic.edu/iiif/2/25ffdf23-5c03-2ea7-1ca3-35fc820da729/full/843,/0/default.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Gustave Moreau",
+   "title": "Inspiration",
+   "date": "c. 1893",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/104463",
+   "image": "https://www.artic.edu/iiif/2/e0002909-4bcc-1a96-ecda-2eebd30a3f61/full/843,/0/default.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Gustave Moreau",
+   "title": "Oedipus and the Sphinx",
+   "date": "1864",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437153",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14201-023.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Hans Holbein the Younger",
+   "title": "Dance of Death:  The Nun",
+   "date": "c. 1526",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1929.159",
+   "image": "https://openaccess-cdn.clevelandart.org/1929.159/1929.159_web.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Hans Memling",
+   "title": "The Annunciation",
+   "date": "ca. 1465–70",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437490",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP240360.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Henri Rousseau",
+   "title": "Oak Branch",
+   "date": "1907/08",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/186406",
+   "image": "https://www.artic.edu/iiif/2/a72c7248-28af-7527-b067-70f2db93b1f1/full/843,/0/default.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Jacob Jordaens",
+   "title": "Adoration of the Shepherds",
+   "date": "17th century",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/335661",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP802213.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Jean-Baptiste Greuze",
+   "title": "Broken Eggs",
+   "date": "1756",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436579",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-12952-001.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Jean-François Millet",
+   "title": "A Shepherdess with Her Flock",
+   "date": "ca. 1852",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337784",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP811920.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Jean-Léon Gérôme",
+   "title": "Bashi-Bazouk",
+   "date": "1868–69",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/440723",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP243839.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Jusepe de Ribera",
+   "title": "Adoration of the Shepherds",
+   "date": "1645–50",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/336332",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP800289.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Jusepe de Ribera",
+   "title": "Drunken Silenus",
+   "date": "1628",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/12114",
+   "image": "https://www.artic.edu/iiif/2/ee936034-fe64-38b0-4bef-4b3270d719e7/full/843,/0/default.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Lawrence Alma-Tadema",
+   "title": "At the Shrine of Venus",
+   "date": "ca. 1889",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/668074",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP839590.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Meindert Hobbema",
+   "title": "The Watermill with the Great Red Roof",
+   "date": "c. 1665",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/869",
+   "image": "https://www.artic.edu/iiif/2/237c25a2-6051-a8e7-1610-a01938d4deab/full/843,/0/default.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Pierre Puvis de Chavannes",
+   "title": "The Shepherd's Song",
+   "date": "1891",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437344",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14201-001.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Piet Mondrian",
+   "title": "Amsterdam Skyline Viewed from the West",
+   "date": "c. 1899",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/186314",
+   "image": "https://www.artic.edu/iiif/2/133d4a6e-7be9-a652-f3db-34be49c671c8/full/843,/0/default.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Pieter de Hooch",
+   "title": "Leisure Time in an Elegant Setting",
+   "date": "ca. 1663–65",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/459086",
+   "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP146506.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Thomas Eakins",
+   "title": "Portrait of Mary Adeline Williams",
+   "date": "1899",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/31285",
+   "image": "https://www.artic.edu/iiif/2/8cb9f5ea-c955-96fd-c2d6-c720b0dbf7d4/full/843,/0/default.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Thomas Lawrence",
+   "title": "Isabella Wolff",
+   "date": "1803–15",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/4773",
+   "image": "https://www.artic.edu/iiif/2/0052fc88-353e-db97-8741-b6b5ec6fb354/full/843,/0/default.jpg",
+   "level": 6
+  },
+  {
+   "artist": "William Holman Hunt",
+   "title": "On the Hill Side (Our English Coasts, 1852), from \"The Art Journal\"",
+   "date": "1877",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/642933",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP835760.jpg",
+   "level": 6
+  },
+  {
+   "artist": "Albrecht Altdorfer",
+   "title": "The Entrance Hall of the Regensburg Synagogue",
+   "date": "1519",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/336256",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP822166.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Benjamin West",
+   "title": "Alexander's Confidence with his Physician Philip",
+   "date": "c. 1770",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/151462",
+   "image": "https://www.artic.edu/iiif/2/5631b612-99cb-129f-e95b-c3ec5b85041f/full/843,/0/default.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Benjamin West",
+   "title": "Death of Lucretia",
+   "date": "1770",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1926.208",
+   "image": "https://openaccess-cdn.clevelandart.org/1926.208/1926.208_web.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Bernardo Bellotto",
+   "title": "Exterior View of the Italian Gate of the Ramparts of the Town of Dresden",
+   "date": "1750",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/188958",
+   "image": "https://www.artic.edu/iiif/2/6203bb1c-2078-99ef-a4b2-1f8fe9688965/full/843,/0/default.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Childe Hassam",
+   "title": "New England Headlands",
+   "date": "1899",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/5349",
+   "image": "https://www.artic.edu/iiif/2/f72dbf42-8655-8788-d899-9e87a0466d28/full/843,/0/default.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Domenico Ghirlandaio",
+   "title": "Francesco Sassetti (1421–1490) and His Son Teodoro",
+   "date": "ca. 1488",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436489",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT1369.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Edward Burne-Jones",
+   "title": "The Entombment",
+   "date": "1879",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/340952",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP805384.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Edward Burne-Jones",
+   "title": "The Love Song",
+   "date": "1868–77",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/435826",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP323394.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Francesco Guardi",
+   "title": "A Procession of Triumphal Cars in the Piazza San Marco, Venice, Celebrating the Visit of the Conti del Nord (recto)",
+   "date": "1782",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1955.164.a",
+   "image": "https://openaccess-cdn.clevelandart.org/1955.164.a/1955.164.a_web.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Francesco Guardi",
+   "title": "Adoration of the Shepherds (recto); Three Sketches: Buildings by Canal with Boats, Landscape with Buldings on Hillside, Buildings with Portico (verso)",
+   "date": "c. 1770",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/113588",
+   "image": "https://www.artic.edu/iiif/2/28da7ec6-d9b1-33ab-1ac2-759f738eac59/full/843,/0/default.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Franz Marc",
+   "title": "Genesis II",
+   "date": "1914",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1959.228",
+   "image": "https://openaccess-cdn.clevelandart.org/1959.228/1959.228_web.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Guercino",
+   "title": "Bust of a Man Facing Right",
+   "date": "1591–1666",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/338994",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP810128.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Hans Memling",
+   "title": "Tommaso di Folco Portinari (1428–1501); Maria Portinari (Maria Maddalena Baroncelli, born 1456)",
+   "date": "ca. 1470",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437056",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-44362-005.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Henri Fantin-Latour",
+   "title": "À Eugene Delacroix",
+   "date": "1890",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1921.76",
+   "image": "https://openaccess-cdn.clevelandart.org/1921.76/1921.76_web.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Henri Fantin-Latour",
+   "title": "À Stendhal",
+   "date": "1892",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1921.55",
+   "image": "https://openaccess-cdn.clevelandart.org/1921.55/1921.55_web.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Jacob Jordaens",
+   "title": "Diana and Nymphs Bathing",
+   "date": "1640/49",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/84234",
+   "image": "https://www.artic.edu/iiif/2/ccdf96cd-909a-255a-6268-7755b991cbb3/full/843,/0/default.jpg",
+   "level": 7
+  },
+  {
+   "artist": "James Ensor",
+   "title": "Large View of Mariakerke",
+   "date": "1887",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1959.93",
+   "image": "https://openaccess-cdn.clevelandart.org/1959.93/1959.93_web.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Jan Brueghel the Elder",
+   "title": "View of Heidelberg",
+   "date": "ca. 1588–89",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337489",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP801180.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Jusepe de Ribera",
+   "title": "A Group of Figures",
+   "date": "c. 1649",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/82496",
+   "image": "https://www.artic.edu/iiif/2/fecaefcd-8013-4ebd-81c5-a6118555ef98/full/843,/0/default.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Martin Johnson Heade",
+   "title": "Magnolias on Light Blue Velvet Cloth",
+   "date": "1885–95",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/100829",
+   "image": "https://www.artic.edu/iiif/2/0729fbba-51e3-a2d7-6d4d-61c2be62af3f/full/843,/0/default.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Odilon Redon",
+   "title": "A Bell was Sounding in the Tower, from The Juror",
+   "date": "1887",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/79421",
+   "image": "https://www.artic.edu/iiif/2/471a5ada-5c6d-0d02-a5ad-fd8041e4c6f2/full/843,/0/default.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Odilon Redon",
+   "title": "Armor",
+   "date": "1891",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/339671",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP139626.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Paul Signac",
+   "title": "Evening",
+   "date": "1898",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/12601",
+   "image": "https://www.artic.edu/iiif/2/45f84c65-657f-482b-1b49-16d4a2caab01/full/843,/0/default.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Thomas Lawrence",
+   "title": "Elizabeth Farren (born about 1759, died 1829), Later Countess of Derby",
+   "date": "1790",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436851",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP169218.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Thomas Lawrence",
+   "title": "John Julius Angerstein (1736–1823)",
+   "date": "",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436852",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP162165.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Wen Zhengming",
+   "title": "Garden of the Inept Administrator",
+   "date": "1551",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/39654",
+   "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP235628_CRD.jpg",
+   "level": 7
+  },
+  {
+   "artist": "William Merritt Chase",
+   "title": "Keying Up",
+   "date": "c. 1885",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/129408",
+   "image": "https://www.artic.edu/iiif/2/3c4e0b9e-92cf-c26a-2ace-d23301fa72c4/full/843,/0/default.jpg",
+   "level": 7
+  },
+  {
+   "artist": "William Merritt Chase",
+   "title": "Marine",
+   "date": "c. 1888",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1957.422",
+   "image": "https://openaccess-cdn.clevelandart.org/1957.422/1957.422_web.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Élisabeth Louise Vigée Le Brun",
+   "title": "Comtesse de la Châtre (Marie Charlotte Louise Perrette Aglaé Bontemps, 1762–1848)",
+   "date": "1789",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437900",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP320086.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Élisabeth Louise Vigée Le Brun",
+   "title": "Marie Antoinette in a Park",
+   "date": "ca. 1780–81",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/824771",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP-18368-001.jpg",
+   "level": 7
+  },
+  {
+   "artist": "Adriaen van Ostade",
+   "title": "Reading the News at the Weavers' Cottage",
+   "date": "1673",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337632",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP800544.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Andrea del Sarto",
+   "title": "The Holy Family with the Young Saint John the Baptist",
+   "date": "ca. 1528",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437609",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP295025.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Angelica Kauffmann",
+   "title": "Head of Woman, Turning Left",
+   "date": "n.d.",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/85645",
+   "image": "https://www.artic.edu/iiif/2/b2886781-746a-1d07-9153-e40ccd770434/full/843,/0/default.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Clara Peeters",
+   "title": "A Bouquet of Flowers",
+   "date": "ca. 1612",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/827660",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-19451-001.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Dong Qichang",
+   "title": "Landscape with Trees in the Manner of Ni Zan (1301–1374)",
+   "date": "ca. 1622–25",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/48953",
+   "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP-35742-002.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Eastman Johnson",
+   "title": "Portrait of Mrs. Jeremiah Chandler",
+   "date": "1847",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/186429",
+   "image": "https://www.artic.edu/iiif/2/380dc0f0-8da2-17fe-45bc-6efa3a7c74f7/full/843,/0/default.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Francesco Guardi",
+   "title": "A Capriccio with a Ruined Gothic Arch",
+   "date": "1770/89",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/149039",
+   "image": "https://www.artic.edu/iiif/2/c6bb7439-234d-2229-2b95-3a51833f4814/full/843,/0/default.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Frederic Leighton",
+   "title": "A Baby in 16th century Dress with a Rooster and a Dog",
+   "date": "ca. 1849",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/418097",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP826419.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Frederic Leighton",
+   "title": "A Man and a Monkey Riding on Horseback",
+   "date": "ca. 1849",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/418096",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP826418.jpg",
+   "level": 8
+  },
+  {
+   "artist": "George Romney",
+   "title": "Admiral Sir Chaloner Ogle (1726–1816)",
+   "date": "",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437505",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP169401.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Gerard ter Borch",
+   "title": "Burgomaster Jan van Duren (1613–1687)",
+   "date": "ca. 1666–67",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/459083",
+   "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP146503.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Guercino",
+   "title": "Boy Reading",
+   "date": "n.d.",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/55042",
+   "image": "https://www.artic.edu/iiif/2/9534cb0a-694c-621c-a0a4-1643b147f0e3/full/843,/0/default.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Henri-Edmond Cross",
+   "title": "Landscape",
+   "date": "ca. 1904",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/334129",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP805784.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Henri-Edmond Cross",
+   "title": "Landscape with Stars",
+   "date": "ca. 1905–1908",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/459189",
+   "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP359010.jpg",
+   "level": 8
+  },
+  {
+   "artist": "J. Alden Weir",
+   "title": "By Candlelight",
+   "date": "ca. 1885–93",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/348584",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/52169.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Jean-Baptiste Greuze",
+   "title": "Child's Head",
+   "date": "",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/338327",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP806605.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Joachim Patinir",
+   "title": "The Penitence of Saint Jerome",
+   "date": "ca. 1515",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437261",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT5549.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Joseph Wright of Derby",
+   "title": "Carved panel and ornament (Smaller Italian sketchbook, leaf 9 recto)",
+   "date": "1774–75",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/405732",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP269417.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Jules Breton",
+   "title": "The Weeders",
+   "date": "1868",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/435773",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT2155.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Léon Bonnat",
+   "title": "Léon Cogniet",
+   "date": "1881",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/2009.563",
+   "image": "https://openaccess-cdn.clevelandart.org/2009.563/2009.563_web.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Martin Schongauer",
+   "title": "Christ Carrying the Cross",
+   "date": "ca. 1475–80",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/336162",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP820028.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Maurice Denis",
+   "title": "Attitudes are Easy and Chaste, plate two from Love",
+   "date": "1898, published 1899",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/117210",
+   "image": "https://www.artic.edu/iiif/2/b0c357db-e274-ba1b-2f72-896896387178/full/843,/0/default.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Paul Signac",
+   "title": "Boats",
+   "date": "c. 1890s",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1952.9",
+   "image": "https://openaccess-cdn.clevelandart.org/1952.9/1952.9_web.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Pontormo",
+   "title": "Christ before Pilate",
+   "date": "1522/23",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/109500",
+   "image": "https://www.artic.edu/iiif/2/55869b15-1e2f-e5dd-e6f9-fe241ccdb8d5/full/843,/0/default.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Salomon van Ruysdael",
+   "title": "Landscape with Two Figures Conversing",
+   "date": "17th century",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/348118",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP800671.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Suzuki Harunobu",
+   "title": "A Flower Vendor",
+   "date": "1751/64",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/19966",
+   "image": "https://www.artic.edu/iiif/2/11012fec-5c0a-7a2b-4f73-70d68732130f/full/843,/0/default.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Suzuki Harunobu",
+   "title": "Night Rain at the Double-Shelf Stand, from the series Eight Parlor Views (Zashiki hakkei)",
+   "date": "ca. 1766",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/37145",
+   "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP119525.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Tsukioka Yoshitoshi",
+   "title": "Frost fills the air and the autumn air is still/lines of returning geese cross the moon in the third hour-Kenshin, from the series Twelve Aspects of the Moon",
+   "date": "1885/92",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/212358",
+   "image": "https://www.artic.edu/iiif/2/54752ae5-1b94-72b2-8cac-dedec11bdfd3/full/843,/0/default.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Utagawa Kuniyoshi",
+   "title": "Actor Ichikawa Danjuro VIII as Narihira at Yatsuhashi from \"A Six-fold Screen of Famous Pictures (Meiga rokushi byobu)\"",
+   "date": "1847-1852",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/81826",
+   "image": "https://www.artic.edu/iiif/2/bf8627fd-1ef2-f09e-38f0-8281f3a48000/full/843,/0/default.jpg",
+   "level": 8
+  },
+  {
+   "artist": "Adriaen van Ostade",
+   "title": "Farmyard",
+   "date": "n.d.",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/75192",
+   "image": "https://www.artic.edu/iiif/2/ef5077df-a3d3-fcce-6ac2-f89b633f0bd4/full/843,/0/default.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Alonso Cano",
+   "title": "Christ Holding a Chalice and Cross (recto)",
+   "date": "1666",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1982.121.a",
+   "image": "https://openaccess-cdn.clevelandart.org/1982.121.a/1982.121.a_web.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Andrea del Sarto",
+   "title": "Lucrezia di Lippo di Iacopo Guidi",
+   "date": "1525–28",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/22270",
+   "image": "https://www.artic.edu/iiif/2/5d50e0e5-db32-4e02-eef7-6fbbae018d44/full/843,/0/default.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Andrea del Sarto",
+   "title": "Madonna del Sacco",
+   "date": "n.d.",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/84944",
+   "image": "https://www.artic.edu/iiif/2/1bd3e535-bff8-0dd9-b140-e85fe31405de/full/843,/0/default.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Antoine-Jean Gros",
+   "title": "Arab of the Desert",
+   "date": "1817",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1940.1118",
+   "image": "https://openaccess-cdn.clevelandart.org/1940.1118/1940.1118_web.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Armand Guillaumin",
+   "title": "Mill of Pont Maupuit",
+   "date": "c. 1900",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/16502",
+   "image": "https://www.artic.edu/iiif/2/f4abdcdc-1d4f-4b8c-5f16-dacc42d509f5/full/843,/0/default.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Dong Qichang",
+   "title": "Invitation to Reclusion at Jingxi",
+   "date": "1611",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/41479",
+   "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP216493_94.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Fitz Henry Lane",
+   "title": "The Maniac",
+   "date": "1880",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/129489",
+   "image": "https://www.artic.edu/iiif/2/8b693511-9923-3f30-3f4d-8b7106ffdb75/full/843,/0/default.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Fitz Henry Lane",
+   "title": "The Salem Mechanick Light Infantry Quick Step",
+   "date": "1836",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/129488",
+   "image": "https://www.artic.edu/iiif/2/0978eb60-3404-7c2b-446c-1cc21ba69d29/full/843,/0/default.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Frans Snyders",
+   "title": "The Four Markets:  The Fruit Market",
+   "date": "1775",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1948.146",
+   "image": "https://openaccess-cdn.clevelandart.org/1948.146/1948.146_web.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Gerard ter Borch",
+   "title": "Margaretha van Haexbergen (1614–1676)",
+   "date": "ca. 1666–67",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/459084",
+   "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP146504.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Giovanni Paolo Panini",
+   "title": "Scalinata della Trinità dei Monti",
+   "date": "ca. 1756–58",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/337498",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP801488.jpg",
+   "level": 9
+  },
+  {
+   "artist": "J. Alden Weir",
+   "title": "Caro",
+   "date": "1890",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/121834",
+   "image": "https://www.artic.edu/iiif/2/b0e6c431-74b8-4f8d-f732-0b2924b31dce/full/843,/0/default.jpg",
+   "level": 9
+  },
+  {
+   "artist": "J. Alden Weir",
+   "title": "Castle Rushen--Isle of Man",
+   "date": "1889",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/261654",
+   "image": "https://www.artic.edu/iiif/2/a9529560-19a6-d08c-53f3-5a2be8ed254b/full/843,/0/default.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Jean-Baptiste Pater",
+   "title": "Man Leaning on a Wall (recto)",
+   "date": "early 18th century",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/338201",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DR88.jpg",
+   "level": 9
+  },
+  {
+   "artist": "John Henry Twachtman",
+   "title": "Dock at Newport",
+   "date": "1893",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/129625",
+   "image": "https://www.artic.edu/iiif/2/57b4b4c3-0321-41d1-3519-b5dfc9ed914f/full/843,/0/default.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Jules Dupré",
+   "title": "Farmyard with Ducks",
+   "date": "1830–89",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/333941",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP810347.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Lorenzo Lotto",
+   "title": "Raising of Lazarus",
+   "date": "1480–1556",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/340323",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP810262.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Lorenzo Lotto",
+   "title": "Venus and Cupid",
+   "date": "1520s",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436918",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-25975-001.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Léon Bonnat",
+   "title": "Monsieur Thiers",
+   "date": "1877",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/132669",
+   "image": "https://www.artic.edu/iiif/2/f567fa80-ed3b-4294-9a27-d97d98af4a3c/full/843,/0/default.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Martin Schongauer",
+   "title": "The Censer",
+   "date": "1470–91",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/336167",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP-41178-001.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Maurice Denis",
+   "title": "And It is the Caress of Their Hands, plate eight from Love",
+   "date": "1898, published 1899",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/117214",
+   "image": "https://www.artic.edu/iiif/2/42426970-3158-bf4a-0986-0928c989c902/full/843,/0/default.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Maximilien Luce",
+   "title": "Study for Mazas",
+   "date": "1894",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/193221",
+   "image": "https://www.artic.edu/iiif/2/4247594c-d140-af94-dfab-a0f42cdf4835/full/843,/0/default.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Nicolas Lancret",
+   "title": "Brother Philippe's Geese",
+   "date": "ca. 1736",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/438727",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-19458-001.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Nicolas Lancret",
+   "title": "Paté d'Anguille",
+   "date": "n.d.",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/339162",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP811625.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Salomon van Ruysdael",
+   "title": "Ferry near Gorinchem",
+   "date": "1646",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/437589",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP146477.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Suzuki Harunobu",
+   "title": "A Cup of Sake before Bed (Toko sakazuki), the sixth sheet of the series \"Marriage in Brocade Prints, the Carriage of the Virtuous Woman (Konrei nishiki misao-guruma)\"",
+   "date": "c. 1769",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/21145",
+   "image": "https://www.artic.edu/iiif/2/448ff083-d3fd-f1f0-eaa5-5995fad1707c/full/843,/0/default.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Tsukioka Yoshitoshi",
+   "title": "Fifty-three Stations of Suehiro: Warrior Looks at Passing Steamship",
+   "date": "ca. 1865",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/55125",
+   "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP142154.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Tōshūsai Sharaku",
+   "title": "Ichikawa Ebizō IV (Danjurō) as Takemura Sadanoshin in The Loving Wife's Parti-Colored Reins",
+   "date": "1794",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1930.205",
+   "image": "https://openaccess-cdn.clevelandart.org/1930.205/1930.205_web.jpg",
+   "level": 9
+  },
+  {
+   "artist": "Alexandre Cabanel",
+   "title": "Aglaida and Boniface",
+   "date": "c. 1857",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/2007.275",
+   "image": "https://openaccess-cdn.clevelandart.org/2007.275/2007.275_web.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Alexandre Cabanel",
+   "title": "Catharine Lorillard Wolfe (1828–1887)",
+   "date": "1876",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/435830",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT11971.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Alonso Cano",
+   "title": "Christ Holding a Chalice and Cross (recto); Resurrected Christ and Lamb of God (verso)",
+   "date": "1666",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1982.121",
+   "image": "https://openaccess-cdn.clevelandart.org/1982.121/1982.121_web.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Anne-Louis Girodet",
+   "title": "Comedy and Tragedy",
+   "date": "1814",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/354035",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP135220.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Antoine-Jean Gros",
+   "title": "Battlefield with Soldier on Horseback (Napoleon?)",
+   "date": "ca.1810",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/381957",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP852153.jpg",
+   "level": 10
+  },
+  {
+   "artist": "August Macke",
+   "title": "Male Nude",
+   "date": "1912",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1972.314",
+   "image": "https://openaccess-cdn.clevelandart.org/1972.314/1972.314_web.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Constant Troyon",
+   "title": "A Clump of Trees",
+   "date": "c. 1860",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/111623",
+   "image": "https://www.artic.edu/iiif/2/4339f21a-5a1c-8f40-931c-32686eefd8d5/full/843,/0/default.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Constant Troyon",
+   "title": "A Farmhouse with a Thatched Roof and Trees Beside a River",
+   "date": "1825–65",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/334671",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP812257.jpg",
+   "level": 10
+  },
+  {
+   "artist": "David Teniers the Younger",
+   "title": "Four Drunken Peasants at Table",
+   "date": "n.d.",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/85855",
+   "image": "https://www.artic.edu/iiif/2/b76988c9-60f8-ef42-1490-47f32cb0113e/full/843,/0/default.jpg",
+   "level": 10
+  },
+  {
+   "artist": "David Teniers the Younger",
+   "title": "Game of Backgammon",
+   "date": "1640s",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1943.377",
+   "image": "https://openaccess-cdn.clevelandart.org/1943.377/1943.377_web.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Eastman Johnson",
+   "title": "Self-Portrait",
+   "date": "1863",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/120170",
+   "image": "https://www.artic.edu/iiif/2/c8eacf36-436a-f4df-819e-d8fefbfac1d2/full/843,/0/default.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Fitz Henry Lane",
+   "title": "Harbor of Boston, with the City in the Distance",
+   "date": "c. 1846–47",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/2004.35",
+   "image": "https://openaccess-cdn.clevelandart.org/2004.35/2004.35_web.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Ford Madox Brown",
+   "title": "Joseph's Coat, from \"Dalziels' Bible Gallery\"",
+   "date": "1864–81",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/641667",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP835628.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Frans Snyders",
+   "title": "Fox With Two Herons",
+   "date": "ca. 1630–40",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/343428",
+   "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP802350.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Frans Snyders",
+   "title": "Still Life with Dead Game, Fruits, and Vegetables in a Market",
+   "date": "1614",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/62042",
+   "image": "https://www.artic.edu/iiif/2/d9bde524-38b2-4262-3338-e4d06a50746d/full/843,/0/default.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Gerard ter Borch",
+   "title": "A Seated Huntsman",
+   "date": "1672",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/459346",
+   "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP-21940-001.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Henri-Edmond Cross",
+   "title": "In the Park",
+   "date": "c. 1890s",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1955.501",
+   "image": "https://openaccess-cdn.clevelandart.org/1955.501/1955.501_web.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Jasper Francis Cropsey",
+   "title": "Niagara Falls in Winter",
+   "date": "1868",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/27163",
+   "image": "https://www.artic.edu/iiif/2/42924282-d483-cd95-e676-52aee4bc4164/full/843,/0/default.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Jules Breton",
+   "title": "The Tired Gleaner",
+   "date": "1880",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1915.721",
+   "image": "https://openaccess-cdn.clevelandart.org/1915.721/1915.721_web.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Maximilien Luce",
+   "title": "Rue Reamur",
+   "date": "1896",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1952.210",
+   "image": "https://openaccess-cdn.clevelandart.org/1952.210/1952.210_web.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Maximilien Luce",
+   "title": "Saint-Tropez",
+   "date": "1897",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1998.185",
+   "image": "https://openaccess-cdn.clevelandart.org/1998.185/1998.185_web.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Narcisse Virgilio Díaz de la Peña",
+   "title": "Autumn: The Woodland Pond",
+   "date": "1867",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/436192",
+   "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP352741.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Narcisse Virgilio Díaz de la Peña",
+   "title": "Education of Cupid",
+   "date": "c. 1859",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/35155",
+   "image": "https://www.artic.edu/iiif/2/3dae143d-6840-2e6e-dff5-cd2eea745da2/full/843,/0/default.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Nicolas Lancret",
+   "title": "Horticulture",
+   "date": "c. 1723–27",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1948.176.2",
+   "image": "https://openaccess-cdn.clevelandart.org/1948.176.2/1948.176.2_web.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Qiu Ying",
+   "title": "Garden for Solitary Enjoyment",
+   "date": "1515–52",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/1978.67",
+   "image": "https://openaccess-cdn.clevelandart.org/1978.67/1978.67_web.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Qiu Ying",
+   "title": "Lady in a bamboo grove",
+   "date": "",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/36013",
+   "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP-16966-002.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Sanford Robinson Gifford",
+   "title": "Haverstraw Bay",
+   "date": "1868",
+   "museum": "The Cleveland Museum of Art",
+   "objectUrl": "https://clevelandart.org/art/2011.43",
+   "image": "https://openaccess-cdn.clevelandart.org/2011.43/2011.43_web.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Tōshūsai Sharaku",
+   "title": "Hamamuraya Roko",
+   "date": "1794",
+   "museum": "Art Institute of Chicago",
+   "objectUrl": "https://www.artic.edu/artworks/18806",
+   "image": "https://www.artic.edu/iiif/2/0cd7e968-68ab-7c2a-c853-8f8c3f212ecc/full/843,/0/default.jpg",
+   "level": 10
+  },
+  {
+   "artist": "Tōshūsai Sharaku",
+   "title": "Ichikawa Ebizo IV in the role of Takemura Sadanoshin",
+   "date": "Probably late 1880s or early 1890s",
+   "museum": "The Metropolitan Museum of Art",
+   "objectUrl": "https://www.metmuseum.org/art/collection/search/37181",
+   "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP130180.jpg",
+   "level": 10
+  }
+ ]
+}
