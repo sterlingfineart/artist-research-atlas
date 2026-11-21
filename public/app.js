@@ -71,6 +71,7 @@
     if (path === '/ra' || path.startsWith('/ra/')) return viewRA(p, path);
     if (path === '/loan' || path.startsWith('/loan/')) return viewLoan(p, path);
     if (path === '/exhibitions' || path.startsWith('/exhibitions/')) return viewExhibitions(p, path);
+    if (path === '/sales') return viewSales(p);
     if (path === '/artist' && (p.wd || p.ulan)) return viewReport(p);
     if (path === '/about') return viewAbout();
     return viewHome();
@@ -1950,6 +1951,423 @@
     ['mkt', 'Market, sales & provenance'],
     ['db', 'Art databases, authority files & identifiers'],
   ];
+
+  /* ==================================================== art sales view */
+  /* Historic record rows are compact arrays built by
+     scripts/build-sales-data.py:
+     [artist, artistDates, subject, lot, saleDate, saleYear, auctioneer,
+      owner, buyer, pricePounds, priceShillings, pricePence,
+      priceAsPrinted, currency, francAmount, page, note, flags]
+     flags bit 1 = braced/shared price. currency "GBP" or "FRF". */
+  const SALES_PAGE_SIZE = 50;
+  let salesManifest = null;
+  let salesConv = null;
+  const salesData = new Map(); // source id -> records array
+  let salesLoadPromise = null;
+  const salesState = { equiv: 'off', query: '', source: 'all', page: 1, results: null, counts: null, today: null, gamePool: null, game: null, score: { played: 0, correct: 0 } };
+
+  async function loadSales() {
+    if (!salesLoadPromise) {
+      salesLoadPromise = (async () => {
+        salesManifest = await salonFetchJSON('/data/sales/index.json');
+        salesConv = await salonFetchJSON('/data/sales/conversions.json');
+        await Promise.all(salesManifest.sources.map(async (s) => {
+          const doc = await salonFetchJSON('/data/sales/' + s.file);
+          salesData.set(s.id, doc.records);
+        }));
+        return salesManifest;
+      })().catch((e) => { salesLoadPromise = null; throw e; });
+    }
+    return salesLoadPromise;
+  }
+  const salesSrcMeta = (id) => (salesManifest ? salesManifest.sources.find((s) => s.id === id) : null);
+  function salesDec(w) {
+    if (w[9] == null) return null;
+    return w[9] + (w[10] || 0) / 20 + (w[11] || 0) / 240;
+  }
+  function fmtLSD(p, s, d) {
+    let out = '£' + Number(p).toLocaleString('en-GB');
+    if (s != null) out += ' ' + s + 's';
+    if (d != null) out += ' ' + d + 'd';
+    return out;
+  }
+  function salesPriceText(w) {
+    if (w[13] === 'FRF') return (w[14] != null ? w[14].toLocaleString('en-GB') : '') + ' francs';
+    if (w[9] == null) return 'No price printed';
+    return fmtLSD(w[9], w[10], w[11]);
+  }
+  function round3sf(x) {
+    if (!x || !isFinite(x)) return 0;
+    const pow = Math.pow(10, Math.floor(Math.log10(x)) - 2);
+    return Math.round(x / pow) * pow;
+  }
+  /* The equivalent for one historic sterling record under a mode
+     ('prices' | 'earnings'); '' when it cannot be computed. */
+  function salesEquivText(w, mode) {
+    if (!mode || mode === 'off' || !salesConv) return '';
+    if (w[13] !== 'GBP' || w[9] == null || w[5] == null) return '';
+    const mult = (salesConv[mode] || {})[w[5]];
+    if (!mult) return '';
+    const val = round3sf(salesDec(w) * mult);
+    return '≈ £' + val.toLocaleString('en-GB') + ' in ' + salesConv.baseYear + ' money (' + (mode === 'prices' ? 'by prices' : 'by earnings') + ')';
+  }
+  function salesPriceCell(w) {
+    const eq = salesEquivText(w, salesState.equiv);
+    let html = '<span class="sales-price">' + esc(salesPriceText(w)) + '</span>';
+    if (w[17] & 1) html += ' <span class="badge variant" title="One printed price covers this lot and its braced companion — the price stands on both records">braced</span>';
+    if (eq) html += '<div class="equiv">' + esc(eq) + '</div>';
+    return html;
+  }
+  const SALES_NOTE_SHOW = /francs|brac|bought in|no price|dash|not put up|implausib|may fuse|garble|ocr/i;
+  function salesNoteHtml(w) {
+    const n = w[16] || '';
+    if (!n || !SALES_NOTE_SHOW.test(n)) return '';
+    const short = n.length > 160 ? n.slice(0, 160) + '…' : n;
+    return '<div class="meta" title="' + esc(n) + '">' + esc(short) + '</div>';
+  }
+  const SALES_MONTHS = { jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, sept: 9, oct: 10, nov: 11, dec: 12, january: 1, february: 2, march: 3, april: 4, june: 6, july: 7, august: 8, september: 9, october: 10, november: 11, december: 12 };
+  const SALES_MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  function parseSalesDate(sd) {
+    const m = /^(\d{4}) ([A-Za-z]+)\.? (\d{1,2})$/.exec(String(sd || '').trim());
+    if (!m) return null;
+    const mo = SALES_MONTHS[m[2].toLowerCase()];
+    return mo ? { y: +m[1], m: mo, d: +m[3] } : null;
+  }
+  function salesGravesRows() {
+    const out = [];
+    for (const id of ['graves-vol1', 'graves-vol2']) {
+      const recs = salesData.get(id) || [];
+      for (const w of recs) out.push({ id, w });
+    }
+    return out;
+  }
+  /* "Sold on this day": the highest-priced Graves sale whose full date
+     matches today's month and day; if none matches, the nearest day
+     that has one, labelled as such. Never invents a match. */
+  function pickSalesToday(now) {
+    const tm = now.getMonth() + 1;
+    const td = now.getDate();
+    const cum = [0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335];
+    const doy = (m, d) => cum[m - 1] + d;
+    const target = doy(tm, td);
+    const byDay = new Map();
+    for (const r of salesGravesRows()) {
+      const p = parseSalesDate(r.w[4]);
+      if (!p || r.w[9] == null) continue;
+      const key = p.m + '-' + p.d;
+      if (!byDay.has(key)) byDay.set(key, { m: p.m, d: p.d, rows: [] });
+      byDay.get(key).rows.push(r);
+    }
+    const bestOf = (rows) => rows.reduce((a, b) => (salesDec(b.w) > salesDec(a.w) ? b : a));
+    const exact = byDay.get(tm + '-' + td);
+    if (exact) return { exact: true, m: tm, d: td, pick: bestOf(exact.rows), n: exact.rows.length };
+    let best = null;
+    for (const day of byDay.values()) {
+      const dd = Math.abs(doy(day.m, day.d) - target);
+      const dist = Math.min(dd, 366 - dd);
+      const pick = bestOf(day.rows);
+      if (!best || dist < best.dist || (dist === best.dist && salesDec(pick.w) > salesDec(best.pick.w))) {
+        best = { exact: false, m: day.m, d: day.d, pick, n: day.rows.length, dist };
+      }
+    }
+    return best;
+  }
+  function renderSalesToday() {
+    const el = $('#sales-today');
+    if (!el) return;
+    const t = salesState.today;
+    if (!t) { el.innerHTML = ''; return; }
+    const w = t.pick.w;
+    const meta = salesSrcMeta(t.pick.id);
+    const when = t.exact
+      ? 'Sold on this day — ' + t.d + ' ' + SALES_MONTH_NAMES[t.m - 1]
+      : 'Sold on this day — no sale in Graves falls on ' + new Date().getDate() + ' ' + SALES_MONTH_NAMES[new Date().getMonth()] + '; the nearest recorded day is ' + t.d + ' ' + SALES_MONTH_NAMES[t.m - 1];
+    el.innerHTML = '<div class="sales-feature"><div class="sales-feature-label">' + esc(when) + '</div>'
+      + '<div class="sales-feature-main"><span class="sales-feature-artist">' + esc(w[0]) + '</span> '
+      + '<span class="sales-feature-title">' + esc(w[2]) + '</span></div>'
+      + '<div class="meta">' + esc(w[4]) + ' · ' + esc(w[6]) + (w[3] ? ' · lot ' + esc(w[3]) : '') + (w[7] ? ' · owner ' + esc(w[7]) : '') + (w[8] ? ' · buyer ' + esc(w[8]) : '') + '</div>'
+      + '<div class="sales-feature-price">' + salesPriceCell(w) + '</div>'
+      + '<div class="meta">As recorded by ' + esc(meta ? meta.label : t.pick.id) + ', p. ' + esc(w[15]) + (t.n > 1 ? ' · the highest-priced of ' + t.n + ' Graves sales on this date' : '') + '</div></div>';
+  }
+  /* -------------------------------------------------- guess the price */
+  function salesGamePool() {
+    if (salesState.gamePool) return salesState.gamePool;
+    const pool = [];
+    for (const r of salesGravesRows()) {
+      const w = r.w;
+      if (w[13] !== 'GBP' || w[9] == null || w[9] <= 0) continue;
+      if (w[10] == null || w[11] == null) continue;         // complete £sd triple
+      if (w[17] & 1) continue;                              // no braced/shared prices
+      if (!w[8] || !w[8].trim()) continue;                  // named buyer preferred — required here
+      if (!w[2] || w[2].trim().length < 6) continue;        // a real subject
+      if (w[5] == null) continue;
+      pool.push(r);
+    }
+    salesState.gamePool = pool;
+    return pool;
+  }
+  function salesShuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function newSalesRound() {
+    const pool = salesGamePool();
+    if (!pool.length) return null;
+    const pick = pool[Math.floor(Math.random() * pool.length)];
+    const trueDec = salesDec(pick.w);
+    const distract = [];
+    const seen = new Set([trueDec]);
+    const windows = [{ yrs: 30, lo: 1 / 3.5, hi: 3.5 }, { yrs: 75, lo: 1 / 6, hi: 6 }, { yrs: 10000, lo: 1 / 6, hi: 6 }];
+    for (const win of windows) {
+      if (distract.length >= 3) break;
+      const cands = salesShuffle(pool.filter((r) => Math.abs(r.w[5] - pick.w[5]) <= win.yrs && salesDec(r.w) >= trueDec * win.lo && salesDec(r.w) <= trueDec * win.hi && !seen.has(salesDec(r.w))));
+      for (const c of cands) {
+        if (distract.length >= 3) break;
+        seen.add(salesDec(c.w));
+        distract.push(c);
+      }
+    }
+    if (distract.length < 3) return null;
+    const options = salesShuffle([{ r: pick, isTrue: true }, ...distract.map((r) => ({ r, isTrue: false }))]);
+    return { pick, options, answered: -1 };
+  }
+  function renderSalesGame() {
+    const el = $('#sales-game');
+    if (!el) return;
+    const g = salesState.game;
+    const s = salesState.score;
+    const scoreLine = '<div class="meta">Score this session: ' + s.correct + ' of ' + s.played + '</div>';
+    if (!g) {
+      el.innerHTML = '<div class="sales-feature"><div class="sales-feature-label">Guess the price</div><div class="notice">The game could not be set up from the Graves records.</div></div>';
+      return;
+    }
+    const w = g.pick.w;
+    const meta = salesSrcMeta(g.pick.id);
+    let html = '<div class="sales-feature"><div class="sales-feature-label">Guess the price</div>'
+      + '<div class="sales-feature-main"><span class="sales-feature-artist">' + esc(w[0]) + '</span> '
+      + '<span class="sales-feature-title">' + esc(w[2]) + '</span></div>'
+      + '<div class="meta">' + esc(w[4]) + ' · ' + esc(w[6]) + (w[3] ? ' · lot ' + esc(w[3]) : '') + (w[7] ? ' · owner ' + esc(w[7]) : '') + '</div>'
+      + '<div class="sales-game-q">What did it make?</div><div class="sales-game-options">';
+    g.options.forEach((o, i) => {
+      let cls = 'sales-game-opt';
+      let dis = '';
+      if (g.answered >= 0) {
+        dis = ' disabled';
+        if (o.isTrue) cls += ' right';
+        else if (i === g.answered) cls += ' wrong';
+      }
+      html += '<button class="' + cls + '" data-game-opt="' + i + '"' + dis + '>' + esc(fmtLSD(o.r.w[9], o.r.w[10], o.r.w[11])) + '</button>';
+    });
+    html += '</div>';
+    if (g.answered >= 0) {
+      const mode = salesState.equiv !== 'off' ? salesState.equiv : 'prices';
+      const eq = salesEquivText(w, mode);
+      html += '<div class="sales-game-reveal">' + (g.options[g.answered].isTrue ? '<strong>Right.</strong>' : '<strong>Not quite.</strong>')
+        + ' It made <strong>' + esc(salesPriceText(w)) + '</strong> (as printed: ' + esc(w[12]) + ')'
+        + (w[8] ? ', bought by ' + esc(w[8]) : '')
+        + '.<br><span class="meta">As recorded by ' + esc(meta ? meta.label : g.pick.id) + ', p. ' + esc(w[15]) + '.'
+        + (eq ? ' ' + esc(eq) + (salesState.equiv === 'off' ? ' (equivalents are off above — shown here as the payoff)' : '') + '.' : '')
+        + '</span></div>'
+        + '<div class="pager"><button class="btn btn-primary" id="sales-game-next">Next picture →</button>' + scoreLine + '</div>';
+    } else {
+      html += scoreLine;
+    }
+    html += '</div>';
+    el.innerHTML = html;
+    el.querySelectorAll('[data-game-opt]').forEach((b) => b.addEventListener('click', () => {
+      const i = +b.dataset.gameOpt;
+      if (salesState.game.answered >= 0) return;
+      salesState.game.answered = i;
+      salesState.score.played++;
+      if (salesState.game.options[i].isTrue) salesState.score.correct++;
+      renderSalesGame();
+    }));
+    const next = $('#sales-game-next');
+    if (next) next.addEventListener('click', () => { salesState.game = newSalesRound(); renderSalesGame(); });
+  }
+  /* --------------------------------------------------------- searching */
+  function salesWords(q) {
+    return q.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+  }
+  function salesMatchHistoric(w, words) {
+    const hay = (w[0] + ' ' + w[2] + ' ' + w[6] + ' ' + w[7] + ' ' + w[8]).toLowerCase();
+    return words.every((word) => hay.includes(word) || word === String(w[5]));
+  }
+  function salesMatchModern(r, words) {
+    const hay = (r.artist + ' ' + r.work_title + ' ' + r.house + ' ' + (r.city || '') + ' ' + r.sale_date).toLowerCase();
+    return words.every((word) => hay.includes(word));
+  }
+  function runSalesSearch() {
+    const words = salesWords(salesState.query);
+    const counts = {};
+    let results = [];
+    for (const meta of salesManifest.sources) {
+      const recs = salesData.get(meta.id) || [];
+      let matched = [];
+      if (meta.kind === 'modern') {
+        matched = recs.filter((r) => salesMatchModern(r, words)).map((r) => ({ kind: 'm', id: meta.id, r }));
+        matched.sort((a, b) => a.r.sale_date.localeCompare(b.r.sale_date));
+      } else {
+        matched = recs.filter((w) => salesMatchHistoric(w, words)).map((w) => ({ kind: 'h', id: meta.id, w }));
+        matched.sort((a, b) => ((a.w[5] ?? 9999) - (b.w[5] ?? 9999)) || a.w[0].localeCompare(b.w[0]));
+      }
+      counts[meta.id] = matched.length;
+      if (salesState.source === 'all' || salesState.source === meta.id) results = results.concat(matched);
+    }
+    if (salesState.source === 'all') {
+      const yr = (x) => (x.kind === 'm' ? +x.r.sale_date.slice(0, 4) : (x.w[5] ?? 9999));
+      results.sort((a, b) => (yr(a) - yr(b)) || (a.kind === 'm' ? a.r.artist : a.w[0]).localeCompare(b.kind === 'm' ? b.r.artist : b.w[0]));
+    }
+    salesState.counts = counts;
+    salesState.results = results;
+    salesState.page = 1;
+    renderSalesResults();
+    renderSalesChips();
+    renderSalesModern();
+  }
+  function salesMoney(v, cur) {
+    if (v == null) return '';
+    const sym = cur === 'USD' ? '$' : cur === 'EUR' ? '€' : '£';
+    return sym + Number(v).toLocaleString('en-GB');
+  }
+  function renderSalesResults() {
+    const wrap = $('#sales-results');
+    if (!wrap) return;
+    const rows = salesState.results;
+    if (!rows) { wrap.innerHTML = ''; return; }
+    if (!rows.length) {
+      wrap.innerHTML = '<div class="notice">No sales match “' + esc(salesState.query) + '” in the selected source — try the surname alone, a distinctive word from the title, the auction house, or a year.</div>';
+      return;
+    }
+    const pages = Math.max(1, Math.ceil(rows.length / SALES_PAGE_SIZE));
+    if (salesState.page > pages) salesState.page = pages;
+    const start = (salesState.page - 1) * SALES_PAGE_SIZE;
+    const pageRows = rows.slice(start, start + SALES_PAGE_SIZE);
+    const hRow = (x) => {
+      const w = x.w;
+      const meta = salesSrcMeta(x.id);
+      return '<tr><td><a href="#/search?q=' + enc(w[0]) + '">' + esc(w[0]) + '</a>' + (w[1] ? '<div class="meta">' + esc(w[1]) + '</div>' : '') + '</td>'
+        + '<td>' + esc(w[2]) + salesNoteHtml(w) + '</td>'
+        + '<td>' + esc(w[4]) + '<div class="meta">' + esc(w[6]) + '</div></td>'
+        + '<td class="salon-num">' + esc(w[3] || '—') + '</td>'
+        + '<td>' + (w[7] ? esc(w[7]) : '<span class="muted">—</span>') + (w[8] ? ' → ' + esc(w[8]) : '') + '</td>'
+        + '<td>' + salesPriceCell(w) + '</td>'
+        + '<td class="meta">' + esc(meta ? meta.short : x.id) + (w[15] != null ? ', p. ' + esc(w[15]) : '') + '</td></tr>';
+    };
+    const mRow = (x) => {
+      const r = x.r;
+      const priceBits = [];
+      if (r.hammer != null) priceBits.push('Hammer ' + salesMoney(r.hammer, r.currency));
+      if (r.price_with_premium != null) priceBits.push('With premium ' + salesMoney(r.price_with_premium, r.currency));
+      if (!priceBits.length && r.price_as_reported) priceBits.push('As reported: ' + esc(r.price_as_reported));
+      else if (r.price_as_reported) priceBits.push('<span class="meta">As reported: ' + esc(r.price_as_reported) + '</span>');
+      return '<tr><td>' + esc(r.artist) + '</td>'
+        + '<td>' + esc(r.work_title) + (r.work_year ? ' (' + esc(r.work_year) + ')' : '') + (r.note ? '<div class="meta">' + esc(r.note) + '</div>' : '') + '</td>'
+        + '<td>' + esc(r.sale_date) + '<div class="meta">' + esc(r.house) + (r.city ? ', ' + esc(r.city) : '') + ' · ' + esc(r.sale_type) + '</div></td>'
+        + '<td class="salon-num">' + (r.lot != null ? esc(r.lot) : '—') + '</td>'
+        + '<td class="meta">' + (r.estimate ? 'Estimate ' + esc(r.estimate) : '—') + '</td>'
+        + '<td>' + priceBits.join('<br>') + '</td>'
+        + '<td class="meta">Modern · <a href="' + esc(r.source_url) + '" target="_blank" rel="noopener">' + esc(r.source_name) + '</a></td></tr>';
+    };
+    wrap.innerHTML = '<div class="meta" style="margin-bottom:8px">' + plural(rows.length, 'sale') + ' match “' + esc(salesState.query) + '”'
+      + (salesState.counts ? ' — ' + salesManifest.sources.map((s) => esc(s.short) + ' ' + (salesState.counts[s.id] || 0).toLocaleString()).join(' · ') : '')
+      + (rows.length > 5000 ? ' — a lot; add a year or the auction house to narrow it down' : '') + '</div>'
+      + '<div class="table-wrap"><table class="table salon-table"><thead><tr><th>Artist</th><th>Work</th><th>Sale</th><th>Lot</th><th>Owner → Buyer / Estimate</th><th>Price</th><th>Source</th></tr></thead>'
+      + '<tbody>' + pageRows.map((x) => (x.kind === 'm' ? mRow(x) : hRow(x))).join('') + '</tbody></table></div>'
+      + '<div class="pager"><button class="btn btn-sm" id="sales-prev-page" ' + (salesState.page <= 1 ? 'disabled' : '') + '>← Previous</button>'
+      + '<span class="meta">Page ' + salesState.page + ' of ' + pages.toLocaleString() + ' · showing ' + (start + 1).toLocaleString() + '–' + Math.min(start + SALES_PAGE_SIZE, rows.length).toLocaleString() + ' of ' + rows.length.toLocaleString() + ' sales</span>'
+      + '<button class="btn btn-sm" id="sales-next-page" ' + (salesState.page >= pages ? 'disabled' : '') + '>Next →</button></div>';
+    const prev = $('#sales-prev-page');
+    const next = $('#sales-next-page');
+    if (prev) prev.addEventListener('click', () => { salesState.page--; renderSalesResults(); });
+    if (next) next.addEventListener('click', () => { salesState.page++; renderSalesResults(); });
+  }
+  function renderSalesChips() {
+    const el = $('#sales-chips');
+    if (!el || !salesManifest) return;
+    const chip = (id, label, n) => '<button class="chip ' + (salesState.source === id ? 'active' : '') + '" data-sales-src="' + esc(id) + '">' + esc(label) + (n != null ? ' (' + n.toLocaleString() + ')' : '') + '</button>';
+    let html = chip('all', 'All sources', salesState.counts ? Object.values(salesState.counts).reduce((a, b) => a + b, 0) : salesManifest.totalRecords);
+    for (const s of salesManifest.sources) html += chip(s.id, s.short, salesState.counts ? (salesState.counts[s.id] || 0) : s.count);
+    el.innerHTML = html;
+    el.querySelectorAll('[data-sales-src]').forEach((b) => b.addEventListener('click', () => {
+      salesState.source = b.dataset.salesSrc;
+      if (salesState.results) runSalesSearch();
+      else renderSalesChips();
+    }));
+  }
+  function renderSalesModern() {
+    const el = $('#sales-modern');
+    if (!el) return;
+    if (salesState.results) { el.innerHTML = ''; return; }
+    const recs = [...(salesData.get('modern') || [])].sort((a, b) => (b.price_with_premium || 0) - (a.price_with_premium || 0));
+    el.innerHTML = '<div class="results-head"><div><h2 style="font-size:26px">Modern landmark sales</h2><div class="meta">Ten landmark sales, each verified against public sources and cited on its record. Hammer and price-with-premium are always separate figures.</div></div></div>'
+      + '<div class="table-wrap"><table class="table salon-table"><thead><tr><th>Artist</th><th>Work</th><th>Sale</th><th>Lot</th><th>Estimate</th><th>Price</th><th>Citation</th></tr></thead><tbody>'
+      + recs.map((r) => {
+        const priceBits = [];
+        if (r.hammer != null) priceBits.push('Hammer ' + salesMoney(r.hammer, r.currency));
+        if (r.price_with_premium != null) priceBits.push('With premium ' + salesMoney(r.price_with_premium, r.currency));
+        if (!priceBits.length && r.price_as_reported) priceBits.push('As reported: ' + esc(r.price_as_reported));
+        else if (r.price_as_reported) priceBits.push('<span class="meta">As reported: ' + esc(r.price_as_reported) + '</span>');
+        return '<tr><td>' + esc(r.artist) + '</td><td>' + esc(r.work_title) + (r.work_year ? ' (' + esc(r.work_year) + ')' : '') + (r.note ? '<div class="meta">' + esc(r.note) + '</div>' : '') + '</td>'
+          + '<td>' + esc(r.sale_date) + '<div class="meta">' + esc(r.house) + (r.city ? ', ' + esc(r.city) : '') + '</div></td>'
+          + '<td class="salon-num">' + (r.lot != null ? esc(r.lot) : '—') + '</td><td class="meta">' + esc(r.estimate || '—') + '</td>'
+          + '<td>' + priceBits.join('<br>') + '</td>'
+          + '<td class="meta"><a href="' + esc(r.source_url) + '" target="_blank" rel="noopener">' + esc(r.source_name) + '</a></td></tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+  async function viewSales(p) {
+    salesState.query = (p.q || '').trim();
+    salesState.results = null;
+    salesState.counts = null;
+    salesState.page = 1;
+    app.innerHTML = '<h1 style="font-size:38px">Historic Art Sales</h1>'
+      + '<p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">What pictures actually made, sale by sale, as the great sale historians printed it — Redford’s “Art Sales” (1888) and Graves’s “Art Sales” (1918–1921), every Graves record checked against the page — together with a small strand of modern landmark sales, each verified and cited. Hammer and price-with-premium are kept separate throughout, and no figure here comes from a paywalled price database.</p>'
+      + '<div id="sales-today">' + spinner('Loading the sales archive…') + '</div>'
+      + '<div id="sales-game"></div>'
+      + '<div class="sales-switch"><span class="meta" style="font-weight:600">Today’s-money equivalents:</span>'
+      + '<div class="filters">'
+      + '<button class="chip" data-equiv="off">Off</button>'
+      + '<button class="chip" data-equiv="prices">By prices</button>'
+      + '<button class="chip" data-equiv="earnings">By earnings</button>'
+      + '</div></div>'
+      + '<form id="sales-form" class="salon-search" style="max-width:640px;display:flex;gap:8px"><input id="sales-q" type="search" placeholder="Artist, title, auction house or year — e.g. Hobbema, Raeburn, Christie’s, 1911" value="' + esc(salesState.query) + '" aria-label="Search historic art sales"><button class="btn btn-primary" type="submit">Search sales</button></form>'
+      + '<div class="filters" id="sales-chips" style="margin-bottom:12px"></div>'
+      + '<div id="sales-results"></div>'
+      + '<div id="sales-modern"></div>'
+      + '<div id="sales-about"></div>';
+    const syncSwitch = () => app.querySelectorAll('[data-equiv]').forEach((b) => b.classList.toggle('active', b.dataset.equiv === salesState.equiv));
+    syncSwitch();
+    app.querySelectorAll('[data-equiv]').forEach((b) => b.addEventListener('click', () => {
+      salesState.equiv = b.dataset.equiv;
+      syncSwitch();
+      renderSalesToday();
+      if (salesState.results) renderSalesResults();
+      if (salesState.game && salesState.game.answered >= 0) renderSalesGame();
+    }));
+    $('#sales-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      salesState.query = $('#sales-q').value.trim();
+      if (!salesManifest) return;
+      if (salesState.query) runSalesSearch();
+      else { salesState.results = null; salesState.counts = null; renderSalesResults(); renderSalesChips(); renderSalesModern(); }
+    });
+    try {
+      await loadSales();
+    } catch (e) {
+      $('#sales-today').innerHTML = '<div class="notice error">The sales archive could not be loaded: ' + esc(e.message) + '</div>';
+      return;
+    }
+    salesState.today = pickSalesToday(new Date());
+    renderSalesToday();
+    salesState.game = newSalesRound();
+    renderSalesGame();
+    renderSalesChips();
+    renderSalesModern();
+    const countsLine = salesManifest.sources.map((s) => esc(s.short) + ' ' + s.count.toLocaleString()).join(' · ');
+    $('#sales-about').innerHTML = '<div class="notice">About these records — ' + countsLine + ' · ' + salesManifest.totalRecords.toLocaleString() + ' sales in all. The historic records stand exactly as Redford and Graves printed them, including their spelling and their errors; Graves set out to correct Redford, and where Redford gives only the year, Graves usually gives the full date and lot number. One caveat travels with the Graves set: for some early sales whose catalogues printed no prices, Graves supplied the figures “to the best of my ability”, unmarked — those figures are his estimates, not catalogue records. Prices are in pounds, shillings and pence as printed; the small number of franc-priced Paris sales stand in francs. A “braced” price is one printed figure covering two lots together, and it stands on both records.</div>'
+      + '<details class="more"><summary>About the today’s-money conversions</summary><div class="notice">Equivalents are expressed in ' + salesConv.baseYear + ' pounds, and are built from two published sources. The Bank of England’s “A millennium of macroeconomic data for the UK” (version 3.1, Thomas &amp; Dimsdale), sheet A1. Headline series, runs to 2016: its consumer price index (2015 = 100) is used for “By prices” and its average weekly earnings for “By earnings”. From 2017 to ' + salesConv.baseYear + ' both series are extended with Office for National Statistics figures compounded onto the 2016 values — the CPI annual rate (series D7G7) for “By prices” and Average Weekly Earnings growth (series KAB9, whole economy total pay) for “By earnings”. Sources accessed November 2026. The multiplier for a sale year is the ' + salesConv.baseYear + ' index value divided by that year’s. Results are rounded to three significant figures and marked “≈”; the printed historic figure is always the primary number. Sterling records only: franc-priced sales show no equivalent, and the modern landmark sales are given as reported.</div></details>';
+    if (salesState.query) runSalesSearch();
+  }
 
   async function viewReport(p) {
     const cached = JSON.parse(sessionStorage.getItem('cand:' + (p.wd || p.ulan)) || 'null');
