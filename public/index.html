@@ -53,7 +53,14 @@
   <main id="app" aria-live="polite"></main>
 
   <footer class="site-footer">
-    <p class="contact" id="contact"><strong>Contact:</strong> <a href="mailto:john@sterlingfineart.com">John Finnegan</a> · <a href="mailto:john@sterlingfineart.com">john@sterlingfineart.com</a></p>
+    <p class="contact" id="contact"><strong>Contact:</strong> <a href="#" id="contactReveal">click to display name and email</a></p>
+    <script>
+      document.getElementById('contactReveal').addEventListener('click', function (e) {
+        e.preventDefault();
+        var u = 'john', d = 'sterlingfineart.com';
+        this.outerHTML = '<a href="mailto:' + u + '@' + d + '">John Finnegan</a> &middot; <a href="mailto:' + u + '@' + d + '">' + u + '@' + d + '</a>';
+      });
+    </script>
     <p>Data from Wikidata, the Getty Union List of Artist Names®, Wikipedia, Wikiquote, OpenAlex, The Metropolitan Museum of Art, the Art Institute of Chicago, the Cleveland Museum of Art, Europeana, Open Library, the Internet Archive and the Library of Congress. Always verify findings against the cited originals.</p>
   </footer>
 
