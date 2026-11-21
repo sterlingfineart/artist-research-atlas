@@ -251,6 +251,39 @@ ol.refs li { overflow-wrap: anywhere; }
 .sales-game-opt.wrong { background: #fbeeee; border-color: var(--accent); color: var(--accent); opacity: 1; }
 .sales-game-reveal { margin-top: 12px; font-size: 15px; }
 #sales-game .pager { justify-content: space-between; }
+.sales-game-btns { display: flex; gap: 10px; }
+.sales-game-pic { margin: 12px 0 4px; }
+.sales-game-pic img { display: block; max-width: 100%; max-height: 420px; border: 1px solid var(--line); border-radius: var(--radius); }
+.sales-game-pic figcaption { margin-top: 6px; }
+
+/* Sales-page tables (search results and the modern strand): the shared
+   .table rules starved the ARTIST column (~83px at a 900px viewport,
+   ~4px of effective left padding) and .table's overflow-wrap: anywhere
+   split names mid-word — "HOBBEM/A." stacked five lines tall, and
+   "Christie's" split in the SALE column. Fixed layout with explicit
+   column widths, real cell padding, and wrapping at spaces only; the
+   .table-wrap scrolls sideways on narrow screens rather than letting
+   the columns crush. */
+#sales-results .table, #sales-modern .table { table-layout: fixed; min-width: 960px; }
+#sales-results .table th, #sales-results .table td,
+#sales-modern .table th, #sales-modern .table td { padding: 9px 10px; overflow-wrap: normal; word-break: normal; }
+#sales-results .table th:nth-child(1), #sales-results .table td:nth-child(1),
+#sales-modern .table th:nth-child(1), #sales-modern .table td:nth-child(1) { width: 16%; }
+#sales-results .table th:nth-child(2), #sales-results .table td:nth-child(2),
+#sales-modern .table th:nth-child(2), #sales-modern .table td:nth-child(2) { width: 21%; }
+#sales-results .table th:nth-child(3), #sales-results .table td:nth-child(3),
+#sales-modern .table th:nth-child(3), #sales-modern .table td:nth-child(3) { width: 12%; }
+#sales-results .table th:nth-child(4), #sales-results .table td:nth-child(4),
+#sales-modern .table th:nth-child(4), #sales-modern .table td:nth-child(4) { width: 6%; }
+#sales-results .table th:nth-child(5), #sales-results .table td:nth-child(5),
+#sales-modern .table th:nth-child(5), #sales-modern .table td:nth-child(5) { width: 16%; }
+#sales-results .table th:nth-child(6), #sales-results .table td:nth-child(6),
+#sales-modern .table th:nth-child(6), #sales-modern .table td:nth-child(6) { width: 15%; }
+#sales-results .table th:nth-child(7), #sales-results .table td:nth-child(7),
+#sales-modern .table th:nth-child(7), #sales-modern .table td:nth-child(7) { width: 14%; }
+/* a few lot entries name a run ("161 and 162"); let them wrap at their
+   spaces inside the narrow lot column instead of spilling over it */
+#sales-results .salon-num, #sales-modern .salon-num { white-space: normal; }
 
 /* royal academy time machine — reuses the salon-* rules above
    (salon-famous chips, salon-search box, salon-table, salon-num, pager);
@@ -274,3 +307,31 @@ ol.refs li { overflow-wrap: anywhere; }
 .chain-edge { display: flex; gap: 8px; align-items: center; padding: 2px 16px; color: var(--muted); font-size: 13.5px; }
 .chain-arrow { color: var(--accent); font-size: 18px; }
 .chain-rel { font-style: italic; }
+
+/* who painted it? */
+.game-modes { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 16px 0 10px; }
+.game-scorebar { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 14.5px; color: var(--muted); margin-bottom: 6px; }
+.game-scorebar b { color: var(--ink); }
+.game-stage { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; margin: 14px 0; }
+.game-figure { margin: 10px 0 0; text-align: center; }
+.game-figure img { max-width: 100%; max-height: 62vh; object-fit: contain; border-radius: 6px; background: #ece6da; }
+.game-credit { color: var(--muted); font-size: 12.5px; margin-top: 8px; }
+.game-q { font: 600 27px var(--serif); text-align: center; margin: 16px 0 14px; }
+.game-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 780px; margin: 0 auto; }
+.game-opt { display: flex; align-items: center; gap: 10px; text-align: left; font: 600 16px var(--sans); padding: 13px 14px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); color: var(--ink); cursor: pointer; min-height: 54px; }
+.game-opt:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.game-opt:disabled { cursor: default; opacity: .8; }
+.game-opt.right { background: #e3f0e7; border-color: var(--ok); color: var(--ok); opacity: 1; }
+.game-opt.wrong { background: #fbeeee; border-color: var(--accent); color: var(--accent); opacity: 1; }
+.game-letter { flex: none; display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 13.5px; font-weight: 700; }
+.game-opt.right .game-letter { background: #cfe5d6; color: var(--ok); }
+.game-opt.wrong .game-letter { background: #f3d9d9; color: var(--accent); }
+.game-verdict { max-width: 780px; margin: 16px auto 0; font-size: 15.5px; }
+.game-verdict .game-work { margin-top: 6px; }
+.game-stage .pager { max-width: 780px; margin: 14px auto 0; }
+.game-final-score { font: 700 40px var(--serif); margin: 4px 0; }
+.game-rank { font-size: 19px; }
+@media (max-width: 640px) {
+  .game-options { grid-template-columns: 1fr; }
+  .game-stage { padding: 16px 14px; }
+}
