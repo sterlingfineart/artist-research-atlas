@@ -302,17 +302,25 @@
   }
   async function viewBrowse(p) {
     app.innerHTML = `<h1 style="font-size:38px">Browse</h1>
-      <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">Two ways in: the Atlas’s own collections — the exhibition catalogues and dictionaries it has digitised and verified — browsed by collection or by year; or artists by century, country, movement or medium, drawn live from Wikidata.</p>
+      <p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">Two ways in: the Atlas’s own collections — the exhibition catalogues and dictionaries it has digitised and verified — browsed by collection or by year; or artists by century, country, movement or medium, drawn from Wikidata.</p>
       <section class="rs" id="browse-collections"></section>
       <section class="rs" id="browse-years"></section>
       <h2>Artists by facet</h2>
-      <p class="source-line">Browse artists by century, country, movement or medium — pick any combination and press GO. Every list is a live query of Wikidata, restricted to painters, sculptors, draftsmen, engravers and printmakers — select an artist to generate the full research report.</p>
+      <p class="source-line">Browse artists by century, country, movement or medium — pick any combination and press GO. Every list is drawn from Wikidata, restricted to painters, sculptors, draftsmen, engravers and printmakers — select an artist to generate the full research report.</p>
+      <p class="source-line" id="browse-cache-note">Results cached — refreshed weekly.</p>
       <div id="browse-facets">${spinner('Loading browse lists…')}</div>
       <div id="browse-results"></div>
       <section class="rs" id="browse-index"></section>`;
     renderShowcaseIndex();
     renderBrowseCollections();
     renderBrowseYears();
+    const showBrowseCacheNote = (cache) => {
+      const note = $('#browse-cache-note');
+      if (!note) return;
+      note.textContent = cache?.cachedAt
+        ? `Results cached — refreshed weekly. Cache updated ${new Date(cache.cachedAt).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' })}.`
+        : 'Results cached — refreshed weekly.';
+    };
     let defs;
     try {
       defs = await api('/api/browse', {});
@@ -321,6 +329,7 @@
       return;
     }
     if (defs?.facets) {
+      showBrowseCacheNote(defs.cache);
       const byId = Object.fromEntries(defs.facets.map((f) => [f.id, f]));
       // The current selection, from a combined URL (?century=19&country=Q96)
       // or a legacy single-facet URL (?facet=country&value=Q96).
@@ -363,6 +372,7 @@
       out.innerHTML = `<div class="notice error">Browse failed: ${esc(e.message)}</div>`;
       return;
     }
+    showBrowseCacheNote(d.cache);
     const artists = d.artists || [];
     if (!artists.length) {
       out.innerHTML = `${errs(d.errors)}<div class="notice">No artists were found for “${esc(d.label || p.value || 'those filters')}”. Wikidata may not record that combination — try another value.</div>`;
