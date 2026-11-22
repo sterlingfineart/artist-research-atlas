@@ -73,6 +73,7 @@
     if (path === '/exhibitions' || path.startsWith('/exhibitions/')) return viewExhibitions(p, path);
     if (path === '/sales') return viewSales(p);
     if (path === '/game') return viewGame(p);
+    if (path === '/feedback') return viewFeedback();
     if (path === '/artist' && (p.wd || p.ulan)) return viewReport(p);
     if (path === '/about') return viewAbout();
     return viewHome();
@@ -2686,9 +2687,15 @@
      movement, nationality, circle). See public/data/game/POOL.md. */
   let gamePool = null;
   let gameLoadPromise = null;
-  const gameState = { mode: null, level: 1, ladderStep: 0, score: 0, streak: 0, best: 0, played: 0, correct: 0, round: null, used: new Set(), bad: new Set(), finished: false };
+  const gameState = { level: 1, phase: null, set: null, score: 0, streak: 0, best: 0, played: 0, correct: 0, round: null, bad: new Set(), bags: {}, lastByLevel: {}, recentDistractors: [], setServed: new Set(), setDone: false };
   const GAME_RANKS = [[5800, 'Chief Curator'], [4600, 'Curator'], [3400, 'Connoisseur'], [2200, 'Docent'], [1000, 'Art Lover'], [0, 'Gallery Visitor']];
   const gameRank = (score) => GAME_RANKS.find(([min]) => score >= min)[1];
+  /* The question follows the work's own kind (pool.json, derived from
+     the holding museum's classification of that exact object): a
+     drawing was not painted, and a print was made, not painted. Any
+     other or unknown kind falls back to the neutral wording. */
+  const GAME_QUESTIONS = { painting: 'Who painted this?', drawing: 'Who drew this?', print: 'Who made this print?', sculpture: 'Who sculpted this?', photograph: 'Who took this photograph?' };
+  const gameQuestion = (work) => GAME_QUESTIONS[work && work.kind] || 'Who created this?';
   const gameNormName = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 
   async function loadGamePool() {
@@ -2725,7 +2732,13 @@
     const seen = new Set([gameNormName(work.artist)]);
     for (const f of chain) {
       if (picked.length >= 3) break;
-      for (const c of salesShuffle(names.filter((n) => f(n) && !seen.has(gameNormName(n))))) {
+      /* Within a rule's candidates, names not used as distractors in
+         the last few rounds come first — variety across a session,
+         without ever loosening the level's closeness rule itself. */
+      const cand = names.filter((n) => f(n) && !seen.has(gameNormName(n)));
+      const fresh = cand.filter((n) => !gameState.recentDistractors.includes(n));
+      const stale = cand.filter((n) => gameState.recentDistractors.includes(n));
+      for (const c of [...salesShuffle(fresh), ...salesShuffle(stale)]) {
         if (picked.length >= 3) break;
         seen.add(gameNormName(c));
         picked.push(c);
@@ -2734,41 +2747,108 @@
     return picked;
   }
 
+  /* Shuffle-bag serving, per level, for the whole session: a work is
+     not served again at a level until every work in that level's pool
+     has been served once, then the bag refills — shuffled so the work
+     served last does not come straight back when the pool allows a
+     different one. Within the bag, the same correct artist is not
+     served twice in a row while the bag still holds another artist.
+     (Level 1's pool is nine works, so a long sitting used to re-serve
+     the same pictures; the bag is what stops that.) A refill also
+     holds out the works already served in the current set, so a set
+     never repeats a work even when it straddles a refill. */
+  function gameServe(level) {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      let bag = gameState.bags[level];
+      if (!bag || !bag.length) {
+        const pool = gamePool.works.filter((w) => w.level === level && !gameState.bad.has(w.image) && !gameState.setServed.has(w.image));
+        if (!pool.length) return null;
+        bag = salesShuffle(pool.slice());
+        const last = gameState.lastByLevel[level];
+        if (pool.length > 1 && last && bag[bag.length - 1].image === last.image) {
+          [bag[0], bag[bag.length - 1]] = [bag[bag.length - 1], bag[0]];
+        }
+        gameState.bags[level] = bag;
+      }
+      while (bag.length) {
+        let idx = bag.length - 1;
+        const last = gameState.lastByLevel[level];
+        if (last && bag[idx].artist === last.artist) {
+          for (let i = bag.length - 2; i >= 0; i--) {
+            if (bag[i].artist !== last.artist) { idx = i; break; }
+          }
+        }
+        const work = bag.splice(idx, 1)[0];
+        if (gameState.bad.has(work.image)) continue;
+        gameState.lastByLevel[level] = { image: work.image, artist: work.artist };
+        gameState.setServed.add(work.image);
+        return work;
+      }
+    }
+    return null;
+  }
+
   function newGameRound(level) {
-    const fresh = gamePool.works.filter((w) => w.level === level && !gameState.used.has(w.image) && !gameState.bad.has(w.image));
-    const any = gamePool.works.filter((w) => w.level === level && !gameState.bad.has(w.image));
-    const src = fresh.length ? fresh : any;
-    if (!src.length) return null;
-    const work = src[Math.floor(Math.random() * src.length)];
-    gameState.used.add(work.image);
+    const work = gameServe(level);
+    if (!work) return null;
     const distract = gameDistractors(work, level);
     if (distract.length < 3) return null;
+    gameState.recentDistractors = [...gameState.recentDistractors, ...distract].slice(-12);
     return { work, options: salesShuffle([work.artist, ...distract]), answered: -1, level, gained: 0, bonus: 0 };
   }
 
-  function startGame(mode, level) {
-    gameState.mode = mode;
-    gameState.finished = false;
-    gameState.round = null;
-    if (mode === 'ladder') {
+  /* A level is played as a set: GAME_SET_ROUNDS rounds, or the
+     level's whole pool when that is smaller (level 1's pool is nine
+     works, so its set is nine rounds). Starting a level — by the
+     ladder button, a level chip, "Next level" or "Replay" — always
+     begins a fresh set; the session score runs on across sets and
+     levels until the player finishes or starts a new session.
+     Finishing a set earns the move-on invitation whatever the score:
+     there is no pass mark. */
+  const GAME_SET_ROUNDS = 10;
+  function gameLevelSize(level) {
+    return gamePool.works.filter((w) => w.level === level && !gameState.bad.has(w.image)).length;
+  }
+
+  function startSet(level) {
+    gameState.level = level;
+    gameState.setServed = new Set();
+    gameState.setDone = false;
+    gameState.set = { level, size: Math.min(GAME_SET_ROUNDS, gameLevelSize(level)), played: 0, correct: 0, points: 0 };
+    gameState.phase = 'playing';
+    gameState.round = gameState.set.size ? newGameRound(level) : null;
+    renderGame();
+  }
+
+  function startGame(level, fresh) {
+    if (fresh) {
       gameState.score = 0; gameState.streak = 0; gameState.best = 0;
       gameState.played = 0; gameState.correct = 0;
-      gameState.used = new Set();
-      gameState.ladderStep = 1;
-      gameState.round = newGameRound(1);
-    } else {
-      gameState.level = level;
-      gameState.ladderStep = 0;
-      gameState.round = newGameRound(level);
     }
+    startSet(level);
+  }
+
+  function completeSet() {
+    gameState.round = null;
+    gameState.setDone = true;
+    /* Level 10 has no next level: its completion is the final
+       summary. Lower levels pause on the invitation screen. */
+    gameState.phase = gameState.set && gameState.set.level >= 10 ? 'finished' : 'complete';
+    renderGame();
+  }
+
+  function finishSession() {
+    gameState.round = null;
+    gameState.phase = 'finished';
     renderGame();
   }
 
   function gameAnswer(i) {
     const g = gameState.round;
-    if (!g || g.answered >= 0) return;
+    if (!g || g.answered >= 0 || gameState.phase !== 'playing') return;
     g.answered = i;
     gameState.played++;
+    if (gameState.set) gameState.set.played++;
     if (g.options[i] === g.work.artist) {
       gameState.correct++;
       gameState.streak++;
@@ -2776,6 +2856,7 @@
       g.bonus = gameState.streak >= 2 ? Math.min(250, 50 * (gameState.streak - 1)) : 0;
       g.gained = g.level * 100 + g.bonus;
       gameState.score += g.gained;
+      if (gameState.set) { gameState.set.correct++; gameState.set.points += g.gained; }
     } else {
       gameState.streak = 0;
     }
@@ -2783,20 +2864,17 @@
   }
 
   function gameNext() {
-    if (gameState.mode === 'ladder') {
-      if (gameState.ladderStep >= 10) { gameState.finished = true; gameState.round = null; renderGame(); return; }
-      gameState.ladderStep++;
-      gameState.round = newGameRound(gameState.ladderStep);
-    } else {
-      gameState.round = newGameRound(gameState.level);
-    }
+    if (gameState.phase !== 'playing' || !gameState.set) return;
+    if (gameState.set.played >= gameState.set.size) { completeSet(); return; }
+    gameState.round = newGameRound(gameState.set.level);
+    if (!gameState.round) { completeSet(); return; }
     renderGameStage();
     renderGameControls();
   }
 
   async function viewGame() {
     app.innerHTML = '<h1 style="font-size:38px">Who Painted It?</h1>'
-      + '<p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">One painting, four names. The works are all open-access museum pictures, and the higher the level, the closer the wrong answers crowd in — by level 10 the alternatives are the artist’s own circle. A correct answer scores the level × 100, and a streak adds a bonus. Play a single level, or climb the ladder from level 1 to 10.</p>'
+      + '<p class="lede" style="text-align:left;margin:0 0 20px;max-width:900px">One painting, four names. The works are all open-access museum pictures, and the higher the level, the closer the wrong answers crowd in — by level 10 the alternatives are the artist’s own circle. A correct answer scores the level × 100, and a streak adds a bonus. Each level is a set of up to ten pictures, none repeated; finish the set and you choose — climb to the next level, replay this one, or stop and take your rank.</p>'
       + '<div id="game-main">' + spinner('Loading the gallery…') + '</div>';
     try {
       await loadGamePool();
@@ -2804,7 +2882,7 @@
       $('#game-main').innerHTML = '<div class="notice error">The game pictures could not be loaded: ' + esc(e.message) + '</div>';
       return;
     }
-    if (!gameState.mode) startGame('level', 1);
+    if (!gameState.phase) startGame(1, true);
     else renderGame();
   }
 
@@ -2824,7 +2902,7 @@
     for (const w of gamePool.works) counts[w.level] = (counts[w.level] || 0) + 1;
     const chips = [];
     for (let l = 1; l <= 10; l++) {
-      chips.push('<button class="chip' + (gameState.mode === 'level' && gameState.level === l ? ' active' : '') + '" data-game-level="' + l + '">Level ' + l + '</button>');
+      chips.push('<button class="chip' + (gameState.level === l ? ' active' : '') + '" data-game-level="' + l + '">Level ' + l + '</button>');
     }
     el.innerHTML = '<div class="game-modes">'
       + '<button class="btn btn-primary" id="game-ladder">Play the ladder · levels 1 → 10</button>'
@@ -2833,10 +2911,11 @@
       + '<div class="game-scorebar"><span>Score <b>' + gameState.score.toLocaleString() + '</b></span>'
       + '<span>Streak <b>' + gameState.streak + '</b></span>'
       + '<span>Right <b>' + gameState.correct + '</b> of <b>' + gameState.played + '</b></span>'
-      + (gameState.mode === 'ladder' && !gameState.finished ? '<span>Question <b>' + gameState.ladderStep + '</b> of 10</span>' : '')
+      + (gameState.set && gameState.phase === 'playing' ? '<span>Level <b>' + gameState.set.level + '</b> · Round <b>' + Math.min(gameState.set.played + 1, gameState.set.size) + '</b> of <b>' + gameState.set.size + '</b></span>' : '')
+      + (gameState.set && gameState.phase === 'complete' ? '<span>Level <b>' + gameState.set.level + '</b> complete</span>' : '')
       + '</div>';
-    $('#game-ladder').addEventListener('click', () => startGame('ladder'));
-    el.querySelectorAll('[data-game-level]').forEach((b) => b.addEventListener('click', () => startGame('level', +b.dataset.gameLevel)));
+    $('#game-ladder').addEventListener('click', () => startGame(1, true));
+    el.querySelectorAll('[data-game-level]').forEach((b) => b.addEventListener('click', () => startGame(+b.dataset.gameLevel, false)));
   }
 
   function renderGameStage() {
@@ -2844,15 +2923,32 @@
     if (!el || !gamePool) return;
     const sb = $('.game-scorebar');
     if (sb) renderGameControls();
-    if (gameState.finished) {
+    if (gameState.phase === 'complete' && gameState.set) {
+      const s = gameState.set;
       const acc = gameState.played ? Math.round((100 * gameState.correct) / gameState.played) : 0;
-      el.innerHTML = '<div class="game-stage"><h2 style="font-size:30px">The ladder climbed</h2>'
+      el.innerHTML = '<div class="game-stage"><h2 style="font-size:30px">Level ' + s.level + ' complete</h2>'
+        + '<p>You got <b>' + s.correct + '</b> right of <b>' + s.played + '</b> rounds at this level, earning <b>' + s.points.toLocaleString() + '</b> points.</p>'
+        + '<p>Session so far: <b>' + gameState.score.toLocaleString() + ' points</b> · rank <b>' + esc(gameRank(gameState.score)) + '</b> · ' + gameState.correct + ' right of ' + gameState.played + ' (' + acc + '%) overall.</p>'
+        + '<p class="game-rank">Care to move to the next?</p>'
+        + '<div class="game-modes"><button class="btn btn-primary" id="game-next-level">Next level →</button>'
+        + '<button class="btn" id="game-replay-level">Replay this level</button>'
+        + '<button class="btn" id="game-finish">Finish</button></div></div>';
+      $('#game-next-level').addEventListener('click', () => startGame(s.level + 1, false));
+      $('#game-replay-level').addEventListener('click', () => startGame(s.level, false));
+      $('#game-finish').addEventListener('click', finishSession);
+      return;
+    }
+    if (gameState.phase === 'finished') {
+      const acc = gameState.played ? Math.round((100 * gameState.correct) / gameState.played) : 0;
+      const s = gameState.set;
+      el.innerHTML = '<div class="game-stage"><h2 style="font-size:30px">Session complete</h2>'
+        + (gameState.setDone && s && s.level >= 10 ? '<p>Level 10 complete: <b>' + s.correct + '</b> right of <b>' + s.played + '</b> rounds, earning <b>' + s.points.toLocaleString() + '</b> points at the top level.</p>' : '')
         + '<p class="game-final-score">' + gameState.score.toLocaleString() + ' points</p>'
         + '<p>' + gameState.correct + ' right of ' + gameState.played + ' (' + acc + '%), best streak ' + gameState.best + '.</p>'
         + '<p class="game-rank">Your rank: <b>' + esc(gameRank(gameState.score)) + '</b></p>'
-        + '<p class="meta">Ranks run Gallery Visitor · Art Lover · Docent · Connoisseur · Curator · Chief Curator. A perfect ladder — every level right, streak unbroken — scores 7,250.</p>'
-        + '<div class="game-modes"><button class="btn btn-primary" id="game-again">Climb again</button></div></div>';
-      $('#game-again').addEventListener('click', () => startGame('ladder'));
+        + '<p class="meta">Ranks run Gallery Visitor · Art Lover · Docent · Connoisseur · Curator · Chief Curator.</p>'
+        + '<div class="game-modes"><button class="btn btn-primary" id="game-again">Play again</button></div></div>';
+      $('#game-again').addEventListener('click', () => startGame(1, true));
       return;
     }
     const g = gameState.round;
@@ -2862,10 +2958,10 @@
     }
     const w = g.work;
     let html = '<div class="game-stage">'
-      + '<div class="sales-feature-label">Level ' + g.level + (gameState.mode === 'ladder' ? ' · question ' + gameState.ladderStep + ' of 10' : '') + ' · ' + (g.level * 100) + ' points</div>'
+      + '<div class="sales-feature-label">Level ' + g.level + (gameState.set ? ' · Round ' + Math.min(gameState.set.played + 1, gameState.set.size) + ' of ' + gameState.set.size : '') + ' · ' + (g.level * 100) + ' points</div>'
       + '<figure class="game-figure"><img id="game-img" src="' + esc(w.image) + '" alt="A painting to identify">'
       + '<figcaption class="game-credit">Image: ' + esc(w.museum) + ' · open access</figcaption></figure>'
-      + '<div class="game-q">Who painted this?</div><div class="game-options">';
+      + '<div class="game-q">' + esc(gameQuestion(w)) + '</div><div class="game-options">';
     g.options.forEach((name, i) => {
       let cls = 'game-opt';
       let dis = '';
@@ -2886,9 +2982,10 @@
         + '<div class="game-work"><i>' + esc(w.title) + '</i>' + (w.date ? ', ' + esc(w.date) : '')
         + ' — ' + esc(w.artist) + (meta && (meta.birth || meta.death) ? ' (' + (meta.birth || '?') + '–' + (meta.death || '?') + ')' : '')
         + '<br>' + esc(w.museum) + ' · ' + link(w.objectUrl, 'the museum’s object page')
+        + (w.medium ? '<br>' + esc(w.medium) : '')
         + '<br><a href="#/search?q=' + enc(w.artist) + '">Research ' + esc(w.artist) + ' in the Atlas →</a></div></div>'
         + '<div class="pager"><button class="btn btn-primary" id="game-next">'
-        + (gameState.mode === 'ladder' ? (gameState.ladderStep >= 10 ? 'See your rank →' : 'Next level →') : 'Next painting →')
+        + (gameState.set && gameState.set.played >= gameState.set.size ? 'See how you did →' : 'Next painting →')
         + '</button></div>';
     }
     html += '</div>';
@@ -2898,6 +2995,7 @@
       if (g.answered >= 0) return;
       gameState.bad.add(w.image);
       gameState.round = newGameRound(g.level);
+      if (!gameState.round) { completeSet(); return; }
       renderGameStage();
     });
     el.querySelectorAll('[data-game-opt]').forEach((b) => b.addEventListener('click', () => gameAnswer(+b.dataset.gameOpt)));
@@ -3489,6 +3587,74 @@
     for (const x of d.newspapers || []) addRef(state, 'life', x.cite, { year: parseInt(x.date, 10) });
     for (const x of d.europeana || []) addRef(state, 'life', x.cite, { year: parseInt(x.year, 10) });
     for (const x of d.books || []) addRef(state, 'life', x.cite, { year: x.year });
+  }
+
+  /* ============================================================= feedback */
+  function viewFeedback() {
+    app.innerHTML = `<section class="rs prose" style="max-width:760px;margin:0 auto">
+      <h2>Feedback</h2>
+      <p>Comments, corrections and suggestions about the Atlas are welcome. Messages go to the editor and help decide what is built next. The two boxes are optional individually — please write in at least one of them.</p>
+      <form id="feedback-form" class="feedback-form" novalidate>
+        <label for="fb-comments">Comments</label>
+        <textarea id="fb-comments" rows="6" maxlength="5000" placeholder="Corrections, problems, questions — anything about the site as it stands."></textarea>
+        <label for="fb-wishes">What else would you like to see on the site?</label>
+        <textarea id="fb-wishes" rows="4" maxlength="5000" placeholder="Artists, exhibitions, records or tools you would like the Atlas to cover."></textarea>
+        <label for="fb-name">Your name and email (optional — only if you’d like a reply)</label>
+        <div class="feedback-contact">
+          <input id="fb-name" type="text" autocomplete="name" placeholder="Name" maxlength="120" />
+          <input id="fb-email" type="email" autocomplete="email" placeholder="Email" maxlength="254" />
+        </div>
+        <div class="fb-hp" aria-hidden="true">
+          <label for="fb-website">Leave this field empty</label>
+          <input id="fb-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <div id="fb-status" role="status" aria-live="polite"></div>
+        <button type="submit" class="btn btn-primary" id="fb-send">Send feedback</button>
+      </form>
+    </section>`;
+    const form = $('#feedback-form');
+    const status = $('#fb-status');
+    const showError = (msg) => { status.innerHTML = `<div class="notice error">${esc(msg)}</div>`; };
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const comments = $('#fb-comments').value.trim();
+      const wishes = $('#fb-wishes').value.trim();
+      const name = $('#fb-name').value.trim();
+      const email = $('#fb-email').value.trim();
+      if (!comments && !wishes) {
+        showError('Please write something in one of the two boxes before sending.');
+        $('#fb-comments').focus();
+        return;
+      }
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError('That email address does not look complete — please check it, or leave it blank.');
+        $('#fb-email').focus();
+        return;
+      }
+      const btn = $('#fb-send');
+      btn.disabled = true;
+      status.innerHTML = `<div class="loading"><div class="spinner"></div><span>Sending…</span></div>`;
+      let r, d;
+      try {
+        r = await fetch('/api/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ comments, wishes, name, email, website: $('#fb-website').value }),
+        });
+        d = await r.json().catch(() => ({}));
+      } catch {
+        // Nothing was sent and nothing is lost: the typed text stays put.
+        btn.disabled = false;
+        showError('Your message could not be sent — please check your connection and try again. Your text is still in the form.');
+        return;
+      }
+      if (r.ok && d.ok) {
+        form.innerHTML = `<div class="notice">Thank you — your feedback has been sent.</div>`;
+        return;
+      }
+      btn.disabled = false;
+      showError(d.error || 'Your message could not be sent just now. Please try again later — your text is still in the form.');
+    });
   }
 
   /* ================================================================ about */
