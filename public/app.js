@@ -2820,6 +2820,29 @@
     renderGame();
   }
 
+  /* A picture that fails to load is marked bad and can never fill a
+     round. When that happens mid-set, the set's planned size may stop
+     being reachable — the failed work was served for this set, and its
+     replacement is drawn from the same shrinking pool — so shrink the
+     size to what can still actually be played: rounds already played,
+     the round in progress, and as many of the remaining planned
+     rounds as the level's unserved, still-playable works can fill.
+     (Where the pool is larger than the set, a failure changes
+     nothing: the set can still fill every planned round.) The stage
+     label, the scorebar and the verdict's next button all read
+     set.size, so they stay truthful without knowing about bad
+     pictures themselves. Called from the one place a work is marked
+     bad, after the replacement round has been served. */
+  function gameSetShrink() {
+    const s = gameState.set;
+    if (!s || !gamePool) return;
+    if (!gameState.round) { s.size = s.played; return; }
+    const unserved = gamePool.works.filter((w) => w.level === s.level && !gameState.bad.has(w.image) && !gameState.setServed.has(w.image)).length;
+    const inProgress = gameState.round.answered < 0 ? 1 : 0;
+    const future = Math.max(0, Math.min(s.size - s.played - inProgress, unserved));
+    s.size = s.played + inProgress + future;
+  }
+
   function startGame(level, fresh) {
     if (fresh) {
       gameState.score = 0; gameState.streak = 0; gameState.best = 0;
@@ -2995,6 +3018,7 @@
       if (g.answered >= 0) return;
       gameState.bad.add(w.image);
       gameState.round = newGameRound(g.level);
+      gameSetShrink();
       if (!gameState.round) { completeSet(); return; }
       renderGameStage();
     });
