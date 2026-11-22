@@ -335,3 +335,22 @@ ol.refs li { overflow-wrap: anywhere; }
   .game-options { grid-template-columns: 1fr; }
   .game-stage { padding: 16px 14px; }
 }
+
+/* feedback */
+.feedback-form { display: flex; flex-direction: column; margin-top: 6px; }
+.feedback-form label { font: 600 14px var(--sans); color: var(--ink); margin: 16px 0 5px; }
+.feedback-form label:first-child { margin-top: 0; }
+.feedback-form textarea, .feedback-form input { font: 15px var(--sans); color: var(--ink); padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); outline: none; width: 100%; }
+.feedback-form textarea { resize: vertical; line-height: 1.55; }
+.feedback-form textarea:focus, .feedback-form input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.feedback-contact { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.feedback-form .btn { align-self: flex-start; margin-top: 18px; }
+.feedback-form .notice { margin: 16px 0 0; }
+#fb-status .notice { margin-bottom: 0; }
+#fb-status .loading { padding: 16px 0 0; }
+/* honeypot: positioned far off-screen — no human visitor ever sees
+   or fills it; a submission with it filled is a bot's and is dropped */
+.fb-hp { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+@media (max-width: 640px) {
+  .feedback-contact { grid-template-columns: 1fr; }
+}
