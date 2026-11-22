@@ -1815,7 +1815,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/16568",
    "image": "https://www.artic.edu/iiif/2/3c27b499-af56-f0d5-93b5-a7f2f1ad5813/full/843,/0/default.jpg",
-   "level": 1
+   "level": 1,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "El Greco",
@@ -1824,7 +1826,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436575",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP349564.jpg",
-   "level": 1
+   "level": 1,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Frederic Edwin Church",
@@ -1833,7 +1837,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/10481",
    "image": "https://images.metmuseum.org/CRDImages/ad/web-large/DT78.jpg",
-   "level": 1
+   "level": 1,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Georges Seurat",
@@ -1842,7 +1848,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/27992",
    "image": "https://www.artic.edu/iiif/2/2d484387-2509-5e8e-2c43-22f9981972eb/full/843,/0/default.jpg",
-   "level": 1
+   "level": 1,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Gustave Caillebotte",
@@ -1851,7 +1859,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/20684",
    "image": "https://www.artic.edu/iiif/2/f8fd76e9-c396-5678-36ed-6a348c904d27/full/843,/0/default.jpg",
-   "level": 1
+   "level": 1,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Katsushika Hokusai",
@@ -1860,7 +1870,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/36491",
    "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP141063.jpg",
-   "level": 1
+   "level": 1,
+   "medium": "Woodblock print; ink and color on paper",
+   "kind": "print"
   },
   {
    "artist": "Paul Cézanne",
@@ -1869,7 +1881,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/435868",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP231550.jpg",
-   "level": 1
+   "level": 1,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Vincent van Gogh",
@@ -1878,7 +1892,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436532",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT1502_cropped2.jpg",
-   "level": 1
+   "level": 1,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Vincent van Gogh",
@@ -1887,7 +1903,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/28560",
    "image": "https://www.artic.edu/iiif/2/6644829f-f292-c5c4-a73c-0356a6fdbf0d/full/843,/0/default.jpg",
-   "level": 1
+   "level": 1,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Albert Bierstadt",
@@ -1896,7 +1914,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/10154",
    "image": "https://images.metmuseum.org/CRDImages/ad/web-large/DT82.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Albrecht Dürer",
@@ -1905,7 +1925,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/336215",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP816773.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Woodcut",
+   "kind": "print"
   },
   {
    "artist": "Camille Pissarro",
@@ -1914,7 +1936,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437310",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-21959-001.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Caravaggio",
@@ -1923,7 +1947,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1976.2",
    "image": "https://openaccess-cdn.clevelandart.org/1976.2/1976.2_web.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Caspar David Friedrich",
@@ -1932,7 +1958,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/438417",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-31997-001-NEW.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Claude Monet",
@@ -1941,7 +1969,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/186316",
    "image": "https://www.artic.edu/iiif/2/b7c3fa7f-d2bd-27b6-4a5c-0c8943d2b944/full/843,/0/default.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Black chalk on cream laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "Claude Monet",
@@ -1950,7 +1980,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/81545",
    "image": "https://www.artic.edu/iiif/2/be0d3e50-a600-6f33-ea8f-16a34d892442/full/843,/0/default.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Diego Velázquez",
@@ -1959,7 +1991,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437869",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14286-001.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Edgar Degas",
@@ -1968,7 +2002,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/438817",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-20101-001.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Francisco Goya",
@@ -1977,7 +2013,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/334453",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP816991.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Etching, aquatint on wove paper",
+   "kind": "print"
   },
   {
    "artist": "Francisco Goya",
@@ -1986,7 +2024,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1922.638",
    "image": "https://openaccess-cdn.clevelandart.org/1922.638/1922.638_web.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "etching and aquatint",
+   "kind": "print"
   },
   {
    "artist": "Henri de Toulouse-Lautrec",
@@ -1995,7 +2035,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/35751",
    "image": "https://www.artic.edu/iiif/2/b3e42174-8b15-1d16-6d94-7fe88c7ed92c/full/843,/0/default.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Lithograph on cream wove paper",
+   "kind": "print"
   },
   {
    "artist": "Henri de Toulouse-Lautrec",
@@ -2004,7 +2046,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/61128",
    "image": "https://www.artic.edu/iiif/2/defb4004-b500-218d-3d9b-9a02423f097d/full/843,/0/default.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Henri de Toulouse-Lautrec",
@@ -2013,7 +2057,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/35963",
    "image": "https://www.artic.edu/iiif/2/a0b5ea00-70b8-306f-04a3-740dd166c8a3/full/843,/0/default.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Lithograph on cream wove paper",
+   "kind": "print"
   },
   {
    "artist": "Henri de Toulouse-Lautrec",
@@ -2022,7 +2068,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/55814",
    "image": "https://www.artic.edu/iiif/2/a8a6de1e-19b7-d99a-ed0f-1777efc723cf/full/843,/0/default.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Color lithograph on tan wove paper",
+   "kind": "print"
   },
   {
    "artist": "Johannes Vermeer",
@@ -2031,7 +2079,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437881",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP353257.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "John Singer Sargent",
@@ -2040,7 +2090,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/12127",
    "image": "https://images.metmuseum.org/CRDImages/ad/web-large/DP-29006-001.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Katsushika Hokusai",
@@ -2049,7 +2101,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1930.189",
    "image": "https://openaccess-cdn.clevelandart.org/1930.189/1930.189_web.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "color woodblock print",
+   "kind": "print"
   },
   {
    "artist": "Katsushika Hokusai",
@@ -2058,7 +2112,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/36490",
    "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP141062.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Woodblock print; ink and color on paper",
+   "kind": "print"
   },
   {
    "artist": "Mary Cassatt",
@@ -2067,7 +2123,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/111442",
    "image": "https://www.artic.edu/iiif/2/3b885ae0-4d46-5fe4-d70a-00474827f02c/full/843,/0/default.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Paul Gauguin",
@@ -2076,7 +2134,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337168",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DT229278.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Fabricated charcoal, red chalk, and white pastel on formerly blue wove paper, mounted on millboard with strips of rose-colored wove paper along two edges",
+   "kind": "drawing"
   },
   {
    "artist": "Pierre-Auguste Renoir",
@@ -2085,7 +2145,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/14655",
    "image": "https://www.artic.edu/iiif/2/3a608f55-d76e-fa96-d0b1-0789fbc48f1e/full/843,/0/default.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Rembrandt van Rijn",
@@ -2094,7 +2156,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1947.487",
    "image": "https://openaccess-cdn.clevelandart.org/1947.487/1947.487_web.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "etching",
+   "kind": "print"
   },
   {
    "artist": "Rembrandt van Rijn",
@@ -2103,7 +2167,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/29220",
    "image": "https://www.artic.edu/iiif/2/b0449785-8df5-5c84-9b0b-cf5cbd1f3752/full/843,/0/default.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Etching in black on ivory laid paper",
+   "kind": "print"
   },
   {
    "artist": "Thomas Cole",
@@ -2112,7 +2178,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/10497",
    "image": "https://images.metmuseum.org/CRDImages/ad/web-large/DP-12550-001.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Utagawa Hiroshige",
@@ -2121,7 +2189,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/36461",
    "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP121525.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Woodblock print; ink and color on paper",
+   "kind": "print"
   },
   {
    "artist": "Vincent van Gogh",
@@ -2130,7 +2200,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/80607",
    "image": "https://www.artic.edu/iiif/2/47c5bcb8-62ef-e5d7-55e7-f5121f409a30/full/843,/0/default.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on artist's board, mounted on cradled panel",
+   "kind": "painting"
   },
   {
    "artist": "Winslow Homer",
@@ -2139,7 +2211,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/11133",
    "image": "https://images.metmuseum.org/CRDImages/ad/web-large/DT83.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Winslow Homer",
@@ -2148,7 +2222,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/11122",
    "image": "https://images.metmuseum.org/CRDImages/ad/web-large/DP-20821-001.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Édouard Manet",
@@ -2157,7 +2233,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436947",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-25466-001.jpg",
-   "level": 2
+   "level": 2,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Antoine Watteau",
@@ -2166,7 +2244,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437926",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP170811.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Artemisia Gentileschi",
@@ -2175,7 +2255,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436453",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-20748-001.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Diego Velázquez",
@@ -2184,7 +2266,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1985.130",
    "image": "https://openaccess-cdn.clevelandart.org/1985.130/1985.130_web.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "etching",
+   "kind": "print"
   },
   {
    "artist": "Edgar Degas",
@@ -2193,7 +2277,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/333813",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP805813.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Graphite and black chalk",
+   "kind": "drawing"
   },
   {
    "artist": "El Greco",
@@ -2202,7 +2288,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436573",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-17777-001.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "El Greco",
@@ -2211,7 +2299,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/459087",
    "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP347226.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "El Greco",
@@ -2220,7 +2310,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/459088",
    "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DT3103.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Eugène Delacroix",
@@ -2229,7 +2321,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436180",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14345-001.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Frans Hals",
@@ -2238,7 +2332,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436622",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP145901.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Gustav Klimt",
@@ -2247,7 +2343,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/334895",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP819708.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Graphite.",
+   "kind": "drawing"
   },
   {
    "artist": "Gustav Klimt",
@@ -2256,7 +2354,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436819",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP243354.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Gustave Courbet",
@@ -2265,7 +2365,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436004",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT887.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Gustave Courbet",
@@ -2274,7 +2376,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436002",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-17680-001.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Jacques-Louis David",
@@ -2283,7 +2387,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/371418",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP213752.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Black chalk, pen and black and brown ink, brush and gray and brown wash, heightened with white gouache",
+   "kind": "drawing"
   },
   {
    "artist": "Jan van Eyck",
@@ -2292,7 +2398,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436282",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/LC-33_92ab-Primary_Temp.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas, transferred from wood",
+   "kind": "painting"
   },
   {
    "artist": "Jean-Auguste-Dominique Ingres",
@@ -2301,7 +2409,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/334710",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DT632.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Graphite",
+   "kind": "drawing"
   },
   {
    "artist": "Johannes Vermeer",
@@ -2310,7 +2420,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437879",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP353256.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "John Constable",
@@ -2319,7 +2431,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/435922",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP164837.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "John Constable",
@@ -2328,7 +2442,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/2014.226",
    "image": "https://openaccess-cdn.clevelandart.org/2014.226/2014.226_web.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "etching and roulette",
+   "kind": "print"
   },
   {
    "artist": "Leonardo da Vinci",
@@ -2337,7 +2453,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/459184",
    "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP324213.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "silverpoint on light buff prepared paper",
+   "kind": "drawing"
   },
   {
    "artist": "Leonardo da Vinci",
@@ -2346,7 +2464,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337494",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP832657.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Silverpoint, partly reworked by the artist with pen and dark brown ink on pink prepared paper; lines ruled with metalpoint (recto); pen and brown ink (verso)",
+   "kind": "drawing"
   },
   {
    "artist": "Leonardo da Vinci",
@@ -2355,7 +2475,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337496",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP102382.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Black chalk, charcoal, and red chalk, with some traces of white chalk (?); some remains of framing lines in pen and brown ink at upper right (not by Leonardo)",
+   "kind": "drawing"
   },
   {
    "artist": "Michelangelo",
@@ -2364,7 +2486,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/340787",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP810667.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Pen and brown ink, and red chalk (recto); pen and brown ink (verso)",
+   "kind": "drawing"
   },
   {
    "artist": "Michelangelo",
@@ -2373,7 +2497,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/363335",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP810670.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Pen and brown ink",
+   "kind": "drawing"
   },
   {
    "artist": "Michelangelo",
@@ -2382,7 +2508,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337497",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP826907.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Red chalk, with small accents of white chalk on the left shoulder of the figure in the main study (recto); soft black chalk, or less probably charcoal (verso)",
+   "kind": "drawing"
   },
   {
    "artist": "Paul Gauguin",
@@ -2391,7 +2519,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337172",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DT641.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Charcoal on laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "Peter Paul Rubens",
@@ -2400,7 +2530,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1943.341",
    "image": "https://openaccess-cdn.clevelandart.org/1943.341/1943.341_web.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "black chalk and brush and brown wash; framing lines in pen and black ink",
+   "kind": "drawing"
   },
   {
    "artist": "Peter Paul Rubens",
@@ -2409,7 +2541,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337844",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP820062.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Black, red, and white chalk, blue pastel, and pen and brown and black ink on light brown laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "Peter Paul Rubens",
@@ -2418,7 +2552,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437536",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-27136-001.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Raphael",
@@ -2427,7 +2563,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437371",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP136373.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on wood",
+   "kind": "painting"
   },
   {
    "artist": "Rembrandt van Rijn",
@@ -2436,7 +2574,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/347371",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP815614.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Drypoint",
+   "kind": "print"
   },
   {
    "artist": "Thomas Eakins",
@@ -2445,7 +2585,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/10819",
    "image": "https://images.metmuseum.org/CRDImages/ad/web-large/DT86.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Titian",
@@ -2454,7 +2596,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437826",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-19299-001.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Titian",
@@ -2463,7 +2607,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437827",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-28918-001.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Vincent van Gogh",
@@ -2472,7 +2618,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/28862",
    "image": "https://www.artic.edu/iiif/2/1d3a275d-45dd-6026-b6ed-d7d8df417a3d/full/843,/0/default.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Vincent van Gogh",
@@ -2481,7 +2629,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/336327",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DT365509.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Brush and oils over black chalk on pink laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "Vincent van Gogh",
@@ -2490,7 +2640,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436528",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP346474.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Édouard Manet",
@@ -2499,7 +2651,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436964",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP273977.jpg",
-   "level": 3
+   "level": 3,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Albert Bierstadt",
@@ -2508,7 +2662,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1922.684",
    "image": "https://openaccess-cdn.clevelandart.org/1922.684/1922.684_web.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "oil on canvas on panel-back stretcher",
+   "kind": "painting"
   },
   {
    "artist": "Albrecht Dürer",
@@ -2517,7 +2673,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/336222",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP816026.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Engraving",
+   "kind": "print"
   },
   {
    "artist": "Albrecht Dürer",
@@ -2526,7 +2684,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/334816",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP802950.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Pen and brown ink",
+   "kind": "drawing"
   },
   {
    "artist": "Anthony van Dyck",
@@ -2535,7 +2695,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337062",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP802956.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Etching; first state of seven",
+   "kind": "print"
   },
   {
    "artist": "Bartolomé Esteban Murillo",
@@ -2544,7 +2706,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437175",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14936-010.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Berthe Morisot",
@@ -2553,7 +2717,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337864",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP807732.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Watercolor over traces of graphite",
+   "kind": "drawing"
   },
   {
    "artist": "Canaletto",
@@ -2562,7 +2728,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/335287",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP232853.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Etching; undivided plate, only state",
+   "kind": "print"
   },
   {
    "artist": "Claude Lorrain",
@@ -2571,7 +2739,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/336489",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP832663.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Pen and brown ink, brush and brown wash, heightened with white, over black chalk",
+   "kind": "drawing"
   },
   {
    "artist": "Dante Gabriel Rossetti",
@@ -2580,7 +2750,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337500",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP289717.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Watercolor and gouache (bodycolor)",
+   "kind": "drawing"
   },
   {
    "artist": "Edvard Munch",
@@ -2589,7 +2761,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/93407",
    "image": "https://www.artic.edu/iiif/2/b91b09e5-6d32-eeb3-3920-fead52a90435/full/843,/0/default.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Lithograph on paper",
+   "kind": "print"
   },
   {
    "artist": "Eugène Delacroix",
@@ -2598,7 +2772,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/336046",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP837212.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Watercolor over graphite on wove paper",
+   "kind": "drawing"
   },
   {
    "artist": "Georges Seurat",
@@ -2607,7 +2783,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/339751",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP158522.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Conté crayon on Michallet paper",
+   "kind": "drawing"
   },
   {
    "artist": "Georges Seurat",
@@ -2616,7 +2794,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/349778",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP812191.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Black chalk",
+   "kind": "drawing"
   },
   {
    "artist": "Georges Seurat",
@@ -2625,7 +2805,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437654",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP375450_cropped.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Giovanni Bellini",
@@ -2634,7 +2816,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/435641",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT375.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Oil on wood",
+   "kind": "painting"
   },
   {
    "artist": "Henri Rousseau",
@@ -2643,7 +2827,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/438822",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT50.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Honoré Daumier",
@@ -2652,7 +2838,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/333915",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/dp29.100.200.R.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Pen and ink, wash, watercolor, lithographic crayon, and gouache over black chalk on wove paper",
+   "kind": "drawing"
   },
   {
    "artist": "James McNeill Whistler",
@@ -2661,7 +2849,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337702",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP813769.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Lithotint with scraping on a prepared half-tint ground, printed in soft gray-black ink on pale blue laid chine mounted on ivory wove plate paper; second state of two (Chicago)",
+   "kind": "print"
   },
   {
    "artist": "Jean-Auguste-Dominique Ingres",
@@ -2670,7 +2860,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/111317",
    "image": "https://www.artic.edu/iiif/2/8d119fd0-2f57-f20e-a3f5-a573904001e9/full/843,/0/default.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Johannes Vermeer",
@@ -2679,7 +2871,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1924.989",
    "image": "https://openaccess-cdn.clevelandart.org/1924.989/1924.989_web.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "wood engraving",
+   "kind": "print"
   },
   {
    "artist": "Joshua Reynolds",
@@ -2688,7 +2882,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437447",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP169215.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Nicolas Poussin",
@@ -2697,7 +2893,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/335240",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP807962.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Pen and brown ink, brush and brown wash, over faint black chalk",
+   "kind": "drawing"
   },
   {
    "artist": "Nicolas Poussin",
@@ -2706,7 +2904,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437326",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP148490.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Nicolas Poussin",
@@ -2715,7 +2915,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437329",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-29324-001.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Paolo Veronese",
@@ -2724,7 +2926,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437891",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP167124.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Paul Cézanne",
@@ -2733,7 +2937,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/343735",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DT4962.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Watercolor over graphite on laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "Paul Klee",
@@ -2742,7 +2948,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1992.278",
    "image": "https://openaccess-cdn.clevelandart.org/1992.278/1992.278_web.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Gouache and tempera",
+   "kind": "drawing"
   },
   {
    "artist": "Piet Mondrian",
@@ -2751,7 +2959,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1971.220",
    "image": "https://openaccess-cdn.clevelandart.org/1971.220/1971.220_web.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "oil on paper laid on board",
+   "kind": "painting"
   },
   {
    "artist": "Rogier van der Weyden",
@@ -2760,7 +2970,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437487",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-26278-001.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Oil on wood",
+   "kind": "painting"
   },
   {
    "artist": "Théodore Géricault",
@@ -2769,7 +2981,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337192",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP806426.jpg",
-   "level": 4
+   "level": 4,
+   "medium": "Brush and brown and gray wash, over graphite",
+   "kind": "drawing"
   },
   {
    "artist": "Anthony van Dyck",
@@ -2778,7 +2992,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/335447",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP802097.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Pen and brown ink, brush and brown wash",
+   "kind": "drawing"
   },
   {
    "artist": "Canaletto",
@@ -2787,7 +3003,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/435839",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14286-009.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Dante Gabriel Rossetti",
@@ -2796,7 +3014,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/363972",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP805903.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Watercolor, pen and black ink",
+   "kind": "drawing"
   },
   {
    "artist": "Fra Angelico",
@@ -2805,7 +3025,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/459466",
    "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP358976.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Pen and brown ink, brush and brown wash (the blade of the sword in pen and darker brown ink)",
+   "kind": "drawing"
   },
   {
    "artist": "Francisco de Zurbarán",
@@ -2814,7 +3036,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/61665",
    "image": "https://www.artic.edu/iiif/2/5fa784d4-f5d4-cc88-2f8c-0d7bad4945c4/full/843,/0/default.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Francisco de Zurbarán",
@@ -2823,7 +3047,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437971",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-26971-001.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Frans Hals",
@@ -2832,7 +3058,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436626",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP145900.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Hans Holbein the Younger",
@@ -2841,7 +3069,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/22220",
    "image": "https://www.artic.edu/iiif/2/97731a59-beff-6abe-e828-607dd09e663c/full/843,/0/default.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Woodcut on paper",
+   "kind": "print"
   },
   {
    "artist": "Hans Holbein the Younger",
@@ -2850,7 +3080,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/132184",
    "image": "https://www.artic.edu/iiif/2/b4efc279-b81d-fd01-1cb3-a9d1eef8d4e2/full/843,/0/default.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Woodcut on paper",
+   "kind": "print"
   },
   {
    "artist": "Honoré Daumier",
@@ -2859,7 +3091,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1946.213",
    "image": "https://openaccess-cdn.clevelandart.org/1946.213/1946.213_web.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "lithograph with watercolor",
+   "kind": "print"
   },
   {
    "artist": "Jacob van Ruisdael",
@@ -2868,7 +3102,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337493",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP800672.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Black chalk, brush and gray wash, and gouache; framing lines in pen and brown ink",
+   "kind": "drawing"
   },
   {
    "artist": "Jacob van Ruisdael",
@@ -2877,7 +3113,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437549",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP145911.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Jan Steen",
@@ -2886,7 +3124,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437749",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP146455.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Jan Steen",
@@ -2895,7 +3135,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/83949",
    "image": "https://www.artic.edu/iiif/2/269eff7b-9436-cf9f-253f-685db42d763e/full/843,/0/default.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Red chalk, on ivory laid paper, tipped onto ivory wove card",
+   "kind": "drawing"
   },
   {
    "artist": "Jean-Baptiste-Camille Corot",
@@ -2904,7 +3146,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/81509",
    "image": "https://www.artic.edu/iiif/2/2661329a-3c67-6216-82eb-90c755bb42b8/full/843,/0/default.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Jean-François Millet",
@@ -2913,7 +3157,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/47366",
    "image": "https://www.artic.edu/iiif/2/ae5d90d3-15ad-13b2-90c7-a8be9b741ad5/full/843,/0/default.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Etching, drypoint and roulette on ivory laid paper",
+   "kind": "print"
   },
   {
    "artist": "John Singer Sargent",
@@ -2922,7 +3168,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/227483",
    "image": "https://www.artic.edu/iiif/2/52270042-a6c0-d325-72b7-53a83d3f40c2/full/843,/0/default.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Watercolor on ivory wove paper",
+   "kind": "drawing"
   },
   {
    "artist": "Leonardo da Vinci",
@@ -2931,7 +3179,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/339116",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP810248.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Pen and brown ink, over soft black chalk",
+   "kind": "drawing"
   },
   {
    "artist": "Mary Cassatt",
@@ -2940,7 +3190,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/13520",
    "image": "https://www.artic.edu/iiif/2/22eaf094-2d13-50e4-cf46-0a02c12031af/full/843,/0/default.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Color aquatint and drypoint, with additions in brush and gold, on ivory laid paper",
+   "kind": "print"
   },
   {
    "artist": "Pierre-Auguste Renoir",
@@ -2949,7 +3201,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1961.285",
    "image": "https://openaccess-cdn.clevelandart.org/1961.285/1961.285_web.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "softground etching",
+   "kind": "print"
   },
   {
    "artist": "Raphael",
@@ -2958,7 +3212,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/95752",
    "image": "https://www.artic.edu/iiif/2/a0637b8e-4420-ed82-a91c-619a775a9342/full/843,/0/default.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Red chalk on ivory laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "Thomas Cole",
@@ -2967,7 +3223,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/90048",
    "image": "https://www.artic.edu/iiif/2/18092196-50ae-3ff1-9205-1b3110e966c3/full/843,/0/default.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Oil on wood panel",
+   "kind": "painting"
   },
   {
    "artist": "Thomas Gainsborough",
@@ -2976,7 +3234,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/73460",
    "image": "https://www.artic.edu/iiif/2/7caaaeb7-3bc6-d611-6523-ebe1a285ca44/full/843,/0/default.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Black chalk, heightened with white chalk, on blue laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "Théodore Géricault",
@@ -2985,7 +3245,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/10197",
    "image": "https://www.artic.edu/iiif/2/3b74309e-037a-9e0b-c220-2e815763ed0b/full/843,/0/default.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Lithograph in black on ivory wove paper",
+   "kind": "print"
   },
   {
    "artist": "Tintoretto",
@@ -2994,7 +3256,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437819",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT216453.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "William-Adolphe Bouguereau",
@@ -3003,7 +3267,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1980.238.1",
    "image": "https://openaccess-cdn.clevelandart.org/1980.238.1/1980.238.1_web.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "oil on fabric",
+   "kind": "painting"
   },
   {
    "artist": "William-Adolphe Bouguereau",
@@ -3012,7 +3278,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1980.238",
    "image": "https://openaccess-cdn.clevelandart.org/1980.238/1980.238_web.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "oil on fabric",
+   "kind": "painting"
   },
   {
    "artist": "William-Adolphe Bouguereau",
@@ -3021,7 +3289,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1980.238.2",
    "image": "https://openaccess-cdn.clevelandart.org/1980.238.2/1980.238.2_web.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "oil on fabric",
+   "kind": "painting"
   },
   {
    "artist": "Winslow Homer",
@@ -3030,7 +3300,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/158322",
    "image": "https://www.artic.edu/iiif/2/e100dc6f-9df8-6146-1b41-6ed5da504004/full/843,/0/default.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Wood engraving on paper",
+   "kind": "print"
   },
   {
    "artist": "Édouard Manet",
@@ -3039,7 +3311,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/334638",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP807593.jpg",
-   "level": 5
+   "level": 5,
+   "medium": "Graphite",
+   "kind": "drawing"
   },
   {
    "artist": "Albrecht Altdorfer",
@@ -3048,7 +3322,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/336259",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP822181.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Etching",
+   "kind": "print"
   },
   {
    "artist": "Angelica Kauffmann",
@@ -3057,7 +3333,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/334892",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP803832.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Pen and brown ink and brown wash over black chalk",
+   "kind": "drawing"
   },
   {
    "artist": "Angelica Kauffmann",
@@ -3066,7 +3344,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/359453",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP819694.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Black and white chalk, on gray prepared paper",
+   "kind": "drawing"
   },
   {
    "artist": "Claude Lorrain",
@@ -3075,7 +3355,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/109118",
    "image": "https://www.artic.edu/iiif/2/dd7c7a67-8f7e-52e0-ab6c-f298c336e9bd/full/843,/0/default.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Pen and brown ink, with brush and gray wash, on ivory laid paper, perimter mounted on cream wove card",
+   "kind": "drawing"
   },
   {
    "artist": "Edvard Munch",
@@ -3084,7 +3366,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/24908",
    "image": "https://www.artic.edu/iiif/2/dbb99c09-8510-1f8b-c0d5-dda3185146c2/full/843,/0/default.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Brush and black and gray wash, over touches of graphite, on tan wove paper",
+   "kind": "drawing"
   },
   {
    "artist": "Edvard Munch",
@@ -3093,7 +3377,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1952.80",
    "image": "https://openaccess-cdn.clevelandart.org/1952.80/1952.80_web.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "lithograph",
+   "kind": "print"
   },
   {
    "artist": "Frédéric Bazille",
@@ -3102,7 +3388,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/435626",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-17243-001.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "George Stubbs",
@@ -3111,7 +3399,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/343646",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP833337.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Etching with roulette work; only state",
+   "kind": "print"
   },
   {
    "artist": "Giovanni Battista Tiepolo",
@@ -3120,7 +3410,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/23602",
    "image": "https://www.artic.edu/iiif/2/d3582874-982f-67d1-b020-fa3743b8d239/full/843,/0/default.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Etching printed in black on paper",
+   "kind": "print"
   },
   {
    "artist": "Gustave Caillebotte",
@@ -3129,7 +3421,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/208200",
    "image": "https://www.artic.edu/iiif/2/25ffdf23-5c03-2ea7-1ca3-35fc820da729/full/843,/0/default.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Sketchbook containing 40 drawings: 30 in graphite, 7 in watercolor over graphite, and 3 in graphite and brush and gray wash, on 40 sheets of cream wove paper bound in brown cloth",
+   "kind": "drawing"
   },
   {
    "artist": "Gustave Moreau",
@@ -3138,7 +3432,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/104463",
    "image": "https://www.artic.edu/iiif/2/e0002909-4bcc-1a96-ecda-2eebd30a3f61/full/843,/0/default.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Watercolor and gouache, with pen and blue ink, over traces of graphite, on ivory wove paper, wrapped and adhered on verso to wood pulp board",
+   "kind": "drawing"
   },
   {
    "artist": "Gustave Moreau",
@@ -3147,7 +3443,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437153",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14201-023.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Hans Holbein the Younger",
@@ -3156,7 +3454,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1929.159",
    "image": "https://openaccess-cdn.clevelandart.org/1929.159/1929.159_web.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "woodcut",
+   "kind": "print"
   },
   {
    "artist": "Hans Memling",
@@ -3165,7 +3465,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437490",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP240360.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Oil on wood",
+   "kind": "painting"
   },
   {
    "artist": "Henri Rousseau",
@@ -3174,7 +3476,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/186406",
    "image": "https://www.artic.edu/iiif/2/a72c7248-28af-7527-b067-70f2db93b1f1/full/843,/0/default.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Pen and gray ink on cream wove paper",
+   "kind": "drawing"
   },
   {
    "artist": "Jacob Jordaens",
@@ -3183,7 +3487,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/335661",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP802213.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Pen and brown ink, brush and brown wash, over black chalk; framing lines in pen and black ink",
+   "kind": "drawing"
   },
   {
    "artist": "Jean-Baptiste Greuze",
@@ -3192,7 +3498,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436579",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-12952-001.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Jean-François Millet",
@@ -3201,7 +3509,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337784",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP811920.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Conté crayon with stumping on laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "Jean-Léon Gérôme",
@@ -3210,7 +3520,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/440723",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP243839.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Jusepe de Ribera",
@@ -3219,7 +3531,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/336332",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP800289.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Pen and brown ink, brush and brown wash",
+   "kind": "drawing"
   },
   {
    "artist": "Jusepe de Ribera",
@@ -3228,7 +3542,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/12114",
    "image": "https://www.artic.edu/iiif/2/ee936034-fe64-38b0-4bef-4b3270d719e7/full/843,/0/default.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Etching on ivory laid paper",
+   "kind": "print"
   },
   {
    "artist": "Lawrence Alma-Tadema",
@@ -3237,7 +3553,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/668074",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP839590.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Photogravure",
+   "kind": "print"
   },
   {
    "artist": "Meindert Hobbema",
@@ -3246,7 +3564,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/869",
    "image": "https://www.artic.edu/iiif/2/237c25a2-6051-a8e7-1610-a01938d4deab/full/843,/0/default.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Pierre Puvis de Chavannes",
@@ -3255,7 +3575,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437344",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-14201-001.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Piet Mondrian",
@@ -3264,7 +3586,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/186314",
    "image": "https://www.artic.edu/iiif/2/133d4a6e-7be9-a652-f3db-34be49c671c8/full/843,/0/default.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Watercolor, gouache, and fabricated black chalk, with erasures, on cream wove paper",
+   "kind": "drawing"
   },
   {
    "artist": "Pieter de Hooch",
@@ -3273,7 +3597,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/459086",
    "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP146506.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Thomas Eakins",
@@ -3282,7 +3608,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/31285",
    "image": "https://www.artic.edu/iiif/2/8cb9f5ea-c955-96fd-c2d6-c720b0dbf7d4/full/843,/0/default.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Thomas Lawrence",
@@ -3291,7 +3619,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/4773",
    "image": "https://www.artic.edu/iiif/2/0052fc88-353e-db97-8741-b6b5ec6fb354/full/843,/0/default.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "William Holman Hunt",
@@ -3300,7 +3630,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/642933",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP835760.jpg",
-   "level": 6
+   "level": 6,
+   "medium": "Etching and engraving on chine collé; proof",
+   "kind": "print"
   },
   {
    "artist": "Albrecht Altdorfer",
@@ -3309,7 +3641,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/336256",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP822166.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Etching",
+   "kind": "print"
   },
   {
    "artist": "Benjamin West",
@@ -3318,7 +3652,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/151462",
    "image": "https://www.artic.edu/iiif/2/5631b612-99cb-129f-e95b-c3ec5b85041f/full/843,/0/default.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Brush and brown and black wash, with tan gouache, heightened with white gouache, with incising, on ivory laid paper, laid down on ivory laid card",
+   "kind": "drawing"
   },
   {
    "artist": "Benjamin West",
@@ -3327,7 +3663,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1926.208",
    "image": "https://openaccess-cdn.clevelandart.org/1926.208/1926.208_web.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "mezzotint",
+   "kind": "print"
   },
   {
    "artist": "Bernardo Bellotto",
@@ -3336,7 +3674,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/188958",
    "image": "https://www.artic.edu/iiif/2/6203bb1c-2078-99ef-a4b2-1f8fe9688965/full/843,/0/default.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Etching on ivory laid paper",
+   "kind": "print"
   },
   {
    "artist": "Childe Hassam",
@@ -3345,7 +3685,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/5349",
    "image": "https://www.artic.edu/iiif/2/f72dbf42-8655-8788-d899-9e87a0466d28/full/843,/0/default.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Domenico Ghirlandaio",
@@ -3354,7 +3696,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436489",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT1369.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Tempera on wood",
+   "kind": "painting"
   },
   {
    "artist": "Edward Burne-Jones",
@@ -3363,7 +3707,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/340952",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP805384.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Green, blue, brown and touches of reddish bodycolor, heightened with white  gouache (bodycolor)",
+   "kind": "drawing"
   },
   {
    "artist": "Edward Burne-Jones",
@@ -3372,7 +3718,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/435826",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP323394.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Francesco Guardi",
@@ -3381,7 +3729,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1955.164.a",
    "image": "https://openaccess-cdn.clevelandart.org/1955.164.a/1955.164.a_web.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "pen and brown ink with brush and brown wash",
+   "kind": "drawing"
   },
   {
    "artist": "Francesco Guardi",
@@ -3390,7 +3740,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/113588",
    "image": "https://www.artic.edu/iiif/2/28da7ec6-d9b1-33ab-1ac2-759f738eac59/full/843,/0/default.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Pen and brown ink and brush and pale brown wash, with traces of black chalk (recto), and pen and brown ink with brush and black and gray and brown wash and touches of red chalk (verso), on gray laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "Franz Marc",
@@ -3399,7 +3751,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1959.228",
    "image": "https://openaccess-cdn.clevelandart.org/1959.228/1959.228_web.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "color woodcut",
+   "kind": "print"
   },
   {
    "artist": "Guercino",
@@ -3408,7 +3762,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/338994",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP810128.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Pen and dark brown ink, brush with brown and gray-brown wash",
+   "kind": "drawing"
   },
   {
    "artist": "Hans Memling",
@@ -3417,7 +3773,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437056",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-44362-005.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Oil on oak",
+   "kind": "painting"
   },
   {
    "artist": "Henri Fantin-Latour",
@@ -3426,7 +3784,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1921.76",
    "image": "https://openaccess-cdn.clevelandart.org/1921.76/1921.76_web.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "lithograph",
+   "kind": "print"
   },
   {
    "artist": "Henri Fantin-Latour",
@@ -3435,7 +3795,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1921.55",
    "image": "https://openaccess-cdn.clevelandart.org/1921.55/1921.55_web.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "lithograph",
+   "kind": "print"
   },
   {
    "artist": "Jacob Jordaens",
@@ -3444,7 +3806,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/84234",
    "image": "https://www.artic.edu/iiif/2/ccdf96cd-909a-255a-6268-7755b991cbb3/full/843,/0/default.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Brush and brown wash, with black chalk and touches of red chalk, and traces of charcoal, heightened with lead white (discolored), on cream laid paper, laid down on ivory  laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "James Ensor",
@@ -3453,7 +3817,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1959.93",
    "image": "https://openaccess-cdn.clevelandart.org/1959.93/1959.93_web.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "etching",
+   "kind": "print"
   },
   {
    "artist": "Jan Brueghel the Elder",
@@ -3462,7 +3828,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337489",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP801180.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Pen and brown ink, brush and blue and brown wash, heightened with white; framing lines in pen and brown ink",
+   "kind": "drawing"
   },
   {
    "artist": "Jusepe de Ribera",
@@ -3471,7 +3839,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/82496",
    "image": "https://www.artic.edu/iiif/2/fecaefcd-8013-4ebd-81c5-a6118555ef98/full/843,/0/default.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Pen and brown ink and brush and brown wash on ivory laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "Martin Johnson Heade",
@@ -3480,7 +3850,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/100829",
    "image": "https://www.artic.edu/iiif/2/0729fbba-51e3-a2d7-6d4d-61c2be62af3f/full/843,/0/default.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Odilon Redon",
@@ -3489,7 +3861,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/79421",
    "image": "https://www.artic.edu/iiif/2/471a5ada-5c6d-0d02-a5ad-fd8041e4c6f2/full/843,/0/default.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Lithograph in black on ivory China paper collé, laid down on white wove paper",
+   "kind": "print"
   },
   {
    "artist": "Odilon Redon",
@@ -3498,7 +3872,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/339671",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP139626.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Charcoal and conté crayon",
+   "kind": "drawing"
   },
   {
    "artist": "Paul Signac",
@@ -3507,7 +3883,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/12601",
    "image": "https://www.artic.edu/iiif/2/45f84c65-657f-482b-1b49-16d4a2caab01/full/843,/0/default.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Lithograph in five colors (light blue, blue, yellow, pink and green) on ivory wove chine",
+   "kind": "print"
   },
   {
    "artist": "Thomas Lawrence",
@@ -3516,7 +3894,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436851",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP169218.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Thomas Lawrence",
@@ -3525,7 +3905,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436852",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP162165.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Wen Zhengming",
@@ -3534,7 +3916,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/39654",
    "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP235628_CRD.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Album of eight leaves; ink on paper",
+   "kind": "painting"
   },
   {
    "artist": "William Merritt Chase",
@@ -3543,7 +3927,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/129408",
    "image": "https://www.artic.edu/iiif/2/3c4e0b9e-92cf-c26a-2ace-d23301fa72c4/full/843,/0/default.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Etching on cream China paper",
+   "kind": "print"
   },
   {
    "artist": "William Merritt Chase",
@@ -3552,7 +3938,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1957.422",
    "image": "https://openaccess-cdn.clevelandart.org/1957.422/1957.422_web.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "oil on wood",
+   "kind": "painting"
   },
   {
    "artist": "Élisabeth Louise Vigée Le Brun",
@@ -3561,7 +3949,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437900",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP320086.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Élisabeth Louise Vigée Le Brun",
@@ -3570,7 +3960,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/824771",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP-18368-001.jpg",
-   "level": 7
+   "level": 7,
+   "medium": "Black chalk, stumped, and white chalk; framing lines in black chalk",
+   "kind": "drawing"
   },
   {
    "artist": "Adriaen van Ostade",
@@ -3579,7 +3971,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337632",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP800544.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Pen and brown ink, watercolor, white heightening, over graphite; framing lines in pen and brown ink and gold",
+   "kind": "drawing"
   },
   {
    "artist": "Andrea del Sarto",
@@ -3588,7 +3982,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437609",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP295025.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Oil on wood",
+   "kind": "painting"
   },
   {
    "artist": "Angelica Kauffmann",
@@ -3597,7 +3993,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/85645",
    "image": "https://www.artic.edu/iiif/2/b2886781-746a-1d07-9153-e40ccd770434/full/843,/0/default.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Pen and brown ink, with brush and brown wash and graphite, on cream wove paper",
+   "kind": "drawing"
   },
   {
    "artist": "Clara Peeters",
@@ -3606,7 +4004,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/827660",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-19451-001.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Oil on wood",
+   "kind": "painting"
   },
   {
    "artist": "Dong Qichang",
@@ -3615,7 +4015,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/48953",
    "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP-35742-002.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Hanging scroll; ink on paper",
+   "kind": "painting"
   },
   {
    "artist": "Eastman Johnson",
@@ -3624,7 +4026,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/186429",
    "image": "https://www.artic.edu/iiif/2/380dc0f0-8da2-17fe-45bc-6efa3a7c74f7/full/843,/0/default.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Graphite, heightened with white chalk, on brown wove paper",
+   "kind": "drawing"
   },
   {
    "artist": "Francesco Guardi",
@@ -3633,7 +4037,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/149039",
    "image": "https://www.artic.edu/iiif/2/c6bb7439-234d-2229-2b95-3a51833f4814/full/843,/0/default.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Pen and brown ink, and brush and brown wash, over traces of black chalk on ivory laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "Frederic Leighton",
@@ -3642,7 +4048,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/418097",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP826419.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Brush and India ink wash over graphite",
+   "kind": "drawing"
   },
   {
    "artist": "Frederic Leighton",
@@ -3651,7 +4059,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/418096",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP826418.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Brush and India ink wash over graphite",
+   "kind": "drawing"
   },
   {
    "artist": "George Romney",
@@ -3660,7 +4070,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437505",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP169401.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Gerard ter Borch",
@@ -3669,7 +4081,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/459083",
    "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP146503.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Guercino",
@@ -3678,7 +4092,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/55042",
    "image": "https://www.artic.edu/iiif/2/9534cb0a-694c-621c-a0a4-1643b147f0e3/full/843,/0/default.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Red chalk, with stumping, over traces of black chalk, on ivory laid paper, tipped onto cream laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "Henri-Edmond Cross",
@@ -3687,7 +4103,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/334129",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP805784.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Watercolor and crayon on paper",
+   "kind": "drawing"
   },
   {
    "artist": "Henri-Edmond Cross",
@@ -3696,7 +4114,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/459189",
    "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP359010.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Watercolor on white wove paper",
+   "kind": "drawing"
   },
   {
    "artist": "J. Alden Weir",
@@ -3705,7 +4125,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/348584",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/52169.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Drypoint; only state",
+   "kind": "print"
   },
   {
    "artist": "Jean-Baptiste Greuze",
@@ -3714,7 +4136,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/338327",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP806605.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Red chalk",
+   "kind": "drawing"
   },
   {
    "artist": "Joachim Patinir",
@@ -3723,7 +4147,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437261",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT5549.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Oil on wood",
+   "kind": "painting"
   },
   {
    "artist": "Joseph Wright of Derby",
@@ -3732,7 +4158,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/405732",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP269417.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Graphite",
+   "kind": "drawing"
   },
   {
    "artist": "Jules Breton",
@@ -3741,7 +4169,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/435773",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT2155.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Léon Bonnat",
@@ -3750,7 +4180,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/2009.563",
    "image": "https://openaccess-cdn.clevelandart.org/2009.563/2009.563_web.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "etching",
+   "kind": "print"
   },
   {
    "artist": "Martin Schongauer",
@@ -3759,7 +4191,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/336162",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP820028.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Engraving",
+   "kind": "print"
   },
   {
    "artist": "Maurice Denis",
@@ -3768,7 +4202,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/117210",
    "image": "https://www.artic.edu/iiif/2/b0c357db-e274-ba1b-2f72-896896387178/full/843,/0/default.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Lithograph in yellow, blue, brown, green, and pink on light ivory wove paper",
+   "kind": "print"
   },
   {
    "artist": "Paul Signac",
@@ -3777,7 +4213,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1952.9",
    "image": "https://openaccess-cdn.clevelandart.org/1952.9/1952.9_web.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "lithograph",
+   "kind": "print"
   },
   {
    "artist": "Pontormo",
@@ -3786,7 +4224,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/109500",
    "image": "https://www.artic.edu/iiif/2/55869b15-1e2f-e5dd-e6f9-fe241ccdb8d5/full/843,/0/default.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Black chalk, with stumping, and traces of red chalk, heightened with traces of white chalk, over stylus incising, on cream laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "Salomon van Ruysdael",
@@ -3795,7 +4235,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/348118",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP800671.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Black chalk, brush and gray wash, some black and brown ink. Traces of framing line in pen & brown ink.",
+   "kind": "drawing"
   },
   {
    "artist": "Suzuki Harunobu",
@@ -3804,7 +4246,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/19966",
    "image": "https://www.artic.edu/iiif/2/11012fec-5c0a-7a2b-4f73-70d68732130f/full/843,/0/default.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Color woodblock print; oban, benizuri-e",
+   "kind": "print"
   },
   {
    "artist": "Suzuki Harunobu",
@@ -3813,7 +4257,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/37145",
    "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP119525.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Woodblock print (first edition); ink and colors on paper, medium-sized print (chuban)",
+   "kind": "print"
   },
   {
    "artist": "Tsukioka Yoshitoshi",
@@ -3822,7 +4268,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/212358",
    "image": "https://www.artic.edu/iiif/2/54752ae5-1b94-72b2-8cac-dedec11bdfd3/full/843,/0/default.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Hanging scroll; ink and colors on silk",
+   "kind": "painting"
   },
   {
    "artist": "Utagawa Kuniyoshi",
@@ -3831,7 +4279,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/81826",
    "image": "https://www.artic.edu/iiif/2/bf8627fd-1ef2-f09e-38f0-8281f3a48000/full/843,/0/default.jpg",
-   "level": 8
+   "level": 8,
+   "medium": "Color woodblock print",
+   "kind": "print"
   },
   {
    "artist": "Adriaen van Ostade",
@@ -3840,7 +4290,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/75192",
    "image": "https://www.artic.edu/iiif/2/ef5077df-a3d3-fcce-6ac2-f89b633f0bd4/full/843,/0/default.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Pen and brown ink, with brush and brown, black, and blue wash, over graphite, on tan laid paper, laid down on cream laid card",
+   "kind": "drawing"
   },
   {
    "artist": "Alonso Cano",
@@ -3849,7 +4301,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1982.121.a",
    "image": "https://openaccess-cdn.clevelandart.org/1982.121.a/1982.121.a_web.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "pen and brown ink and brush and brown wash on laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "Andrea del Sarto",
@@ -3858,7 +4312,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/22270",
    "image": "https://www.artic.edu/iiif/2/5d50e0e5-db32-4e02-eef7-6fbbae018d44/full/843,/0/default.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Oil on panel",
+   "kind": "painting"
   },
   {
    "artist": "Andrea del Sarto",
@@ -3867,7 +4323,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/84944",
    "image": "https://www.artic.edu/iiif/2/1bd3e535-bff8-0dd9-b140-e85fe31405de/full/843,/0/default.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Graphite on ivory laid paper prepared with tan wash, incised",
+   "kind": "drawing"
   },
   {
    "artist": "Antoine-Jean Gros",
@@ -3876,7 +4334,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1940.1118",
    "image": "https://openaccess-cdn.clevelandart.org/1940.1118/1940.1118_web.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "lithograph",
+   "kind": "print"
   },
   {
    "artist": "Armand Guillaumin",
@@ -3885,7 +4345,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/16502",
    "image": "https://www.artic.edu/iiif/2/f4abdcdc-1d4f-4b8c-5f16-dacc42d509f5/full/843,/0/default.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Dong Qichang",
@@ -3894,7 +4356,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/41479",
    "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP216493_94.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Handscroll; ink on paper",
+   "kind": "painting"
   },
   {
    "artist": "Fitz Henry Lane",
@@ -3903,7 +4367,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/129489",
    "image": "https://www.artic.edu/iiif/2/8b693511-9923-3f30-3f4d-8b7106ffdb75/full/843,/0/default.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Lithograph on cream wove paper, folded",
+   "kind": "print"
   },
   {
    "artist": "Fitz Henry Lane",
@@ -3912,7 +4378,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/129488",
    "image": "https://www.artic.edu/iiif/2/0978eb60-3404-7c2b-446c-1cc21ba69d29/full/843,/0/default.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Lithograph on cream wove paper, folded",
+   "kind": "print"
   },
   {
    "artist": "Frans Snyders",
@@ -3921,7 +4389,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1948.146",
    "image": "https://openaccess-cdn.clevelandart.org/1948.146/1948.146_web.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "mezzotint",
+   "kind": "print"
   },
   {
    "artist": "Gerard ter Borch",
@@ -3930,7 +4400,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/459084",
    "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP146504.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Giovanni Paolo Panini",
@@ -3939,7 +4411,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/337498",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP801488.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Pen and black ink, brush and gray wash, watercolor, over graphite",
+   "kind": "drawing"
   },
   {
    "artist": "J. Alden Weir",
@@ -3948,7 +4422,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/121834",
    "image": "https://www.artic.edu/iiif/2/b0e6c431-74b8-4f8d-f732-0b2924b31dce/full/843,/0/default.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Drypoint on cream laid paper",
+   "kind": "print"
   },
   {
    "artist": "J. Alden Weir",
@@ -3957,7 +4433,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/261654",
    "image": "https://www.artic.edu/iiif/2/a9529560-19a6-d08c-53f3-5a2be8ed254b/full/843,/0/default.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Etching in black on ivory wove paper",
+   "kind": "print"
   },
   {
    "artist": "Jean-Baptiste Pater",
@@ -3966,7 +4444,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/338201",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DR88.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Red chalk heightened with white, on blue paper",
+   "kind": "drawing"
   },
   {
    "artist": "John Henry Twachtman",
@@ -3975,7 +4455,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/129625",
    "image": "https://www.artic.edu/iiif/2/57b4b4c3-0321-41d1-3519-b5dfc9ed914f/full/843,/0/default.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Etching on ivory laid paper",
+   "kind": "print"
   },
   {
    "artist": "Jules Dupré",
@@ -3984,7 +4466,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/333941",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP810347.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Charcoal and white chalk",
+   "kind": "drawing"
   },
   {
    "artist": "Lorenzo Lotto",
@@ -3993,7 +4477,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/340323",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP810262.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Pen and brown ink, over black chalk",
+   "kind": "drawing"
   },
   {
    "artist": "Lorenzo Lotto",
@@ -4002,7 +4488,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436918",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-25975-001.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Léon Bonnat",
@@ -4011,7 +4499,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/132669",
    "image": "https://www.artic.edu/iiif/2/f567fa80-ed3b-4294-9a27-d97d98af4a3c/full/843,/0/default.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Etching with drypoint on cream laid paper",
+   "kind": "print"
   },
   {
    "artist": "Martin Schongauer",
@@ -4020,7 +4510,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/336167",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP-41178-001.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Engraving",
+   "kind": "print"
   },
   {
    "artist": "Maurice Denis",
@@ -4029,7 +4521,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/117214",
    "image": "https://www.artic.edu/iiif/2/42426970-3158-bf4a-0986-0928c989c902/full/843,/0/default.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Lithograph in green, peach, and yellow on light ivory wove paper",
+   "kind": "print"
   },
   {
    "artist": "Maximilien Luce",
@@ -4038,7 +4532,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/193221",
    "image": "https://www.artic.edu/iiif/2/4247594c-d140-af94-dfab-a0f42cdf4835/full/843,/0/default.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Black chalk on buff wove paper",
+   "kind": "drawing"
   },
   {
    "artist": "Nicolas Lancret",
@@ -4047,7 +4543,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/438727",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP-19458-001.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Oil on copper",
+   "kind": "painting"
   },
   {
    "artist": "Nicolas Lancret",
@@ -4056,7 +4554,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/339162",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP811625.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Red chalk, over traces of black chalk; squared in black chalk",
+   "kind": "drawing"
   },
   {
    "artist": "Salomon van Ruysdael",
@@ -4065,7 +4565,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/437589",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP146477.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Suzuki Harunobu",
@@ -4074,7 +4576,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/21145",
    "image": "https://www.artic.edu/iiif/2/448ff083-d3fd-f1f0-eaa5-5995fad1707c/full/843,/0/default.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Color woodblock print; chuban yoko-e",
+   "kind": "print"
   },
   {
    "artist": "Tsukioka Yoshitoshi",
@@ -4083,7 +4587,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/55125",
    "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP142154.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "Woodblock print; ink and color on paper",
+   "kind": "print"
   },
   {
    "artist": "Tōshūsai Sharaku",
@@ -4092,7 +4598,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1930.205",
    "image": "https://openaccess-cdn.clevelandart.org/1930.205/1930.205_web.jpg",
-   "level": 9
+   "level": 9,
+   "medium": "color woodblock print",
+   "kind": "print"
   },
   {
    "artist": "Alexandre Cabanel",
@@ -4101,7 +4609,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/2007.275",
    "image": "https://openaccess-cdn.clevelandart.org/2007.275/2007.275_web.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Alexandre Cabanel",
@@ -4110,7 +4620,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/435830",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DT11971.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Alonso Cano",
@@ -4119,7 +4631,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1982.121",
    "image": "https://openaccess-cdn.clevelandart.org/1982.121/1982.121_web.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "pen and brown ink and brush and brown wash",
+   "kind": "drawing"
   },
   {
    "artist": "Anne-Louis Girodet",
@@ -4128,7 +4642,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/354035",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP135220.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Black chalk and stumping",
+   "kind": "drawing"
   },
   {
    "artist": "Antoine-Jean Gros",
@@ -4137,7 +4653,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/381957",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP852153.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Pen and black ink on beige antique laid paper",
+   "kind": "drawing"
   },
   {
    "artist": "August Macke",
@@ -4146,7 +4664,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1972.314",
    "image": "https://openaccess-cdn.clevelandart.org/1972.314/1972.314_web.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "brush and black wash and  black gouache with green-yellow gouache",
+   "kind": "drawing"
   },
   {
    "artist": "Constant Troyon",
@@ -4155,7 +4675,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/111623",
    "image": "https://www.artic.edu/iiif/2/4339f21a-5a1c-8f40-931c-32686eefd8d5/full/843,/0/default.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Constant Troyon",
@@ -4164,7 +4686,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/334671",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP812257.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Black chalk with touches of white, on blue paper",
+   "kind": "drawing"
   },
   {
    "artist": "David Teniers the Younger",
@@ -4173,7 +4697,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/85855",
    "image": "https://www.artic.edu/iiif/2/b76988c9-60f8-ef42-1490-47f32cb0113e/full/843,/0/default.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Pen and black ink, with brush and gray wash, on tan laid paper, laid down on ivory wove card",
+   "kind": "drawing"
   },
   {
    "artist": "David Teniers the Younger",
@@ -4182,7 +4708,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1943.377",
    "image": "https://openaccess-cdn.clevelandart.org/1943.377/1943.377_web.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "oil on wood, transferred to canvas",
+   "kind": "painting"
   },
   {
    "artist": "Eastman Johnson",
@@ -4191,7 +4719,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/120170",
    "image": "https://www.artic.edu/iiif/2/c8eacf36-436a-f4df-819e-d8fefbfac1d2/full/843,/0/default.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Oil on millboard",
+   "kind": "painting"
   },
   {
    "artist": "Fitz Henry Lane",
@@ -4200,7 +4730,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/2004.35",
    "image": "https://openaccess-cdn.clevelandart.org/2004.35/2004.35_web.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Ford Madox Brown",
@@ -4209,7 +4741,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/641667",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP835628.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Wood engraving on India paper, mounted on thin card",
+   "kind": "print"
   },
   {
    "artist": "Frans Snyders",
@@ -4218,7 +4752,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/343428",
    "image": "https://images.metmuseum.org/CRDImages/dp/web-large/DP802350.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Pen and brown ink, brush and brown wash, over traces of black chalk",
+   "kind": "drawing"
   },
   {
    "artist": "Frans Snyders",
@@ -4227,7 +4763,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/62042",
    "image": "https://www.artic.edu/iiif/2/d9bde524-38b2-4262-3338-e4d06a50746d/full/843,/0/default.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Gerard ter Borch",
@@ -4236,7 +4774,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/459346",
    "image": "https://images.metmuseum.org/CRDImages/rl/web-large/DP-21940-001.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Black chalk",
+   "kind": "drawing"
   },
   {
    "artist": "Henri-Edmond Cross",
@@ -4245,7 +4785,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1955.501",
    "image": "https://openaccess-cdn.clevelandart.org/1955.501/1955.501_web.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "color lithograph",
+   "kind": "print"
   },
   {
    "artist": "Jasper Francis Cropsey",
@@ -4254,7 +4796,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/27163",
    "image": "https://www.artic.edu/iiif/2/42924282-d483-cd95-e676-52aee4bc4164/full/843,/0/default.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Jules Breton",
@@ -4263,7 +4807,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1915.721",
    "image": "https://openaccess-cdn.clevelandart.org/1915.721/1915.721_web.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "oil on fabric",
+   "kind": "painting"
   },
   {
    "artist": "Maximilien Luce",
@@ -4272,7 +4818,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1952.210",
    "image": "https://openaccess-cdn.clevelandart.org/1952.210/1952.210_web.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "lithograph",
+   "kind": "print"
   },
   {
    "artist": "Maximilien Luce",
@@ -4281,7 +4829,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1998.185",
    "image": "https://openaccess-cdn.clevelandart.org/1998.185/1998.185_web.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "color lithograph",
+   "kind": "print"
   },
   {
    "artist": "Narcisse Virgilio Díaz de la Peña",
@@ -4290,7 +4840,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/436192",
    "image": "https://images.metmuseum.org/CRDImages/ep/web-large/DP352741.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Narcisse Virgilio Díaz de la Peña",
@@ -4299,7 +4851,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/35155",
    "image": "https://www.artic.edu/iiif/2/3dae143d-6840-2e6e-dff5-cd2eea745da2/full/843,/0/default.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Oil on panel",
+   "kind": "painting"
   },
   {
    "artist": "Nicolas Lancret",
@@ -4308,7 +4862,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1948.176.2",
    "image": "https://openaccess-cdn.clevelandart.org/1948.176.2/1948.176.2_web.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Qiu Ying",
@@ -4317,7 +4873,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/1978.67",
    "image": "https://openaccess-cdn.clevelandart.org/1978.67/1978.67_web.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Handscroll; ink and light color on silk",
+   "kind": "painting"
   },
   {
    "artist": "Qiu Ying",
@@ -4326,7 +4884,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/36013",
    "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP-16966-002.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Hanging scroll; ink and color on silk",
+   "kind": "painting"
   },
   {
    "artist": "Sanford Robinson Gifford",
@@ -4335,7 +4895,9 @@
    "museum": "The Cleveland Museum of Art",
    "objectUrl": "https://clevelandart.org/art/2011.43",
    "image": "https://openaccess-cdn.clevelandart.org/2011.43/2011.43_web.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "oil on canvas",
+   "kind": "painting"
   },
   {
    "artist": "Tōshūsai Sharaku",
@@ -4344,7 +4906,9 @@
    "museum": "Art Institute of Chicago",
    "objectUrl": "https://www.artic.edu/artworks/18806",
    "image": "https://www.artic.edu/iiif/2/0cd7e968-68ab-7c2a-c853-8f8c3f212ecc/full/843,/0/default.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Color woodblock print; aiban",
+   "kind": "print"
   },
   {
    "artist": "Tōshūsai Sharaku",
@@ -4353,7 +4917,9 @@
    "museum": "The Metropolitan Museum of Art",
    "objectUrl": "https://www.metmuseum.org/art/collection/search/37181",
    "image": "https://images.metmuseum.org/CRDImages/as/web-large/DP130180.jpg",
-   "level": 10
+   "level": 10,
+   "medium": "Woodblock print; ink and color on paper",
+   "kind": "print"
   }
  ]
 }

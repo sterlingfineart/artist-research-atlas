@@ -44,6 +44,48 @@ On top of that, artist matching is deliberately strict:
   merged, preferring Met, then AIC, then Cleveland.
 - At most 6 works per artist enter the pool.
 
+## Mediums — the question fits the work
+
+Each work also carries two fields taken from the holding museum's record
+for that exact object:
+
+- **`medium`** — the museum's own medium string, verbatim (the Met's
+  `medium`, Chicago's `medium_display`, Cleveland's `technique`).
+- **`kind`** — one of `painting`, `drawing`, `print`, `sculpture`,
+  `photograph`, `other`, derived from the museum's own classification
+  of the object (the Met's `classification`, Chicago's
+  `artwork_type_title`, Cleveland's `type`). Where a record carries no
+  classification — the Met leaves it empty on some genuine paintings,
+  *The Heart of the Andes* among them — the kind is read from the
+  record's medium string instead (print techniques first, then
+  photographic, oil/tempera painting media, then drawing media). Kinds
+  are never guessed from titles.
+
+The game asks its question by kind — *Who painted this?* for a
+painting, *Who drew this?* for a drawing, *Who made this print?*,
+*Who sculpted this?*, *Who took this photograph?* — and falls back to
+*Who created this?* for kind `other`. The verdict panel shows the
+work's medium under its title, date and museum. (The game's name stays
+"Who Painted It?"; only the per-work question adapts.)
+
+Kind counts across the 283 works, as augmented on 2026-11-22:
+
+| Kind | Met (160) | Cleveland (43) | Chicago (80) | Total |
+|---|---|---|---|---|
+| painting | 79 | 14 | 27 | 120 |
+| drawing | 59 | 6 | 24 | 89 |
+| print | 22 | 23 | 29 | 74 |
+| other | 0 | 0 | 0 | 0 |
+
+The mediums are now complete for all three museums — every one of the
+283 works carries a `medium` and a `kind` from its holding museum's
+record. The Art Institute's live API and website refuse requests from
+the build server's network (the bot wall described above), so Chicago's
+mediums come from the museum's published data dump, read as data only
+by `scripts/build-game-pool.py --augment-only` (the same streaming read
+the candidate harvest uses; nothing in the dump is executed). Every
+other field of the pool is unchanged by the augmentation.
+
 ## Levels — curatorial, by fame
 
 Levels were assigned in three steps:
