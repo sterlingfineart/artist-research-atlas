@@ -564,6 +564,177 @@ def aic_candidates():
     return buckets
 
 
+# ---------------------------------------------------------------- mediums
+# Every pooled work also carries the holding museum's own medium string
+# and a coarse "kind" derived from the museum's classification of that
+# exact object, so the game can ask the right question — "Who drew
+# this?" for a drawing, "Who made this print?" for a print — instead of
+# calling everything a painting. Mediums are fetched per object from
+# the museum record itself (Met: classification + medium; AIC:
+# artwork_type_title + medium_display, from the data dump; Cleveland:
+# type + technique) and cached in MEDIUM_CACHE so rebuilds are cheap.
+# A work whose record cannot be retrieved keeps an empty medium and
+# kind "other"; kinds are never guessed from titles.
+MEDIUM_CACHE = '/tmp/game-pool-mediums.json'
+
+KIND_BY_MET_CLASS = {'Paintings': 'painting', 'Drawings': 'drawing',
+                     'Prints': 'print'}
+KIND_BY_AIC_TYPE = {'Painting': 'painting', 'Print': 'print',
+                    'Drawing and Watercolor': 'drawing',
+                    'Photograph': 'photograph', 'Sculpture': 'sculpture'}
+KIND_BY_CLE_TYPE = {'Painting': 'painting', 'Print': 'print',
+                    'Drawing': 'drawing', 'Photograph': 'photograph',
+                    'Sculpture': 'sculpture'}
+
+# Fallback wording tests on a museum medium string, used only when the
+# record's own classification is missing (the Met leaves the
+# classification empty on some genuine paintings — the Heart of the
+# Andes among them). Print techniques are tested first: a woodblock
+# print's medium also mentions ink.
+_PRINT_TERMS = ('woodblock', 'engraving', 'etching', 'woodcut', 'lithograph',
+                'drypoint', 'aquatint', 'mezzotint', 'linocut', 'screenprint',
+                'serigraph', 'photogravure', 'print')
+_PHOTO_TERMS = ('photograph', 'gelatin silver', 'albumen', 'daguerreotype',
+                'chromogenic', 'platinum print', 'cyanotype')
+_PAINT_TERMS = ('oil on', 'oil and', 'tempera', 'acrylic', 'encaustic',
+                'fresco', 'casein')
+_DRAW_TERMS = ('watercolor', 'watercolour', 'gouache', 'graphite', 'pencil',
+               'chalk', 'charcoal', 'pastel', 'crayon', 'pen and', 'ink',
+               'wash', 'drawing')
+
+
+def kind_from_medium(medium):
+    m = norm(medium)
+    if not m:
+        return 'other'
+    if any(t in m for t in _PRINT_TERMS):
+        return 'print'
+    if any(t in m for t in _PHOTO_TERMS):
+        return 'photograph'
+    if any(t in m for t in _PAINT_TERMS):
+        return 'painting'
+    if any(t in m for t in _DRAW_TERMS):
+        return 'drawing'
+    return 'other'
+
+
+def _met_medium(url):
+    m = re.search(r'(\d+)/?$', url or '')
+    if not m:
+        return None
+    o = get_json('https://collectionapi.metmuseum.org/public/collection/v1'
+                 f'/objects/{m.group(1)}')
+    medium = (o.get('medium') or '').strip()
+    kind = KIND_BY_MET_CLASS.get(o.get('classification') or '') \
+        or kind_from_medium(medium)
+    return {'medium': medium, 'kind': kind}
+
+
+def _cle_medium(url):
+    m = re.search(r'/art/(.+)$', url or '')
+    if not m:
+        return None
+    acc = urllib.parse.quote(m.group(1), safe='')
+    d = get_json('https://openaccess-api.clevelandart.org/api/artworks/'
+                 f'?accession_number={acc}')
+    rows = d.get('data') or []
+    if not rows:
+        return None
+    o = rows[0]
+    medium = (o.get('technique') or '').strip()
+    kind = KIND_BY_CLE_TYPE.get(o.get('type') or '') \
+        or kind_from_medium(medium)
+    return {'medium': medium, 'kind': kind}
+
+
+def _aic_mediums(urls):
+    """One streaming pass over the museum's data dump, picking out the
+    records for the given object URLs (the live AIC API is bot-walled
+    from the build network; see aic_candidates)."""
+    ids = {}
+    for u in urls:
+        m = re.search(r'/artworks/(\d+)', u or '')
+        if m:
+            ids[int(m.group(1))] = u
+    out = {}
+    if not ids:
+        return out
+    with tarfile.open(AIC_TARBALL, 'r|bz2') as tf:
+        for m in tf:
+            if not m.isfile() or '/artworks/' not in m.name \
+                    or not m.name.endswith('.json'):
+                continue
+            try:
+                aid = int(m.name.rsplit('/', 1)[-1][:-5])
+            except ValueError:
+                continue
+            if aid not in ids:
+                continue
+            f = tf.extractfile(m)
+            if f is None:
+                continue
+            try:
+                o = json.loads(f.read().decode('utf-8'))
+            except Exception:
+                continue
+            medium = (o.get('medium_display') or '').strip()
+            kind = KIND_BY_AIC_TYPE.get(o.get('artwork_type_title') or '') \
+                or kind_from_medium(medium)
+            out[ids[aid]] = {'medium': medium, 'kind': kind}
+            if len(out) == len(ids):
+                break
+    return out
+
+
+def augment_mediums(works):
+    """Attach medium + kind to each work, from its museum record.
+    Returns the number of works whose record could not be retrieved
+    (they keep an empty medium and kind "other")."""
+    import os
+    cache = {}
+    if os.path.exists(MEDIUM_CACHE):
+        try:
+            cache = json.load(open(MEDIUM_CACHE))
+        except Exception:
+            cache = {}
+    todo = [w for w in works if w.get('objectUrl') not in cache]
+    if todo:
+        fetched = {}
+
+        def fetch_one(w):
+            try:
+                rec = _met_medium(w['objectUrl']) if w['museum'] == MET \
+                    else _cle_medium(w['objectUrl'])
+                return w['objectUrl'], rec
+            except Exception:
+                return w['objectUrl'], None
+
+        singles = [w for w in todo if w['museum'] in (MET, CLE)]
+        with ThreadPoolExecutor(max_workers=10) as ex:
+            for url, rec in ex.map(fetch_one, singles):
+                if rec:
+                    fetched[url] = rec
+        try:
+            fetched.update(_aic_mediums(
+                [w['objectUrl'] for w in todo if w['museum'] == AIC]))
+        except Exception as e:
+            print(f'  AIC mediums unavailable: {e}', flush=True)
+        cache.update(fetched)
+        with open(MEDIUM_CACHE, 'w') as f:
+            json.dump(cache, f)
+        print(f'Mediums: fetched {len(fetched)} of {len(todo)} outstanding',
+              flush=True)
+    missing = 0
+    for w in works:
+        rec = cache.get(w.get('objectUrl'))
+        if rec:
+            w['medium'], w['kind'] = rec['medium'], rec['kind']
+        else:
+            w['medium'], w['kind'] = '', 'other'
+            missing += 1
+    return missing
+
+
 # ---------------------------------------------------------------- levels
 def title_matches(nt, ns):
     """Pattern-in-title test; a leading 'the' in the pattern is optional,
@@ -736,6 +907,18 @@ def dedupe(cand):
 
 def main():
     import os
+    if '--augment-only' in sys.argv:
+        # Refresh just the medium/kind fields of the shipped pool from
+        # the museum records; works, levels and order stay untouched.
+        doc = json.load(open(OUT))
+        missing = augment_mediums(doc['works'])
+        with open(OUT, 'w') as f:
+            json.dump(doc, f, ensure_ascii=False, indent=1)
+        from collections import Counter
+        print('Kinds:', dict(Counter(w['kind'] for w in doc['works'])))
+        print(f'Augmented {OUT}: {len(doc["works"])} works, '
+              f'{missing} without a retrievable museum medium')
+        return
     if '--fresh' not in sys.argv and os.path.exists(CACHE):
         cand = json.load(open(CACHE))
         print(f'Loaded {len(cand)} candidates from cache (use --fresh to re-harvest)', flush=True)
@@ -863,6 +1046,10 @@ def main():
     works = [{'artist': r['artist'], 'title': r['title'], 'date': r['date'],
               'museum': r['museum'], 'objectUrl': r['objectUrl'],
               'image': r['image'], 'level': r['level']} for r in pool]
+    missing = augment_mediums(works)
+    if missing:
+        print(f'WARNING: {missing} works have no retrievable museum '
+              f'medium; kind set to "other"', flush=True)
     artists = {a['name']: {'birth': a['birth'], 'death': a['death'],
                            'century': a['century'], 'movement': a['movement'],
                            'nationality': a['nationality'], 'circle': a['circle'],
