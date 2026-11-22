@@ -10,6 +10,7 @@ by adding one file and one manifest entry — no page code changes:
   public/data/sales/redford-vol2.json — George Redford, Art Sales, Vol II
   public/data/sales/graves-vol1.json  — Algernon Graves, Art Sales, Vol I
   public/data/sales/graves-vol2.json  — Algernon Graves, Art Sales, Vol II
+  public/data/sales/graves-vol3.json  — Algernon Graves, Art Sales, Vol III
   public/data/sales/modern.json       — 10 verified modern landmark sales
   public/data/sales/conversions.json  — today's-money multipliers by year
 
@@ -77,10 +78,20 @@ SOURCES = [
         'blurb': 'Algernon Graves, “Art Sales”, Vol. II (H–REME) — every '
                  'record verified against the page image.',
     },
+    {
+        'id': 'graves-vol3', 'file': 'graves-vol3.json',
+        'label': 'Graves, Art Sales, Vol. III (1921)',
+        'short': 'Graves III',
+        'src': os.path.join(HS, 'data', 'graves-vol3-all.json'),
+        'blurb': 'Algernon Graves, “Art Sales”, Vol. III '
+                 '(REYNOLDS–ZURBARAN) — every record verified against '
+                 'the page image.',
+    },
 ]
 
 FRANC_RES = [re.compile(r'frs\.\s*([\d,]+)'),
-             re.compile(r'([\d,]+)\s*francs')]
+             re.compile(r'([\d,]+)\s*francs'),
+             re.compile(r'([\d,]+)\s*frs\.')]
 
 
 def franc_amount(r):
@@ -253,7 +264,8 @@ def verify(docs, manifest, conv, raw_series):
                 errors.append(f"{s['id']}: field mismatch at {w[0]} / {w[2]}")
                 break
         fr = [w for w in rows if w[13] == 'FRF']
-        expect_fr = 22 if s['id'].startswith('graves') else 0
+        expect_fr = {'graves-vol1': 22, 'graves-vol2': 22,
+                     'graves-vol3': 39}.get(s['id'], 0)
         if len(fr) != expect_fr:
             errors.append(f"{s['id']}: {len(fr)} franc records "
                           f"(expect {expect_fr})")
