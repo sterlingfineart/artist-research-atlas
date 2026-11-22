@@ -4,7 +4,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const { search } = require('./lib/search');
-const { browse, warmCountryFacets } = require('./lib/browse');
+const { browse, warmCountryFacets, warmBrowseCache } = require('./lib/browse');
 const { degrees } = require('./lib/degrees');
 const report = require('./lib/report');
 const ai = require('./lib/ai');
@@ -109,6 +109,8 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`Artist Research Atlas running at http://localhost:${PORT}  (AI synthesis: ${ai.enabled() ? 'on, ' + ai.model : 'off'})`);
-  // Warm the Browse country list in the background (never blocks startup).
+  // Warm the Browse country list and result cache in the background
+  // (never blocks startup).
   warmCountryFacets();
+  warmBrowseCache();
 });
