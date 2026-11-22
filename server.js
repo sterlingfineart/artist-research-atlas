@@ -8,6 +8,7 @@ const { browse, warmCountryFacets, warmBrowseCache } = require('./lib/browse');
 const { degrees } = require('./lib/degrees');
 const report = require('./lib/report');
 const ai = require('./lib/ai');
+const mail = require('./lib/mail');
 
 const PORT = parseInt(process.env.PORT || '3000', 10);
 const PUBLIC = path.join(__dirname, 'public');
@@ -72,11 +73,84 @@ function need(p) {
   return p;
 }
 
+/* ---------------------------------------------------------- feedback */
+// The Feedback page posts here. Submissions are emailed to the editor
+// (lib/mail.js); nothing is stored on the server.
+const FB_WINDOW = 60 * 60 * 1000; // one hour
+const FB_MAX = 5; // submissions per IP per window
+const fbHits = new Map();
+function feedbackLimited(ip) {
+  const now = Date.now();
+  const h = (fbHits.get(ip) || []).filter((t) => now - t < FB_WINDOW);
+  h.push(now);
+  fbHits.set(ip, h);
+  return h.length > FB_MAX;
+}
+
+function readBody(req, limit = 65536) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    let size = 0;
+    req.on('data', (c) => {
+      size += c.length;
+      if (size > limit) {
+        reject(Object.assign(new Error('That message is too long to send.'), { status: 413 }));
+        req.destroy();
+        return;
+      }
+      chunks.push(c);
+    });
+    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    req.on('error', reject);
+  });
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+async function handleFeedback(req, res, ip) {
+  let data;
+  try {
+    data = JSON.parse(await readBody(req));
+  } catch (e) {
+    return send(res, e.status || 400, { error: e.status ? e.message : 'Could not read your message — please try again.' });
+  }
+  if (!data || typeof data !== 'object') return send(res, 400, { error: 'Could not read your message — please try again.' });
+  // Honeypot: the form carries a "website" field no human visitor ever
+  // sees or fills. If it arrives filled, the submission is a bot's —
+  // discard it silently, answering exactly as if it had been accepted.
+  if (typeof data.website === 'string' && data.website.trim() !== '') return send(res, 200, { ok: true });
+  if (feedbackLimited(ip)) return send(res, 429, { error: 'Too many messages from this connection in the last hour — please try again later.' });
+  const text = (v, n) => (typeof v === 'string' ? v.replace(/\r\n?/g, '\n').replace(/\r/g, '\n').trim().slice(0, n) : '');
+  const comments = text(data.comments, 5000);
+  const wishes = text(data.wishes, 5000);
+  const name = (typeof data.name === 'string' ? data.name : '').replace(/[\r\n]+/g, ' ').trim().slice(0, 120);
+  const email = (typeof data.email === 'string' ? data.email : '').trim().slice(0, 254);
+  if (!comments && !wishes) return send(res, 400, { error: 'Please write something in one of the two boxes before sending.' });
+  if (email && !EMAIL_RE.test(email)) return send(res, 400, { error: 'That email address does not look complete — please check it, or leave it blank.' });
+  if (!mail.configured()) {
+    // Log the fact only — never the content of a submission.
+    console.log('feedback: submission received, but mail is not configured — not sent');
+    return send(res, 503, { error: 'Feedback mail is not configured on the server yet, so your message has not been sent. Please try again another time.', code: 'mail_not_configured' });
+  }
+  try {
+    await mail.sendFeedback({ name, email, comments, wishes });
+  } catch (e) {
+    console.log(`feedback: send failed (${e.message})`);
+    return send(res, 502, { error: 'Your message could not be sent just now. Please try again later — your text is still in the form.' });
+  }
+  console.log('feedback: message sent');
+  return send(res, 200, { ok: true });
+}
+
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   if (url.pathname.startsWith('/api/')) {
     const ip = req.headers['x-forwarded-for']?.split(',')[0] || req.socket.remoteAddress;
     if (limited(ip)) return send(res, 429, { error: 'Too many requests — please wait a minute.' });
+    if (url.pathname === '/api/feedback') {
+      if (req.method !== 'POST') return send(res, 405, { error: 'Method not allowed' });
+      return handleFeedback(req, res, ip);
+    }
     const fn = routes[url.pathname];
     if (!fn) return send(res, 404, { error: 'Not found' });
     const t0 = Date.now();
