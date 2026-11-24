@@ -1619,6 +1619,14 @@
     const short = note.length > 160 ? note.slice(0, 160) + '…' : note;
     return `<div class="meta exh-note" title="${esc(note)}">${esc(short)}</div>`;
   }
+  /* A catalogue plate: the illustration the catalogue itself printed
+     for this work, cropped from its own pages. Shown only where the
+     record carries one; records without render exactly as before. */
+  function exhPlateHtml(w) {
+    if (!w.image) return '';
+    return `<img class="exh-thumb" src="${esc(w.image)}" alt="Illustration of this work in the catalogue" loading="lazy" onerror="this.remove()">
+      ${w.plate ? `<div class="meta exh-plate">${esc(w.plate)}</div>` : ''}`;
+  }
   /* One works table for the Record of Exhibitions, global and local:
      Exhibition (global only) | No. | Artist | Title | Medium | Size |
      Lender. Artist names link to the Atlas name search, as on the Loan
@@ -1628,7 +1636,7 @@
       ${global ? `<td><a href="#/exhibitions/${esc(w.exhibition)}">${esc(w.label)}</a></td>` : ''}
       <td class="salon-num">${esc(w.no)}</td>
       <td><a href="#/search?q=${enc(exhNamePart(w.artist))}">${esc(niceName(w.artist))}</a></td>
-      <td>${esc(niceTitle(w.title || ''))}${exhNoteHtml(w.note)}</td>
+      <td>${esc(niceTitle(w.title || ''))}${exhNoteHtml(w.note)}${exhPlateHtml(w)}</td>
       <td>${esc(w.medium || '')}</td>
       <td class="exh-size">${esc(w.size || '')}</td>
       <td>${esc(niceName(w.lender))}</td>
@@ -2070,7 +2078,7 @@
           <thead><tr><th class="salon-num">No.</th><th>Title</th><th>Medium</th><th>Size</th><th>Lender</th><th>Gallery</th></tr></thead>
           <tbody>${sel.works.map((w) => `<tr>
             <td class="salon-num">${esc(w.no)}</td>
-            <td>${esc(niceTitle(w.title || ''))}${exhNoteHtml(w.note)}</td>
+            <td>${esc(niceTitle(w.title || ''))}${exhNoteHtml(w.note)}${exhPlateHtml(w)}</td>
             <td>${esc(w.medium || '')}</td>
             <td class="exh-size">${esc(w.size || '')}</td>
             <td>${esc(niceName(w.lender))}</td>
