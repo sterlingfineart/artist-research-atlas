@@ -1625,7 +1625,11 @@ EXHIBITIONS = [
                   'their sequence position; each is flagged in its record’s note, shown under the title. '
                   'Some entries print no size, medium or lender, and none has been inferred. '
                   'The catalogue’s text carries ordinary OCR noise, so the odd title or name is garbled. '
-                  'No images in this first version.'),
+                  'The catalogue illustrates 47 of the works on unnumbered plate leaves; each plate is '
+                  'shown beside its record, cropped from the catalogue’s own pages — the caption printed '
+                  'with the plate is the evidence for the match. One further plate (a portrait captioned '
+                  '“John Lavery, No. 170”) is not shown: the catalogue’s own entry no. 170 is Norman '
+                  'Garstin’s “Moulin de la Ville”, so the plate cannot be assigned without guessing.'),
         # Expected values from the verified parse — the build fails
         # loudly rather than shipping numbers that do not match them.
         'expect': {
@@ -3982,6 +3986,38 @@ def verify(ex, recs):
 
 
 os.makedirs(OUT, exist_ok=True)
+
+# Catalogue-plate images: where a catalogue itself prints an
+# illustration with a caption attributing artist and title, the plate
+# is cropped from the catalogue's own pages and attached to the record
+# (the catalogue is the evidence — no external identity matching).
+# The archive of record (full-resolution crops, full plate pages and
+# the caption index) lives in the record-of-exhibitions workspace at
+# data/plate-archive/<exhibition-id>/index.json; the site carries the
+# web-sized crops under public/images/exhibitions/<exhibition-id>/.
+PLATE_ARCHIVE_DIR = os.path.expanduser(
+    '~/workspace/record-of-exhibitions/data/plate-archive')
+
+
+def apply_plates(ex, recs):
+    path = os.path.join(PLATE_ARCHIVE_DIR, ex['id'], 'index.json')
+    if not os.path.exists(path):
+        return
+    index = json.load(open(path))
+    plates = {str(e['no']): e for e in index}
+    matched = 0
+    for r in recs:
+        e = plates.get(str(r['no']))
+        if e:
+            r['image'] = e['web']
+            r['plate'] = e['plate']
+            matched += 1
+    if matched != len(plates):
+        raise SystemExit(f"PLATES FAILED for {ex['id']}: matched "
+                         f"{matched} of {len(plates)} archived plates")
+    print(f"{ex['id']}: attached {matched} catalogue plates")
+
+
 summaries = []
 all_works = []
 for ex in EXHIBITIONS:
@@ -3998,6 +4034,7 @@ for ex in EXHIBITIONS:
         for r in recs:
             r['no'] = str(r['no'])
     sections = verify(ex, recs)
+    apply_plates(ex, recs)
     with open(os.path.join(OUT, ex.get('out_file', ex['file'])), 'w') as f:
         json.dump(recs, f, ensure_ascii=False)
     summaries.append({
