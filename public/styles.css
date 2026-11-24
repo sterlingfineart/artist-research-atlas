@@ -224,6 +224,8 @@ ol.refs li { overflow-wrap: anywhere; }
    sits as its own block under the title, and sizes never wrap
    mid-value ("37 x" / "59") */
 .exh-note { margin-top: 6px; padding-top: 5px; border-top: 1px dotted var(--line); font-size: 12.5px; }
+.exh-thumb { float: left; max-width: 118px; max-height: 148px; width: auto; height: auto; margin: 8px 12px 6px 0; border: 1px solid var(--line); border-radius: 4px; background: #ece6da; }
+.exh-plate { clear: left; font-size: 12.5px; font-style: italic; }
 .salon-table td.exh-size { white-space: nowrap; overflow-wrap: normal; }
 .flag-mark { color: var(--warn); cursor: help; font-weight: 700; }
 .pager { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 14px 0; }
