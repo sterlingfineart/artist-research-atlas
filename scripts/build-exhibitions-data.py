@@ -879,41 +879,44 @@ EXHIBITIONS = [
         'id': 'nad-1846',
         'file': 'nad-1846.json',
         'title': '21st Annual Exhibition of the National Academy of Design',
-        'subtitle': 'As recorded in the compiled National Academy of Design Exhibition Record 1826–1860 (1943)',
+        'subtitle': 'As printed in the original exhibition catalogue (1846)',
         'venue': 'National Academy of Design, New York',
         'dates': '1846',
         'year': 1846,
         'organiser': 'National Academy of Design',
         'label': 'National Academy of Design 1846',
-        'source': 'Compiled record: National Academy of Design Exhibition Record 1826–1860, printed for the New-York Historical Society, 1943 (Internet Archive items nationalacademyo741nati and nationalacademyo752nati) — not the original exhibition catalogue',
-        'notes': ('The 21st annual exhibition of the National Academy of Design. These records '
-         'are taken from the published compiled record — the National Academy of '
-         'Design Exhibition Record 1826–1860, printed for the New-York Historical '
-         'Society in 1943 — not from the original exhibition catalogue, and they stand '
-         "as that book prints them, gathered under each artist's heading. Of the 344 "
-         "works here, 218 carry the owner's name as the book prints it, carried in "
-         'these records as the lender, and 2 are marked “For sale.” in the book. The '
-         "artist's address, as the book prints it for the year, stands in each "
-         "record's note, and every record's note closes with its page in the compiled "
-         "record. The book's catalogue numbers are not a single complete sequence — "
-         'they carry gaps and repetitions — and they stand exactly as printed. The '
-         "parse read the book's pages by image OCR and cross-checked every catalogue "
-         "number and year against the scan's text layer: 87 of this year's numbers "
-         'rest on the image reading alone, the text layer dropping or garbling them; 6 '
-         'numbers on which the two readings disagree are marked uncertain in their '
-         "records; and 17 of this year's records carry a year that rests on the image "
-         "reading and the sequence of the book's year blocks, the text layer losing "
-         'the year line. Owner names are the least-verified field: the book prints '
-         'them in italics after the title, the italics survive in neither OCR source, '
-         'and they were separated from the titles typographically. The original 1846 '
-         'catalogue has since been acquired and is being parsed from the catalogue '
-         'itself; that parse will supersede this compiled-record entry.'),
+        'source': 'Original catalogue: Catalogue of the Twenty-First Annual Exhibition of the National Academy of Design (New-York: Israel Sackett, 1846); Internet Archive item catalogueofannua00nati_0 — parsed from the catalogue itself',
+        'notes': ('The 21st annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Twenty-First Annual Exhibition (New-York: Israel Sackett, '
+         '1846), read from the Internet Archive scan (item catalogueofannua00nati_0) '
+         "— and they stand as the catalogue prints them, in the catalogue's own "
+         'numbered order under its three saloon sections: Large Saloon (nos. 1–116), '
+         'Smaller Saloon (nos. 117–236) and Drawing-Room (nos. 237–346). Of the 346 '
+         "works here, 232 carry the possessor's name as the catalogue prints it, "
+         'carried in these records as the lender. The catalogue prints no medium and '
+         'no dimensions, and no per-entry for-sale marks — a sale list was held by '
+         'the Curator, per the notice at the head of the catalogue. No. 129 prints '
+         'no subject, and its record carries no title. The parse read the '
+         "catalogue's pages by image OCR and cross-checked every catalogue number "
+         "against the scan's text layer: the two readings of the number lists differ "
+         'on 5 of the 16 catalogue pages; 10 records carry a flag in their note '
+         'where the number rests on the image reading; and 7 numbers garbled in the '
+         "OCR were restored from the sequence and the catalogue's own exhibitor "
+         'index, both readings preserved — among them no. 327, which the page itself '
+         'appears to print as 227. This entry supersedes the compiled-record entry '
+         'for 1846 released on 24 November 2026, which was taken from the National '
+         'Academy of Design Exhibition Record 1826–1860 (printed for the New-York '
+         "Historical Society, 1943) and carried 344 records: the compiled record's "
+         'numbering duplicates two numbers, omits others and adds a spurious no. '
+         '354. Nothing was imported from the compiled record into this parse; where '
+         'the two differ, the catalogue itself governs.'),
         'expect': {
-            'total': 344,
-            'sections': {'Catalogue': 344},
-            'no_lender': 126,
-            'no_medium': 344,
-            'no_title': 0,
+            'total': 346,
+            'sections': {'LARGE SALOON.': 116, 'SMALLER SALOON.': 120, 'DRAWING-ROOM': 110},
+            'no_lender': 114,
+            'no_medium': 346,
+            'no_title': 1,
             'no_artist': 0,
         },
     },
@@ -1410,41 +1413,45 @@ EXHIBITIONS = [
         'id': 'nad-1859',
         'file': 'nad-1859.json',
         'title': '34th Annual Exhibition of the National Academy of Design',
-        'subtitle': 'As recorded in the compiled National Academy of Design Exhibition Record 1826–1860 (1943)',
+        'subtitle': 'As printed in the original exhibition catalogue (1859)',
         'venue': 'National Academy of Design, New York',
         'dates': '1859',
         'year': 1859,
         'organiser': 'National Academy of Design',
         'label': 'National Academy of Design 1859',
-        'source': 'Compiled record: National Academy of Design Exhibition Record 1826–1860, printed for the New-York Historical Society, 1943 (Internet Archive items nationalacademyo741nati and nationalacademyo752nati) — not the original exhibition catalogue',
-        'notes': ('The 34th annual exhibition of the National Academy of Design. These records '
-         'are taken from the published compiled record — the National Academy of '
-         'Design Exhibition Record 1826–1860, printed for the New-York Historical '
-         'Society in 1943 — not from the original exhibition catalogue, and they stand '
-         "as that book prints them, gathered under each artist's heading. Of the 828 "
-         "works here, 333 carry the owner's name as the book prints it, carried in "
-         'these records as the lender, and 242 are marked “For sale.” in the book. The '
-         "artist's address, as the book prints it for the year, stands in each "
-         "record's note, and every record's note closes with its page in the compiled "
-         "record. The book's catalogue numbers are not a single complete sequence — "
-         'they carry gaps and repetitions — and they stand exactly as printed. The '
-         "parse read the book's pages by image OCR and cross-checked every catalogue "
-         "number and year against the scan's text layer: 54 of this year's numbers "
-         'rest on the image reading alone, the text layer dropping or garbling them; 1 '
-         'number on which the two readings disagree is marked uncertain in its record; '
-         "and 1 of this year's records carry a year that rests on the image reading "
-         "and the sequence of the book's year blocks, the text layer losing the year "
-         'line. Owner names are the least-verified field: the book prints them in '
-         'italics after the title, the italics survive in neither OCR source, and they '
-         'were separated from the titles typographically. The original 1859 catalogue '
-         'has since been acquired and is being parsed from the catalogue itself; that '
-         'parse will supersede this compiled-record entry.'),
+        'source': 'Original catalogue: Catalogue of the Thirty-Fourth Annual Exhibition of the National Academy of Design (New-York: Sackett & Cobb, 1859); Internet Archive item catalogueofannua00nati — parsed from the catalogue itself',
+        'notes': ('The 34th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Thirty-Fourth Annual Exhibition (New-York: Sackett & '
+         'Cobb, 1859), read from the Internet Archive scan (item '
+         'catalogueofannua00nati) — and they stand as the catalogue prints them, in '
+         "the catalogue's own numbered order under its gallery sections: First "
+         'Gallery (nos. 1–243), Second Gallery (nos. 244–342), Third Gallery (nos. '
+         '343–505), Fourth Gallery (nos. 506–614), Fifth Gallery (nos. 615–720), '
+         'Sixth Gallery (nos. 721–807) and Corridor (nos. 808–815). Of the 815 works '
+         "here, 359 carry the possessor's name as the catalogue prints it, carried "
+         'in these records as the lender, and 229 are marked “For Sale,” in the '
+         'catalogue. The catalogue prints no medium and no dimensions. No. 296 '
+         'prints no subject — dots only — and its record carries no title. The parse '
+         "read the catalogue's pages by image OCR and cross-checked every catalogue "
+         "number against the scan's text layer: the two readings of the number lists "
+         'differ on 23 of the 35 catalogue pages; 117 records carry a flag in their '
+         'note where the two readings disagree, both readings preserved; and the '
+         'catalogue itself misprints four numbers — the entries in sequence 80, 81 '
+         'and 82 are printed 30, 31 and 32, and no. 777 is printed 477 — each '
+         'flagged in its record. This entry supersedes the compiled-record entry for '
+         '1859 released on 24 November 2026, which was taken from the National '
+         'Academy of Design Exhibition Record 1826–1860 (printed for the New-York '
+         'Historical Society, 1943) and carried 828 records over 803 distinct '
+         'numbers: the compiled record duplicates 25 catalogue numbers and omits 12 '
+         'that the catalogue prints. Nothing was imported from the compiled record '
+         'into this parse; where the two differ, the catalogue itself governs.'),
         'expect': {
-            'total': 828,
-            'sections': {'Catalogue': 828},
-            'no_lender': 495,
-            'no_medium': 828,
-            'no_title': 0,
+            'total': 815,
+            'sections': {'FIRST GALLERY.': 243, 'SECOND GALLERY.': 99, 'THIRD GALLERY.': 163, 'FOURTH GALLERY.': 109, 'FIFTH GALLERY.': 106, 'SIXTH GALLERY.': 87, 'CORRIDOR.': 8},
+            'no_lender': 456,
+            'no_medium': 815,
+            'no_title': 1,
             'no_artist': 0,
         },
     },
