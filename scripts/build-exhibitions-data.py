@@ -3,8 +3,10 @@
 parsed exhibition catalogues in ~/workspace/record-of-exhibitions/data/.
 
 Outputs under public/data/exhibitions/:
-  index.json          — array of exhibition summaries, chronological
-                        (id, title, venue, dates, year, organiser, works
+  index.json          — array of exhibition summaries, in slate order
+                        (grouped by series, chronological within each
+                        series — see "Slate order" after the registry;
+                        id, title, venue, dates, year, organiser, works
                         count, sections with counts, source note, and
                         the exhibition's honest "notes" text, which the
                         site shows in its About notice)
@@ -5367,6 +5369,54 @@ EXHIBITIONS = [
         },
     },
 ]
+
+
+# ——— Slate order ———
+# The Record of Exhibitions index (and all.json, which follows it)
+# lists the exhibitions grouped by series, chronological within each
+# series. The registry above is kept in the order the catalogues were
+# parsed and is NOT the display order; the sort below enforces the
+# slate on every build, wherever in the registry an entry sits.
+# Series are ordered by the year of their first exhibition — National
+# Academy of Design 1826, American Water Color Society 1891, then the
+# two series beginning in 1892 alphabetically (Guildhall before the
+# Salon de la Rose+Croix). When a new series is first recorded, add it
+# to SERIES in first-year order. A series missing from SERIES sorts
+# after the listed ones, by its first year and then its prefix, so
+# the output stays deterministic.
+SERIES = [
+    ('nad-', 'National Academy of Design'),
+    ('aws-', 'American Water Color Society'),
+    ('guildhall-', 'Guildhall'),
+    ('rose-croix-', 'Salon de la Rose+Croix'),
+]
+
+
+def _series_rank(ex):
+    for rank, (prefix, _name) in enumerate(SERIES):
+        if ex['id'].startswith(prefix):
+            return rank
+    return len(SERIES)
+
+
+_unlisted_first_year = {}
+for _ex in EXHIBITIONS:
+    if _series_rank(_ex) == len(SERIES):
+        _prefix = _ex['id'].split('-')[0]
+        _unlisted_first_year[_prefix] = min(
+            _unlisted_first_year.get(_prefix, _ex['year']), _ex['year'])
+
+
+def _slate_key(ex):
+    rank = _series_rank(ex)
+    if rank < len(SERIES):
+        return (rank, 0, '', ex['year'], ex['id'])
+    prefix = ex['id'].split('-')[0]
+    return (rank, _unlisted_first_year[prefix], prefix,
+            ex['year'], ex['id'])
+
+
+EXHIBITIONS.sort(key=_slate_key)
 
 
 def _is_plain(no):
