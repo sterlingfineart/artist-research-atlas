@@ -38,8 +38,12 @@ EXHIBITIONS = [
     # record's numbers are not a single complete sequence (gaps and
     # repetitions stand as printed), so these entries deliberately
     # carry no plain_range/lettered checks: totals, section and field
-    # counts are the verification. Original-catalogue parses for 1846,
-    # 1858 and 1859 are in progress and will supersede those years.
+    # counts are the verification. Original-catalogue parses have
+    # superseded the compiled entries for 1846 and 1859 (see those
+    # entries below); 1858 stays on the compiled record — its only
+    # scan is missing a gathering, and the library routes were left
+    # unpursued by decision of 24 November 2026. Original-catalogue
+    # entries continue the series past 1860 to 1923 (below).
     {
         'id': 'nad-1826',
         'file': 'nad-1826.json',
@@ -1492,6 +1496,1548 @@ EXHIBITIONS = [
             'no_lender': 386,
             'no_medium': 654,
             'no_title': 1,
+            'no_artist': 0,
+        },
+    },
+    # ——— National Academy of Design, original annual
+    # catalogues 1870–1923 ———
+    # Parsed from the original annual catalogues themselves
+    # (Internet Archive scans), on the same pattern as the
+    # 1846 and 1859 entries above: the About text cites the
+    # original catalogue as the source. Years whose scans are
+    # defective (1877, 1897, 1898, 1905, 1915) and years with
+    # no scan in hand (1871, 1878, 1891–1893, 1899, 1910–1911,
+    # 1914, 1916–1919) have no entry. Audit trail:
+    # ~/workspace/national-academy/RUN_LOG.md.
+    {
+        'id': 'nad-1870',
+        'file': 'nad-1870.json',
+        'title': '45th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1870)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1870',
+        'year': 1870,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1870',
+        'source': 'Original catalogue: Catalogue of the Forty-Fifth Annual Exhibition of the National Academy of Design (New-York: E. Wells Sackett, 1870); Internet Archive item annualexhibition45nati — parsed from the catalogue itself',
+        'notes': (
+         'The 45th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Forty-Fifth Annual Exhibition (New-York: E. Wells '
+         'Sackett, 1870), read from the Internet Archive scan (item '
+         'annualexhibition45nati) — and they stand as the catalogue prints them, '
+         'in the catalogue’s own numbered order under its 6 sections: CORRIDOR. '
+         '(nos. 1–162), NORTH ROOM. (nos. 163–221), EAST ROOM. (nos. 222–307), '
+         'SOUTH ROOM. (nos. 308–379), WEST ROOM. (nos. 380–460), SCULPTURE ROOM. '
+         '(nos. 461–477). Of the 477 works here, 276 carry the possessor’s name as '
+         'the catalogue prints it, carried in these records as the lender, and 144 '
+         'are marked “For Sale,” in the catalogue. The catalogue prints no medium '
+         'and no dimensions. The catalogue prints no illustrations. Two entries '
+         'the OCR missed (nos. 16 and 198) were restored from the page images, and '
+         'no. 477 prints its number with an asterisk, its footnote — “Died April '
+         '10th, 1870” — carried as its catalogue text. Printed misprints stand as '
+         'printed. The parse read the catalogue’s pages by image OCR and '
+         'cross-checked every catalogue number against the scan’s text layer; '
+         'where the two readings disagree, the record is flagged and both readings '
+         'are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 477,
+            'sections': {'CORRIDOR.': 162, 'NORTH ROOM.': 59, 'EAST ROOM.': 86, 'SOUTH ROOM.': 72, 'WEST ROOM.': 81, 'SCULPTURE ROOM.': 17},
+            'plain_range': (1, 477),
+            'lettered': set(),
+            'no_lender': 201,
+            'no_medium': 477,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1872',
+        'file': 'nad-1872.json',
+        'title': '47th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1872)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1872',
+        'year': 1872,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1872',
+        'source': 'Original catalogue: Catalogue of the Forty-Seventh Annual Exhibition of the National Academy of Design (New-York: E. Wells Sackett & Bro., 1872); Internet Archive item annualexhibition47nati — parsed from the catalogue itself',
+        'notes': (
+         'The 47th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Forty-Seventh Annual Exhibition (New-York: E. Wells '
+         'Sackett & Bro., 1872), read from the Internet Archive scan (item '
+         'annualexhibition47nati) — and they stand as the catalogue prints them, '
+         'in the catalogue’s own numbered order under its 6 sections: CORRIDOR. '
+         '(nos. 1–107), NORTH ROOM. (nos. 108–190), EAST ROOM. (nos. 191–253), '
+         'SOUTH ROOM. (nos. 254–316), WEST ROOM. (nos. 317–371), SCULPTURE ROOM. '
+         '(nos. 372–385). Of the 385 works here, 192 carry the possessor’s name as '
+         'the catalogue prints it, carried in these records as the lender, and 138 '
+         'are marked “For Sale,” in the catalogue. The catalogue prints no medium '
+         'and no dimensions. The catalogue prints no illustrations. Two entries '
+         'the OCR missed (nos. 254 and 349) were restored from the page images. '
+         'The parse read the catalogue’s pages by image OCR and cross-checked '
+         'every catalogue number against the scan’s text layer; where the two '
+         'readings disagree, the record is flagged and both readings are preserved '
+         'in the parse’s audit file.'),
+        'expect': {
+            'total': 385,
+            'sections': {'CORRIDOR.': 107, 'NORTH ROOM.': 83, 'EAST ROOM.': 63, 'SOUTH ROOM.': 63, 'WEST ROOM.': 55, 'SCULPTURE ROOM.': 14},
+            'plain_range': (1, 385),
+            'lettered': set(),
+            'no_lender': 193,
+            'no_medium': 385,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1873',
+        'file': 'nad-1873.json',
+        'title': '48th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1873)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1873',
+        'year': 1873,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1873',
+        'source': 'Original catalogue: Catalogue of the Forty-Eighth Annual Exhibition of the National Academy of Design (New-York: E. Wells Sackett & Bro., 1873); Internet Archive item annualexhibition4852nati (bound volume holding the 1873–1877 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 48th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Forty-Eighth Annual Exhibition (New-York: E. Wells '
+         'Sackett & Bro., 1873), read from the Internet Archive scan (item '
+         'annualexhibition4852nati) — and they stand as the catalogue prints them, '
+         'in the catalogue’s own numbered order under its 6 sections: CORRIDOR. '
+         '(nos. 1–95), NORTH ROOM. (nos. 96–139), EAST ROOM. (nos. 140–190), SOUTH '
+         'ROOM. (nos. 191–269), WEST ROOM. (nos. 270–323), SCULPTURE ROOM. (nos. '
+         '324–337). Of the 337 works here, 120 carry the possessor’s name as the '
+         'catalogue prints it, carried in these records as the lender, and 137 are '
+         'marked “For Sale,” in the catalogue. The catalogue prints no medium and '
+         'no dimensions. The catalogue prints no illustrations. Entries the raw '
+         'parse dropped were restored from the page images and are flagged in '
+         'their records. The parse read the catalogue’s pages by image OCR and '
+         'cross-checked every catalogue number against the scan’s text layer; '
+         'where the two readings disagree, the record is flagged and both readings '
+         'are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 337,
+            'sections': {'CORRIDOR.': 95, 'NORTH ROOM.': 44, 'EAST ROOM.': 51, 'SOUTH ROOM.': 79, 'WEST ROOM.': 54, 'SCULPTURE ROOM.': 14},
+            'plain_range': (1, 337),
+            'lettered': set(),
+            'no_lender': 217,
+            'no_medium': 337,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1874',
+        'file': 'nad-1874.json',
+        'title': '49th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1874)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1874',
+        'year': 1874,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1874',
+        'source': 'Original catalogue: Catalogue of the Forty-Ninth Annual Exhibition of the National Academy of Design (New-York: E. Wells Sackett & Bro., 1874); Internet Archive item annualexhibition4852nati (bound volume holding the 1873–1877 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 49th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Forty-Ninth Annual Exhibition (New-York: E. Wells '
+         'Sackett & Bro., 1874), read from the Internet Archive scan (item '
+         'annualexhibition4852nati) — and they stand as the catalogue prints them, '
+         'in the catalogue’s own numbered order under its 6 sections: CORRIDOR. '
+         '(nos. 1–134), NORTH ROOM. (nos. 135–192), EAST ROOM. (nos. 193–254), '
+         'SOUTH ROOM. (nos. 255–338), WEST ROOM. (nos. 339–393), SCULPTURE ROOM. '
+         '(nos. 394–418). Of the 418 works here, 137 carry the possessor’s name as '
+         'the catalogue prints it, carried in these records as the lender, and 213 '
+         'are marked “For Sale,” in the catalogue. The catalogue prints no medium '
+         'and no dimensions. The catalogue prints no illustrations. The catalogue '
+         'itself misprints one number — the entry in sequence 88 is printed “38” — '
+         'restored from the sequence and flagged in its record. The parse read the '
+         'catalogue’s pages by image OCR and cross-checked every catalogue number '
+         'against the scan’s text layer; where the two readings disagree, the '
+         'record is flagged and both readings are preserved in the parse’s audit '
+         'file.'),
+        'expect': {
+            'total': 418,
+            'sections': {'CORRIDOR.': 134, 'NORTH ROOM.': 58, 'EAST ROOM.': 62, 'SOUTH ROOM.': 84, 'WEST ROOM.': 55, 'SCULPTURE ROOM.': 25},
+            'plain_range': (1, 418),
+            'lettered': set(),
+            'no_lender': 281,
+            'no_medium': 418,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1875',
+        'file': 'nad-1875.json',
+        'title': '50th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1875)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1875',
+        'year': 1875,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1875',
+        'source': 'Original catalogue: Catalogue of the Fiftieth Annual Exhibition of the National Academy of Design (New-York: E. Wells Sackett & Bro., 1875); Internet Archive item annualexhibition4852nati (bound volume holding the 1873–1877 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 50th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Fiftieth Annual Exhibition (New-York: E. Wells Sackett '
+         '& Bro., 1875), read from the Internet Archive scan (item '
+         'annualexhibition4852nati) — and they stand as the catalogue prints them, '
+         'in the catalogue’s own numbered order under its 6 sections: CORRIDOR. '
+         '(nos. 1–173), NORTH ROOM. (nos. 174–255), EAST ROOM. (nos. 256–318), '
+         'SOUTH ROOM. (nos. 319–425), WEST ROOM. (nos. 426–491), NORTH-WEST ROOM. '
+         '(nos. 492–533). Of the 533 works here, 111 carry the possessor’s name as '
+         'the catalogue prints it, carried in these records as the lender, 346 are '
+         'marked “For Sale,” in the catalogue, and the catalogue’s own printed '
+         'Price List gives a price for 347 works, carried in those records’ notes. '
+         'The catalogue prints no medium and no dimensions. The catalogue prints '
+         'no illustrations. There is no Sculpture Room this year; the sculpture '
+         'stands in the North-West Room. The parse read the catalogue’s pages by '
+         'image OCR and cross-checked every catalogue number against the scan’s '
+         'text layer; where the two readings disagree, the record is flagged and '
+         'both readings are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 533,
+            'sections': {'CORRIDOR.': 173, 'NORTH ROOM.': 82, 'EAST ROOM.': 63, 'SOUTH ROOM.': 107, 'WEST ROOM.': 66, 'NORTH-WEST ROOM.': 42},
+            'plain_range': (1, 533),
+            'lettered': set(),
+            'no_lender': 422,
+            'no_medium': 533,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1876',
+        'file': 'nad-1876.json',
+        'title': '51st Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1876)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1876',
+        'year': 1876,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1876',
+        'source': 'Original catalogue: Catalogue of the Fifty-First Annual Exhibition of the National Academy of Design (New-York: E. Wells Sackett & Bro., 1876); Internet Archive item annualexhibition4852nati (bound volume holding the 1873–1877 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 51st annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Fifty-First Annual Exhibition (New-York: E. Wells '
+         'Sackett & Bro., 1876), read from the Internet Archive scan (item '
+         'annualexhibition4852nati) — and they stand as the catalogue prints them, '
+         'in the catalogue’s own numbered order under its 6 sections: CORRIDOR. '
+         '(nos. 1–175), NORTH ROOM. (nos. 176–262), EAST ROOM. (nos. 263–347), '
+         'SOUTH ROOM. (nos. 348–442), WEST ROOM. (nos. 443–513), SCULPTURE ROOM. '
+         '(nos. 514–568). Of the 568 works here, 70 carry the owner’s name as the '
+         'catalogue prints it, carried in these records as the lender, and 414 '
+         'carry a price as printed in the catalogue’s OWNER OR PRICE column, '
+         'carried in the record’s note. The catalogue prints no medium and no '
+         'dimensions. The catalogue prints no illustrations. Two catalogue numbers '
+         'are misprinted in the catalogue itself and stand flagged in their '
+         'records. The parse read the catalogue’s pages by image OCR and '
+         'cross-checked every catalogue number against the scan’s text layer; '
+         'where the two readings disagree, the record is flagged and both readings '
+         'are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 568,
+            'sections': {'CORRIDOR.': 175, 'NORTH ROOM.': 87, 'EAST ROOM.': 85, 'SOUTH ROOM.': 95, 'WEST ROOM.': 71, 'SCULPTURE ROOM.': 55},
+            'plain_range': (1, 568),
+            'lettered': set(),
+            'no_lender': 498,
+            'no_medium': 568,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1879',
+        'file': 'nad-1879.json',
+        'title': '54th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1879)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1879',
+        'year': 1879,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1879',
+        'source': 'Original catalogue: Catalogue of the Fifty-Fourth Annual Exhibition of the National Academy of Design (New York: E. Wells Sackett & Bro., 1879); Internet Archive item annualexhibition54nati — parsed from the catalogue itself',
+        'notes': (
+         'The 54th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Fifty-Fourth Annual Exhibition (New York: E. Wells '
+         'Sackett & Bro., 1879), read from the Internet Archive scan (item '
+         'annualexhibition54nati) — and they stand as the catalogue prints them, '
+         'in the catalogue’s own numbered order under its 7 sections: CENTRAL '
+         'GALLERY. (nos. 1–128), NORTH ROOM. (nos. 129–220), EAST ROOM. (nos. '
+         '221–308), SOUTH ROOM. (nos. 309–399), WEST ROOM. (nos. 400–479), '
+         'NORTH-WEST ROOM. (nos. 480–534), SCULPTURE ROOM. (nos. 535–615). Of the '
+         '610 works here, 91 carry the owner’s name as the catalogue prints it, '
+         'carried in these records as the lender, 332 carry a price as printed in '
+         'the catalogue’s OWNER OR PRICE column, carried in the record’s note, and '
+         '2 are marked “For Sale,” there. The catalogue prints no medium and no '
+         'dimensions. The catalogue prints no illustrations. Nos. 75–79 have no '
+         'records of their own: entry no. 74 is the catalogue’s own range entry, '
+         '“74 to 79”, covering six Grand Manan studies by J. G. Brown, and it '
+         'stands as the single record no. 74. The parse read the catalogue’s pages '
+         'by image OCR and cross-checked every catalogue number against the scan’s '
+         'text layer; where the two readings disagree, the record is flagged and '
+         'both readings are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 610,
+            'sections': {'CENTRAL GALLERY.': 123, 'NORTH ROOM.': 92, 'EAST ROOM.': 88, 'SOUTH ROOM.': 91, 'WEST ROOM.': 80, 'NORTH-WEST ROOM.': 55, 'SCULPTURE ROOM.': 81},
+            'plain_range': (1, 615),
+            'absent_numbers': [75, 76, 77, 78, 79],
+            'lettered': set(),
+            'no_lender': 519,
+            'no_medium': 610,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1880',
+        'file': 'nad-1880.json',
+        'title': '55th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1880)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1880',
+        'year': 1880,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1880',
+        'source': 'Original catalogue: Catalogue of the Fifty-Fifth Annual Exhibition of the National Academy of Design (New York, 1880); Internet Archive item annualexhibition5559nati (bound volume holding the 1880–1884 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 55th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Fifty-Fifth Annual Exhibition (New York, 1880), read '
+         'from the Internet Archive scan (item annualexhibition5559nati) — and '
+         'they stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 7 sections: CENTRAL GALLERY. (nos. 1–143), NORTH ROOM. '
+         '(nos. 144–238), EAST ROOM. (nos. 239–334), SOUTH ROOM. (nos. 335–462), '
+         'WEST ROOM. (nos. 463–553), NORTH-WEST ROOM. (nos. 554–625), DRAWING AND '
+         'SCULPTURE ROOM. (nos. 626–740). Of the 740 works here, 82 carry the '
+         'owner’s name as the catalogue prints it, carried in these records as the '
+         'lender, 532 carry a price as printed in the catalogue’s OWNER OR PRICE '
+         'column, carried in the record’s note, and 1 is marked “For Sale” there. '
+         'The catalogue prints no medium and no dimensions. The catalogue prints '
+         'no illustrations. Three entries the raw parse had absorbed into their '
+         'neighbours (nos. 160, 638 and 669) were restored from the page images. '
+         'The parse read the catalogue’s pages by image OCR and cross-checked '
+         'every catalogue number against the scan’s text layer; where the two '
+         'readings disagree, the record is flagged and both readings are preserved '
+         'in the parse’s audit file.'),
+        'expect': {
+            'total': 740,
+            'sections': {'CENTRAL GALLERY.': 143, 'NORTH ROOM.': 95, 'EAST ROOM.': 96, 'SOUTH ROOM.': 128, 'WEST ROOM.': 91, 'NORTH-WEST ROOM.': 72, 'DRAWING AND SCULPTURE ROOM.': 115},
+            'plain_range': (1, 740),
+            'lettered': set(),
+            'no_lender': 658,
+            'no_medium': 740,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1881',
+        'file': 'nad-1881.json',
+        'title': '56th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1881)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1881',
+        'year': 1881,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1881',
+        'source': 'Original catalogue: Catalogue of the Fifty-Sixth Annual Exhibition of the National Academy of Design (New York, 1881); Internet Archive item annualexhibition5559nati (bound volume holding the 1880–1884 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 56th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Fifty-Sixth Annual Exhibition (New York, 1881), read '
+         'from the Internet Archive scan (item annualexhibition5559nati) — and '
+         'they stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 7 sections: CORRIDOR. (nos. 1–125), NORTH GALLERY. (nos. '
+         '126–271), EAST GALLERY. (nos. 272–381), SOUTH GALLERY. (nos. 382–499), '
+         'WEST GALLERY. (nos. 500–610), NORTH-WEST GALLERY. (nos. 611–668), '
+         'PARLORS. (nos. 669–752). Of the 752 works here, 72 carry the owner’s '
+         'name as the catalogue prints it, carried in these records as the lender, '
+         'and 601 carry a price as printed in the catalogue’s OWNER OR PRICE '
+         'column, carried in the record’s note. The catalogue prints no medium and '
+         'no dimensions. The catalogue prints no illustrations. Entries the raw '
+         'parse had absorbed into their neighbours were restored from the page '
+         'images and are flagged in their records. The parse read the catalogue’s '
+         'pages by image OCR and cross-checked every catalogue number against the '
+         'scan’s text layer; where the two readings disagree, the record is '
+         'flagged and both readings are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 752,
+            'sections': {'CORRIDOR.': 125, 'NORTH GALLERY.': 146, 'EAST GALLERY.': 110, 'SOUTH GALLERY.': 118, 'WEST GALLERY.': 111, 'NORTH-WEST GALLERY.': 58, 'PARLORS.': 84},
+            'plain_range': (1, 752),
+            'lettered': set(),
+            'no_lender': 680,
+            'no_medium': 752,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1882',
+        'file': 'nad-1882.json',
+        'title': '57th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1882)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1882',
+        'year': 1882,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1882',
+        'source': 'Original catalogue: Catalogue of the Fifty-Seventh Annual Exhibition of the National Academy of Design (New York, 1882); Internet Archive item annualexhibition5559nati (bound volume holding the 1880–1884 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 57th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Fifty-Seventh Annual Exhibition (New York, 1882), read '
+         'from the Internet Archive scan (item annualexhibition5559nati) — and '
+         'they stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 7 sections: NORTH GALLERY. (nos. 1–135), EAST GALLERY. '
+         '(nos. 136–260), SOUTH GALLERY. (nos. 261–416), WEST GALLERY. (nos. '
+         '417–499), NORTH-WEST GALLERY. (nos. 500–579), CORRIDOR. (nos. 580–705), '
+         'LIBRARY. (nos. 706–839). Of the 839 works here, 62 carry the owner’s '
+         'name as the catalogue prints it, carried in these records as the lender, '
+         'and 690 carry a price as printed in the catalogue’s OWNER OR PRICE '
+         'column, carried in the record’s note. The catalogue prints no medium and '
+         'no dimensions. The catalogue prints no illustrations. The parse read the '
+         'catalogue’s pages by image OCR and cross-checked every catalogue number '
+         'against the scan’s text layer; where the two readings disagree, the '
+         'record is flagged and both readings are preserved in the parse’s audit '
+         'file.'),
+        'expect': {
+            'total': 839,
+            'sections': {'NORTH GALLERY.': 135, 'EAST GALLERY.': 125, 'SOUTH GALLERY.': 156, 'WEST GALLERY.': 83, 'NORTH-WEST GALLERY.': 80, 'CORRIDOR.': 126, 'LIBRARY.': 134},
+            'plain_range': (1, 839),
+            'lettered': set(),
+            'no_lender': 777,
+            'no_medium': 839,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1883',
+        'file': 'nad-1883.json',
+        'title': '58th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1883)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1883',
+        'year': 1883,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1883',
+        'source': 'Original catalogue: Catalogue of the Fifty-Eighth Annual Exhibition of the National Academy of Design (New York, 1883); Internet Archive item annualexhibition5559nati (bound volume holding the 1880–1884 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 58th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Fifty-Eighth Annual Exhibition (New York, 1883), read '
+         'from the Internet Archive scan (item annualexhibition5559nati) — and '
+         'they stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 7 sections: NORTH GALLERY. (nos. 1–125), EAST GALLERY. '
+         '(nos. 126–217), SOUTH GALLERY. (nos. 218–387), WEST GALLERY. (nos. '
+         '388–446), NORTH-WEST GALLERY. (nos. 447–527), CORRIDOR. (nos. 528–634), '
+         'LIBRARY. (nos. 635–746). Of the 746 works here, 40 carry the owner’s '
+         'name as the catalogue prints it, carried in these records as the lender, '
+         'and 646 carry a price as printed in the catalogue’s OWNER OR PRICE '
+         'column, carried in the record’s note. The catalogue prints no medium and '
+         'no dimensions. The catalogue prints no illustrations. The parse read the '
+         'catalogue’s pages by image OCR and cross-checked every catalogue number '
+         'against the scan’s text layer; where the two readings disagree, the '
+         'record is flagged and both readings are preserved in the parse’s audit '
+         'file.'),
+        'expect': {
+            'total': 746,
+            'sections': {'NORTH GALLERY.': 125, 'EAST GALLERY.': 92, 'SOUTH GALLERY.': 170, 'WEST GALLERY.': 59, 'NORTH-WEST GALLERY.': 81, 'CORRIDOR.': 107, 'LIBRARY.': 112},
+            'plain_range': (1, 746),
+            'lettered': set(),
+            'no_lender': 706,
+            'no_medium': 746,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1884',
+        'file': 'nad-1884.json',
+        'title': '59th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1884)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1884',
+        'year': 1884,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1884',
+        'source': 'Original catalogue: Catalogue of the Fifty-Ninth Annual Exhibition of the National Academy of Design (New York, 1884); Internet Archive item annualexhibition5559nati (bound volume holding the 1880–1884 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 59th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Fifty-Ninth Annual Exhibition (New York, 1884), read '
+         'from the Internet Archive scan (item annualexhibition5559nati) — and '
+         'they stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 6 sections: NORTH GALLERY. (nos. 1–110), EAST GALLERY. '
+         '(nos. 111–202), SOUTH GALLERY. (nos. 203–395), WEST GALLERY. (nos. '
+         '396–470), NORTH-WEST GALLERY. (nos. 471–534), CORRIDOR. (nos. 535–709). '
+         'Of the 709 works here, 65 carry the owner’s name as the catalogue prints '
+         'it, carried in these records as the lender, and 583 carry a price as '
+         'printed in the catalogue’s OWNER OR PRICE column, carried in the '
+         'record’s note. The catalogue prints no medium and no dimensions. The '
+         'catalogue prints no illustrations. The printed cover is this catalogue’s '
+         'only title page; there is no separate letterpress title page. The parse '
+         'read the catalogue’s pages by image OCR and cross-checked every '
+         'catalogue number against the scan’s text layer; where the two readings '
+         'disagree, the record is flagged and both readings are preserved in the '
+         'parse’s audit file.'),
+        'expect': {
+            'total': 709,
+            'sections': {'NORTH GALLERY.': 110, 'EAST GALLERY.': 92, 'SOUTH GALLERY.': 193, 'WEST GALLERY.': 75, 'NORTH-WEST GALLERY.': 64, 'CORRIDOR.': 175},
+            'plain_range': (1, 709),
+            'lettered': set(),
+            'no_lender': 644,
+            'no_medium': 709,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1885',
+        'file': 'nad-1885.json',
+        'title': '60th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1885)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1885',
+        'year': 1885,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1885',
+        'source': 'Original catalogue: Catalogue of the Sixtieth Annual Exhibition of the National Academy of Design (New York, 1885); Internet Archive item annualexhibition6061nati (bound volume holding the 1885 and 1886 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 60th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Sixtieth Annual Exhibition (New York, 1885), read from '
+         'the Internet Archive scan (item annualexhibition6061nati) — and they '
+         'stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 6 sections: CORRIDOR. (nos. 1–114), NORTH GALLERY. (nos. '
+         '115–237), EAST GALLERY. (nos. 238–358), SOUTH GALLERY. (nos. 359–501), '
+         'WEST GALLERY. (nos. 502–581), NORTH-WEST GALLERY. (nos. 582–665). Of the '
+         '665 works here, 35 carry the owner’s name as the catalogue prints it, '
+         'carried in these records as the lender, and 576 carry a price as printed '
+         'in the catalogue’s OWNER OR PRICE column, carried in the record’s note. '
+         'The catalogue prints no medium and no dimensions. The catalogue prints '
+         'no illustrations. The parse read the catalogue’s pages by image OCR and '
+         'cross-checked every catalogue number against the scan’s text layer; '
+         'where the two readings disagree, the record is flagged and both readings '
+         'are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 665,
+            'sections': {'CORRIDOR.': 114, 'NORTH GALLERY.': 123, 'EAST GALLERY.': 121, 'SOUTH GALLERY.': 143, 'WEST GALLERY.': 80, 'NORTH-WEST GALLERY.': 84},
+            'plain_range': (1, 665),
+            'lettered': set(),
+            'no_lender': 630,
+            'no_medium': 665,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1886',
+        'file': 'nad-1886.json',
+        'title': '61st Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1886)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1886',
+        'year': 1886,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1886',
+        'source': 'Original catalogue: Catalogue of the Sixty-First Annual Exhibition of the National Academy of Design (New York: John C. Rankin, Jr., 1886); Internet Archive item annualexhibition6061nati (bound volume holding the 1885 and 1886 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 61st annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Sixty-First Annual Exhibition (New York: John C. '
+         'Rankin, Jr., 1886), read from the Internet Archive scan (item '
+         'annualexhibition6061nati) — and they stand as the catalogue prints them, '
+         'in the catalogue’s own numbered order under its 6 sections: CORRIDOR. '
+         '(nos. 1–165), NORTH GALLERY. (nos. 166–312), EAST GALLERY. (nos. '
+         '313–467), SOUTH GALLERY. (nos. 468–615), WEST GALLERY. (nos. 616–735), '
+         'NORTH-WEST GALLERY. (nos. 736–843). Of the 843 works here, 60 carry the '
+         'owner’s name as the catalogue prints it, carried in these records as the '
+         'lender, and 711 carry a price as printed in the catalogue’s OWNER OR '
+         'PRICE column, carried in the record’s note. The catalogue prints no '
+         'medium and no dimensions. The catalogue prints no illustrations. The '
+         'cover prints the exhibition dates, April 5th to May 15th, 1886. The '
+         'parse read the catalogue’s pages by image OCR and cross-checked every '
+         'catalogue number against the scan’s text layer; where the two readings '
+         'disagree, the record is flagged and both readings are preserved in the '
+         'parse’s audit file.'),
+        'expect': {
+            'total': 843,
+            'sections': {'CORRIDOR.': 165, 'NORTH GALLERY.': 147, 'EAST GALLERY.': 155, 'SOUTH GALLERY.': 148, 'WEST GALLERY.': 120, 'NORTH-WEST GALLERY.': 108},
+            'plain_range': (1, 843),
+            'lettered': set(),
+            'no_lender': 783,
+            'no_medium': 843,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1887',
+        'file': 'nad-1887.json',
+        'title': '62nd Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1887)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1887',
+        'year': 1887,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1887',
+        'source': 'Original catalogue: National Academy Notes and Complete Catalogue, Sixty-second Spring Exhibition of the National Academy of Design, edited by Charles M. Kurtz (New York: Cassell & Co., Limited, 1887); Internet Archive item annualexhibition62nati — parsed from the catalogue itself',
+        'notes': (
+         'The 62nd annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'National Academy Notes and Complete Catalogue (New York: Cassell & Co., '
+         'Limited, 1887), read from the Internet Archive scan (item '
+         'annualexhibition62nati) — and they stand as the catalogue prints them, '
+         'in the catalogue’s own numbered order under its 5 sections: THE '
+         'CORRIDOR. (nos. 1–132), THE NORTH GALLERY. (nos. 133–204), THE EAST '
+         'GALLERY. (nos. 205–286), THE SOUTH GALLERY. (nos. 287–411), THE WEST '
+         'GALLERY. (nos. 412–503). Of the 503 works here, 37 carry the owner’s '
+         'name as the catalogue prints it, carried in these records as the lender, '
+         'and 427 carry a price as printed in the entry itself, carried in the '
+         'record’s note. The catalogue prints no medium and no dimensions, except '
+         'that the dimensions printed in the catalogue’s illustration captions are '
+         'carried into the size of 59 records. The catalogue is illustrated: 62 of '
+         'its plates are reproduced here, each cropped from the catalogue’s own '
+         'pages and attached to the record its caption names — the catalogue is '
+         'the evidence, so no external identity matching is involved. This is not '
+         'the Academy’s letterpress catalogue alone: it is Charles M. Kurtz’s '
+         '“National Academy Notes and Complete Catalogue” (Cassell & Co.), which '
+         'contains all the matter of the official catalogue with notes and '
+         'illustrations added. The entries run as a list — title, then the price '
+         'if for sale, then the artist — with no table and no owner-or-price '
+         'column; 84 entries carry the prize star in the title as printed. The '
+         'parse read the catalogue’s pages by image OCR and cross-checked every '
+         'catalogue number against the scan’s text layer; where the two readings '
+         'disagree, the record is flagged and both readings are preserved in the '
+         'parse’s audit file.'),
+        'expect': {
+            'total': 503,
+            'sections': {'THE CORRIDOR.': 132, 'THE NORTH GALLERY.': 72, 'THE EAST GALLERY.': 82, 'THE SOUTH GALLERY.': 125, 'THE WEST GALLERY.': 92},
+            'plain_range': (1, 503),
+            'lettered': set(),
+            'no_lender': 466,
+            'no_medium': 503,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1888',
+        'file': 'nad-1888.json',
+        'title': '63rd Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1888)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1888',
+        'year': 1888,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1888',
+        'source': 'Original catalogue: Catalogue of the Sixty-Third Annual Exhibition of the National Academy of Design (New York: John C. Rankin, Jr., 1888); Internet Archive item annualexhibition6364nati (bound volume holding the 1888 and 1889 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 63rd annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Sixty-Third Annual Exhibition (New York: John C. '
+         'Rankin, Jr., 1888), read from the Internet Archive scan (item '
+         'annualexhibition6364nati) — and they stand as the catalogue prints them, '
+         'in the catalogue’s own numbered order under its 5 sections: CORRIDOR. '
+         '(nos. 1–121), NORTH GALLERY. (nos. 122–234), EAST GALLERY. (nos. '
+         '235–323), SOUTH GALLERY. (nos. 324–466), WEST GALLERY. (nos. 467–598). '
+         'Of the 598 works here, 57 carry the owner’s name as the catalogue prints '
+         'it, carried in these records as the lender, and 493 carry a price as '
+         'printed in the catalogue’s OWNER OR PRICE column, carried in the '
+         'record’s note. The catalogue prints no medium and no dimensions. The '
+         'catalogue prints no illustrations. The prize device this year is a '
+         'system of seven marks for the Clarke, Hallgarten and Dodge prizes, '
+         'printed before the subject and explained in each marked record’s note; '
+         '120 records carry one. No. 589’s number is misprinted “539” in the '
+         'catalogue itself; the record stands in sequence, flagged. The parse read '
+         'the catalogue’s pages by image OCR and cross-checked every catalogue '
+         'number against the scan’s text layer; where the two readings disagree, '
+         'the record is flagged and both readings are preserved in the parse’s '
+         'audit file.'),
+        'expect': {
+            'total': 598,
+            'sections': {'CORRIDOR.': 121, 'NORTH GALLERY.': 113, 'EAST GALLERY.': 89, 'SOUTH GALLERY.': 143, 'WEST GALLERY.': 132},
+            'plain_range': (1, 598),
+            'lettered': set(),
+            'no_lender': 541,
+            'no_medium': 598,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1889',
+        'file': 'nad-1889.json',
+        'title': '64th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1889)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1889',
+        'year': 1889,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1889',
+        'source': 'Original catalogue: Catalogue of the Sixty-Fourth Annual Exhibition of the National Academy of Design (New York: John C. Rankin, Jr., 1889); Internet Archive item annualexhibition6364nati (bound volume holding the 1888 and 1889 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 64th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Sixty-Fourth Annual Exhibition (New York: John C. '
+         'Rankin, Jr., 1889), read from the Internet Archive scan (item '
+         'annualexhibition6364nati) — and they stand as the catalogue prints them, '
+         'in the catalogue’s own numbered order under its 5 sections: CORRIDOR. '
+         '(nos. 1–135), NORTH GALLERY. (nos. 136–241), EAST GALLERY. (nos. '
+         '242–307), SOUTH GALLERY. (nos. 308–436), WEST GALLERY. (nos. 437–547). '
+         'Of the 547 works here, 49 carry the owner’s name as the catalogue prints '
+         'it, carried in these records as the lender, and 432 carry a price as '
+         'printed in the catalogue’s OWNER OR PRICE column, carried in the '
+         'record’s note. The catalogue prints no medium and no dimensions. The '
+         'catalogue prints no illustrations. The prize glyphs of 1888 give way to '
+         'parenthesised prize letters — (C) Clarke, (H) Hallgarten, (D) Dodge — '
+         'standing in the title as printed; 128 records carry one. The parse read '
+         'the catalogue’s pages by image OCR and cross-checked every catalogue '
+         'number against the scan’s text layer; where the two readings disagree, '
+         'the record is flagged and both readings are preserved in the parse’s '
+         'audit file.'),
+        'expect': {
+            'total': 547,
+            'sections': {'CORRIDOR.': 135, 'NORTH GALLERY.': 106, 'EAST GALLERY.': 66, 'SOUTH GALLERY.': 129, 'WEST GALLERY.': 111},
+            'plain_range': (1, 547),
+            'lettered': set(),
+            'no_lender': 498,
+            'no_medium': 547,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1890',
+        'file': 'nad-1890.json',
+        'title': '65th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1890)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1890',
+        'year': 1890,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1890',
+        'source': 'Original catalogue: Catalogue of the Sixty-Fifth Annual Exhibition of the National Academy of Design (New York: John C. Rankin, Jr., 1890); Internet Archive item annualexhibition65nati — parsed from the catalogue itself',
+        'notes': (
+         'The 65th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Sixty-Fifth Annual Exhibition (New York: John C. '
+         'Rankin, Jr., 1890), read from the Internet Archive scan (item '
+         'annualexhibition65nati) — and they stand as the catalogue prints them, '
+         'in the catalogue’s own numbered order under its 5 sections: CORRIDOR. '
+         '(nos. 1–165), NORTH GALLERY. (nos. 166–277), EAST GALLERY. (nos. '
+         '278–389), SOUTH GALLERY. (nos. 390–537), WEST GALLERY. (nos. 538–671). '
+         'Of the 671 works here, 38 carry the owner’s name as the catalogue prints '
+         'it, carried in these records as the lender, and 556 carry a price as '
+         'printed in the catalogue’s OWNER OR PRICE column, carried in the '
+         'record’s note. The catalogue prints no medium and no dimensions. The '
+         'catalogue prints no illustrations. The parenthesised prize letters of '
+         '1889 continue; 102 records carry one. The parse read the catalogue’s '
+         'pages by image OCR and cross-checked every catalogue number against the '
+         'scan’s text layer; where the two readings disagree, the record is '
+         'flagged and both readings are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 671,
+            'sections': {'CORRIDOR.': 165, 'NORTH GALLERY.': 112, 'EAST GALLERY.': 112, 'SOUTH GALLERY.': 148, 'WEST GALLERY.': 134},
+            'plain_range': (1, 671),
+            'lettered': set(),
+            'no_lender': 633,
+            'no_medium': 671,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1894',
+        'file': 'nad-1894.json',
+        'title': '69th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1894)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1894',
+        'year': 1894,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1894',
+        'source': 'Original catalogue: Catalogue of the Sixty-Ninth Annual Exhibition of the National Academy of Design (New York, 1894); Internet Archive item annualexhibition69nati — parsed from the catalogue itself',
+        'notes': (
+         'The 69th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Sixty-Ninth Annual Exhibition (New York, 1894), read '
+         'from the Internet Archive scan (item annualexhibition69nati) — and they '
+         'stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 5 sections: Corridor. (nos. 1–69), North Gallery. (nos. '
+         '70–143), East Gallery. (nos. 144–197), South Gallery. (nos. 198–337), '
+         'West Gallery. (nos. 338–413). Of the 413 works here, 23 carry the '
+         'owner’s name as the catalogue prints it, carried in these records as the '
+         'lender, and 356 carry a price as printed in the catalogue entry, carried '
+         'in the record’s note. The catalogue prints no medium and no dimensions, '
+         'except that the dimensions printed in the catalogue’s illustration '
+         'captions are carried into the size of 64 records. The catalogue is '
+         'illustrated: 64 of its plates are reproduced here, each cropped from the '
+         'catalogue’s own pages and attached to the record its caption names — the '
+         'catalogue is the evidence, so no external identity matching is involved. '
+         'Prize marks stand before the subject as printed and are explained in the '
+         'records’ notes. The parse read the catalogue’s pages by image OCR and '
+         'cross-checked every catalogue number against the scan’s text layer; '
+         'where the two readings disagree, the record is flagged and both readings '
+         'are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 413,
+            'sections': {'Corridor.': 69, 'North Gallery.': 74, 'East Gallery.': 54, 'South Gallery.': 140, 'West Gallery.': 76},
+            'plain_range': (1, 413),
+            'lettered': set(),
+            'no_lender': 390,
+            'no_medium': 413,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1895',
+        'file': 'nad-1895.json',
+        'title': '70th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1895)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1895',
+        'year': 1895,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1895',
+        'source': 'Original catalogue: Catalogue of the Seventieth Annual Exhibition of the National Academy of Design (New York: The Knickerbocker Press, 1895); Internet Archive item annualexhibition70nati — parsed from the catalogue itself',
+        'notes': (
+         'The 70th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Seventieth Annual Exhibition (New York: The '
+         'Knickerbocker Press, 1895), read from the Internet Archive scan (item '
+         'annualexhibition70nati) — and they stand as the catalogue prints them, '
+         'in the catalogue’s own numbered order under its 5 sections: Corridor. '
+         '(nos. 1–90), North Gallery. (nos. 91–169), East Gallery. (nos. 170–270), '
+         'South Gallery. (nos. 271–377), West Gallery. (nos. 378–473). Of the 473 '
+         'works here, 35 carry the owner’s name as the catalogue prints it, '
+         'carried in these records as the lender, and 387 carry a price as printed '
+         'in the catalogue entry, carried in the record’s note. The catalogue '
+         'prints no medium and no dimensions, except that the dimensions printed '
+         'in the catalogue’s illustration captions are carried into the size of 64 '
+         'records. The catalogue is illustrated: 64 of its plates are reproduced '
+         'here, each cropped from the catalogue’s own pages and attached to the '
+         'record its caption names — the catalogue is the evidence, so no external '
+         'identity matching is involved. 98 records carry a prize mark, standing '
+         'before the subject as printed. The parse read the catalogue’s pages by '
+         'image OCR and cross-checked every catalogue number against the scan’s '
+         'text layer; where the two readings disagree, the record is flagged and '
+         'both readings are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 473,
+            'sections': {'Corridor.': 90, 'North Gallery.': 79, 'East Gallery.': 101, 'South Gallery.': 107, 'West Gallery.': 96},
+            'plain_range': (1, 473),
+            'lettered': set(),
+            'no_lender': 438,
+            'no_medium': 473,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1896',
+        'file': 'nad-1896.json',
+        'title': '71st Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1896)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1896',
+        'year': 1896,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1896',
+        'source': 'Original catalogue: Catalogue of the Seventy-First Annual Exhibition of the National Academy of Design (New York, 1896); Internet Archive item annualexhibition8182nati — parsed from the catalogue itself',
+        'notes': (
+         'The 71st annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Seventy-First Annual Exhibition (New York, 1896), read '
+         'from the Internet Archive scan (item annualexhibition8182nati) — and '
+         'they stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 6 sections: Along the Staircase. (nos. 1–6), Corridor. '
+         '(nos. 7–79), North Gallery. (nos. 80–150), East Gallery. (nos. 151–226), '
+         'South Gallery. (nos. 227–334), West Gallery. (nos. 335–408). Of the 409 '
+         'works here, 23 carry the owner’s name as the catalogue prints it, '
+         'carried in these records as the lender, and 339 carry a price as printed '
+         'in the catalogue entry, carried in the record’s note. The catalogue '
+         'prints no medium and no dimensions, except that the dimensions printed '
+         'in the catalogue’s illustration captions are carried into the size of 60 '
+         'records. The catalogue is illustrated: 62 of its plates are reproduced '
+         'here, each cropped from the catalogue’s own pages and attached to the '
+         'record its caption names — the catalogue is the evidence, so no external '
+         'identity matching is involved. 72 records carry a prize mark. No. 259 '
+         'does not exist: the printed catalogue itself skips it (258 is followed '
+         'by 260, verified on the page image), and no record has been fabricated '
+         'for it. The lettered sub-numbers 32a and 36a stand as printed. The '
+         'Internet Archive item is named for the 81st–82nd exhibitions, but the '
+         'file holds the 71st (1896) catalogue only; the catalogue’s own title '
+         'page governs. The parse read the catalogue’s pages by image OCR and '
+         'cross-checked every catalogue number against the scan’s text layer; '
+         'where the two readings disagree, the record is flagged and both readings '
+         'are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 409,
+            'sections': {'Along the Staircase.': 6, 'Corridor.': 75, 'North Gallery.': 71, 'East Gallery.': 76, 'South Gallery.': 107, 'West Gallery.': 74},
+            'plain_range': (1, 408),
+            'absent_numbers': [259],
+            'lettered': {'32a', '36a'},
+            'no_lender': 386,
+            'no_medium': 409,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1900',
+        'file': 'nad-1900.json',
+        'title': '75th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1900)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1900',
+        'year': 1900,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1900',
+        'source': 'Original catalogue: Catalogue of the Seventy-Fifth Annual Exhibition of the National Academy of Design (New York, 1900); Internet Archive item annualexhibition7576nati (bound volume holding the 1900 and 1901 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 75th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Seventy-Fifth Annual Exhibition (New York, 1900), read '
+         'from the Internet Archive scan (item annualexhibition7576nati) — and '
+         'they stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 5 sections: Vanderbilt Gallery. (nos. 1–120), South '
+         'Gallery. (nos. 121–235), Middle Gallery. (nos. 236–273), East Gallery. '
+         '(nos. 274–298), Statuary and Miniatures. (nos. 299–314). Of the 315 '
+         'works here, 22 carry the owner’s name as the catalogue prints it, '
+         'carried in these records as the lender. The catalogue prints no prices. '
+         'The catalogue prints no medium and no dimensions. The catalogue is '
+         'illustrated: 46 of its plates are reproduced here, each cropped from the '
+         'catalogue’s own pages and attached to the record its caption names — the '
+         'catalogue is the evidence, so no external identity matching is involved. '
+         'The lettered sub-number 60a stands as printed. The catalogue’s printed '
+         'Index to Illustrations lists 46 works, and exactly 46 plates are '
+         'printed. The parse read the catalogue’s pages by image OCR and '
+         'cross-checked every catalogue number against the scan’s text layer; '
+         'where the two readings disagree, the record is flagged and both readings '
+         'are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 315,
+            'sections': {'Vanderbilt Gallery.': 121, 'South Gallery.': 115, 'Middle Gallery.': 38, 'East Gallery.': 25, 'Statuary and Miniatures.': 16},
+            'plain_range': (1, 314),
+            'lettered': {'60a'},
+            'no_lender': 293,
+            'no_medium': 315,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1901',
+        'file': 'nad-1901.json',
+        'title': '76th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1901)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1901',
+        'year': 1901,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1901',
+        'source': 'Original catalogue: Catalogue of the Seventy-Sixth Annual Exhibition of the National Academy of Design (New York, 1901); Internet Archive item annualexhibition7576nati (bound volume holding the 1900 and 1901 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 76th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Seventy-Sixth Annual Exhibition (New York, 1901), read '
+         'from the Internet Archive scan (item annualexhibition7576nati) — and '
+         'they stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 6 sections: South Gallery. (nos. 1–82), Middle Gallery. '
+         '(nos. 83–101), East Gallery. (nos. 102–140), West Gallery. (nos. '
+         '141–184), Vanderbilt Gallery. (nos. 185–272), Sculpture. (nos. 273–285). '
+         'Of the 286 works here, 23 carry the owner’s name as the catalogue prints '
+         'it, carried in these records as the lender. The catalogue prints no '
+         'prices. The catalogue prints no medium and no dimensions. The catalogue '
+         'is illustrated: 45 of its plates are reproduced here, each cropped from '
+         'the catalogue’s own pages and attached to the record its caption names — '
+         'the catalogue is the evidence, so no external identity matching is '
+         'involved. The lettered sub-number 55A stands as printed. The printed '
+         'Index to Illustrations lists 45 works, and exactly 45 plates are '
+         'printed. The parse read the catalogue’s pages by image OCR and '
+         'cross-checked every catalogue number against the scan’s text layer; '
+         'where the two readings disagree, the record is flagged and both readings '
+         'are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 286,
+            'sections': {'South Gallery.': 83, 'Middle Gallery.': 19, 'East Gallery.': 39, 'West Gallery.': 44, 'Vanderbilt Gallery.': 88, 'Sculpture.': 13},
+            'plain_range': (1, 285),
+            'lettered': {'55A'},
+            'no_lender': 263,
+            'no_medium': 286,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1902',
+        'file': 'nad-1902.json',
+        'title': '77th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1902)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1902',
+        'year': 1902,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1902',
+        'source': 'Original catalogue: Catalogue of the Seventy-Seventh Annual Exhibition of the National Academy of Design (New York, 1902); Internet Archive item annualexhibition7778nati (bound volume holding the 1902 and 1903 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 77th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Seventy-Seventh Annual Exhibition (New York, 1902), '
+         'read from the Internet Archive scan (item annualexhibition7778nati) — '
+         'and they stand as the catalogue prints them, in the catalogue’s own '
+         'numbered order under its 6 sections: South Gallery. (nos. 1–104), Middle '
+         'Gallery. (nos. 105–156), East Gallery. (nos. 157–207), West Gallery. '
+         '(nos. 208–260), Vanderbilt Gallery. (nos. 261–389), Sculpture. (nos. '
+         '390–405). Of the 405 works here, 26 carry the owner’s name as the '
+         'catalogue prints it, carried in these records as the lender. The '
+         'catalogue prints no prices. The catalogue prints no medium and no '
+         'dimensions. The catalogue is illustrated: 30 of its plates are '
+         'reproduced here, each cropped from the catalogue’s own pages and '
+         'attached to the record its caption names — the catalogue is the '
+         'evidence, so no external identity matching is involved. The parse read '
+         'the catalogue’s pages by image OCR and cross-checked every catalogue '
+         'number against the scan’s text layer; where the two readings disagree, '
+         'the record is flagged and both readings are preserved in the parse’s '
+         'audit file.'),
+        'expect': {
+            'total': 405,
+            'sections': {'South Gallery.': 104, 'Middle Gallery.': 52, 'East Gallery.': 51, 'West Gallery.': 53, 'Vanderbilt Gallery.': 129, 'Sculpture.': 16},
+            'plain_range': (1, 405),
+            'lettered': set(),
+            'no_lender': 379,
+            'no_medium': 405,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1903',
+        'file': 'nad-1903.json',
+        'title': '78th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1903)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1903',
+        'year': 1903,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1903',
+        'source': 'Original catalogue: Catalogue of the Seventy-Eighth Annual Exhibition of the National Academy of Design (New York, 1903); Internet Archive item annualexhibition7778nati (bound volume holding the 1902 and 1903 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 78th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Seventy-Eighth Annual Exhibition (New York, 1903), read '
+         'from the Internet Archive scan (item annualexhibition7778nati) — and '
+         'they stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 6 sections: South Gallery. (nos. 1–113), Middle Gallery. '
+         '(nos. 114–170), East Gallery. (nos. 171–217), West Gallery. (nos. '
+         '218–264), Vanderbilt Gallery. (nos. 265–393), Sculpture. (nos. 394–398). '
+         'Of the 398 works here, 29 carry the owner’s name as the catalogue prints '
+         'it, carried in these records as the lender. The catalogue prints no '
+         'prices. The catalogue prints no medium and no dimensions. The catalogue '
+         'is illustrated: 28 of its plates are reproduced here, each cropped from '
+         'the catalogue’s own pages and attached to the record its caption names — '
+         'the catalogue is the evidence, so no external identity matching is '
+         'involved. Nos. 169 and 276 are printed with no title at all; their '
+         'records carry none. The parse read the catalogue’s pages by image OCR '
+         'and cross-checked every catalogue number against the scan’s text layer; '
+         'where the two readings disagree, the record is flagged and both readings '
+         'are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 398,
+            'sections': {'South Gallery.': 113, 'Middle Gallery.': 57, 'East Gallery.': 47, 'West Gallery.': 47, 'Vanderbilt Gallery.': 129, 'Sculpture.': 5},
+            'plain_range': (1, 398),
+            'lettered': set(),
+            'no_lender': 369,
+            'no_medium': 398,
+            'no_title': 2,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1904',
+        'file': 'nad-1904.json',
+        'title': '79th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1904)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1904',
+        'year': 1904,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1904',
+        'source': 'Original catalogue: Catalogue of the Seventy-Ninth Annual Exhibition of the National Academy of Design (New York: The Knickerbocker Press, 1904); Internet Archive item annualexhibition7980nati (bound volume also holding the 1905 catalogue) — parsed from the catalogue itself',
+        'notes': (
+         'The 79th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Seventy-Ninth Annual Exhibition (New York: The '
+         'Knickerbocker Press, 1904), read from the Internet Archive scan (item '
+         'annualexhibition7980nati) — and they stand as the catalogue prints them, '
+         'in the catalogue’s own numbered order under its 6 sections: South '
+         'Gallery. (nos. 1–101), Middle Gallery. (nos. 102–141), East Gallery. '
+         '(nos. 142–187), West Gallery. (nos. 188–244), Vanderbilt Gallery. (nos. '
+         '245–348), Sculpture. (nos. 349–351). Of the 354 works here, 32 carry the '
+         'owner’s name as the catalogue prints it, carried in these records as the '
+         'lender. The catalogue prints no prices. The catalogue prints no medium '
+         'and no dimensions. The catalogue is illustrated: 23 of its plates are '
+         'reproduced here, each cropped from the catalogue’s own pages and '
+         'attached to the record its caption names — the catalogue is the '
+         'evidence, so no external identity matching is involved. Nos. 224, 265 '
+         'and 293 are printed with no title at all; their records carry none. The '
+         'lettered sub-numbers 263a, 263b and 263c stand as printed. One plate — '
+         'captioned “NO. 2. THE LETTER. BY ARTHUR M. HAZARD.” — matches neither '
+         'no. 2 nor Hazard’s only other entry, and is archived unattached rather '
+         'than forced onto a record; six works the printed Index to Illustrations '
+         'lists (nos. 31, 51, 75, 85, 89 and 183) have no plate printed anywhere '
+         'in the catalogue, and their records carry no image. The parse read the '
+         'catalogue’s pages by image OCR and cross-checked every catalogue number '
+         'against the scan’s text layer; where the two readings disagree, the '
+         'record is flagged and both readings are preserved in the parse’s audit '
+         'file.'),
+        'expect': {
+            'total': 354,
+            'sections': {'South Gallery.': 101, 'Middle Gallery.': 40, 'East Gallery.': 46, 'West Gallery.': 57, 'Vanderbilt Gallery.': 107, 'Sculpture.': 3},
+            'plain_range': (1, 351),
+            'lettered': {'263c', '263b', '263a'},
+            'no_lender': 322,
+            'no_medium': 354,
+            'no_title': 3,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1906',
+        'file': 'nad-1906.json',
+        'title': '81st Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1906)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1906',
+        'year': 1906,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1906',
+        'source': 'Original catalogue: Catalogue of the Eighty-First Annual Exhibition of the National Academy of Design (New York, 1906); Internet Archive item annualexhibition71nati (bound volume holding the 1906 and 1907 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 81st annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Eighty-First Annual Exhibition (New York, 1906), read '
+         'from the Internet Archive scan (item annualexhibition71nati) — and they '
+         'stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 6 sections: South Gallery. (nos. 1–108), Centre Gallery. '
+         '(nos. 109–137), East Gallery. (nos. 138–171), West Gallery. (nos. '
+         '172–224), Vanderbilt Gallery. (nos. 225–340), Sculpture. (nos. 341–350). '
+         'Of the 350 works here, 29 carry the owner’s name as the catalogue prints '
+         'it, carried in these records as the lender. The catalogue prints no '
+         'prices. The catalogue prints no medium and no dimensions. The catalogue '
+         'is illustrated: 17 of its plates are reproduced here, each cropped from '
+         'the catalogue’s own pages and attached to the record its caption names — '
+         'the catalogue is the evidence, so no external identity matching is '
+         'involved. The Internet Archive item is named for the 71st exhibition, '
+         'but the volume holds the 81st (1906) and 82nd (1907) catalogues; only '
+         'the 1906 catalogue is parsed here. The parse read the catalogue’s pages '
+         'by image OCR and cross-checked every catalogue number against the scan’s '
+         'text layer; where the two readings disagree, the record is flagged and '
+         'both readings are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 350,
+            'sections': {'South Gallery.': 108, 'Centre Gallery.': 29, 'East Gallery.': 34, 'West Gallery.': 53, 'Vanderbilt Gallery.': 116, 'Sculpture.': 10},
+            'plain_range': (1, 350),
+            'lettered': set(),
+            'no_lender': 321,
+            'no_medium': 350,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1907',
+        'file': 'nad-1907.json',
+        'title': '82nd Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1907)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1907',
+        'year': 1907,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1907',
+        'source': 'Original catalogue: Catalogue of the Eighty-Second Annual Exhibition of the National Academy of Design (New York, 1907); Internet Archive item annualexhibition71nati (bound volume holding the 1906 and 1907 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 82nd annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Eighty-Second Annual Exhibition (New York, 1907), read '
+         'from the Internet Archive scan (item annualexhibition71nati) — and they '
+         'stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 7 sections: South Gallery. (nos. 1–94), Centre Gallery. '
+         '(nos. 95–116), East Gallery. (nos. 117–164), West Gallery. (nos. '
+         '165–213), Vanderbilt Gallery. (nos. 214–345), Academy Room. (nos. '
+         '346–378), Sculpture (nos. 379–429). Of the 429 works here, 39 carry the '
+         'owner’s name as the catalogue prints it, carried in these records as the '
+         'lender. The catalogue prints no prices. The catalogue prints no medium '
+         'and no dimensions. The catalogue is illustrated: 16 of its plates are '
+         'reproduced here, each cropped from the catalogue’s own pages and '
+         'attached to the record its caption names — the catalogue is the '
+         'evidence, so no external identity matching is involved. This scan has no '
+         'title page — the front-matter foliation is unbroken, so the catalogue '
+         'proper is complete and nothing is missing from it. The Internet Archive '
+         'item is named for the 71st exhibition, but the volume holds the 81st '
+         '(1906) and 82nd (1907) catalogues; only the 1907 catalogue is parsed '
+         'here. The parse read the catalogue’s pages by image OCR and '
+         'cross-checked every catalogue number against the scan’s text layer; '
+         'where the two readings disagree, the record is flagged and both readings '
+         'are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 429,
+            'sections': {'South Gallery.': 94, 'Centre Gallery.': 22, 'East Gallery.': 48, 'West Gallery.': 49, 'Vanderbilt Gallery.': 132, 'Academy Room.': 33, 'Sculpture': 51},
+            'plain_range': (1, 429),
+            'lettered': set(),
+            'no_lender': 390,
+            'no_medium': 429,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1908',
+        'file': 'nad-1908.json',
+        'title': '83rd Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1908)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1908',
+        'year': 1908,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1908',
+        'source': 'Original catalogue: Catalogue of the Eighty-Third Annual Exhibition of the National Academy of Design (New York, 1908); Internet Archive item annualexhibition8384nati (bound volume holding the 1908 and 1909 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 83rd annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Eighty-Third Annual Exhibition (New York, 1908), read '
+         'from the Internet Archive scan (item annualexhibition8384nati) — and '
+         'they stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 4 sections: South Gallery. (nos. 1–109), Centre Gallery. '
+         '(nos. 110–208), Vanderbilt Gallery. (nos. 209–345), Sculpture (nos. '
+         '346–389). Of the 389 works here, 42 carry the owner’s name as the '
+         'catalogue prints it, carried in these records as the lender. The '
+         'catalogue prints no prices. The catalogue prints no medium and no '
+         'dimensions. The catalogue is illustrated: 17 of its plates are '
+         'reproduced here, each cropped from the catalogue’s own pages and '
+         'attached to the record its caption names — the catalogue is the '
+         'evidence, so no external identity matching is involved. Nos. 371 and 376 '
+         'print no artist, and their records carry none. The parse read the '
+         'catalogue’s pages by image OCR and cross-checked every catalogue number '
+         'against the scan’s text layer; where the two readings disagree, the '
+         'record is flagged and both readings are preserved in the parse’s audit '
+         'file.'),
+        'expect': {
+            'total': 389,
+            'sections': {'South Gallery.': 109, 'Centre Gallery.': 99, 'Vanderbilt Gallery.': 137, 'Sculpture': 44},
+            'plain_range': (1, 389),
+            'lettered': set(),
+            'no_lender': 347,
+            'no_medium': 389,
+            'no_title': 0,
+            'no_artist': 2,
+        },
+    },
+    {
+        'id': 'nad-1909',
+        'file': 'nad-1909.json',
+        'title': '84th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1909)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1909',
+        'year': 1909,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1909',
+        'source': 'Original catalogue: Catalogue of the Eighty-Fourth Annual Exhibition of the National Academy of Design (New York, 1909); Internet Archive item annualexhibition8384nati (bound volume holding the 1908 and 1909 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 84th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Eighty-Fourth Annual Exhibition (New York, 1909), read '
+         'from the Internet Archive scan (item annualexhibition8384nati) — and '
+         'they stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 4 sections: South Gallery. (nos. 1–94), Centre Gallery. '
+         '(nos. 95–179), Vanderbilt Gallery. (nos. 180–275), Sculpture (nos. '
+         '276–306). Of the 306 works here, 34 carry the owner’s name as the '
+         'catalogue prints it, carried in these records as the lender. The '
+         'catalogue prints no prices. The catalogue prints no medium and no '
+         'dimensions. The catalogue is illustrated: 16 of its plates are '
+         'reproduced here, each cropped from the catalogue’s own pages and '
+         'attached to the record its caption names — the catalogue is the '
+         'evidence, so no external identity matching is involved. The parse read '
+         'the catalogue’s pages by image OCR and cross-checked every catalogue '
+         'number against the scan’s text layer; where the two readings disagree, '
+         'the record is flagged and both readings are preserved in the parse’s '
+         'audit file.'),
+        'expect': {
+            'total': 306,
+            'sections': {'South Gallery.': 94, 'Centre Gallery.': 85, 'Vanderbilt Gallery.': 96, 'Sculpture': 31},
+            'plain_range': (1, 306),
+            'lettered': set(),
+            'no_lender': 272,
+            'no_medium': 306,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1912',
+        'file': 'nad-1912.json',
+        'title': '87th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1912)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1912',
+        'year': 1912,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1912',
+        'source': 'Original catalogue: Catalogue of the Eighty-Seventh Annual Exhibition of the National Academy of Design (New York, 1912); Internet Archive item annualexhibition8788nati (bound volume holding the 1912 and 1913 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 87th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Eighty-Seventh Annual Exhibition (New York, 1912), read '
+         'from the Internet Archive scan (item annualexhibition8788nati) — and '
+         'they stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 5 sections: South Gallery. (nos. 1–85), Centre Gallery. '
+         '(nos. 86–163), Vanderbilt Gallery. (nos. 164–260), Academy Room. (nos. '
+         '261–296), Sculpture. (nos. 297–322). Of the 322 works here, 22 carry the '
+         'owner’s name as the catalogue prints it, carried in these records as the '
+         'lender. The catalogue prints no prices. The catalogue prints no medium '
+         'and no dimensions. The catalogue is illustrated: 18 of its plates are '
+         'reproduced here, each cropped from the catalogue’s own pages and '
+         'attached to the record its caption names — the catalogue is the '
+         'evidence, so no external identity matching is involved. The parse read '
+         'the catalogue’s pages by image OCR and cross-checked every catalogue '
+         'number against the scan’s text layer; where the two readings disagree, '
+         'the record is flagged and both readings are preserved in the parse’s '
+         'audit file.'),
+        'expect': {
+            'total': 322,
+            'sections': {'South Gallery.': 85, 'Centre Gallery.': 78, 'Vanderbilt Gallery.': 97, 'Academy Room.': 36, 'Sculpture.': 26},
+            'plain_range': (1, 322),
+            'lettered': set(),
+            'no_lender': 300,
+            'no_medium': 322,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1913',
+        'file': 'nad-1913.json',
+        'title': '88th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1913)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1913',
+        'year': 1913,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1913',
+        'source': 'Original catalogue: Catalogue of the Eighty-Eighth Annual Exhibition of the National Academy of Design (New York, 1913); Internet Archive item annualexhibition8788nati (bound volume holding the 1912 and 1913 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 88th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Eighty-Eighth Annual Exhibition (New York, 1913), read '
+         'from the Internet Archive scan (item annualexhibition8788nati) — and '
+         'they stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 5 sections: South Gallery. (nos. 1–88), Center Gallery. '
+         '(nos. 89–179), Vanderbilt Gallery. (nos. 180–246), Academy Room. (nos. '
+         '247–300), Sculpture. (nos. 301–315). Of the 315 works here, 22 carry the '
+         'owner’s name as the catalogue prints it, carried in these records as the '
+         'lender. The catalogue prints no prices. The catalogue prints no medium '
+         'and no dimensions. The catalogue is illustrated: 16 of its plates are '
+         'reproduced here, each cropped from the catalogue’s own pages and '
+         'attached to the record its caption names — the catalogue is the '
+         'evidence, so no external identity matching is involved. The parse read '
+         'the catalogue’s pages by image OCR and cross-checked every catalogue '
+         'number against the scan’s text layer; where the two readings disagree, '
+         'the record is flagged and both readings are preserved in the parse’s '
+         'audit file.'),
+        'expect': {
+            'total': 315,
+            'sections': {'South Gallery.': 88, 'Center Gallery.': 91, 'Vanderbilt Gallery.': 67, 'Academy Room.': 54, 'Sculpture.': 15},
+            'plain_range': (1, 315),
+            'lettered': set(),
+            'no_lender': 293,
+            'no_medium': 315,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1920',
+        'file': 'nad-1920.json',
+        'title': '95th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1920)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1920',
+        'year': 1920,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1920',
+        'source': 'Original catalogue: Catalogue of the Ninety-Fifth Annual Exhibition of the National Academy of Design (New York, 1920); Internet Archive items annualexhibition00nati (bound volume holding the 1920 and 1921 catalogues; the parse scan) and annualexhibition95nati (cross-check) — parsed from the catalogue itself',
+        'notes': (
+         'The 95th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Ninety-Fifth Annual Exhibition (New York, 1920), read '
+         'from the Internet Archive scan (item annualexhibition00nati) — and they '
+         'stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 3 sections: Paintings (nos. 1–654), Drawings, '
+         'Engravings, Etchings and Prints (nos. 655–858), Sculpture (nos. '
+         '859–936). No work here carries an owner’s name — the catalogue prints '
+         'none. The catalogue prints no prices. The catalogue prints no medium and '
+         'no dimensions. The catalogue is illustrated: 14 of its plates are '
+         'reproduced here, each cropped from the catalogue’s own pages and '
+         'attached to the record its caption names — the catalogue is the '
+         'evidence, so no external identity matching is involved. Two scans of '
+         'this edition were audited; the parse is made from the higher-resolution '
+         'scan in the BYU bound volume, which holds all 14 plates, with the '
+         'standalone scan (item annualexhibition95nati) as cross-check. No. 330 '
+         'does not exist in print — 329 is followed by 331 — and 23 lettered '
+         'sub-numbers stand as printed. Four of the 14 plates attach on their '
+         'captions’ artist and title against a conflicting printed caption number, '
+         'flagged in their records. The parse read the catalogue’s pages by image '
+         'OCR and cross-checked every catalogue number against the scan’s text '
+         'layer; where the two readings disagree, the record is flagged and both '
+         'readings are preserved in the parse’s audit file.'),
+        'expect': {
+            'total': 958,
+            'sections': {'Paintings': 655, 'Drawings, Engravings, Etchings and Prints': 208, 'Sculpture': 95},
+            'plain_range': (1, 936),
+            'absent_numbers': [330],
+            'lettered': {'868a', '887a', '928a', '924a', '889a', '910a', '911a', '865a', '883b', '883a', '884c', '121a', '747d', '94a', '890a', '747b', '897a', '897b', '891a', '747a', '747c', '863a', '863b'},
+            'no_lender': 958,
+            'no_medium': 958,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1921',
+        'file': 'nad-1921.json',
+        'title': '96th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1921)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1921',
+        'year': 1921,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1921',
+        'source': 'Original catalogue: Catalogue of the Ninety-Sixth Annual Exhibition of the National Academy of Design (New York, 1921); Internet Archive item annualexhibition00nati (bound volume holding the 1920 and 1921 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 96th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Ninety-Sixth Annual Exhibition (New York, 1921), read '
+         'from the Internet Archive scan (item annualexhibition00nati) — and they '
+         'stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 5 sections: Paintings (nos. 1–84), Center Gallery (nos. '
+         '85–166), Vanderbilt Gallery (nos. 167–254), Academy Room (nos. 255–412), '
+         'Sculpture (nos. 413–475). Of the 475 works here, 4 carry the owner’s '
+         'name as the catalogue prints it, carried in these records as the lender. '
+         'The catalogue prints no medium and no dimensions. The catalogue is '
+         'illustrated: 16 of its plates are reproduced here, each cropped from the '
+         'catalogue’s own pages and attached to the record its caption names — the '
+         'catalogue is the evidence, so no external identity matching is involved. '
+         'No Index to Illustrations and no illustration marks are printed; the '
+         'plates attach on their captions alone, checked both ways. The parse read '
+         'the catalogue’s pages by image OCR and cross-checked every catalogue '
+         'number against the scan’s text layer; where the two readings disagree, '
+         'the record is flagged and both readings are preserved in the parse’s '
+         'audit file.'),
+        'expect': {
+            'total': 475,
+            'sections': {'Paintings': 84, 'Center Gallery': 82, 'Vanderbilt Gallery': 88, 'Academy Room': 158, 'Sculpture': 63},
+            'plain_range': (1, 475),
+            'lettered': set(),
+            'no_lender': 471,
+            'no_medium': 475,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1922',
+        'file': 'nad-1922.json',
+        'title': '97th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1922)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1922',
+        'year': 1922,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1922',
+        'source': 'Original catalogue: Catalogue of the Ninety-Seventh Annual Exhibition of the National Academy of Design (New York, 1922); Internet Archive item annualexhibition9798nati (bound volume holding the 1922 and 1923 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 97th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Ninety-Seventh Annual Exhibition (New York, 1922), read '
+         'from the Internet Archive scan (item annualexhibition9798nati) — and '
+         'they stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 5 sections: Paintings (88 works), Sculpture (65 works), '
+         'Center Gallery (75 works), Vanderbilt Gallery (64 works), Academy Room '
+         '(130 works). Of the 422 works here, 1 carry the owner’s name as the '
+         'catalogue prints it, carried in these records as the lender. The '
+         'catalogue prints no medium and no dimensions. The catalogue is '
+         'illustrated: 16 of its plates are reproduced here, each cropped from the '
+         'catalogue’s own pages and attached to the record its caption names — the '
+         'catalogue is the evidence, so no external identity matching is involved. '
+         'No Index to Illustrations and no illustration marks are printed; the '
+         'plates attach on their captions alone, checked both ways. The parse read '
+         'the catalogue’s pages by image OCR and cross-checked every catalogue '
+         'number against the scan’s text layer; where the two readings disagree, '
+         'the record is flagged and both readings are preserved in the parse’s '
+         'audit file.'),
+        'expect': {
+            'total': 422,
+            'sections': {'Paintings': 88, 'Sculpture': 65, 'Center Gallery': 75, 'Vanderbilt Gallery': 64, 'Academy Room': 130},
+            'plain_range': (1, 422),
+            'lettered': set(),
+            'no_lender': 421,
+            'no_medium': 422,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'nad-1923',
+        'file': 'nad-1923.json',
+        'title': '98th Annual Exhibition of the National Academy of Design',
+        'subtitle': 'As printed in the original exhibition catalogue (1923)',
+        'venue': 'National Academy of Design, New York',
+        'dates': '1923',
+        'year': 1923,
+        'organiser': 'National Academy of Design',
+        'label': 'National Academy of Design 1923',
+        'source': 'Original catalogue: Catalogue of the Ninety-Eighth Annual Exhibition of the National Academy of Design (New York, 1923); Internet Archive item annualexhibition9798nati (bound volume holding the 1922 and 1923 catalogues) — parsed from the catalogue itself',
+        'notes': (
+         'The 98th annual exhibition of the National Academy of Design. These '
+         'records are taken from the original exhibition catalogue itself — the '
+         'Catalogue of the Ninety-Eighth Annual Exhibition (New York, 1923), read '
+         'from the Internet Archive scan (item annualexhibition9798nati) — and '
+         'they stand as the catalogue prints them, in the catalogue’s own numbered '
+         'order under its 5 sections: Paintings (106 works), Sculpture (29 works), '
+         'Center Gallery (77 works), Vanderbilt Gallery (95 works), Academy Room '
+         '(146 works). No work here carries an owner’s name — the catalogue prints '
+         'none. The catalogue prints no medium and no dimensions. The catalogue is '
+         'illustrated: 18 of its plates are reproduced here, each cropped from the '
+         'catalogue’s own pages and attached to the record its caption names — the '
+         'catalogue is the evidence, so no external identity matching is involved. '
+         'No Index to Illustrations and no illustration marks are printed; the '
+         'plates attach on their captions alone, checked both ways. The parse read '
+         'the catalogue’s pages by image OCR and cross-checked every catalogue '
+         'number against the scan’s text layer; where the two readings disagree, '
+         'the record is flagged and both readings are preserved in the parse’s '
+         'audit file.'),
+        'expect': {
+            'total': 453,
+            'sections': {'Paintings': 106, 'Sculpture': 29, 'Center Gallery': 77, 'Vanderbilt Gallery': 95, 'Academy Room': 146},
+            'plain_range': (1, 453),
+            'lettered': set(),
+            'no_lender': 453,
+            'no_medium': 453,
+            'no_title': 0,
             'no_artist': 0,
         },
     },
