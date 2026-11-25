@@ -3147,7 +3147,8 @@ EXHIBITIONS = [
     {
         'id': 'rose-croix-1892',
         'file': 'rose-croix-1892.json',
-        'title': 'Catalogue du Salon de la Rose+Croix : Geste esthétique',
+        'title': 'Premier Salon de la Rose+Croix (Ier Geste esthétique)',
+        'printed_title': 'Catalogue du Salon de la Rose+Croix : Geste esthétique',
         'subtitle': 'By Joséphin Péladan, for the Ordre de la Rose-Croix Catholique du Temple et du Graal',
         'venue': 'Galeries Durand-Ruel, Paris',
         'dates': '10 March – 10 April 1892',
@@ -3285,7 +3286,8 @@ EXHIBITIONS = [
     {
         'id': 'rose-croix-1893',
         'file': 'rose-croix-1893.json',
-        'title': 'Catalogue officiel illustré du second Salon de la Rose+Croix (IIe Geste esthétique)',
+        'title': 'Deuxième Salon de la Rose+Croix (IIe Geste esthétique)',
+        'printed_title': 'Catalogue officiel illustré du second Salon de la Rose+Croix (IIe Geste esthétique)',
         'subtitle': 'By Joséphin Péladan, for the Ordre de la Rose-Croix Catholique du Temple et du Graal',
         'venue': 'Palais du Champ-de-Mars, Paris',
         'dates': '28 March – 30 April 1893',
@@ -3419,7 +3421,8 @@ EXHIBITIONS = [
     {
         'id': 'rose-croix-1894',
         'file': 'rose-croix-1894.json',
-        'title': 'Catalogue du Salon de la Rose+Croix (IIIe Geste esthétique)',
+        'title': 'Troisième Salon de la Rose+Croix (IIIe Geste esthétique)',
+        'printed_title': 'Catalogue du Salon de la Rose+Croix (IIIe Geste esthétique)',
         'subtitle': 'By Joséphin Péladan, for the Ordre de la Rose-Croix Catholique du Temple et du Graal',
         'venue': 'Galerie des Artistes Contemporains, rue de la Paix, Paris',
         'dates': 'May 1894',
@@ -3527,7 +3530,8 @@ EXHIBITIONS = [
     {
         'id': 'rose-croix-1895',
         'file': 'rose-croix-1895.json',
-        'title': 'Catalogue du Salon de la Rose+Croix (IVe Geste esthétique)',
+        'title': 'Quatrième Salon de la Rose+Croix (IVe Geste esthétique)',
+        'printed_title': 'Catalogue du Salon de la Rose+Croix (IVe Geste esthétique)',
         'subtitle': 'By Joséphin Péladan, for the Ordre de la Rose-Croix Catholique du Temple et du Graal',
         'venue': 'Galerie des Artistes Contemporains, rue de la Paix, Paris',
         'dates': '20 March – 20 April 1895',
@@ -3676,7 +3680,8 @@ EXHIBITIONS = [
     {
         'id': 'rose-croix-1896',
         'file': 'rose-croix-1896.json',
-        'title': 'Salon de la Rose+Croix (Ve Geste esthétique)',
+        'title': 'Cinquième Salon de la Rose+Croix (Ve Geste esthétique)',
+        'printed_title': 'Salon de la Rose+Croix (Ve Geste esthétique)',
         'subtitle': 'By Joséphin Péladan, for the Ordre de la Rose-Croix Catholique du Temple et du Graal',
         'venue': 'Galerie des Arts Réunis, avenue de l’Opéra, Paris',
         'dates': '20 March – 20 April 1896',
@@ -3772,7 +3777,8 @@ EXHIBITIONS = [
     {
         'id': 'rose-croix-1897',
         'file': 'rose-croix-1897.json',
-        'title': 'VIe Geste esthétique — Sixième Salon de la Rose+Croix',
+        'title': 'Sixième Salon de la Rose+Croix (VIe Geste esthétique)',
+        'printed_title': 'VIe Geste esthétique — Sixième Salon de la Rose+Croix',
         'subtitle': 'By Joséphin Péladan, for the Ordre de la Rose-Croix Catholique du Temple et du Graal',
         'venue': 'Galerie Georges Petit, Paris',
         'dates': '5 – 31 March 1897',
@@ -6944,6 +6950,22 @@ SERIES = [
     ('rose-croix-', 'Salon de la Rose+Croix'),
 ]
 
+# Display heading for each series, shown as the group heading on the
+# Record of Exhibitions page; the summaries carry it as 'series'.
+SERIES_HEADINGS = {
+    'nad-': 'National Academy of Design — Annual Exhibitions · New York',
+    'aws-': 'American Water Color Society — Annual Exhibitions · New York',
+    'guildhall-': 'Guildhall Art Gallery — Loan Exhibitions · London',
+    'rose-croix-': 'Salons de la Rose+Croix · Paris',
+}
+
+
+def _series_heading(ex):
+    for prefix, heading in SERIES_HEADINGS.items():
+        if ex['id'].startswith(prefix):
+            return heading
+    return ex['id'].split('-')[0]
+
 
 def _series_rank(ex):
     for rank, (prefix, _name) in enumerate(SERIES):
@@ -7106,10 +7128,13 @@ for ex in EXHIBITIONS:
         'year': ex['year'],
         'organiser': ex['organiser'],
         'label': ex['label'],
+        'series': _series_heading(ex),
         'works': len(recs),
         'sections': [{'name': name, 'works': n} for name, n in sections.items()],
         'source': ex['source'],
-        'notes': ex['notes'],
+        'notes': ex['notes'] + (f" The catalogue’s own title is "
+                                f"«{ex['printed_title']}»."
+                                if ex.get('printed_title') else ''),
     })
     for r in recs:
         row = dict(r)
