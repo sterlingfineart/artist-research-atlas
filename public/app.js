@@ -1340,6 +1340,9 @@
   async function loadExhRecords(id) {
     if (!exhDataCache.has(id)) {
       exhDataCache.set(id, salonFetchJSON(`/data/exhibitions/${id}.json`)
+        /* Field-standard exhibitions build to an object
+           {records, apparatus}; the rest are bare record arrays. */
+        .then((d) => (Array.isArray(d) ? d : d.records))
         .catch((e) => { exhDataCache.delete(id); throw e; }));
     }
     return exhDataCache.get(id);
@@ -1992,6 +1995,7 @@
     aws: 'The Society’s annual exhibitions in New York.',
     guildhall: 'The Corporation of London’s loan exhibitions at the Guildhall Art Gallery.',
     rose: 'Joséphin Péladan’s six Salons de la Rose+Croix — the Gestes esthétiques.',
+    detroit: 'The Institute’s annual exhibition for Michigan artists and its loan exhibitions of the 1940s, catalogued by W. R. Valentiner and E. P. Richardson.',
   };
   function renderExhList(idx) {
     const el = $('#exh-list');
