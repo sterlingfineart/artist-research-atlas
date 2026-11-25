@@ -1,13 +1,13 @@
 {
  "builtFrom": "public/data (Record of Exhibitions, Loan, RA, Salon, Graves/Redford sales)",
- "records": 505588,
- "identities": 90196,
- "groups": 1025,
+ "records": 505945,
+ "identities": 90379,
+ "groups": 1028,
  "shards": 557,
  "shardFiles": 27,
- "shardBytes": 85860745,
+ "shardBytes": 85958415,
  "stats": {
-  "record": 47125,
+  "record": 47482,
   "record_skipped_noname": 15,
   "loan": 42727,
   "ra": 161019,
