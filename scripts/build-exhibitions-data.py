@@ -10,7 +10,12 @@ Outputs under public/data/exhibitions/:
                         count, sections with counts, source note, and
                         the exhibition's honest "notes" text, which the
                         site shows in its About notice)
-  <id>.json           — that exhibition's records, as parsed
+  <id>.json           — that exhibition's records, as parsed (for the
+                        field-standard parses, whose sources are objects
+                        {exhibition, records, apparatus}: an object
+                        {records, apparatus}, the apparatus carried from
+                        the source file; the site's loader accepts both
+                        shapes)
   all.json            — {"works": [...]}: every record across
                         exhibitions, each tagged with its exhibition
                         id and short label (the cross-exhibition
@@ -6927,6 +6932,154 @@ EXHIBITIONS = [
             'no_artist': 0,
         },
     },
+    # ——— Detroit Institute of Arts, 1942–1945 ———
+    # The first parses under the unified field standard
+    # (FIELD-STANDARD.md, confirmed 25 November 2026): the source
+    # files are objects {exhibition, records, apparatus}, not bare
+    # record lists. The build takes the records, applies the display
+    # adaptation in adapt_object_records (lettered suffixes fold into
+    # the catalogue number; the printed lines with no column of their
+    # own are appended to the record's note), and carries the
+    # apparatus block into the built file beside the records — the
+    # site does not yet render the apparatus, but it is not dropped.
+    {
+        'id': 'detroit-1942',
+        'file': 'detroit-1942.json',
+        'title': 'Annual Exhibition for Michigan Artists',
+        'subtitle': 'As printed in the original exhibition catalogue (1942)',
+        'venue': 'Detroit Institute of Arts, Detroit',
+        'dates': '17 November – 14 December 1942',
+        'year': 1942,
+        'organiser': 'Detroit Institute of Arts',
+        'label': 'Detroit Institute of Arts 1942',
+        'source': 'Original catalogue: Annual Exhibition for Michigan Artists (Detroit Institute of Arts, 1942); HathiTrust item mdp.39015091048705 (University of Michigan copy) — parsed from the catalogue itself',
+        'notes': ('The annual juried exhibition for Michigan artists at the Detroit '
+         'Institute of Arts — begun in 1910, held under the joint auspices of the '
+         'Institute and the Scarab Club until 1928, and judged thereafter by an '
+         'out-of-town jury. These records are taken from the original exhibition '
+         'catalogue itself (printed pp. 1–16) and stand as the catalogue prints '
+         'them: 231 works in the catalogue’s own numbered order — Pictures '
+         '(nos. 1–206) and Sculpture (nos. 207–231). The catalogue prints no '
+         'medium, dimensions or lender for any work (the works were for sale at '
+         'studio prices, enquired of at the desk), and none has been inferred. '
+         'Sixteen prizes were awarded; the prize each work won stands in its '
+         'record and is shown in its note, as are the asterisked entries the '
+         'catalogue marks as not in competition. The foreword counts 143 '
+         'painters; the catalogue’s own headings number 142 — the discrepancy '
+         'stands as printed. The catalogue’s apparatus — the jury of award, the '
+         'prize table, the list of awards and the Founders Society purchase-'
+         'prize roll 1926–1942 (which names no winner for 1934) — is carried '
+         'in the built file’s apparatus block; the page does not yet display it.'),
+        'object_file': True,
+        'expect': {
+            'total': 231,
+            'sections': {'Pictures': 206, 'Sculpture': 25},
+            'plain_range': (1, 231),
+            'no_lender': 231,
+            'no_medium': 231,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'detroit-1944-early-dutch',
+        'file': 'detroit-1944-early-dutch.json',
+        'title': 'Loan Exhibition of Early Dutch Paintings 1460–1540',
+        'subtitle': 'The Twenty-Fifth Loan Exhibition · As printed in the original exhibition catalogue (1944)',
+        'venue': 'Detroit Institute of Arts, Detroit',
+        'dates': 'February 1944',
+        'year': 1944,
+        'organiser': 'Detroit Institute of Arts',
+        'label': 'Detroit Institute of Arts 1944',
+        'source': 'Original catalogue: Loan Exhibition of Early Dutch Paintings 1460–1540 (Detroit Institute of Arts, 1944), catalogue by W. R. Valentiner; HathiTrust item mdp.39015091048713 (University of Michigan copy) — parsed from the catalogue itself',
+        'notes': ('The Institute’s Twenty-Fifth Loan Exhibition, a scholarly loan '
+         'exhibition of early Dutch paintings catalogued by the Institute’s '
+         'director, W. R. Valentiner. These records are taken from the original '
+         'catalogue itself and stand as it prints them: 27 works under its six '
+         'school sections (Haarlem, Amsterdam, Leiden, Delft, ’s-Hertogenbosch, '
+         'Utrecht), each entry carrying its lender and, where the catalogue '
+         'prints them, its COLLECTIONS provenance, EXHIBITED history and '
+         'DESCRIBED bibliography — those lines stand in each record and are '
+         'shown in its note. Sixteen lenders are named, New York dealers among '
+         'them. The catalogue prints no prices and names no buyers — it is a '
+         'loan exhibition — and the records’ price and buyer fields stand '
+         'empty, as printed. Twelve works are illustrated on the catalogue’s '
+         'plate leaves; each plate is shown beside its record, cropped from '
+         'the catalogue’s own pages. This copy has no closing checklist; the '
+         'numbered run was reconciled against the catalogue body itself. The '
+         'catalogue’s introduction, lenders list and artist essays are carried '
+         'in the built file’s apparatus block; the page does not yet display it.'),
+        'object_file': True,
+        # February 1944 precedes the December 1944 loan exhibition
+        # below; both carry year 1944, so the slate tiebreak is stated.
+        'slate_sort': 'detroit-1944-a',
+        'expect': {
+            'total': 27,
+            'sections': {'School of Haarlem': 6, 'School of Amsterdam': 4,
+                         'School of Leiden': 5, 'School of Delft': 1,
+                         'School of Hertogenbosch': 2, 'School of Utrecht': 9},
+            'plain_range': (1, 27),
+            'no_lender': 0,
+            'no_medium': 0,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
+    {
+        'id': 'detroit-1944-45-romantic',
+        'file': 'detroit-1944-45-romantic.json',
+        'title': 'The World of the Romantic Artist — A Survey of American Culture from 1800 to 1875',
+        'subtitle': 'The Twenty-Sixth Loan Exhibition · As printed in the original exhibition catalogue (1944–45)',
+        'venue': 'Detroit Institute of Arts, Detroit',
+        'dates': '28 December 1944 – 28 January 1945',
+        'year': 1944,
+        'organiser': 'Detroit Institute of Arts',
+        'label': 'Detroit Institute of Arts 1944–45',
+        'source': 'Original catalogue: The World of the Romantic Artist — A Survey of American Culture from 1800 to 1875 (Detroit Institute of Arts, 1944), catalogue by E. P. Richardson; HathiTrust item mdp.39015091048754 (University of Michigan copy) — parsed from the catalogue itself',
+        'notes': ('The Institute’s Twenty-Sixth Loan Exhibition, a survey of American '
+         'culture from 1800 to 1875 through its painting, catalogued by '
+         'E. P. Richardson. These records are taken from the original catalogue '
+         'itself and stand as it prints them: 99 works — nos. 1–97 with the '
+         'catalogue’s two lettered insertions, 13a and 44a — under its fifteen '
+         'parts, from National Leaders to the Exotic Landscape. The catalogue '
+         'prints no dimensions and no medium for any work, and none has been '
+         'inferred; each work’s printed date, where the catalogue gives one, '
+         'stands in its record and is shown in its note. Thirty-nine lenders '
+         'are named, American museums and private collectors among them; two '
+         'works (nos. 84 and 94) are anonymous loans. Twenty-eight works are '
+         'illustrated in the text, each captioned with its number, title and '
+         'artist; each illustration is shown beside its record, cropped from '
+         'the catalogue’s own pages. The catalogue’s closing index of artists '
+         'assigns no. 19 to William Page, where the body gives it to Stanley — '
+         'the error stands as printed, and the index is carried whole in the '
+         'built file’s apparatus block; the page does not yet display it.'),
+        'object_file': True,
+        'slate_sort': 'detroit-1944-b',
+        'expect': {
+            'total': 99,
+            'sections': {'The People — I. National Leaders': 4,
+                         'The People — II. Elegance and Romantic Beauty': 4,
+                         'The People — III. Talent': 6,
+                         'The People — IV. Character': 5,
+                         'National Life': 8,
+                         'Poetic Revery, Fantasy, The Idyll': 6,
+                         'Religion': 4,
+                         'Animals and Birds': 3,
+                         'Still Life': 2,
+                         'Landscape — I. The Wilderness Continent': 7,
+                         'Landscape — II. The Seas and Ships': 2,
+                         'Landscape — III. The Cities of America': 4,
+                         'Landscape — IV. The Pastoral or Inhabited Landscape': 7,
+                         'Landscape — V. The Exotic Landscape': 14,
+                         'Life, Manners, The Variety of the Human Scene, The Humors and Flavors of Life': 23},
+            'plain_range': (1, 97),
+            'lettered': {'13a', '44a'},
+            'no_lender': 0,
+            'no_medium': 99,
+            'no_title': 0,
+            'no_artist': 0,
+        },
+    },
 ]
 
 
@@ -6948,6 +7101,7 @@ SERIES = [
     ('aws-', 'American Water Color Society'),
     ('guildhall-', 'Guildhall'),
     ('rose-croix-', 'Salon de la Rose+Croix'),
+    ('detroit-', 'Detroit Institute of Arts'),
 ]
 
 # Display heading for each series, shown as the group heading on the
@@ -6957,6 +7111,7 @@ SERIES_HEADINGS = {
     'aws-': 'American Water Color Society — Annual Exhibitions · New York',
     'guildhall-': 'Guildhall Art Gallery — Loan Exhibitions · London',
     'rose-croix-': 'Salons de la Rose+Croix · Paris',
+    'detroit-': 'Detroit Institute of Arts — Annual and Loan Exhibitions · Detroit',
 }
 
 
@@ -6983,12 +7138,16 @@ for _ex in EXHIBITIONS:
 
 
 def _slate_key(ex):
+    # An entry may carry 'slate_sort' to state its place among
+    # same-year exhibitions of its series (the two Detroit loan
+    # exhibitions both opened in 1944, February before December);
+    # it defaults to the exhibition id.
     rank = _series_rank(ex)
     if rank < len(SERIES):
-        return (rank, 0, '', ex['year'], ex['id'])
+        return (rank, 0, '', ex['year'], ex.get('slate_sort', ex['id']))
     prefix = ex['id'].split('-')[0]
     return (rank, _unlisted_first_year[prefix], prefix,
-            ex['year'], ex['id'])
+            ex['year'], ex.get('slate_sort', ex['id']))
 
 
 EXHIBITIONS.sort(key=_slate_key)
@@ -7091,7 +7250,16 @@ def apply_plates(ex, recs):
     for r in recs:
         e = plates.get(str(r['no']))
         if e:
-            r['image'] = e['web']
+            web = e['web']
+            if web.startswith('web/'):
+                # The Detroit archives record the web copy's place
+                # inside the archive ('web/2.jpg'); the site carries
+                # it under /images/exhibitions/<id>/ — the form the
+                # earlier archives record directly in their own ways
+                # (with or without the leading slash), and those stand
+                # exactly as recorded.
+                web = f"/images/exhibitions/{ex['id']}/{os.path.basename(web)}"
+            r['image'] = web
             r['plate'] = e['plate']
             matched += 1
     if matched != len(plates):
@@ -7100,10 +7268,63 @@ def apply_plates(ex, recs):
     print(f"{ex['id']}: attached {matched} catalogue plates")
 
 
+def adapt_object_records(recs):
+    """Display adaptation for the field-standard source shape
+    ({exhibition, records, apparatus} — the Detroit parses first).
+    Formatting-level only: every source field stays on the built
+    record; two things change for display.
+
+    * A lettered insert's suffix folds into the catalogue number
+      (no 13 with no_suffix 'a' becomes '13a'), the form the other
+      catalogues' lettered numbers already take.
+    * The printed lines that have no column of their own — the work's
+      printed date, COLLECTIONS / EXHIBITED / DESCRIBED lines, a shared
+      group heading, prize awards and the not-in-competition flag —
+      are appended to the record's note, where the exhibition page
+      shows them under the title (the same home the owner and price
+      lines take in the American Water Color Society records).
+    """
+    out = []
+    for r in recs:
+        r = dict(r)
+        if r.get('no_suffix'):
+            r['no'] = f"{r['no']}{r['no_suffix']}"
+        extra = []
+        if r.get('work_date'):
+            extra.append(f"Dated {r['work_date']}.")
+        if r.get('collections'):
+            extra.append(f"{r.get('collections_label') or 'COLLECTIONS'}: "
+                         f"{r['collections']}")
+        if r.get('exhibited'):
+            extra.append(f"EXHIBITED: {r['exhibited']}")
+        if r.get('described'):
+            extra.append(f"DESCRIBED: {r['described']}")
+        if r.get('group'):
+            extra.append(f"Shown in the group “{r['group']}”.")
+        for a in r.get('award') or []:
+            extra.append(f"Award: {a}.")
+        if r.get('not_in_competition'):
+            extra.append('Not in competition.')
+        if extra:
+            base = (r.get('note') or '').strip()
+            r['note'] = (base + ' ' if base else '') + ' '.join(extra)
+        out.append(r)
+    return out
+
+
 summaries = []
 all_works = []
 for ex in EXHIBITIONS:
-    recs = json.load(open(os.path.join(SRC_DIR, ex['file'])))
+    raw = json.load(open(os.path.join(SRC_DIR, ex['file'])))
+    apparatus = None
+    if isinstance(raw, dict) and 'records' in raw:
+        # The field-standard source shape: the records are adapted
+        # for display and the apparatus block is carried into the
+        # built file beside them (see the output write below).
+        recs = adapt_object_records(raw['records'])
+        apparatus = raw.get('apparatus')
+    else:
+        recs = raw
     if ex.get('notes_plural'):
         # This parse stores the record note under 'notes' and carries
         # working 'price' and 'page' fields; the built file carries
@@ -7118,7 +7339,11 @@ for ex in EXHIBITIONS:
     sections = verify(ex, recs)
     apply_plates(ex, recs)
     with open(os.path.join(OUT, ex.get('out_file', ex['file'])), 'w') as f:
-        json.dump(recs, f, ensure_ascii=False)
+        if apparatus is not None:
+            json.dump({'records': recs, 'apparatus': apparatus}, f,
+                      ensure_ascii=False)
+        else:
+            json.dump(recs, f, ensure_ascii=False)
     summaries.append({
         'id': ex['id'],
         'title': ex['title'],
