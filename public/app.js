@@ -74,6 +74,7 @@
     if (path === '/sales') return viewSales(p);
     if (path === '/game') return viewGame(p);
     if (path === '/feedback') return viewFeedback();
+    if (path === '/restitution') return viewRestitution();
     if (path === '/artist' && (p.wd || p.ulan)) return viewReport(p);
     if (path === '/about') return viewAbout();
     return viewHome();
@@ -3760,6 +3761,127 @@
     </section>`;
   }
 
+  /* ============================================================ restitution */
+  function viewRestitution() {
+    const dirItem = (name, url, what) =>
+      `<li><span class="t">${link(url, name)}</span><div class="abs">${what}</div></li>`;
+    app.innerHTML = `<section class="rs prose" style="max-width:900px;margin:0 auto">
+      <h2>Art restitution</h2>
+      <p>Restitution is the return of a work of art or other cultural property to its former owner, or to that owner's heirs, when the work was taken — or lost in circumstances amounting to a taking — in a way that the law, or the standards museums and governments have adopted, treats as wrongful. This page explains how restitution works, follows recent developments, explains the landmark cases in plain terms, and links to the databases, panels and research organisations a researcher uses to check a work's history.</p>
+      <div class="notice">This page is general information for researchers, not legal advice. Whether any particular work is subject to a claim depends on its own documented history and on the law of the place where the claim is brought.</div>
+
+      <h3>What restitution is</h3>
+      <p>A restitution claim starts from a provenance: the documented chain of ownership of a work from its creation to the present. Where that chain shows the work was confiscated, stolen, or sold under duress or in other circumstances of persecution, the former owner or their heirs may seek its return from the current holder — a museum, a dealer or a private owner. Restitution is distinct from the recovery of works stolen in ordinary theft, although the same databases serve both, and from repatriation between states, although the colonial-era cases below sit between the two ideas.</p>
+
+      <h3>Nazi-era spoliation, 1933–45</h3>
+      <p>The largest body of restitution cases arises from the Nazi period. Between 1933 and 1945, Jewish collectors, dealers and other persecuted owners across Germany and occupied Europe lost art on a vast scale and by many mechanisms: outright seizure by agencies such as the Einsatzstab Reichsleiter Rosenberg (ERR), which confiscated collections in France, Belgium and elsewhere and processed them through the Jeu de Paume in Paris; the forced "aryanisation" of Jewish-owned galleries and businesses; sales made under duress to raise money for punitive emigration taxes such as the Reichsfluchtsteuer; and "flight goods" (Fluchtgut) — property sold by owners fleeing persecution, often at depressed prices in a place of refuge. A sale documented in the records of the period is therefore not, by itself, evidence that the transaction was voluntary; researchers read the circumstances, not just the fact of sale.</p>
+
+      <h3>The post-war recovery</h3>
+      <p>As the Allied armies advanced, the Monuments, Fine Arts, and Archives officers (the "Monuments Men") located the repositories where seized art had been stored and gathered recovered works at Central Collecting Points, principally in Munich. Works that could be identified were returned to the countries from which they had been taken, and those countries ran restitution programmes for individual owners. Many works were recovered and returned; many were never found, and some that were found were never claimed — a body of unclaimed works remains in state custody in several countries, in France held as the Musées Nationaux Récupération (MNR) works. Post-war restitution law in the occupation zones set deadlines, and claims not brought in time lapsed, which is one reason later claims proceed under modern standards rather than the post-war statutes.</p>
+
+      <h3>The Washington Principles and how claims proceed today</h3>
+      <p>In December 1998, 44 governments adopted the Washington Conference Principles on Nazi-Confiscated Art. The Principles call on holders to research the provenance of their collections, to make records public, to encourage claims, and to achieve "a just and fair solution" where a pre-war owner or their heirs can be identified. They are not a treaty and bind no one as a matter of law; their force is moral and professional, and museums and governments have adopted them as the standard against which their conduct is judged. In 2024 a group of governments issued best practices intended to clarify how the Principles should be applied.</p>
+      <p>Today a claim typically proceeds in one of three ways. First, several countries maintain specialist advisory panels or commissions — Germany's Advisory Commission, the UK's Spoliation Advisory Panel, the Netherlands Restitutions Committee, France's CIVS and Austria's Art Restitution Advisory Board among them — which examine claims against public collections, and sometimes private holders by agreement, and recommend or advise on an outcome; most recommendations are not legally binding, but governments usually follow them. Second, claims are brought in court: in the United States, the Holocaust Expropriated Art Recovery (HEAR) Act of 2016 provides a federal six-year limitation period, running from the claimant's actual discovery of the work's identity and location, for Nazi-era claims. Third, many claims settle between the parties — outcomes include return of the work, its purchase from the heirs, compensation, or a sale with the proceeds divided. Because limitation periods, burdens of proof and the treatment of good-faith purchasers differ from country to country, the same documented history can produce different results in different jurisdictions.</p>
+
+      <h3>Colonial-era restitution</h3>
+      <p>A second front concerns objects taken during the colonial period — above all in military expeditions and under colonial rule — and now held in Western museums. The best-known example is the Benin Bronzes: several thousand plaques and sculptures seized by British forces in the 1897 attack on Benin City, in present-day Nigeria, and dispersed to museums and collectors worldwide. Since 2021 a series of museums and governments — including Germany, the Netherlands, and museums in the United Kingdom and the United States — have transferred ownership of Benin works to Nigeria or returned the objects themselves. These cases proceed differently from Nazi-era claims: there is no equivalent of the Washington Principles, decisions rest with governments and museum governing bodies under their own policies, and the claimants are usually states or traditional authorities rather than individual heirs.</p>
+
+      <h3>What "questionable provenance" means in practice</h3>
+      <p>Researchers use the phrase as a prompt for further work, not as a finding. The standard questions are factual. Is there a gap in the work's documented ownership in Europe between 1933 and 1945 — years for which no owner can be shown? Did the work pass through a dealer or intermediary documented as having handled confiscated property? Do the surviving records of a sale give a seller, a buyer and a price that can be checked against other sources, or only a name? A gap is not proof that a work was looted: records were destroyed, and many legitimate transactions were poorly documented. Equally, an unbroken-looking provenance is not proof that every transfer was voluntary. What can be published, and what this Atlas publishes, are the records themselves and the gaps in them; conclusions about any individual work belong to the bodies listed below, working from the full evidence.</p>
+
+      <h3>How the Atlas's records help</h3>
+      <p>Provenance research is built from fixed points — dated, documented moments at which a specific work can be placed in a specific place or pair of hands. The Atlas's databases supply such points. Its exhibition records, transcribed from the catalogues as printed, show a work exhibited on a date, frequently with the lender who owned it at that moment; its sales records name buyers and sellers at dated auctions. A work documented in an exhibition before 1933, or in a sale with a named buyer, has an anchor against which later claims about its history can be tested. Where a catalogue printed an illustration of the work, the Atlas preserves that plate with its caption: a contemporary image, published with the exhibition itself, is identification evidence of a particular strength, because it shows the work as it was when the record was made.</p>
+
+      <h3>Restitution in the news</h3>
+      <p>Recent returns, panel decisions and court rulings, each verified against its source. The selection is updated periodically; the date of each item is shown.</p>
+      <div id="rest-news"><div class="loading"><div class="spinner"></div><span>Loading news…</span></div></div>
+
+      <h3>Landmark cases</h3>
+      <p>The cases below are the ones that made the modern law and practice of restitution. Each is explained in plain terms: what happened, what the court or panel had to decide, what the outcome was, and whether the route the claimant took actually worked. Read together, they show why the same history can end differently in different countries — the comparison after the cases draws that out.</p>
+      <div id="rest-cases"><div class="loading"><div class="spinner"></div><span>Loading cases…</span></div></div>
+
+      <h3>Why the country matters</h3>
+      <p>The cases above were decided less by what happened in the 1930s and 1940s — which was often undisputed — than by where the work happened to be when it was claimed, and which legal clock applied to it. In outline:</p>
+      <p><strong>The United States</strong> is the most claimant-friendly forum, and the most combative. Cases are ordinary lawsuits, with full evidence-gathering and heavy costs. Two ideas dominate: a thief can pass no title, so argument concentrates on time; and Congress softened the time problem in 2016 with the HEAR Act, giving claimants six years from actually discovering where the work is. Set against those are the defence of laches, which defeated the Grünbaum heirs in <em>Bakalar</em>, and, where a foreign state holds the work, sovereign immunity (<em>Philipp</em>) and the act of state doctrine (<em>Von Saher</em>). A claimant with a work in the United States has real rights — and should expect a real fight, measured in years.</p>
+      <p><strong>England</strong> routes claims against national collections away from the courts to the Spoliation Advisory Panel, which judges the moral strength of the claim rather than technical title. Its recommendations are not binding, but ministers have accepted them; the true obstacle was that national museums were forbidden by statute to give anything back, a bar the Holocaust (Return of Cultural Objects) Act 2009 removed where the Panel recommends return. The process is slow and inexpensive — but it reaches public collections only, and a private holder in England may still be protected by limitation rules once a good-faith purchaser has held a work for six years.</p>
+      <p><strong>Germany</strong>, whose institutions hold the largest share of the material, has chosen advice over law. There is no general restitution statute a claimant can invoke, and ordinary civil law is unhelpful: a purchase in good faith can transfer ownership, and ownership claims face a thirty-year long-stop. The Advisory (Limbach) Commission will examine a dispute with a public institution if the institution agrees to submit to it, and its reasoned recommendations carry political weight, but they bind no one — as the Guelph Treasure heirs learned. Outcomes turn on provenance research and public attention more than on enforceable rights.</p>
+      <p><strong>The Netherlands</strong> built the most developed committee system: the Restitutions Committee advises the minister on the state collection and can give opinions that bind other holders who agree to be bound. For years its "balance of interests" weighed the museum's attachment to a work against the family's loss, and produced decisions claimants experienced as cold. The Kohnstamm review of 2020 said so officially, and policy since 2021 starts from return where the loss was involuntary. The Kandinsky case shows both the system's rigidity — a binding opinion upheld by a court — and its ability to reverse itself without any court deciding the merits.</p>
+      <p><strong>France</strong> holds recovered works in a posture of permanent custody. The MNR works were never the museums' property, so they can be returned administratively once research identifies the owner — and <em>Gentili</em> showed the courts could annul a spoliation sale outright. But works that had become national property were locked by the rule that public collections are inalienable, beyond even a willing minister's power to release; for decades, most such restitutions required an Act of Parliament for the individual work, until the framework law of 22 July 2023 created a general route for property spoliated between 1933 and 1945. France is therefore two systems side by side: a research-driven one that works, and a legislative bottleneck that is only now clearing.</p>
+      <p><strong>Austria</strong> is the exception that proves the rule: since 1998 it has had an actual restitution statute for the federal collections. Official researchers examine the collections, the Art Restitution Advisory Board recommends, the responsible minister decides, and the decisions are published. The system has produced large numbers of returns without litigation — and it was this law that Maria Altmann first invoked. Its limits are scope, since it covers federal collections only, and the fact that the final word is a minister's rather than a court's; but of the countries on this page, Austria is the one where a claimant against the state proceeds by something resembling a right rather than by grace or by lawsuit.</p>
+      <p><strong>The pattern.</strong> Strip the doctrines away and three things decide most cases. Where the work sits, because that chooses the forum, and the forum chooses the law — <em>Cassirer</em> has run for twenty years on that single point. Which clock applies, because limitation periods, discovery rules and laches, rather than the facts of the taking, are what claimants most often lose on. And whether the holder is a state collection, because states can be moved by panels, statutes and politics in ways private owners cannot. The merits — was this work taken from a persecuted owner? — are frequently agreed by everyone involved. What each country's law supplies is a different answer to the question that follows: and what, here and now, follows from that?</p>
+
+      <h3>Research a work's history</h3>
+      <p>The starting points below are the databases, panels and organisations that provenance researchers use. Every link was checked against the organisation's own site when this page was built.</p>
+
+      <h3>Lost and stolen art databases</h3>
+      <ul class="items">
+        ${dirItem('Lost Art Database — German Lost Art Foundation', 'https://www.lostart.de/en/start', 'The public database of cultural property lost through Nazi persecution, 1933–45, and of wartime losses: search requests for missing works and found-object reports for works whose owners are sought. Free to search; the first check for a work missing since the Nazi period.')}
+        ${dirItem('ERR Database — art objects at the Jeu de Paume', 'https://www.errproject.org/jeudepaume/', 'The registration cards and photographs of more than 40,000 objects seized by the Einsatzstab Reichsleiter Rosenberg in France and Belgium, 1940–44, searchable by object and by the owner they were taken from. A Claims Conference and US Holocaust Memorial Museum project.')}
+        ${dirItem('Art Loss Register', 'https://www.artloss.com/search/', 'The largest private database of stolen, missing and looted art — over 700,000 items. A paid search with a certificate; the standard due-diligence check before a purchase, sale or loan.')}
+        ${dirItem('INTERPOL — Stolen Works of Art Database', 'https://www.interpol.int/Crimes/Cultural-heritage-crime/Stolen-Works-of-Art-Database', 'Some 57,000 stolen and missing objects recorded with certified police information. Full access is by application; the public ID-Art app checks objects against it.')}
+      </ul>
+
+      <h3>Sales records and catalogues, 1901–1945</h3>
+      <ul class="items">
+        ${dirItem('Getty Provenance Index — German Sales Catalogs', 'https://www.getty.edu/research/tools/provenance/german_sales.html', 'More than 250,000 auction records from over 2,000 German, Austrian, Swiss and occupied-territory sales catalogues of 1930–45, searchable by artist, lot title, buyer, seller and city; each record links to the full catalogue at Heidelberg University Library. The single most important sales source for the 1930–45 window.')}
+        ${dirItem('Heidelberg University Library / arthistoricum.net — German Sales 1901–1945', 'https://www.arthistoricum.net/en/subjects/thematic-portals/german-sales/', 'The digitised catalogues themselves: around 8,000 German-language auction catalogues, 1901–1945, free to read in full, with the Getty index as their searchable companion.')}
+      </ul>
+
+      <h3>National panels and commissions</h3>
+      <ul class="items">
+        ${dirItem('Germany — Advisory Commission (Beratende Kommission)', 'https://www.beratende-kommission.de/en/commission', 'Mediates disputes between claimants and German public institutions over Nazi-confiscated cultural property, where both parties agree to submit the case; its recommendations are not legally binding.')}
+        ${dirItem('United Kingdom — Spoliation Advisory Panel', 'https://www.gov.uk/government/groups/spoliation-advisory-panel', 'Considers claims for objects lost between 1933 and 1945 that are now in UK national collections or other public museums, and recommends a response to the Secretary of State.')}
+        ${dirItem('Netherlands — Restitutions Committee', 'https://www.restitutiecommissie.nl/en/', 'Advises the Minister on claims to the Dutch National Art Collection, and can give binding opinions for other collections when both parties agree.')}
+        ${dirItem('France — CIVS', 'https://www.civs.gouv.fr/en/our-missions', 'The Commission for the Restitution of Property and Compensation of Victims of Anti-Semitic Spoliation: examines claims for property spoliated in France in 1940–44 and, under the law of 22 July 2023, cultural property spoliated between 1933 and 1945 now in French public collections, and recommends measures to the Prime Minister.')}
+        ${dirItem('Austria — Provenance Research and Restitution in the Federal Collections', 'https://www.provenienzforschung.gv.at/en/', 'The Commission for Provenance Research investigates the Austrian federal collections; the Art Restitution Advisory Board recommends to the responsible minister whether a work should be restituted under the 1998 Art Restitution Act, and its decisions are published.')}
+      </ul>
+
+      <h3>Research organisations and guidance</h3>
+      <ul class="items">
+        ${dirItem('Central Registry of Information on Looted Cultural Property 1933–1945 (lootedart.com)', 'https://www.lootedart.com', 'Run by the Commission for Looted Art in Europe: a searchable object database of more than 25,000 looted and missing works, and an information database of laws, policies and cases from over 49 countries.')}
+        ${dirItem('Claims Conference / WJRO — Looted Art and Cultural Property Initiative', 'https://art.claimscon.org/resources/overview-of-worldwide-looted-art-and-provenance-research-databases/', 'The Claims Conference and World Jewish Restitution Organization initiative on Holocaust-looted art; its research-databases page is a maintained overview of provenance sources worldwide.')}
+        ${dirItem('Proveana — German Lost Art Foundation', 'https://www.proveana.de/en/start', 'The research database publishing the results of the Foundation-funded provenance research projects — on objects, people, institutions and events — and searchable together with the Lost Art contents. Use it to see what funded research has already established about a work, a collector or a dealer.')}
+        ${dirItem('German Lost Art Foundation (Deutsches Zentrum Kulturgutverluste)', 'https://www.kulturgutverluste.de/en/', 'Germany\'s federal foundation for provenance research: it funds research projects, runs the Lost Art Database and Proveana, and is the secretariat of the Advisory Commission.')}
+      </ul>
+
+      <h3>Museum provenance projects</h3>
+      <ul class="items">
+        ${dirItem('The Met — Provenance Research', 'https://www.metmuseum.org/research-centers/provenance-research/research-resources', 'The Metropolitan Museum\'s provenance initiative: its research on works that changed hands in German-occupied Europe during the Nazi era, its published resources for researchers, and its record of objects returned.')}
+        ${dirItem('MoMA — Provenance Research Project', 'https://www.moma.org/collection/provenance/', 'The Museum of Modern Art\'s research into works created before 1946 and acquired after 1932 that were or could have been in continental Europe during the Nazi era — some 800 paintings — with the provenances published as research proceeds.')}
+        ${dirItem('National Gallery, London — Whereabouts of paintings 1933–45', 'https://www.nationalgallery.org.uk/about-us/history/collection-history/whereabouts-of-paintings-1933-1945', 'The Gallery\'s published list of its own paintings whose 1933–45 provenance is incomplete, with the specific open question stated for each work — a model of how a museum publishes gaps rather than conclusions.')}
+      </ul>
+    </section>`;
+    const box = $('#rest-news');
+    salonFetchJSON('/data/restitution-news.json').then((d) => {
+      const items = (d && d.items) || [];
+      if (!items.length) { box.innerHTML = `<div class="notice">No news items are available at the moment.</div>`; return; }
+      box.innerHTML = `<ul class="items">` + items.map((n) => `<li>
+        <span class="t">${link(n.url, n.headline)}</span>
+        <div class="sub">${esc(n.displayDate || n.date)} · ${esc(n.source || '')}</div>
+        <div class="abs">${esc(n.summary || '')}</div>
+      </li>`).join('') + `</ul>`;
+    }).catch(() => {
+      box.innerHTML = `<div class="notice">The news list could not be loaded just now. Please try again later.</div>`;
+    });
+    const cbox = $('#rest-cases');
+    salonFetchJSON('/data/restitution-cases.json').then((d) => {
+      const items = (d && d.items) || [];
+      if (!items.length) { cbox.innerHTML = `<div class="notice">No cases are available at the moment.</div>`; return; }
+      cbox.innerHTML = `<ul class="items">` + items.map((c) => `<li>
+        <span class="t">${esc(c.name || '')}</span>
+        <div class="sub">${esc(c.jurisdiction || '')} · ${esc(c.court || '')} · ${esc(c.years || '')}</div>
+        <div class="sub">${esc(c.citation || '')}</div>
+        <div class="abs"><strong>The work:</strong> ${esc(c.work || '')}</div>
+        <div class="abs"><strong>What happened:</strong> ${esc(c.happened || '')}</div>
+        <div class="abs"><strong>The legal question:</strong> ${esc(c.question || '')}</div>
+        <div class="abs"><strong>The outcome:</strong> ${esc(c.outcome || '')}</div>
+        <div class="abs"><strong>Why it matters:</strong> ${esc(c.matters || '')}</div>
+        <div class="sub">Source: ${link(c.sourceUrl, c.sourceName || c.sourceUrl)}</div>
+      </li>`).join('') + `</ul>`;
+    }).catch(() => {
+      cbox.innerHTML = `<div class="notice">The case list could not be loaded just now. Please try again later.</div>`;
+    });
+  }
 
   fetch('/api/config').then((r) => r.json()).then((c) => (config = c)).catch(() => {}).finally(route);
 })();
