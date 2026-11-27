@@ -3065,10 +3065,10 @@
     window.__report = state;
     const secs = SECTIONS.filter(([k]) => k !== 'synthesis' || config.ai);
     app.innerHTML = `<div class="report">
-      <aside class="toc"><h4>Report contents</h4>${secs.map(([k, l], i) => `<a href="#sec-${k}" data-toc="${k}"${k === 'catalogue' ? ' class="hl"' : ''}><span>${k === 'synthesis' ? '★' : i + (config.ai ? 0 : 1)}. ${l}</span><span class="st loading-dot" id="st-${k}"></span></a>${k === 'references' ? REF_CATS.map(([rk, rl]) => `<a class="sub" href="#ref-${rk}"><span>${rl}</span><span class="st" id="rc-${rk}"></span></a>`).join('') : ''}`).join('')}</aside>
+      <aside class="toc"><h4>Report contents</h4>${secs.map(([k, l], i) => `<a href="#sec-${k}" data-toc="${k}"><span>${k === 'synthesis' ? '★' : i + (config.ai ? 0 : 1)}. ${l}</span><span class="st loading-dot" id="st-${k}"></span></a>${k === 'references' ? REF_CATS.map(([rk, rl]) => `<a class="sub" href="#ref-${rk}"><span>${rl}</span><span class="st" id="rc-${rk}"></span></a>`).join('') : ''}`).join('')}</aside>
       <div>
         <div class="rep-head" id="rep-head">${cached ? headHtml({ name: cached.name, births: [cached.birth].filter(Boolean), deaths: [cached.death].filter(Boolean), birthPlace: cached.birthPlace, deathPlace: cached.deathPlace, description: cached.description, image: cached.image?.replace('?width=160', '?width=400') }, true) : spinner('Loading artist record…')}</div>
-        ${secs.map(([k, l], i) => `<section class="rs${k === 'catalogue' ? ' hl' : ''}" id="sec-${k}"><h2><span><span class="num">${k === 'synthesis' ? '★' : i + (config.ai ? 0 : 1)}</span>${l}</span><small id="sm-${k}"></small></h2><div id="body-${k}">${k === 'synthesis' ? '' : spinner()}</div></section>`).join('')}
+        ${secs.map(([k, l], i) => `<section class="rs" id="sec-${k}"><h2><span><span class="num">${k === 'synthesis' ? '★' : i + (config.ai ? 0 : 1)}</span>${l}</span><small id="sm-${k}"></small></h2><div id="body-${k}">${k === 'synthesis' ? '' : spinner()}</div></section>`).join('')}
       </div></div>`;
     // smooth in-page anchors without breaking the hash router
     app.querySelectorAll('.toc a').forEach((a) =>

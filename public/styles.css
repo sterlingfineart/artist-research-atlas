@@ -116,7 +116,6 @@ main { max-width: 1240px; margin: 0 auto; padding: 28px 24px 60px; min-height: 7
 .toc a { display: flex; justify-content: space-between; gap: 6px; color: var(--ink); text-decoration: none; padding: 5px 8px; border-radius: 6px; }
 .toc a:hover { background: var(--accent-soft); color: var(--accent); }
 .toc a.sub { padding-left: 22px; font-size: 13px; color: var(--muted); }
-.toc a.hl { color: var(--gold); font-weight: 700; background: #f5e6bd; }
 .toc .st { font-size: 11px; color: var(--muted); }
 .toc .st.loading-dot::after { content: '…'; }
 .rep-head { display: grid; grid-template-columns: auto 1fr; gap: 26px; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin-bottom: 22px; }
@@ -127,7 +126,6 @@ main { max-width: 1240px; margin: 0 auto; padding: 28px 24px 60px; min-height: 7
 .facts-grid div b { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 600; }
 .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 section.rs { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px 28px; margin-bottom: 22px; scroll-margin-top: 90px; }
-section.rs.hl { border-left: 3px solid var(--gold); background: #f5e6bd; }
 section.rs > h2 { font-size: 31px; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
 section.rs > h2 .num { color: var(--gold); font-size: 22px; margin-right: 8px; }
 section.rs > h2 small { font: 400 12px var(--sans); color: var(--muted); }
